@@ -1,0 +1,16 @@
+version: "3.1"
+services:
+  development:
+    container_name: development
+    build: .
+    command: npm start
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    env_file: ./.env
+    
+    
+networks:
+  default:
+    external:
+      name: nginx-proxy

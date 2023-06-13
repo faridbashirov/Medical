@@ -1,0 +1,139 @@
+.result-text {
+    color: #5282FF;
+    font-size: 20px;
+}
+
+.card-body-doctors {
+    padding-left: 80px !important;
+}
+
+.card-ratings {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    height: 30px;
+}
+
+.doctors-more-btn {
+    width: 155px;
+    height: 45px;
+    margin-bottom: 10px;
+    background-color: #FFF;
+    color: #5282FF;
+}
+
+.display_grid-doctors {
+    display: grid;
+}
+
+.doctors-card {
+    display: flex;
+    height: 260px;
+    border: 1px solid #DADADA;
+    border-radius: 11px;
+    height: 260px;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+.doctors-card-active {
+    background-color: #5282FF;
+}
+
+.doctors-img {
+    width: 30%;
+    max-width: 194px;
+    height: 210px;
+    position: relative;
+    margin-right: 33px;
+    object-fit: cover;
+    border-radius: 9px;
+}
+
+.doctors-img-lg {
+    width: 100%;
+    height: 100%;
+}
+
+.doctors-heart {
+    position: absolute;
+    right: 10%;
+}
+
+.doctors-card-body {
+    width: 70%;
+}
+.doctors-card__ratings{
+    display: none;
+}
+.white{
+    color: #fff;
+}
+
+@media (max-width: 756px) {
+
+    .result-text {
+        font-size: 14px;
+    }
+
+    .card-body-doctors {
+        padding-left: 0;
+    }
+
+    .card-ratings {
+        margin-top: 10px;
+        align-items: center;
+    }
+
+    .sort-text {
+        display: none;
+    }
+
+    .doctors-more-btn {
+        display: none;
+    }
+
+    .doctors-card {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .doctors-img {
+        width: 100%;
+        /*height: auto;*/
+        max-width: 100%;
+        height: 280px;
+        overflow: hidden;
+    }
+
+    .doctors-img-lg {
+        object-fit: cover;
+        overflow: hidden;
+        object-position: top center;
+    }
+    .d-none {
+        display: none;
+    }
+    .doctors-card-body{
+        width: 100%;
+    }
+    .doctors-card__ratings{
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        font-size: 12px;
+        width: 100%;
+    }
+    .doctors-card__ratings-num{
+        background-color: #FFC224;
+        color: #000;
+        padding: 5px 8px;
+        border-radius: 5px;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+}
