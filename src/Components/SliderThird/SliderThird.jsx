@@ -1,18 +1,30 @@
 import React from "react";
-import Carousel from "react-elastic-carousel";
+import Carousel from "react-multi-carousel";
 import CardThird from "../CardThird/CardThird";
 
 const SliderThird = () => {
-  const breakPoints = [
-    { width: 500, itemsToShow: 1 },
-    { width: 768, itemsToShow: 2 },
-    { width: 1024, itemsToShow: 2 },
-    { width: 1200, itemsToShow: 4 },
-    { width: 1500, itemsToShow: 4 },
-  ];
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
   return (
     <>
-      <Carousel breakPoints={breakPoints}>
+      <Carousel responsive={responsive}>
        <CardThird/>
        <CardThird/>
        <CardThird/>
