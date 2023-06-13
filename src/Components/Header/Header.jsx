@@ -16,7 +16,7 @@ import trFlag from "../../assets/Svg/trFlag.svg";
 import absFlag from "../../assets/Svg/absFlag.svg";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import userIcon from "../../assets/Svg/userLogin.svg"
+import userIcon from "../../assets/Svg/userlogin.svg"
 import menu from "../../assets/Svg/menuIcon.svg"
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { Outlet } from "react-router-dom";

@@ -6,11 +6,8 @@ WORKDIR /usr/src
 
 COPY . /usr/src
 
-RUN npm install serve -g
-
-RUN npm install
-
-RUN npm run build
-
+RUN yarn cache clean
+RUN yarn install --save
+RUN yarn build
 
 EXPOSE 3000
