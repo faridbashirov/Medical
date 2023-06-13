@@ -10,7 +10,7 @@ import detailImg2 from "../../assets/Images/hospital-detail/hospital-detail-2.jp
 import detailImg3 from "../../assets/Images/hospital-detail/hospital-detail-3.jpg"
 import arrowLeft from "../../assets/Svg/arrow-left.svg"
 import arrowRight from "../../assets/Svg/arrow-right.svg"
-import Carousel from "react-elastic-carousel";
+import Carousel from 'react-multi-carousel';
 
 const Detail = () => {
   return (

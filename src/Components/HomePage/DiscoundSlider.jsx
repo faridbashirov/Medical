@@ -1,18 +1,31 @@
 import React from 'react';
-import Carousel from "react-elastic-carousel";
+import Carousel from 'react-multi-carousel';
 import group15 from "../../assets/Images/Group15.png";
 import group16 from "../../assets/Images/Group16.png";
 import group17 from "../../assets/Images/Group17.png";
-const breakPoints = [
-  { width: 500, itemsToShow: 2 },
-  { width: 768, itemsToShow: 2 },
-  { width: 1200, itemsToShow: 3 },
-  { width: 1500, itemsToShow: 3 },
-];
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 const DiscountSlider = () => {
   return (
     <div style={{ paddingTop: "10px" }} className="container">
-      <Carousel breakPoints={breakPoints}>
+      <Carousel responsive={responsive}>
         <div style={{marginRight:"10px"}}>
           <img style={{width:"100%", height:"100%"}} src={group15} />
         </div>

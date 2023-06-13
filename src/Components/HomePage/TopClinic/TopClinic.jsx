@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button} from "antd";
-import Carousel from "react-elastic-carousel";
+import Carousel from 'react-multi-carousel';
 import heart from "../../../assets/Svg/heart-sm.svg"
 import heartOutlined from "../../../assets/Svg/heart-sm-outlined.svg"
 import clinic1 from "../../../assets/Images/FavoriteHospitals.png"
@@ -12,12 +12,25 @@ import "./TopClinic.css"
 import { Link } from 'react-router-dom';
 
 const TopClinic = () => {
-  const breakPoints = [
-    { width: 500, itemsToShow: 1 },
-    { width: 768, itemsToShow: 4 },
-    { width: 1200, itemsToShow: 4 },
-    { width: 1500, itemsToShow: 4 },
-  ];
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
   return (
       <section className="top-clinic">
     <div className={"container"}>
@@ -34,7 +47,7 @@ const TopClinic = () => {
           </div>
         </div>
         <div className="top-clinic__carousel">
-          <Carousel breakPoints={breakPoints}>
+          <Carousel responsive={responsive}>
             <div className="top-clinic_item">
               <div className="top-clinic__item-top">
                 <img src={clinic1} alt="clinic" className="top-clinic__item-img"/>

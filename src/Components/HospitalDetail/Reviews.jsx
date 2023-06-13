@@ -1,17 +1,29 @@
 import React from 'react';
-import Carousel from "react-elastic-carousel";
+import Carousel from 'react-multi-carousel';
 import ruFlag from "../../assets/Svg/userFlag.svg"
 import trFlag from "../../assets/Svg/trFlag.svg"
 import azFlag from "../../assets/Svg/azFlag.svg"
 
 const Reviews = () => {
-  const breakPoints = [
-    { width: 500, itemsToShow: 1 },
-    { width: 768, itemsToShow: 2 },
-    { width: 1024, itemsToShow: 3 },
-    { width: 1200, itemsToShow: 3 },
-    { width: 1500, itemsToShow: 3 },
-  ];
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
   return (
     <section className="hospital-detail__reviews">
       <div className="container">
@@ -20,7 +32,7 @@ const Reviews = () => {
           <p className="reviews__header-subtitle"><span className={"subtitle__rating"}>9,8</span>Великолепно <span>&#x2022;</span><span>23 отзыва</span> <a href="#">Читать все отзывы</a></p>
         </div>
         <div className="reviews__carousel">
-          <Carousel breakPoints={breakPoints} itemPadding={[10, 10]}>
+          <Carousel responsive={responsive} itemPadding={[10, 10]}>
             <div className="reviews__carousel-item">
               <div className="reviews__carousel-item-content">
                 <p>“Peaceful mountain view right from the terrace/window. Fireplace in the salon, cozy atmosphere of the house, toys for kids, playground for kids (and even sleds).”</p>

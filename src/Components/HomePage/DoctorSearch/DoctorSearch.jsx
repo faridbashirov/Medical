@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button} from "antd";
 import { Link } from 'react-router-dom';
-import Carousel from "react-elastic-carousel";
+import Carousel from 'react-multi-carousel';
 import tooth from "../../../assets/Svg/doctor-search/tooth.svg"
 import surgery from "../../../assets/Svg/doctor-search/plastic-surgery.svg"
 import eye from "../../../assets/Svg/doctor-search/eye.svg"
@@ -9,12 +9,25 @@ import boyrek from "../../../assets/Svg/doctor-search/boyrek.svg"
 import "./DoctorSearch.css"
 
 const DoctorSearch = () => {
-  const breakPoints = [
-    { width: 500, itemsToShow: 1 },
-    { width: 768, itemsToShow: 4 },
-    { width: 1200, itemsToShow: 4 },
-    { width: 1500, itemsToShow: 4 },
-  ];
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
   return (
     <section className="top-clinic">
       <div className={"container"}>
@@ -28,7 +41,7 @@ const DoctorSearch = () => {
           </div>
         </div>
         <div className="top-clinic__carousel">
-          <Carousel breakPoints={breakPoints}>
+          <Carousel responsive={responsive}>
             <div className="doctor-search_item">
               <img src={tooth} alt="tooth"/>
               <p className={"doctor-search_item-desc"}>стоматология</p>
