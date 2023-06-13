@@ -6,8 +6,8 @@ WORKDIR /usr/src
 
 COPY . /usr/src
 
-RUN yarn cache clean
-RUN yarn install --save
-RUN yarn build
+RUN npm cache clean
+RUN npm install --save
+RUN vite build 
 
 EXPOSE 3000
