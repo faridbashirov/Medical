@@ -34,21 +34,22 @@ const App = () => {
        {/* <MobileLogin />  */}
        <Routes>
          <Route element={<Header handleMenu={handleMenu} showMenu={showMenu}/>}>
-           <Route path="Medical-marketplace/" element={<HomePage handleMenu={handleMenu} showMenu={showMenu} setShowMenu={setShowMenu}/>}/>
-         <Route path="Medical-marketplace/profile" element={ <Profile/>}/>
-    <Route path="Medical-marketplace/profile/doctor-reviews" element={<ReviewDoctors/>}/>
-    <Route path="Medical-marketplace/profile/hospital-reviewa" element={ <ReviewHospitals/>}/>
-    <Route path="Medical-marketplace/fav-doctors" element={ <FavDoctors/>}/>
-    <Route path="Medical-marketplace/fav-hospitals" element={<FavHospitals />}/>
-    <Route path="Medical-marketplace/hospitals" element={<Hospitals/>}/>
-    <Route path="Medical-marketplace/doctors" element={<Doctors/>}/>
-    <Route path="Medical-marketplace/hospital-reviews" element={<HospitalsReviewsAll/>}/>
-    <Route path="Medical-marketplace/hospital-detail" element={<HospitalDetail/>}/>
-    <Route path="Medical-marketplace/doctor-detail" element={<DoctorDetail/>}/>
-      <Route path="Medical-marketplace/doctor-reviews" element={<DoctorsReviewsAll/>}/>
-   <Route path="Medical-marketplace/faq" element={ <FAQ/>}/>
-      <Route path="Medical-marketplace/privacy-policy" element={<PrivacyPolicy/>}/>
-      <Route path="Medical-marketplace/about-us" element={ < AboutUs/> }/>
+           <Route path="/" element={<HomePage handleMenu={handleMenu} showMenu={showMenu} setShowMenu={setShowMenu}/>}/>
+         <Route path="profile" element={ <Profile/>}/>
+    <Route path="/profile/doctor-reviews" element={<ReviewDoctors/>}/>
+    <Route path="/profile/hospital-reviewa" element={ <ReviewHospitals/>}/>
+    <Route path="/fav-doctors" element={ <FavDoctors/>}/>
+    <Route path="/fav-hospitals" element={<FavHospitals />}/>
+    <Route path="/hospitals" element={<Hospitals/>}/>
+    <Route path="/doctors" element={<Doctors/>}/>
+    <Route path="/hospital-reviews" element={<HospitalsReviewsAll/>}/>
+    <Route path="/hospital-detail" element={<HospitalDetail/>}/>
+    <Route path="/doctor-detail" element={<DoctorDetail/>}/>
+      <Route path="/doctor-reviews" element={<DoctorsReviewsAll/>}/>
+   <Route path="/faq" element={ <FAQ/>}/>
+      <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+      <Route path="/about-us" element={ < AboutUs/> }/>
+      <Route path="*" element={ < AboutUs/> }/>
       </Route>
       </Routes>
 

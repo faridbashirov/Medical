@@ -1,16 +1,13 @@
-version: "3.1"
+version: '3.4'
 services:
-  development:
-    container_name: development
-    build: .
-    command: npm start
-    ports:
-      - "3000:3000"
-    stdin_open: true
-    env_file: ./.env
-    
-    
-networks:
-  default:
-    external:
-      name: nginx-proxy
+    react-nginx-app:
+      stdin_open: true
+      build:
+        context: .
+        dockerfile: Dockerfile
+      expose:
+        - 8080
+      ports:
+        - 8080:80
+      environment:
+          - CHOKIDAR_USEPOLLING=true

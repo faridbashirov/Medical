@@ -3,20 +3,20 @@ import Carousel from 'react-multi-carousel';
 import ruFlag from "../../assets/Svg/userFlag.svg"
 import trFlag from "../../assets/Svg/trFlag.svg"
 import azFlag from "../../assets/Svg/azFlag.svg"
-
+import 'react-multi-carousel/lib/styles.css';
 const Reviews = () => {
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5
+      breakpoint: { max: 1500, min: 1200 },
+      items: 3
     },
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: 1200, min: 768 },
       items: 3
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 768, min: 464 },
       items: 2
     },
     mobile: {
@@ -24,6 +24,7 @@ const Reviews = () => {
       items: 1
     }
   };
+  
   return (
     <section className="hospital-detail__reviews">
       <div className="container">
@@ -32,7 +33,7 @@ const Reviews = () => {
           <p className="reviews__header-subtitle"><span className={"subtitle__rating"}>9,8</span>Великолепно <span>&#x2022;</span><span>23 отзыва</span> <a href="#">Читать все отзывы</a></p>
         </div>
         <div className="reviews__carousel">
-          <Carousel responsive={responsive} itemPadding={[10, 10]}>
+          <Carousel responsive={responsive} >
             <div className="reviews__carousel-item">
               <div className="reviews__carousel-item-content">
                 <p>“Peaceful mountain view right from the terrace/window. Fireplace in the salon, cozy atmosphere of the house, toys for kids, playground for kids (and even sleds).”</p>

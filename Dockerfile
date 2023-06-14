@@ -1,13 +1,12 @@
-FROM node
+FROM node:18-alpine3.17 as build
+WORKDIR /app
+COPY . /app
+RUN npm install
+RUN npm run build
 
-RUN mkdir -p /usr/src
-
-WORKDIR /usr/src
-
-COPY . /usr/src
-
-RUN yarn cache clean
-RUN yarn install --save
-RUN yarn build
-
-EXPOSE 3000
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install nginx -y
+COPY --from=build /app/dist /var/www/html/
+EXPOSE 80
+CMD ["nginx","-g","daemon off;"]

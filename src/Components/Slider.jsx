@@ -4,7 +4,7 @@ import Carousel from "react-multi-carousel";
 import "../Slider.css";
 import BakuPic from "../../src/assets/Images/BakuPic.png";
 import MoskovaPic from "../../src/assets/Images/MoskovaPic.png";
-
+import 'react-multi-carousel/lib/styles.css';
 const Slider = () => {
   const responsive = {
     superLargeDesktop: {

@@ -14,7 +14,7 @@ import OurGeography from "./OurGeography.jsx";
 const AboutUs = () => {
   return (
     <div style={{background: "#f6f6f6"}}>
-      <Header/>
+      
       <div style={{background: "#fff"}}>
         <BreadCrumbs/>
         <WelcomeSection/>

@@ -11,7 +11,25 @@ import detailImg3 from "../../assets/Images/hospital-detail/hospital-detail-3.jp
 import arrowLeft from "../../assets/Svg/arrow-left.svg"
 import arrowRight from "../../assets/Svg/arrow-right.svg"
 import Carousel from 'react-multi-carousel';
-
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 const Detail = () => {
   return (
     <div className={'hospital-detail_content'}>
@@ -96,7 +114,7 @@ const Detail = () => {
 <span className={'hospital-detail_img-more-text'}>+20 ФОТОГРАФИЙ</span>
           </div>
         </div>
-        <Carousel className={'hospital-detail_img-slider'} >
+        <Carousel responsive={responsive} className={'hospital-detail_img-slider'} >
           <img src={detailImg1} alt=""/>
           <img src={detailImg2} alt=""/>
           <img src={detailImg2} alt=""/>

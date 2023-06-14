@@ -19,7 +19,7 @@ const HospitalDetail = () => {
   return (
     <div style={{background: "#f6f6f6"}}>
       
-      {/*breadcrumbs*/}
+    
       <BreadCrumbs/>
       <div className={'container'}>
         <div className={'detail__info-btns'}>

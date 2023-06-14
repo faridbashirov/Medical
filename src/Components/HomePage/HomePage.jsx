@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import {
   ArrowRightOutlined,
   SearchOutlined,
@@ -57,6 +57,7 @@ import TopClinic from "./TopClinic/index.js";
 import DoctorSearch from "./DoctorSearch/index.js";
 import HomeReviews from "./HomeReviews/index.js";
 import MobileLogin from "../MobileLogin/MobileLogin";
+import axios from "axios";
 
 
 const handleMenuClick = (e) => {
@@ -219,6 +220,20 @@ const menuPropsFlag = {
 };
 
 const HomePage = ({}) => {
+
+
+  useEffect(()=>{
+    
+    axios.get("https://hospitalbackend.efgroup.az/hospital/hospitals", {
+      headers: { 
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },})
+    .then((response) =>{
+     console.log(response.data)
+    })
+    
+  },[])
  
   
 
