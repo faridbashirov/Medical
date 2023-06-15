@@ -10,9 +10,9 @@
     align-items: center;
     overflow: hidden;
 }
-@media (max-width: 576px){
+@media (max-width: 1300px){
     .card{
-        width: 244px;
+        width: unset!important;
         height: 286px;
     }
 }

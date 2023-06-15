@@ -27,9 +27,9 @@ const TabDoctors = () => {
   };
   return (
     <>
-      <div className={"home-reviews__items"}>
-        <Carousel responsive={responsive}>
-          <div className="home-reviews__item">
+      <div className={"home-reviews__items"} >
+        <Carousel    responsive={responsive}>
+          <div  className="home-reviews__item">
             <div className="reviews-item__header">
               <div className="reviews-item__author">
                 <img src={author} alt={""} className="reviews-item__author-img"/>

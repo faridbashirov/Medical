@@ -5,3 +5,9 @@
     width: 337px !important;
     height: 134px !important;
 }
+@media (max-width: 768px){
+    .cardSecond{
+        width: 200px !important;
+        
+    }
+}

@@ -594,6 +594,7 @@ const HomePage = ({}) => {
       <TopClinic/>
       <DoctorSearch/>
       <HomeReviews/>
+      
 
       <Footer/>
 

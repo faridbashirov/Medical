@@ -8,6 +8,7 @@
     background-color: #000 !important;
 }
 
+
 .ant-tabs-tab, .ant-tabs-tab-active {
     color: #000;
 }
@@ -100,6 +101,9 @@
 
 .home-reviews__items-mobile {
     display: none;
+}
+.dsad{
+    width: unset!important;
 }
 
 @media (max-width: 756px) {

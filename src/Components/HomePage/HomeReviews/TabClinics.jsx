@@ -29,7 +29,7 @@ const TabClinics = () => {
   return (
     <>
       <div className={"home-reviews__items"}>
-        <Carousel responsive={responsive}>
+        <Carousel itemClass='dsad' responsive={responsive}>
           <div className="home-reviews__item">
             <div className="reviews-item__header">
               <div className="reviews-item__author">
