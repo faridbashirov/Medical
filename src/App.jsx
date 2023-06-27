@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import MobileLogin from "./Components/MobileLogin/MobileLogin";
 import HomePage from "./Components/HomePage/HomePage";
 import Profile from "./Components/Profile/Profile";
@@ -19,39 +19,71 @@ import HospitalDetail from "./Components/HospitalDetail";
 import DoctorDetail from "./Components/DoctorDetail/index.js";
 import Header from "./Components/Header/Header";
 import AboutUs from "./Components/AboutUs/index.js";
+import PrivateRoute from "./Components/utils/PrivateRoute";
 import './main.css'
-
-
+import { useSelector,useDispatch } from "react-redux";
+import { fetchHospitals } from "./store/thunk/hospitalsThunk";
+import { authToken } from "./store/reducers/userReducer";
+import { tokenRefresh } from "./store/thunk/tokenRefresh";
 
 const App = () => {
   const [showMenu, setShowMenu] = useState(false)
+  const {authToken} = useSelector((state) => state.auth)
+  const dispatch=useDispatch()
+  console.log(authToken?.refresh);
+  useEffect(()=>{
+    const getAuth=(token)=>{
+      console.log(token);
+      var fiveminutes=1000 * 60 * 4
+      let interval= setInterval(()=>{
+        if(authToken){
+          dispatch(tokenRefresh(token))
+    
+        }
 
+      },fiveminutes)
+      return ()=> clearInterval(interval)
+     
+
+    }
+    getAuth(authToken?.refresh)
+   
+
+  },[authToken])
+
+
+ 
   const handleMenu = () =>{
     setShowMenu(!showMenu)
   }
+  
+  
   return (
     <main className={`${showMenu && 'overflowHidden'} `}>
        {/* <MobileLogin />  */}
        <Routes>
          <Route element={<Header handleMenu={handleMenu} showMenu={showMenu}/>}>
-           <Route path="/" element={<HomePage handleMenu={handleMenu} showMenu={showMenu} setShowMenu={setShowMenu}/>}/>
-         <Route path="profile" element={ <Profile/>}/>
-    <Route path="/profile/doctor-reviews" element={<ReviewDoctors/>}/>
-    <Route path="/profile/hospital-reviewa" element={ <ReviewHospitals/>}/>
-    <Route path="/fav-doctors" element={ <FavDoctors/>}/>
-    <Route path="/fav-hospitals" element={<FavHospitals />}/>
+           <Route  path="/" element={<HomePage handleMenu={handleMenu} showMenu={showMenu} setShowMenu={setShowMenu}/>}/>
+         <Route element={<PrivateRoute/>}>
+    <Route path="profile" element={ <Profile/>}/>
+    <Route path="profile/doctor-reviews" element={<ReviewDoctors/>}/>
+    <Route path="profile/hospital-reviews" element={ <ReviewHospitals/>}/>
+    <Route path="fav-doctors" element={ <FavDoctors/>}/>
+    <Route path="fav-hospitals" element={<FavHospitals />}/>
+         </Route>
+    
+    <Route path="/hospital-reviews" element={<HospitalsReviewsAll/>}/>
     <Route path="/hospitals" element={<Hospitals/>}/>
     <Route path="/doctors" element={<Doctors/>}/>
-    <Route path="/hospital-reviews" element={<HospitalsReviewsAll/>}/>
-    <Route path="/hospital-detail" element={<HospitalDetail/>}/>
+    <Route path="/hospital/:id" element={<HospitalDetail/>}/>
     <Route path="/doctor-detail" element={<DoctorDetail/>}/>
-      <Route path="/doctor-reviews" element={<DoctorsReviewsAll/>}/>
-   <Route path="/faq" element={ <FAQ/>}/>
-      <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
-      <Route path="/about-us" element={ < AboutUs/> }/>
-      <Route path="*" element={ < AboutUs/> }/>
-      </Route>
-      </Routes>
+    <Route path="/doctor-reviews" element={<DoctorsReviewsAll/>}/>
+    <Route path="/faq" element={ <FAQ/>}/>
+    <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+    <Route path="/about-us" element={ < AboutUs/> }/>
+    <Route path="*" element={ < AboutUs/> }/>
+    </Route>
+    </Routes>
 
       {/* <Slider/> */}
     </main>

@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Button } from "antd";
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 
+import { useSelector } from "react-redux";
+import { logoutuser } from "../../store/reducers/userReducer";
+import { useDispatch } from "react-redux";
 import vector from "../../assets/Images/vector.png";
 import vectorWhite from "../../assets/Images/vector_white.png";
 import user from "../../assets/Images/user.png";
@@ -16,7 +19,11 @@ import vk from "../../assets/Images/vk.png";
 import "../MobileLogin/MobileLogin.css";
 
 const MobileLogin = () => {
+
   const [isOpen, setIsOpen] = useState(true);
+
+  const dispatch=useDispatch()
+  const {user}=useSelector((state)=>state.auth)
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);

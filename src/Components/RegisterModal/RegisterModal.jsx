@@ -5,19 +5,21 @@ import DoctorForm from "./DoctorForm.jsx";
 
 
 
-const items = [
-  {
-    key: '1',
-    label: `Как клиент`,
-    children: <ClientForm/>,
-  },
-  {
-    key: '2',
-    label: `Как доктор`,
-    children: <DoctorForm/>,
-  },
-];
+
 const RegisterModal = ({openRegister, onCloseRegister}) => {
+
+  const items = [
+    {
+      key: '1',
+      label: `Как клиент`,
+      children: <ClientForm onCancel={onCloseRegister}/>,
+    },
+    {
+      key: '2',
+      label: `Как доктор`,
+      children: <DoctorForm/>,
+    },
+  ];
 
   const onChange = (key) => {
     console.log(key);
@@ -26,8 +28,7 @@ const RegisterModal = ({openRegister, onCloseRegister}) => {
 
   return (
     <Modal open={openRegister} onCancel={onCloseRegister} footer={[
-      <Button type={'primary'} htmlType={'submit'} block size={'large'}
-              style={{display: 'block', marginBottom: '.5rem'}}>Войти</Button>
+      
     ]}>
       <Typography className={'login-title'}>Зарегистрироваться</Typography>
       <Divider/>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import './HospitalDetail.css'
 import Header from "../Header";
 import Footer from "../Footer/index.js";
@@ -13,9 +13,33 @@ import Questions from "./Questions.jsx";
 import QualityRating from "./QualityRating.jsx";
 import GetService from "./GetService.jsx";
 import PaySection from "./PaySection.jsx";
-
+import { hospitalDetailFetch } from '../api/hospitalDetailFetch';
+import { useParams } from 'react-router-dom';
 
 const HospitalDetail = () => {
+
+  const [hospital,setHospital] =useState({})
+  const {id}=useParams()
+
+
+  useEffect(()=>{
+    
+
+    const getHospital= async(id)=>{
+      const data=await hospitalDetailFetch(id)
+      setHospital(data)
+
+    }
+    getHospital(id)
+
+  
+    
+
+
+  },[id])
+
+
+
   return (
     <div style={{background: "#f6f6f6"}}>
       
@@ -27,7 +51,7 @@ const HospitalDetail = () => {
             <button key={item.id} className={'detail__info-btn'}>{item.label}</button>
           ))}
         </div>
-        <Detail/>
+        <Detail hospital={hospital}/>
         <div className={'detail__clinic-btns'}>
           {clinicButtons.map(item => (
             <button key={item.id} className={'detail__clinic-btn'}>
@@ -37,7 +61,7 @@ const HospitalDetail = () => {
           ))}
         </div>
       </div>
-      <InfoContent/>
+      <InfoContent hospital={hospital}/>
       <div className="container">
         <div className={"hospital-detail__hint"}>
           <h4 className={"hospital-detail__hint-title"}>Подсказка: бронируйте с возможностью изенить свои планы.</h4>

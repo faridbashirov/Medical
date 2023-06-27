@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import {Link} from 'react-router-dom'
-
+import { LogoutOutlined } from "@ant-design/icons";
 import Vector from "../../assets/Images/Vector.svg";
 import {Button, Dropdown, Space} from "antd";
 import RUB from "../../assets/Svg/rub.svg";
@@ -20,6 +20,12 @@ import userIcon from "../../assets/Svg/userlogin.svg"
 import menu from "../../assets/Svg/menuIcon.svg"
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logoutuser } from "../../store/reducers/userReducer";
+import {toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const items = [
   {
@@ -185,6 +191,25 @@ const Header = ({handleMenu,showMenu}) =>{
   const [openLogin, setOpenLogin] = useState(false)
   const [openRegister, setOpenRegister] = useState(false)
 
+  const {user, errors}=useSelector((state)=> state.auth)
+  const {authToken}=useSelector((state)=> state.auth)
+  const state=useSelector((state)=>state.auth)
+  console.log(state)
+ 
+  const displayLogoutNotification = () => {
+   
+    toast("You looged out!");
+  };
+  const dispatch =useDispatch()
+
+  
+ const logout =()=>{
+    dispatch(logoutuser())
+    displayLogoutNotification()
+
+
+
+ }
  
   const onOpenLogin = () => {
     setOpenLogin(true)
@@ -205,6 +230,7 @@ const Header = ({handleMenu,showMenu}) =>{
 
     return(
       <>
+    
       <header>
         <div id="bg">
           <div className="container container1">
@@ -267,21 +293,30 @@ const Header = ({handleMenu,showMenu}) =>{
                   <img className="heart" src={heart} />
                 </li>
                 <li style={{ paddingBottom: "15px" }}>
-                  <Button
+                 {user ? <Button
+                    className="button"
+                    type="primary"
+                    icon={<ArrowRightOutlined className="Arrow" />}
+                    onClick={()=> logout()}
+                  >
+                    Logout
+                  </Button> : <Button
                     className="button"
                     type="primary"
                     icon={<ArrowRightOutlined className="Arrow" />}
                     onClick={onOpenLogin}
                   >
-                    Bойти
-                  </Button>
+                    Login
+                  </Button>}
+
                 </li>
               </ul>
             </div>
             <div style={{display:"flex",gap:"2px"}} className={"mobile-menu"}>
-              <button className="userİconMobileMenu" style={{border:"none"}} onClick={onOpenLogin}>
+             {user ? "" :  <button className="userİconMobileMenu" style={{border:"none"}} onClick={onOpenLogin}>
                 <img src={userIcon} alt=""/>
-              </button>
+              </button>}
+             
               <button className="userİconMobileMenu" style={{border:"none"}} onClick={handleMenu}>
                 <img src={menu} alt=""/>
               </button>

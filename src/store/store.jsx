@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from '../counter/counterSlice'
+import AuthReducer  from './reducers/userReducer'
+import hostpialsReducer from './reducers/hostpialsReducer'
 
 export const store = configureStore({
   reducer: {
-    counter:counterReducer
+    auth:AuthReducer,
+    hospitals:hostpialsReducer,
   },
 })

@@ -342,6 +342,11 @@ ul, li {
 
     /* height: 600px; */
 }
+.grid_2 img{
+    width: 285px;
+    height: 285px;
+}
+
 
 .grid_3 {
     display: grid;
@@ -349,12 +354,22 @@ ul, li {
     /* height: 285px; */
     gap: 20px;
 }
+.grid_3 img{
+    width: 285px;
+    height: 285px;
+}
+
 
 .grid_4 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
+.grid_4 img{
+    width: 285px;
+    height: 285px;
+}
+
 
 .grid_5 {
     display: grid;

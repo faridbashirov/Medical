@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 
 import {
   Dropdown,
@@ -30,7 +30,7 @@ import vk from "../../assets/Images/vk.png";
 import reviewDoctor from "../../assets/Images/reviewDoctor.png";
 import CheckDoctor from "../../assets/Images/checkdoctor.png";
 import "./Doctors.css"
-
+import { useLocation, useSearchParams } from "react-router-dom";
 import { ArrowRightOutlined, EnvironmentOutlined } from "@ant-design/icons";
 import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
 import Sponsored from "../../assets/Svg/sponsored.svg";
@@ -38,6 +38,9 @@ import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import PageLoginBox from "../PageLoginBox/index.js";
 import FilterButtons from "../FilterButtons/index.js";
+import { mainFilterSearch } from "../api/mainFilterFetch";
+import { allFilterSearch } from "../api/allFilterSearch";
+import { useNavigate } from "react-router-dom";
 
 const { Panel } = Collapse;
 
@@ -204,6 +207,151 @@ const menuPropsFlag = {
 };
 
 const Doctors = () => {
+  const navigate=useNavigate()
+    const [searchParams,setSearchParams] = useSearchParams()
+  const [type,setType]=useState(searchParams.get("type") ? searchParams.get("type") :"doctor")
+  const [name,setName]=useState(searchParams.get("name") ? searchParams.get("name") : "")
+  const [doctors,setDoctors]=useState([])
+  const [selectedCountryValue, setSelectedCountryValue] = useState(searchParams.get("country")? searchParams.get("country").split(",") : []);
+  const [selectedRaitingValue, setSelectedRaitingValue] = useState(searchParams.get("raiting")? searchParams.get("raiting").split(",") : []);
+  const [checkedValue, setCheckedValue] = useState(searchParams.get("type")? searchParams.get("type") :"doctor");
+  const [count,setCount] = useState(0)
+  const [currentValue, setCurrentValue] = useState(searchParams.get("page") ? searchParams.get("page") : 1)
+  console.log(currentValue);
+  console.log(doctors)
+  
+  searchParams.set("type",checkedValue)
+  const CountryChange = (value) => {
+    console.log(value);
+    setSelectedCountryValue(value);
+    searchParams.delete("page");
+    searchParams.delete("page");
+    setCurrentValue(1)
+    searchParams.delete("location")
+    searchParams.delete("name")
+     
+    if (value.length === 0) {
+      searchParams.delete("country");
+    
+    } else {
+      searchParams.set("country", value);
+    }
+    
+    const newSearch = `?${searchParams.toString()}`;
+    navigate({ search: newSearch });
+    };
+
+    const raitingChange = (value) => {
+      console.log(value);
+      setSelectedRaitingValue(value);
+      searchParams.delete("page");
+      searchParams.delete("location")
+      searchParams.delete("name")
+       
+      if (value.length === 0) {
+        searchParams.delete("raiting");
+      
+      } else {
+        searchParams.set("raiting", value);
+      }
+      
+      const newSearch = `?${searchParams.toString()}`;
+      navigate({ search: newSearch });
+      };
+    
+
+    const handleCheckboxChange = (e) => {
+      const { value } = e.target;
+      setCheckedValue(value);
+      searchParams.set("type", value);
+     
+      if (value !== "doctor") {
+        searchParams.delete("page");
+        searchParams.delete("name");
+        searchParams.delete("location")
+        searchParams.delete("country")
+        searchParams.delete("raiting")
+        const newSearch = `?${searchParams.toString()}`;
+        navigate({ pathname: "/hospitals", search: newSearch });
+      } else {
+        searchParams.delete("page");
+        searchParams.delete("name");
+        searchParams.delete("location")
+        searchParams.delete("country")
+        searchParams.delete("raiting")
+        navigate({ search: `?${searchParams.toString()}` });
+        
+      }
+    };
+
+    const capitalizeWords = (str) => {
+      return str
+        .toLowerCase()
+        .split(' ')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    };
+
+
+
+
+  useEffect(() => {
+
+   
+    searchParams.set("page",currentValue)
+
+    if(searchParams.get("country")){
+      searchParams.set("country",selectedCountryValue)
+      
+    }
+    else{
+      searchParams.delete("country")
+      setSelectedCountryValue([])
+
+    }
+    if(searchParams.get("raiting")){
+      searchParams.set("raiting",selectedRaitingValue)
+
+    }
+    else{
+      searchParams.delete("raiting")
+      setSelectedRaitingValue([])
+
+    }
+    
+    const getHospitals = async () => {
+
+
+      const data = await (searchParams.has("country")|| searchParams.has("raiting") 
+      ? allFilterSearch(
+        checkedValue || "clinic",
+        searchParams.get("country") || "",
+        searchParams.get("raiting") || "",
+        searchParams.get("page") || 0,
+      )
+      : mainFilterSearch(
+        checkedValue || "clinic",
+          searchParams.get("location") || "",
+          searchParams.get("name") || "",
+          searchParams.get("page") || 0,
+        ));
+     
+          setDoctors(data.results);
+          setCount(data.count)
+
+          
+         
+          
+          
+          navigate({ search: `?${searchParams.toString()}` });
+          
+    };
+  
+    getHospitals();
+  }, [searchParams]);
+
+
+
   return (
     <div style={{ backgroundColor: "#F4F4F4" }}>
       
@@ -271,77 +419,86 @@ const Doctors = () => {
                   Место / название клиники / врач
                 </p>
                 <hr style={{ border: "1px solid #F0F0F0" }} />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Турция
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Pоссия
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Aзербайджан
-                  </p>
-                </Checkbox>
+                <Checkbox.Group style={{display:"block"}} value={selectedCountryValue} onChange={CountryChange}>
+                  <Checkbox value={"Turkey"} >
+                    <p
+                      style={{
+                        margin: "6px 0",
+                        color: "#000",
+                        fontSize: "16px",
+                      }}
+                    >
+                      Турция
+                    </p>
+                  </Checkbox>
+                  <br />
+                  <Checkbox value={"Russia"} >
+                    <p
+                      style={{
+                        margin: "6px 0",
+                        color: "#000",
+                        fontSize: "16px",
+                      }}
+                    >
+                      Pоссия
+                    </p>
+                  </Checkbox>
+                  <br />
+                  <Checkbox value={"Azerbaijan"} >
+                    <p
+                      style={{
+                        margin: "6px 0",
+                        color: "#000",
+                        fontSize: "16px",
+                      }}
+                    >
+                      Aзербайджан
+                    </p>
+                  </Checkbox>
+                  </Checkbox.Group>
                 <hr style={{ border: "1px solid #F0F0F0" }} />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Клиники
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Услуги
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Врачи
-                  </p>
-                </Checkbox>
+                <Checkbox  checked={checkedValue === 'doctor'}
+        onChange={handleCheckboxChange}
+        className={checkedValue === 'doctor' ? 'selected' : ''} value={"doctor"} >
+                    <p
+                      style={{
+                        margin: "6px 0",
+                        color: "#000",
+                        fontSize: "16px",
+                      }}
+                    >
+                      Врачи
+                    </p>
+                  </Checkbox>
+                  <br />
+                  <Checkbox checked={checkedValue === 'clinic'}
+        onChange={handleCheckboxChange}
+        className={checkedValue === 'clinic' ? 'selected' : ''} value={"clinic"} >
+                    <p
+                      style={{
+                        margin: "6px 0",
+                        color: "#000",
+                        fontSize: "16px",
+                      }}
+                    >
+                      Клиники
+                    </p>
+                  </Checkbox>
+                  <br />
+                  <Checkbox checked={checkedValue === 'service'}
+        onChange={handleCheckboxChange}
+        className={checkedValue === 'service' ? 'selected' : ''} value={"service"} >
+                    <p
+                      style={{
+                        margin: "6px 0",
+                        color: "#000",
+                        fontSize: "16px",
+                      }}
+                    >
+                      Услуги
+                    </p>
+                  </Checkbox>
+                  <br />
                 <br />
               </Panel>
             </Collapse>
@@ -611,65 +768,67 @@ const Doctors = () => {
                 }
                 key="1"
               >
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    2 звезды
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    3 звезды
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    4 звезды
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    5 звезды
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    без звезд
-                  </p>
-                </Checkbox>
+                 <Checkbox.Group style={{display:"block"}} value={selectedRaitingValue} onChange={raitingChange}>
+                  <Checkbox value={"1"} >
+                    <p
+                      style={{
+                        margin: "6px 0",
+                        color: "#000",
+                        fontSize: "16px",
+                      }}
+                    >
+                      1 звезды
+                    </p>
+                  </Checkbox>
+                  <br />
+                  <Checkbox value={"2"} >
+                    <p
+                      style={{
+                        margin: "6px 0",
+                        color: "#000",
+                        fontSize: "16px",
+                      }}
+                    >
+                         2 звезды
+                    </p>
+                  </Checkbox>
+                  <br />
+                  <Checkbox value={"3"} >
+                    <p
+                      style={{
+                        margin: "6px 0",
+                        color: "#000",
+                        fontSize: "16px",
+                      }}
+                    >
+                       3 звезды
+                    </p>
+                  </Checkbox>
+                  <br />
+                  <Checkbox value={"4"} >
+                    <p
+                      style={{
+                        margin: "6px 0",
+                        color: "#000",
+                        fontSize: "16px",
+                      }}
+                    >
+                       4 звезды
+                    </p>
+                  </Checkbox>
+                  <br />
+                  <Checkbox value={"5"} >
+                    <p
+                      style={{
+                        margin: "6px 0",
+                        color: "#000",
+                        fontSize: "16px",
+                      }}
+                    >
+                       5 звезды
+                    </p>
+                  </Checkbox>
+                  </Checkbox.Group>
                 <br />
               </Panel>
             </Collapse>
@@ -803,9 +962,9 @@ const Doctors = () => {
                     marginTop: "10px",
                   }}
                 >
-                  “Пластическая Хирургия”: Hайден
+                  {name? `"${name}"`: " Hайден"}
                 </span>
-                47 вариант
+                {count} вариант
               </p>
             </div>
             <div className="buttonsNav">
@@ -836,9 +995,10 @@ const Doctors = () => {
             </div>
 
             <div>
-              <div className="doctors-card doctors-card-active">
+              {doctors.map((item,index)=>{
+                return <div className="doctors-card doctors-card-active">
                 <div className="doctors-img">
-                  <img className="doctors-img-lg" src={CheckDoctor}/>
+                  <img className="doctors-img-lg" src={"asd"}/>
                   <img
                     className={"doctors-heart"}
                     id="likeImageFavHospitals"
@@ -857,7 +1017,7 @@ const Doctors = () => {
                           color: "#FFF",
                         }}
                       >
-                        Главный врач
+                        {item.position.name}
                       </p>
                     </div>
                     <div className="d-none" style={{ marginRight: "auto" }}>
@@ -909,7 +1069,7 @@ const Doctors = () => {
                           paddingTop: "10px",
                         }}
                       >
-                        Dr. Алина Леонидовна
+                        Dr.{capitalizeWords(item.first_name)} {capitalizeWords(item.last_name)}
                       </h3>
                       <div style={{ color: "#FFF" }} >
                         <p
@@ -996,318 +1156,9 @@ const Doctors = () => {
                   </div>
                 </div>
               </div>
-              <div className="doctors-card ">
-                <div className="doctors-img">
-                  <img className="doctors-img-lg" src={CheckDoctor}/>
-                  <img
-                    className={"doctors-heart"}
-                    id="likeImageFavHospitals"
-                    src={likeReview}
-                  />
-                </div>
-                <div
-                  className="doctors-card-body"
-                >
-                  <div className={"card-ratings"}>
-                    <div>
-                      <p
-                        style={{
-                          margin: "0 15px 0 0",
-                          paddingTop: "0px !important",
-                        }}
-                      >
-                        Главный врач
-                      </p>
-                    </div>
-                    <div style={{ marginRight: "auto" }} className={"d-none"}>
-                      <img src={Iconstars} />
-                    </div>
-                    <div className={"d-none"}>
-                      <p
-                        style={{
-                          margin: "0 !important",
-                          fontSize: "16px",
-                          fontWeight: "400",
-                        }}
-                      >
-                        Bеликолепно
-                      </p>
-                    </div>
-                    <div className={"d-none"}>
-                      <p
-                        style={{
-                          backgroundColor: "#FFC224",
-                          color: "#000",
-                          width: "30px",
-                          height: "24.71px",
-                          borderRadius: "4.41px",
-                          margin: "0 0 0 0",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        9.0
-                      </p>
-                    </div>
-                  </div>
-                  <div className={"doctors-card__ratings"}>
-                    <p className={"doctors-card__ratings-num"}>9.0</p>
-                    <img src={Iconstars} />
-                    <p>Bеликолепно</p>
-                    <p><span>23</span> отзыва</p>
-                  </div>
-                  <div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <h3
-                        style={{
-                          fontSize: "24px !important",
-                          margin: "0px",
-                          paddingTop: "10px",
-                        }}
-                      >
-                        Dr. Алина Леонидовна
-                      </h3>
-                      <div  >
-                        <p
-                          className="comment"
-                          style={{  textAlign: "right" }}
-                        >
-                          <span>23</span> отзыва
-                        </p>
-                        <span className={"sort-text"}>
-                        Соотношение цена/качество
-                        </span>
-                      </div>
-                    </div>
-
-                    <p
-                      style={{
-                        fontSize: "14px",
-                        margin: "0px",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <EnvironmentOutlined
-                        style={{ marginRight: "6px",  }}
-                      />
-                      Больница Американ
-                    </p>
-
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div>
-                        <p
-                          style={{
-                            color: "#000",
-                            backgroundColor: "#F4F4F4",
-                            border: "1px solid #EFEFEF",
-                            borderRadius: "15px",
-                            fontSize: "12px",
-                            padding: "10px 10px",
-                            width: "151px",
-                            textAlign: "center",
-                          }}
-                        >
-                          Сосудистая хирургия
-                        </p>
-                        <p
-                          style={{
-                            color: "#000",
-                            backgroundColor: "#F4F4F4",
-                            border: "1px solid #EFEFEF",
-                            borderRadius: "15px",
-                            fontSize: "12px",
-                            padding: "10px 10px",
-                            width: "124px",
-                            textAlign: "center",
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "10px",
-                          }}
-                        >
-                          <img src={experience} />
-                          20 лет опыта
-                        </p>
-                      </div>
-                      <div>
-                        <Button
-                          className={"doctors-more-btn"}
-                          type="primary"
-                        >
-                          Посмотреть Врачи
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="doctors-card ">
-                <div className="doctors-img">
-                  <img className="doctors-img-lg" src={CheckDoctor}/>
-                  <img
-                    className={"doctors-heart"}
-                    id="likeImageFavHospitals"
-                    src={likeReview}
-                  />
-                </div>
-                <div
-                  className="doctors-card-body"
-                >
-                  <div className={"card-ratings"}>
-                    <div>
-                      <p
-                        style={{
-                          margin: "0 15px 0 0",
-                          paddingTop: "0px !important",
-                        }}
-                      >
-                        Главный врач
-                      </p>
-                    </div>
-                    <div style={{ marginRight: "auto" }} className={"d-none"}>
-                      <img src={Iconstars} />
-                    </div>
-                    <div className={"d-none"}>
-                      <p
-                        style={{
-                          margin: "0 !important",
-                          fontSize: "16px",
-                          fontWeight: "400",
-                        }}
-                      >
-                        Bеликолепно
-                      </p>
-                    </div>
-                    <div className={"d-none"}>
-                      <p
-                        style={{
-                          backgroundColor: "#FFC224",
-                          color: "#000",
-                          width: "30px",
-                          height: "24.71px",
-                          borderRadius: "4.41px",
-                          margin: "0 0 0 0",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        9.0
-                      </p>
-                    </div>
-                  </div>
-                  <div className={"doctors-card__ratings"}>
-                    <p className={"doctors-card__ratings-num"}>9.0</p>
-                    <img src={Iconstars} />
-                    <p>Bеликолепно</p>
-                    <p><span>23</span> отзыва</p>
-                  </div>
-                  <div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <h3
-                        style={{
-                          fontSize: "24px !important",
-                          margin: "0px",
-                          paddingTop: "10px",
-                        }}
-                      >
-                        Dr. Алина Леонидовна
-                      </h3>
-                      <div  >
-                        <p
-                          className="comment"
-                          style={{  textAlign: "right" }}
-                        >
-                          <span>23</span> отзыва
-                        </p>
-                        <span className={"sort-text"}>
-                        Соотношение цена/качество
-                        </span>
-                      </div>
-                    </div>
-
-                    <p
-                      style={{
-                        fontSize: "14px",
-                        margin: "0px",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <EnvironmentOutlined
-                        style={{ marginRight: "6px",  }}
-                      />
-                      Больница Американ
-                    </p>
-
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div>
-                        <p
-                          style={{
-                            color: "#000",
-                            backgroundColor: "#F4F4F4",
-                            border: "1px solid #EFEFEF",
-                            borderRadius: "15px",
-                            fontSize: "12px",
-                            padding: "10px 10px",
-                            width: "151px",
-                            textAlign: "center",
-                          }}
-                        >
-                          Сосудистая хирургия
-                        </p>
-                        <p
-                          style={{
-                            color: "#000",
-                            backgroundColor: "#F4F4F4",
-                            border: "1px solid #EFEFEF",
-                            borderRadius: "15px",
-                            fontSize: "12px",
-                            padding: "10px 10px",
-                            width: "124px",
-                            textAlign: "center",
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "10px",
-                          }}
-                        >
-                          <img src={experience} />
-                          20 лет опыта
-                        </p>
-                      </div>
-                      <div>
-                        <Button
-                          className={"doctors-more-btn"}
-                          type="primary"
-                        >
-                          Посмотреть Врачи
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              })}
+              
+             
 
               <div
                 style={{
@@ -1317,9 +1168,18 @@ const Doctors = () => {
                   paddingBottom: "50px",
                 }}
               >
-                <Pagination defaultCurrent={1} total={50} />
+                {count ?  <Pagination
+                   current={currentValue}  pageSize={2} onChange={(page)=>{
+                    setCurrentValue(page)
+                    searchParams.set("page", page)
+                    const newSearch = `?${searchParams.toString()}`;
+                    navigate({ search: newSearch });
+  
+                  }}  total={count}
+                   
+                  /> : <h1>Nothing Found !</h1>}
               </div>
-              <PageLoginBox/>
+              {/* <PageLoginBox/> */}
             </div>
           </div>
         </div>

@@ -9,7 +9,6 @@ import { Provider } from "react-redux";
 import { ConfigProvider } from "antd";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
     <HashRouter>
       <Provider store={store}>
         <ConfigProvider
@@ -47,5 +46,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </ConfigProvider>
       </Provider>
     </HashRouter>
-  </React.StrictMode>
 );

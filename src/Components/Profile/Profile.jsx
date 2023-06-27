@@ -21,7 +21,7 @@ import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import mailIcon from "../../assets/Svg/mailIcon.svg";
 import passwordIcon from "../../assets/Svg/passwordIcon.svg";
-
+import { useNavigate } from "react-router-dom";
 import "../Profile/Profile.css";
 
 import {
@@ -229,6 +229,7 @@ const handleChange = (value) => {
 };
 
 const Profile = () => {
+  const navigate=useNavigate()
   const onFinish = (value) => {
     console.log(value);
   };
@@ -280,7 +281,7 @@ const Profile = () => {
                 <img style={{ paddingRight: "27px" }} src={peopleIcon} />
                 Личная информация
               </li>
-              <li
+              <li onClick={()=> navigate("/fav-doctors")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",

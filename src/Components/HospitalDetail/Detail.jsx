@@ -30,7 +30,7 @@ const responsive = {
     items: 1
   }
 };
-const Detail = () => {
+const Detail = ({hospital}) => {
   return (
     <div className={'hospital-detail_content'}>
       <div className={'hospital-detail_content--search'}>
@@ -68,10 +68,10 @@ const Detail = () => {
             <p>Трансфер от/до аэропорта</p>
             <Divider/>
 
-            <h3>Luvimed</h3>
+            <h3>{hospital.name}</h3>
             <p style={{display: "flex", gap: "10px", alignItems: "center", color: "#5282ff"}}>
               <img src={location} alt="Бейоглу, Стамбул, Турция "/>
-              Бейоглу, Стамбул, Турция </p>
+              {hospital.location} </p>
             <p>Отличное расположение - <span style={{color: "#5282ff"}}>Проверить карту</span></p>
           </div>
           <div className={'content__info-header-right'}>

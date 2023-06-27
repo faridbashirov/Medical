@@ -58,8 +58,12 @@ import DoctorSearch from "./DoctorSearch/index.js";
 import HomeReviews from "./HomeReviews/index.js";
 import MobileLogin from "../MobileLogin/MobileLogin";
 import axios from "axios";
-
-
+import { BestoffersFetch } from "../api/bestoffersFetch";
+import { LikedoffersFetch } from "../api/likedOffers";
+import { BestsellersFetch } from "../api/bestsellersFetch";
+import { allCountriesFetch } from "../api/allCountries";
+import { useNavigate } from "react-router-dom";
+import { PopularSearchFetch } from "../api/popularSearchs";
 const handleMenuClick = (e) => {
   console.log("click", e);
 };
@@ -69,6 +73,7 @@ const handleMenuFlagClick = (e) => {
 };
 
 const changeStyleButton = () => {}
+
 
 const items = [
   {
@@ -220,20 +225,135 @@ const menuPropsFlag = {
 };
 
 const HomePage = ({}) => {
+  const [bestoffer,setBestoffer] =useState([])
+  const [likedoffer,setLikedoffer] =useState([])
+  const[bestseller,setBestseller] =useState([])
+  const [countries,setCountries] = useState([])
+  const [show,setShow] = useState(true)
+  const [show2,setShow2] = useState(false)
+  const [show3,setShow3] = useState(false)
+  const [value,setValue] = useState("")
+  const [search,setSearch] = useState({
+    type:"service",
+    path:"/hospitals"
+  })
+  const [popularSearchs,setPopularSearchs] = useState([])
+  const [type,setType]=useState("")
+  const [location,setLocation] = useState("")
+  
+  console.log(popularSearchs);
+  const navigate = useNavigate();
+  
+  const searchForm = (e) =>{
+     navigate({
+      pathname: search.path,
+      search: `?type=${search.type}&location=${location}&name=${type}`,
+    });
+  }
+  
+  const onToggleClick = () => {
+    
+    if(show === false){
+      setShow(!show)
 
+      setSearch({
+        path:"/hospitals",
+        type:"service"
+      })
+     
+    }
+    
+    setShow2(false);
+    setShow3(false);
+    
+  };
+  
+  const onToggleClick2 = () => {
+    setShow(false)
+    if(show2 === false){
+      setShow2(!show2);
+      setSearch({
+        path:"/hospitals",
+        type:"clinic"
+      })
+
+    }
+    
+    setShow3(false);
+  };
+  
+  const onToggleClick3 = () => {
+    setShow(false)
+    setShow2(false);
+    if(show3 === false){
+      setShow3(!show3);
+      setSearch({
+        path:"/doctors",
+        type:"doctor"
+      })
+
+    }
+    
+  };
+  
+
+ useEffect(()=>{
+  console.log("++++++");
+  const getPopularSearchs =(async()=>{
+    const data=await PopularSearchFetch()
+    setPopularSearchs(data)
+    
+   })
+   getPopularSearchs()
+
+ },[])
 
   useEffect(()=>{
-    
-    axios.get("https://hospitalbackend.efgroup.az/hospital/hospitals", {
-      headers: { 
-        'Access-Control-Allow-Origin' : '*',
-        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      },})
-    .then((response) =>{
-     console.log(response.data)
-    })
-    
+     const getBestoffer =(async()=>{
+      const data=await BestoffersFetch()
+      setBestoffer(data)
+     })
+     getBestoffer()
+
+
   },[])
+
+  useEffect(()=>{
+     const getlikedOffer =(async()=>{
+      const data=await LikedoffersFetch()
+      setLikedoffer(data)
+     })
+     getlikedOffer()
+
+
+  },[])
+  useEffect(()=>{
+     const getbestSellers =(async()=>{
+      const data=await BestsellersFetch()
+      setBestseller(data)
+     })
+     getbestSellers()
+
+
+  },[])
+  useEffect(()=>{
+     const getCountries =(async()=>{
+      const data=await allCountriesFetch()
+      setCountries(data)
+     })
+     getCountries()
+
+
+  },[])
+  
+ const onChange = (e) => {
+  
+  setType(e.target.value)
+}
+const onChange2 = (e) => {
+  setLocation(e.target.value)
+
+}
  
   
 
@@ -252,17 +372,23 @@ const HomePage = ({}) => {
         <div id="marginBTN" className="container">
           <Space>
             <Button
-              className="btn_ activeBtn"
+            onClick={onToggleClick}
+              className={show ? "btn_ activeBtn " :  "btn_ " }
             >
               Услуги
             </Button>
             <Button
-              className="btn_ "
+            onClick={onToggleClick2}
+              className={show2 ? "btn_ activeBtn " :  "btn_ " }
             >
               Клиники
             </Button>
             <Button
-              className="btn_"
+             onClick={onToggleClick3}
+            
+               className={show3 ? "btn_ activeBtn " :  "btn_ " }
+             
+             
             >
               Врачи{" "}
             </Button>
@@ -273,6 +399,8 @@ const HomePage = ({}) => {
             <Row gutter={12}>
               <Col lg={12} xs={24} style={{marginBottom:"10px"}}>
                 <Input
+                onInput={onChange}
+                 value={type}
                   size="large"
                   placeholder="Процедура, заболевание, клинка, врач"
                   prefix={
@@ -285,8 +413,13 @@ const HomePage = ({}) => {
               </Col>
               <Col lg={8} xs={12}>
                 <Input
+                 onInput={onChange2}
+                 value={location}
+                
                   size="large"
                   placeholder="Москва, Россия"
+                  
+                  
                   prefix={
                     <EnvironmentOutlined
                       style={{ fontSize: "23px", color: "#5282FF" }}
@@ -296,14 +429,32 @@ const HomePage = ({}) => {
                 />
               </Col>
               <Col lg={4} xs={12}>
-                <Button className="inputBtn" type="primary">
+                <Button onClick={()=>searchForm()} className="inputBtn" type="primary">
                   Yзнать цены
                 </Button>
               </Col>
             </Row>
           </div>
           <div className="textFlex">
-            <Button style={{ backgroundColor: "#F4F4F4" }} type="text">
+          {popularSearchs.map(item => (
+              item.name ==search.type ?
+               item.category.map(innerItem => (
+               <Button style={{ backgroundColor: "#F4F4F4" }} type="text">
+                   {innerItem.search}
+                  </Button>
+                   )    )  : null
+                
+                  )   )} 
+            {/* {popularSearchs.map((item,index)=>{
+              if(item.name == search.type){
+                //  item.category.map((d,index)=>{
+                  return <Button style={{ backgroundColor: "#F4F4F4" }} type="text">
+                   {item.name}
+                  </Button>
+                // })   
+              }
+            })} */}
+            {/* <Button style={{ backgroundColor: "#F4F4F4" }} type="text">
               Клиники сети Медикал Парк
             </Button>
             <Button style={{ backgroundColor: "#F4F4F4" }} type="text">
@@ -317,7 +468,7 @@ const HomePage = ({}) => {
             </Button>
             <Button style={{ backgroundColor: "#F4F4F4" }} type="text">
               Университетская больница Коч
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>
@@ -452,10 +603,13 @@ const HomePage = ({}) => {
           Лучшие предложения
         </p>
         <div className="grid_2">
-          <div>
-            <img src={group} />
+          {bestoffer.map((item,index)=>{
+            return   <div key={index}>
+            <img src={item.image} />
           </div>
-          <div>
+          })}
+         
+          {/* <div>
             <img src={group2} />
           </div>
           <div>
@@ -475,7 +629,7 @@ const HomePage = ({}) => {
           </div>
           <div>
             <img src={group8} />
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -484,18 +638,13 @@ const HomePage = ({}) => {
           Baм понравится
         </p>
         <div className="grid_3">
-          <div>
-            <img src={group9} />
+          {likedoffer.map((item,index)=>{
+            return  <div key={index}>
+            <img src={item.image} />
           </div>
-          <div>
-            <img src={group10} />
-          </div>
-          <div>
-            <img src={group11} />
-          </div>
-          <div>
-            <img src={group12} />
-          </div>
+          })}
+         
+          
         </div>
         <div style={{ paddingTop: "15px" }} className="grid_4">
           <div>
@@ -512,10 +661,13 @@ const HomePage = ({}) => {
           Хиты продаж
         </p>
         <div className="grid_3">
-          <div>
-            <img src={group9} />
+          {bestseller.map((item,index)=>{
+            return  <div key={index}>
+            <img src={item.image} />
           </div>
-          <div>
+})}
+          
+          {/* <div>
             <img src={group10} />
           </div>
           <div>
@@ -523,7 +675,7 @@ const HomePage = ({}) => {
           </div>
           <div>
             <img src={group12} />
-          </div>
+          </div> */}
         </div>
       </div>
       <DiscoundSlider/>
@@ -545,7 +697,7 @@ const HomePage = ({}) => {
 
       <div className="containerSliderSecond">
         {" "}
-        <Slider />
+        <Slider countries={countries} />
 
       </div>
 

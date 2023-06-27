@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+
 import {
   Dropdown,
   Button,
@@ -26,7 +27,7 @@ import facebook from "../../assets/Images/facebook.png";
 import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
-
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowRightOutlined, EnvironmentOutlined } from "@ant-design/icons";
 
 import "../FavHospitals/FavHospitals.css";
@@ -38,12 +39,17 @@ import LoginModal from "../LoginModal/index.js";
 import RegisterModal from "../RegisterModal/index.js";
 import PageLoginBox from "../PageLoginBox/index.js";
 import FilterButtons from "../FilterButtons/index.js";
-
+import { useParams } from "react-router-dom";
+import Search from "antd/es/transfer/search";
+import { mainFilterSearch } from "../api/mainFilterFetch";
+import { allhospitalFetch } from "../api/allhospitalsFetch";
+import { useLocation } from "react-router-dom";
+import { allFilterSearch } from "../api/allFilterSearch";
+import { useSelector } from "react-redux";
+import axios from "axios";
 const { Panel } = Collapse;
 
-const onChange = (e) => {
-  console.log(`checked = ${e.target.checked}`);
-};
+
 
 const items = [
   {
@@ -205,6 +211,177 @@ const menuPropsFlag = {
 
 const  Hospitals = () => {
 
+  const navigate=useNavigate()
+
+  const [searchParams,setSearchParams] = useSearchParams()
+  const [selectedCountryValue, setSelectedCountryValue] = useState(searchParams.get("country")? searchParams.get("country").split(",") : []);
+  const [selectedRaitingValue, setSelectedRaitingValue] = useState(searchParams.get("raiting")? searchParams.get("raiting").split(",") : []);
+  const [checkedValue, setCheckedValue] = useState(searchParams.get("type")? searchParams.get("type") : "clinic");
+  const [hospitals,setHospitals]=useState([])
+  const [name,setName]=useState(searchParams.get("name") ? searchParams.get("name") : "")
+  const [count,setCount] = useState(0)
+  const [currentValue, setCurrentValue] = useState(searchParams.get("page")? searchParams.get("page"): 1)
+  const {user,authToken}=useSelector(state=> state.auth)
+  // console.log(user.user_id,authToken.access,"+++++");
+  console.log(hospitals);
+  console.log(checkedValue)
+ 
+  searchParams.set("type",checkedValue)
+
+  // useEffect(()=>{
+  //   if(searchParams.get("type")==="doctor"){
+  //     searchParams.delete("name")
+  //     console.log(searchParams.get("name"));
+  //     // const newSearch = `?${searchParams.toString()}`;
+
+  //     // navigate({ pathname:"/doctors", search: newSearch });
+
+  //   }
+  
+  // },[searchParams])
+
+
+
+  const liked= async(id)=>{
+    
+    const config = {
+      headers: { Authorization: `Bearer ${authToken.access}` }
+  };
+  
+   
+    try {
+      const resp = await  axios.post( 
+        `https://hospitalbackend.efgroup.az/card/add_favorite/2`,{
+          headers: {
+              Authorization:`Bearer ${authToken.access}`,
+              
+          },
+        })
+  
+      console.log( resp.data)
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+  const CountryChange = (value) => {
+    console.log(value);
+    setSelectedCountryValue(value);
+    searchParams.delete("page");
+    searchParams.delete("location")
+    searchParams.delete("name")
+     
+    if (value.length === 0) {
+      searchParams.delete("country");
+    
+    } else {
+      searchParams.set("country", value);
+    }
+    
+    const newSearch = `?${searchParams.toString()}`;
+    navigate({ search: newSearch });
+    };
+  const raitingChange = (value) => {
+    console.log(value);
+    setSelectedRaitingValue(value);
+    searchParams.delete("page");
+    searchParams.delete("location")
+    searchParams.delete("name")
+     
+    if (value.length === 0) {
+      searchParams.delete("raiting");
+    
+    } else {
+      searchParams.set("raiting", value);
+    }
+    
+    const newSearch = `?${searchParams.toString()}`;
+    navigate({ search: newSearch });
+    };
+  
+
+    const handleCheckboxChange = (e) => {
+      const { value } = e.target;
+      setCheckedValue(value);
+      searchParams.set("type", value);
+      if(e.target.value ==="doctor"){
+       
+        searchParams.delete("name")
+        searchParams.delete("location")
+        searchParams.delete("page")
+        searchParams.delete("country")
+        searchParams.delete("raiting")
+        const newSearch = `?${searchParams.toString()}`;
+        navigate({ pathname:"/doctors",search: newSearch });
+        
+      }
+      else{
+        const { value } = e.target;
+        setCheckedValue(value);
+        searchParams.set("type",value)
+        searchParams.delete("page");
+        searchParams.delete("name");
+        searchParams.delete("location")
+        searchParams.delete("country")
+        searchParams.delete("raiting")
+        const newSearch = `?${searchParams.toString()}`;
+        navigate({ search: newSearch });
+      }
+     
+    };
+    useEffect(() => {
+      
+      searchParams.set("page",currentValue)
+
+      if(searchParams.get("country")){
+        searchParams.set("country",selectedCountryValue)
+        
+      }
+      else{
+        searchParams.delete("country")
+        setSelectedCountryValue([])
+
+      }
+      if(searchParams.get("raiting")){
+        searchParams.set("raiting",selectedRaitingValue)
+
+      }
+      else{
+        searchParams.delete("raiting")
+        setSelectedRaitingValue([])
+
+      }
+      
+       
+      const getHospitals = async () => {
+        
+        
+        const data = await (searchParams.has("country")|| searchParams.has("raiting") 
+          ? allFilterSearch(
+            checkedValue || "clinic",
+            searchParams.get("country") || "",
+            searchParams.get("raiting") || "",
+            searchParams.get("page") || 0,
+          )
+          : mainFilterSearch(
+            checkedValue || "clinic",
+              searchParams.get("location") || "",
+              searchParams.get("name") || "",
+              searchParams.get("page") || 0,
+            ));
+            setHospitals(data.results);
+            setCount(data.count)
+          
+          
+            navigate({ search: `?${searchParams.toString()}` });
+          
+      
+      };
+    
+      getHospitals();
+    }, [searchParams]);
+
+
+
   return (
     <>
       {/* <Header/> */}
@@ -233,10 +410,8 @@ const  Hospitals = () => {
                   title: "Клиники",
                   href: "",
                 },
-
-                {
-                  title: "Турция",
-                },
+              
+                 
                 {
                   title: "Результаты поиска",
                 },
@@ -280,7 +455,8 @@ const  Hospitals = () => {
                     Место / название клиники / врач
                   </p>
                   <hr style={{ border: "1px solid #F0F0F0" }} />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox.Group style={{display:"block"}} value={selectedCountryValue} onChange={ CountryChange}>
+                  <Checkbox value={"Turkey"} >
                     <p
                       style={{
                         margin: "6px 0",
@@ -292,7 +468,7 @@ const  Hospitals = () => {
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox value={"Russia"} >
                     <p
                       style={{
                         margin: "6px 0",
@@ -304,7 +480,7 @@ const  Hospitals = () => {
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox value={"Azerbaijan"} >
                     <p
                       style={{
                         margin: "6px 0",
@@ -315,8 +491,27 @@ const  Hospitals = () => {
                       Aзербайджан
                     </p>
                   </Checkbox>
+                  </Checkbox.Group>
                   <hr style={{ border: "1px solid #F0F0F0" }} />
-                  <Checkbox onChange={onChange}>
+                
+             
+                  <Checkbox  checked={checkedValue === 'doctor'}
+        onChange={handleCheckboxChange}
+        className={checkedValue === 'doctor' ? 'selected' : ''} value={"doctor"} >
+                    <p
+                      style={{
+                        margin: "6px 0",
+                        color: "#000",
+                        fontSize: "16px",
+                      }}
+                    >
+                      Врачи
+                    </p>
+                  </Checkbox>
+                  <br />
+                  <Checkbox checked={checkedValue === 'clinic'}
+        onChange={handleCheckboxChange}
+        className={checkedValue === 'clinic' ? 'selected' : ''} value={"clinic"} >
                     <p
                       style={{
                         margin: "6px 0",
@@ -328,7 +523,9 @@ const  Hospitals = () => {
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox checked={checkedValue === 'service'}
+        onChange={handleCheckboxChange}
+        className={checkedValue === 'service' ? 'selected' : ''} value={"service"} >
                     <p
                       style={{
                         margin: "6px 0",
@@ -340,17 +537,9 @@ const  Hospitals = () => {
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox onChange={onChange}>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Врачи
-                    </p>
-                  </Checkbox>
+                 
+                
+                
                   <br />
                 </Panel>
               </Collapse>
@@ -395,7 +584,7 @@ const  Hospitals = () => {
                     Ваш бюджет
                   </p>
                   <hr style={{ border: "1px solid #F0F0F0" }} />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox>
                     <p
                       style={{
                         margin: "6px 0",
@@ -407,7 +596,7 @@ const  Hospitals = () => {
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox  >
                     <p
                       style={{
                         margin: "6px 0",
@@ -419,7 +608,7 @@ const  Hospitals = () => {
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox >
                     <p
                       style={{
                         margin: "6px 0",
@@ -442,156 +631,7 @@ const  Hospitals = () => {
                 }}
                 accordion
               >
-                <Panel
-                  style={{ backgroundColor: "#FBFBFB" }}
-                  header={
-                    <span
-                      style={{
-                        color: "#084BC2",
-                        fontSize: "18px",
-                        fontWeight: 500,
-                        fontFamily: "Inter",
-                        fontStyle: "normal",
-                      }}
-                    >
-                      Популярные фильтры
-                    </span>
-                  }
-                  key="1"
-                >
-                  <Checkbox onChange={onChange}>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Лабораторные анализы
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox onChange={onChange}>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Превосходно 9+
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox onChange={onChange}>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      5 звезд 112MED
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox onChange={onChange}>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Специализированные{" "}
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox onChange={onChange}>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      клиники Многопрофильные
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox onChange={onChange}>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      клиники
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox onChange={onChange}>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Реабилитация Бесплатное
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox onChange={onChange}>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      проживание
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox onChange={onChange}>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      check up
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox onChange={onChange}>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Центр города
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox onChange={onChange}>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Аппаратные исследования
-                    </p>
-                  </Checkbox>
-                  <br />
-                </Panel>
+               
               </Collapse>
               <Collapse
                 expandIconPosition="end"
@@ -620,7 +660,8 @@ const  Hospitals = () => {
                   }
                   key="1"
                 >
-                  <Checkbox onChange={onChange}>
+                    <Checkbox.Group style={{display:"block"}} value={selectedRaitingValue} onChange={raitingChange}>
+                  <Checkbox value={"1"} >
                     <p
                       style={{
                         margin: "6px 0",
@@ -628,11 +669,11 @@ const  Hospitals = () => {
                         fontSize: "16px",
                       }}
                     >
-                      2 звезды
+                      1 звезды
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox value={"2"} >
                     <p
                       style={{
                         margin: "6px 0",
@@ -640,11 +681,11 @@ const  Hospitals = () => {
                         fontSize: "16px",
                       }}
                     >
-                      3 звезды
+                         2 звезды
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox value={"3"} >
                     <p
                       style={{
                         margin: "6px 0",
@@ -652,11 +693,11 @@ const  Hospitals = () => {
                         fontSize: "16px",
                       }}
                     >
-                      4 звезды
+                       3 звезды
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox value={"4"} >
                     <p
                       style={{
                         margin: "6px 0",
@@ -664,11 +705,11 @@ const  Hospitals = () => {
                         fontSize: "16px",
                       }}
                     >
-                      5 звезды
+                       4 звезды
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox value={"5"} >
                     <p
                       style={{
                         margin: "6px 0",
@@ -676,9 +717,11 @@ const  Hospitals = () => {
                         fontSize: "16px",
                       }}
                     >
-                      без звезд
+                       5 звезды
                     </p>
                   </Checkbox>
+                  </Checkbox.Group>
+                
                   <br />
                 </Panel>
               </Collapse>
@@ -692,36 +735,7 @@ const  Hospitals = () => {
                 }}
                 accordion
               >
-                <Panel
-                  style={{ backgroundColor: "#FBFBFB" }}
-                  header={
-                    <span
-                      style={{
-                        color: "#084BC2",
-                        fontSize: "18px",
-                        fontWeight: 500,
-                        fontFamily: "Inter",
-                        fontStyle: "normal",
-                      }}
-                    >
-                      Специльные предложения
-                    </span>
-                  }
-                  key="1"
-                >
-                  <Checkbox onChange={onChange}>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Все предложения
-                    </p>
-                  </Checkbox>
-                  <br />
-                </Panel>
+               
               </Collapse>
               <Collapse
                 expandIconPosition="end"
@@ -750,7 +764,7 @@ const  Hospitals = () => {
                   }
                   key="1"
                 >
-                  <Checkbox onChange={onChange}>
+                  <Checkbox >
                     <p
                       style={{
                         margin: "6px 0",
@@ -762,7 +776,7 @@ const  Hospitals = () => {
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox >
                     <p
                       style={{
                         margin: "6px 0",
@@ -774,7 +788,7 @@ const  Hospitals = () => {
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox >
                     <p
                       style={{
                         margin: "6px 0",
@@ -786,7 +800,7 @@ const  Hospitals = () => {
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox onChange={onChange}>
+                  <Checkbox >
                     <p
                       style={{
                         margin: "6px 0",
@@ -863,15 +877,16 @@ const  Hospitals = () => {
               </div>
 
               <div>
-                <div className="cardReviewDoctors cardReviewDoctors-active">
+                {hospitals.map((item,index)=>{
+                  return  <div className="cardReviewDoctors cardReviewDoctors-active">
                   <div className="display_grid img-wrapper">
                     <img
                       className={"cardFavHospitals-img"}
                       id="hospitalsImage"
-                      src={FavoriteHospitals}
+                      src={item.main_image}
                     />
                     <img id="sponsoredImage" src={Sponsored} />
-                    <img id="likeImageFavHospitals" src={likeReview} />
+                    <img   id="likeImageFavHospitals" src={likeReview} />
                   </div>
                   <div
                     style={{ width: "769px", paddingLeft: "110px" }}
@@ -892,7 +907,7 @@ const  Hospitals = () => {
                           paddingLeft: "15px",
                         }}
                       >
-                        LuviMed
+                       {item.name}
                       </h3>
                       <div style={{ display: "flex", gap: "10px" }}>
                         <p style={{ margin: "0px", color: "white" }}>Hеплохо</p>
@@ -937,9 +952,9 @@ const  Hospitals = () => {
                           <EnvironmentOutlined
                             style={{ marginRight: "6px", color: "white" }}
                           />
-                          Бейоглу, Стамбул
+                          {item.location}
                         </p>
-                        <a href="#" style={{ margin: "0px", color: "#ffff" }}>
+                        <a onClick={()=>liked(item.id)} style={{ margin: "0px", color: "#ffff" }}>
                           Показать на карте
                         </a>
                       </div>
@@ -1029,6 +1044,7 @@ const  Hospitals = () => {
                         </p>
                       </div>
                       <div>
+                        <Link to={`/hospital/${item.id}`}>
                         <Button
                           style={{
                             backgroundColor: "#FFFF",
@@ -1038,9 +1054,11 @@ const  Hospitals = () => {
                             color: "black",
                           }}
                           type="primary"
+                         
                         >
                           Посмотреть услуги
                         </Button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -1169,1832 +1187,30 @@ const  Hospitals = () => {
                     </div>
                   </div>
                 </div>
-                <div className="cardReviewDoctors">
-                  <div className="display_grid img-wrapper">
-                    <img
-                      className={"cardFavHospitals-img"}
-                      id="hospitalsImage"
-                      src={FavoriteHospitals}
-                    />
-                    <img id="sponsoredImage" src={Sponsored} />
-                    <img id="likeImageFavHospitals" src={likeReview} />
-                  </div>
-                  <div
-                    style={{ width: "769px", paddingLeft: "110px" }}
-                    className="card-body card-content"
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-start",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <h3
-                        style={{
-                          margin: "0px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        LuviMed
-                      </h3>
-                      <div style={{ display: "flex", gap: "10px" }}>
-                        <p style={{ margin: "0px"}}>Hеплохо</p>
-
-                        <p
-                          style={{
-                            backgroundColor: "#FFC224",
-                            color: "#000",
-                            width: "29.16px",
-                            height: "21.53px",
-                            borderRadius: "2.5px",
-                            textAlign: "center",
-                            margin: "0px",
-                          }}
-                        >
-                          6.0
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "baseline",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "10px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "14px",
-                            margin: "0px",
-                          }}
-                        >
-                          <EnvironmentOutlined
-                            style={{ marginRight: "6px" }}
-                          />
-                          Бейоглу, Стамбул
-                        </p>
-                        <a href="#" style={{ margin: "0px" }}>
-                          Показать на карте
-                        </a>
-                      </div>
-                      <div>
-                        <p
-                          className="comment_hospitals"
-                          style={{ textAlign: "right" }}
-                        >
-                          <a style={{ color: "#000" }} href="#">
-                            45 отзыва
-                          </a>
-                        </p>
-                        <p style={{ margin: "0px" }}>
-                          Соотношение цена/качество
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        paddingLeft: "15px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            textAlign: "center",
-                            margin: "8px",
-                            paddingLeft: "12px",
-                          }}
-                        >
-                          При бронировании <br /> на сайте - 40%
-                        </p>
-                      </div>
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
-                        }}
-                      >
-                        <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#FFFF",
-                          borderRadius: "5px",
-                          border: "1px solid #EFEFEF",
-                          width: "384px",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            //   textAlign: "justify",
-                            fontSize: "12px",
-                            margin: "10px",
-                            lineHeight: "18px",
-                          }}
-                        >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
-                        </p>
-                      </div>
-                      <div>
-                        <Button
-                          style={{
-                            backgroundColor: "#FFFF",
-                            borderRadius: "5px",
-                            width: "155px",
-                            height: "40px",
-                            color: "black",
-                          }}
-                          type="primary"
-                        >
-                          Посмотреть услуги
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="card-content-mobile"
-                  >
-                    <div
-                      style={{
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <p
-                        style={{
-                          fontSize: "14px",
-                        }}
-                      >
-                        <EnvironmentOutlined
-                          style={{ marginRight: "6px", }}
-                        />
-                        Бейоглу, Стамбул
-                      </p>
-                      <h3
-                        style={{
-                          margin: "0px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        LuviMed
-                      </h3>
-                      <div style={{ display: "flex", gap: "10px", alignItems:"center" }}>
-                        <p
-                          style={{
-                            backgroundColor: "#FFC224",
-                            color: "#000",
-                            width: "29.16px",
-                            height: "21.53px",
-                            borderRadius: "2.5px",
-                            textAlign: "center",
-                            margin: "0px",
-                          }}
-                        >
-                          6.0
-                        </p>
-                        <img src={Iconstars} />
-                        <p style={{ margin: "0px", }}>Hеплохо</p>
-                        <p
-                          style={{ textAlign: "right" }}
-                        >
-                          <a style={{ color: "#000" }} href="#">
-                            45 отзыва
-                          </a>
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent:"space-between"
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            textAlign: "center",
-                            margin: "8px",
-                            paddingLeft: "12px",
-                          }}
-                        >
-                          При бронировании <br /> на сайте - 40%
-                        </p>
-                      </div>
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
-                        }}
-                      >
-                        <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#FFFF",
-                          borderRadius: "5px",
-                          border: "1px solid #EFEFEF",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            //   textAlign: "justify",
-                            fontSize: "12px",
-                            margin: "10px",
-                            lineHeight: "18px",
-                          }}
-                        >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="cardReviewDoctors">
-                  <div className="display_grid img-wrapper">
-                    <img
-                      className={"cardFavHospitals-img"}
-                      id="hospitalsImage"
-                      src={FavoriteHospitals}
-                    />
-                    <img id="sponsoredImage" src={Sponsored} />
-                    <img id="likeImageFavHospitals" src={likeReview} />
-                  </div>
-                  <div
-                    style={{ width: "769px", paddingLeft: "110px" }}
-                    className="card-body card-content"
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-start",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <h3
-                        style={{
-                          margin: "0px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        LuviMed
-                      </h3>
-                      <div style={{ display: "flex", gap: "10px" }}>
-                        <p style={{ margin: "0px"}}>Hеплохо</p>
-
-                        <p
-                          style={{
-                            backgroundColor: "#FFC224",
-                            color: "#000",
-                            width: "29.16px",
-                            height: "21.53px",
-                            borderRadius: "2.5px",
-                            textAlign: "center",
-                            margin: "0px",
-                          }}
-                        >
-                          6.0
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "baseline",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "10px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "14px",
-                            margin: "0px",
-                          }}
-                        >
-                          <EnvironmentOutlined
-                            style={{ marginRight: "6px" }}
-                          />
-                          Бейоглу, Стамбул
-                        </p>
-                        <a href="#" style={{ margin: "0px" }}>
-                          Показать на карте
-                        </a>
-                      </div>
-                      <div>
-                        <p
-                          className="comment_hospitals"
-                          style={{ textAlign: "right" }}
-                        >
-                          <a style={{ color: "#000" }} href="#">
-                            45 отзыва
-                          </a>
-                        </p>
-                        <p style={{ margin: "0px" }}>
-                          Соотношение цена/качество
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        paddingLeft: "15px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            textAlign: "center",
-                            margin: "8px",
-                            paddingLeft: "12px",
-                          }}
-                        >
-                          При бронировании <br /> на сайте - 40%
-                        </p>
-                      </div>
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
-                        }}
-                      >
-                        <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#FFFF",
-                          borderRadius: "5px",
-                          border: "1px solid #EFEFEF",
-                          width: "384px",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            //   textAlign: "justify",
-                            fontSize: "12px",
-                            margin: "10px",
-                            lineHeight: "18px",
-                          }}
-                        >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
-                        </p>
-                      </div>
-                      <div>
-                        <Button
-                          style={{
-                            backgroundColor: "#FFFF",
-                            borderRadius: "5px",
-                            width: "155px",
-                            height: "40px",
-                            color: "black",
-                          }}
-                          type="primary"
-                        >
-                          Посмотреть услуги
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="card-content-mobile"
-                  >
-                    <div
-                      style={{
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <p
-                        style={{
-                          fontSize: "14px",
-                        }}
-                      >
-                        <EnvironmentOutlined
-                          style={{ marginRight: "6px", }}
-                        />
-                        Бейоглу, Стамбул
-                      </p>
-                      <h3
-                        style={{
-                          margin: "0px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        LuviMed
-                      </h3>
-                      <div style={{ display: "flex", gap: "10px", alignItems:"center" }}>
-                        <p
-                          style={{
-                            backgroundColor: "#FFC224",
-                            color: "#000",
-                            width: "29.16px",
-                            height: "21.53px",
-                            borderRadius: "2.5px",
-                            textAlign: "center",
-                            margin: "0px",
-                          }}
-                        >
-                          6.0
-                        </p>
-                        <img src={Iconstars} />
-                        <p style={{ margin: "0px", }}>Hеплохо</p>
-                        <p
-                          style={{ textAlign: "right" }}
-                        >
-                          <a style={{ color: "#000" }} href="#">
-                            45 отзыва
-                          </a>
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent:"space-between"
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            textAlign: "center",
-                            margin: "8px",
-                            paddingLeft: "12px",
-                          }}
-                        >
-                          При бронировании <br /> на сайте - 40%
-                        </p>
-                      </div>
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
-                        }}
-                      >
-                        <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#FFFF",
-                          borderRadius: "5px",
-                          border: "1px solid #EFEFEF",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            //   textAlign: "justify",
-                            fontSize: "12px",
-                            margin: "10px",
-                            lineHeight: "18px",
-                          }}
-                        >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="cardReviewDoctors">
-                  <div className="display_grid img-wrapper">
-                    <img
-                      className={"cardFavHospitals-img"}
-                      id="hospitalsImage"
-                      src={FavoriteHospitals}
-                    />
-                    <img id="sponsoredImage" src={Sponsored} />
-                    <img id="likeImageFavHospitals" src={likeReview} />
-                  </div>
-                  <div
-                    style={{ width: "769px", paddingLeft: "110px" }}
-                    className="card-body card-content"
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-start",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <h3
-                        style={{
-                          margin: "0px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        LuviMed
-                      </h3>
-                      <div style={{ display: "flex", gap: "10px" }}>
-                        <p style={{ margin: "0px"}}>Hеплохо</p>
-
-                        <p
-                          style={{
-                            backgroundColor: "#FFC224",
-                            color: "#000",
-                            width: "29.16px",
-                            height: "21.53px",
-                            borderRadius: "2.5px",
-                            textAlign: "center",
-                            margin: "0px",
-                          }}
-                        >
-                          6.0
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "baseline",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "10px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "14px",
-                            margin: "0px",
-                          }}
-                        >
-                          <EnvironmentOutlined
-                            style={{ marginRight: "6px" }}
-                          />
-                          Бейоглу, Стамбул
-                        </p>
-                        <a href="#" style={{ margin: "0px" }}>
-                          Показать на карте
-                        </a>
-                      </div>
-                      <div>
-                        <p
-                          className="comment_hospitals"
-                          style={{ textAlign: "right" }}
-                        >
-                          <a style={{ color: "#000" }} href="#">
-                            45 отзыва
-                          </a>
-                        </p>
-                        <p style={{ margin: "0px" }}>
-                          Соотношение цена/качество
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        paddingLeft: "15px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            textAlign: "center",
-                            margin: "8px",
-                            paddingLeft: "12px",
-                          }}
-                        >
-                          При бронировании <br /> на сайте - 40%
-                        </p>
-                      </div>
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
-                        }}
-                      >
-                        <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#FFFF",
-                          borderRadius: "5px",
-                          border: "1px solid #EFEFEF",
-                          width: "384px",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            //   textAlign: "justify",
-                            fontSize: "12px",
-                            margin: "10px",
-                            lineHeight: "18px",
-                          }}
-                        >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
-                        </p>
-                      </div>
-                      <div>
-                        <Button
-                          style={{
-                            backgroundColor: "#FFFF",
-                            borderRadius: "5px",
-                            width: "155px",
-                            height: "40px",
-                            color: "black",
-                          }}
-                          type="primary"
-                        >
-                          Посмотреть услуги
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="card-content-mobile"
-                  >
-                    <div
-                      style={{
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <p
-                        style={{
-                          fontSize: "14px",
-                        }}
-                      >
-                        <EnvironmentOutlined
-                          style={{ marginRight: "6px", }}
-                        />
-                        Бейоглу, Стамбул
-                      </p>
-                      <h3
-                        style={{
-                          margin: "0px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        LuviMed
-                      </h3>
-                      <div style={{ display: "flex", gap: "10px", alignItems:"center" }}>
-                        <p
-                          style={{
-                            backgroundColor: "#FFC224",
-                            color: "#000",
-                            width: "29.16px",
-                            height: "21.53px",
-                            borderRadius: "2.5px",
-                            textAlign: "center",
-                            margin: "0px",
-                          }}
-                        >
-                          6.0
-                        </p>
-                        <img src={Iconstars} />
-                        <p style={{ margin: "0px", }}>Hеплохо</p>
-                        <p
-                          style={{ textAlign: "right" }}
-                        >
-                          <a style={{ color: "#000" }} href="#">
-                            45 отзыва
-                          </a>
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent:"space-between"
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            textAlign: "center",
-                            margin: "8px",
-                            paddingLeft: "12px",
-                          }}
-                        >
-                          При бронировании <br /> на сайте - 40%
-                        </p>
-                      </div>
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
-                        }}
-                      >
-                        <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#FFFF",
-                          borderRadius: "5px",
-                          border: "1px solid #EFEFEF",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            //   textAlign: "justify",
-                            fontSize: "12px",
-                            margin: "10px",
-                            lineHeight: "18px",
-                          }}
-                        >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="cardReviewDoctors">
-                  <div className="display_grid img-wrapper">
-                    <img
-                      className={"cardFavHospitals-img"}
-                      id="hospitalsImage"
-                      src={FavoriteHospitals}
-                    />
-                    <img id="sponsoredImage" src={Sponsored} />
-                    <img id="likeImageFavHospitals" src={likeReview} />
-                  </div>
-                  <div
-                    style={{ width: "769px", paddingLeft: "110px" }}
-                    className="card-body card-content"
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-start",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <h3
-                        style={{
-                          margin: "0px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        LuviMed
-                      </h3>
-                      <div style={{ display: "flex", gap: "10px" }}>
-                        <p style={{ margin: "0px"}}>Hеплохо</p>
-
-                        <p
-                          style={{
-                            backgroundColor: "#FFC224",
-                            color: "#000",
-                            width: "29.16px",
-                            height: "21.53px",
-                            borderRadius: "2.5px",
-                            textAlign: "center",
-                            margin: "0px",
-                          }}
-                        >
-                          6.0
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "baseline",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "10px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "14px",
-                            margin: "0px",
-                          }}
-                        >
-                          <EnvironmentOutlined
-                            style={{ marginRight: "6px" }}
-                          />
-                          Бейоглу, Стамбул
-                        </p>
-                        <a href="#" style={{ margin: "0px" }}>
-                          Показать на карте
-                        </a>
-                      </div>
-                      <div>
-                        <p
-                          className="comment_hospitals"
-                          style={{ textAlign: "right" }}
-                        >
-                          <a style={{ color: "#000" }} href="#">
-                            45 отзыва
-                          </a>
-                        </p>
-                        <p style={{ margin: "0px" }}>
-                          Соотношение цена/качество
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        paddingLeft: "15px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            textAlign: "center",
-                            margin: "8px",
-                            paddingLeft: "12px",
-                          }}
-                        >
-                          При бронировании <br /> на сайте - 40%
-                        </p>
-                      </div>
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
-                        }}
-                      >
-                        <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#FFFF",
-                          borderRadius: "5px",
-                          border: "1px solid #EFEFEF",
-                          width: "384px",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            //   textAlign: "justify",
-                            fontSize: "12px",
-                            margin: "10px",
-                            lineHeight: "18px",
-                          }}
-                        >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
-                        </p>
-                      </div>
-                      <div>
-                        <Button
-                          style={{
-                            backgroundColor: "#FFFF",
-                            borderRadius: "5px",
-                            width: "155px",
-                            height: "40px",
-                            color: "black",
-                          }}
-                          type="primary"
-                        >
-                          Посмотреть услуги
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="card-content-mobile"
-                  >
-                    <div
-                      style={{
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <p
-                        style={{
-                          fontSize: "14px",
-                        }}
-                      >
-                        <EnvironmentOutlined
-                          style={{ marginRight: "6px", }}
-                        />
-                        Бейоглу, Стамбул
-                      </p>
-                      <h3
-                        style={{
-                          margin: "0px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        LuviMed
-                      </h3>
-                      <div style={{ display: "flex", gap: "10px", alignItems:"center" }}>
-                        <p
-                          style={{
-                            backgroundColor: "#FFC224",
-                            color: "#000",
-                            width: "29.16px",
-                            height: "21.53px",
-                            borderRadius: "2.5px",
-                            textAlign: "center",
-                            margin: "0px",
-                          }}
-                        >
-                          6.0
-                        </p>
-                        <img src={Iconstars} />
-                        <p style={{ margin: "0px", }}>Hеплохо</p>
-                        <p
-                          style={{ textAlign: "right" }}
-                        >
-                          <a style={{ color: "#000" }} href="#">
-                            45 отзыва
-                          </a>
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent:"space-between"
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            textAlign: "center",
-                            margin: "8px",
-                            paddingLeft: "12px",
-                          }}
-                        >
-                          При бронировании <br /> на сайте - 40%
-                        </p>
-                      </div>
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
-                        }}
-                      >
-                        <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#FFFF",
-                          borderRadius: "5px",
-                          border: "1px solid #EFEFEF",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            //   textAlign: "justify",
-                            fontSize: "12px",
-                            margin: "10px",
-                            lineHeight: "18px",
-                          }}
-                        >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="cardReviewDoctors">
-                  <div className="display_grid img-wrapper">
-                    <img
-                      className={"cardFavHospitals-img"}
-                      id="hospitalsImage"
-                      src={FavoriteHospitals}
-                    />
-                    <img id="sponsoredImage" src={Sponsored} />
-                    <img id="likeImageFavHospitals" src={likeReview} />
-                  </div>
-                  <div
-                    style={{ width: "769px", paddingLeft: "110px" }}
-                    className="card-body card-content"
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-start",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <h3
-                        style={{
-                          margin: "0px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        LuviMed
-                      </h3>
-                      <div style={{ display: "flex", gap: "10px" }}>
-                        <p style={{ margin: "0px"}}>Hеплохо</p>
-
-                        <p
-                          style={{
-                            backgroundColor: "#FFC224",
-                            color: "#000",
-                            width: "29.16px",
-                            height: "21.53px",
-                            borderRadius: "2.5px",
-                            textAlign: "center",
-                            margin: "0px",
-                          }}
-                        >
-                          6.0
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "baseline",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "10px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "14px",
-                            margin: "0px",
-                          }}
-                        >
-                          <EnvironmentOutlined
-                            style={{ marginRight: "6px" }}
-                          />
-                          Бейоглу, Стамбул
-                        </p>
-                        <a href="#" style={{ margin: "0px" }}>
-                          Показать на карте
-                        </a>
-                      </div>
-                      <div>
-                        <p
-                          className="comment_hospitals"
-                          style={{ textAlign: "right" }}
-                        >
-                          <a style={{ color: "#000" }} href="#">
-                            45 отзыва
-                          </a>
-                        </p>
-                        <p style={{ margin: "0px" }}>
-                          Соотношение цена/качество
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        paddingLeft: "15px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            textAlign: "center",
-                            margin: "8px",
-                            paddingLeft: "12px",
-                          }}
-                        >
-                          При бронировании <br /> на сайте - 40%
-                        </p>
-                      </div>
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
-                        }}
-                      >
-                        <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#FFFF",
-                          borderRadius: "5px",
-                          border: "1px solid #EFEFEF",
-                          width: "384px",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            //   textAlign: "justify",
-                            fontSize: "12px",
-                            margin: "10px",
-                            lineHeight: "18px",
-                          }}
-                        >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
-                        </p>
-                      </div>
-                      <div>
-                        <Button
-                          style={{
-                            backgroundColor: "#FFFF",
-                            borderRadius: "5px",
-                            width: "155px",
-                            height: "40px",
-                            color: "black",
-                          }}
-                          type="primary"
-                        >
-                          Посмотреть услуги
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="card-content-mobile"
-                  >
-                    <div
-                      style={{
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <p
-                        style={{
-                          fontSize: "14px",
-                        }}
-                      >
-                        <EnvironmentOutlined
-                          style={{ marginRight: "6px", }}
-                        />
-                        Бейоглу, Стамбул
-                      </p>
-                      <h3
-                        style={{
-                          margin: "0px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        LuviMed
-                      </h3>
-                      <div style={{ display: "flex", gap: "10px", alignItems:"center" }}>
-                        <p
-                          style={{
-                            backgroundColor: "#FFC224",
-                            color: "#000",
-                            width: "29.16px",
-                            height: "21.53px",
-                            borderRadius: "2.5px",
-                            textAlign: "center",
-                            margin: "0px",
-                          }}
-                        >
-                          6.0
-                        </p>
-                        <img src={Iconstars} />
-                        <p style={{ margin: "0px", }}>Hеплохо</p>
-                        <p
-                          style={{ textAlign: "right" }}
-                        >
-                          <a style={{ color: "#000" }} href="#">
-                            45 отзыва
-                          </a>
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent:"space-between"
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            textAlign: "center",
-                            margin: "8px",
-                            paddingLeft: "12px",
-                          }}
-                        >
-                          При бронировании <br /> на сайте - 40%
-                        </p>
-                      </div>
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
-                        }}
-                      >
-                        <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#FFFF",
-                          borderRadius: "5px",
-                          border: "1px solid #EFEFEF",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            //   textAlign: "justify",
-                            fontSize: "12px",
-                            margin: "10px",
-                            lineHeight: "18px",
-                          }}
-                        >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="cardReviewDoctors">
-                  <div className="display_grid img-wrapper">
-                    <img
-                      className={"cardFavHospitals-img"}
-                      id="hospitalsImage"
-                      src={FavoriteHospitals}
-                    />
-                    <img id="sponsoredImage" src={Sponsored} />
-                    <img id="likeImageFavHospitals" src={likeReview} />
-                  </div>
-                  <div
-                    style={{ width: "769px", paddingLeft: "110px" }}
-                    className="card-body card-content"
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-start",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <h3
-                        style={{
-                          margin: "0px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        LuviMed
-                      </h3>
-                      <div style={{ display: "flex", gap: "10px" }}>
-                        <p style={{ margin: "0px"}}>Hеплохо</p>
-
-                        <p
-                          style={{
-                            backgroundColor: "#FFC224",
-                            color: "#000",
-                            width: "29.16px",
-                            height: "21.53px",
-                            borderRadius: "2.5px",
-                            textAlign: "center",
-                            margin: "0px",
-                          }}
-                        >
-                          6.0
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "baseline",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "10px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "14px",
-                            margin: "0px",
-                          }}
-                        >
-                          <EnvironmentOutlined
-                            style={{ marginRight: "6px" }}
-                          />
-                          Бейоглу, Стамбул
-                        </p>
-                        <a href="#" style={{ margin: "0px" }}>
-                          Показать на карте
-                        </a>
-                      </div>
-                      <div>
-                        <p
-                          className="comment_hospitals"
-                          style={{ textAlign: "right" }}
-                        >
-                          <a style={{ color: "#000" }} href="#">
-                            45 отзыва
-                          </a>
-                        </p>
-                        <p style={{ margin: "0px" }}>
-                          Соотношение цена/качество
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        paddingLeft: "15px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            textAlign: "center",
-                            margin: "8px",
-                            paddingLeft: "12px",
-                          }}
-                        >
-                          При бронировании <br /> на сайте - 40%
-                        </p>
-                      </div>
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
-                        }}
-                      >
-                        <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#FFFF",
-                          borderRadius: "5px",
-                          border: "1px solid #EFEFEF",
-                          width: "384px",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            //   textAlign: "justify",
-                            fontSize: "12px",
-                            margin: "10px",
-                            lineHeight: "18px",
-                          }}
-                        >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
-                        </p>
-                      </div>
-                      <div>
-                        <Button
-                          style={{
-                            backgroundColor: "#FFFF",
-                            borderRadius: "5px",
-                            width: "155px",
-                            height: "40px",
-                            color: "black",
-                          }}
-                          type="primary"
-                        >
-                          Посмотреть услуги
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="card-content-mobile"
-                  >
-                    <div
-                      style={{
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <p
-                        style={{
-                          fontSize: "14px",
-                        }}
-                      >
-                        <EnvironmentOutlined
-                          style={{ marginRight: "6px", }}
-                        />
-                        Бейоглу, Стамбул
-                      </p>
-                      <h3
-                        style={{
-                          margin: "0px",
-                          paddingLeft: "15px",
-                        }}
-                      >
-                        LuviMed
-                      </h3>
-                      <div style={{ display: "flex", gap: "10px", alignItems:"center" }}>
-                        <p
-                          style={{
-                            backgroundColor: "#FFC224",
-                            color: "#000",
-                            width: "29.16px",
-                            height: "21.53px",
-                            borderRadius: "2.5px",
-                            textAlign: "center",
-                            margin: "0px",
-                          }}
-                        >
-                          6.0
-                        </p>
-                        <img src={Iconstars} />
-                        <p style={{ margin: "0px", }}>Hеплохо</p>
-                        <p
-                          style={{ textAlign: "right" }}
-                        >
-                          <a style={{ color: "#000" }} href="#">
-                            45 отзыва
-                          </a>
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent:"space-between"
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            textAlign: "center",
-                            margin: "8px",
-                            paddingLeft: "12px",
-                          }}
-                        >
-                          При бронировании <br /> на сайте - 40%
-                        </p>
-                      </div>
-                      <div
-                        style={{
-                          backgroundColor: "#E9ECFF",
-                          borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
-                        }}
-                      >
-                        <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#FFFF",
-                          borderRadius: "5px",
-                          border: "1px solid #EFEFEF",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <p
-                          style={{
-                            //   textAlign: "justify",
-                            fontSize: "12px",
-                            margin: "10px",
-                            lineHeight: "18px",
-                          }}
-                        >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                })}
+               
+               
                 <div className={'hospitals-pagination'}>
-                  <Pagination
-                    showSizeChanger={false}
-                    defaultCurrent={1}
-                    total={50}
-                  />
+                  {count ?  <Pagination
+                   current={currentValue}  pageSize={2} onChange={(page)=>{
+                    setCurrentValue(page)
+                    searchParams.set("page", page)
+                    const newSearch = `?${searchParams.toString()}`;
+                    navigate({ search: newSearch });
+  
+                  }}  total={count}
+                   
+                  /> : <h1>Nothing Found !</h1>}
+                 
                 </div>
-                <PageLoginBox/>
+                {/* <PageLoginBox/> */}
               </div>
             </div>
           </div>
         </div>
       </div>
       <Footer/>
+      
     </>
   );
 };
