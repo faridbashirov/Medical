@@ -4,6 +4,8 @@
     gap: 30px;
     padding-top: 30px;
 }
+
+
 .display_grid{
     display: grid;
     grid-template-columns: repeat(12,1fr);

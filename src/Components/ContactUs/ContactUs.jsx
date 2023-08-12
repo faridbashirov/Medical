@@ -1,5 +1,5 @@
-import React from "react";
-
+import React,{useEffect, useState}  from "react";
+import { Controller } from 'react-hook-form';
 import {
   Dropdown,
   Button,
@@ -28,10 +28,12 @@ import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 
 import { ArrowRightOutlined } from "@ant-design/icons";
-
+import { useForm } from "react-hook-form";
 import "../ContactUs/ContactUs.css";
+import { contactFetch } from "../api/contactFetch";
 import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
+import { useTranslation } from "react-i18next";
 
 const items = [
   {
@@ -215,6 +217,33 @@ const MyFormItem = ({ name, ...props }) => {
 };
 
 const ContactUs = () => {
+  const {t}=useTranslation()
+  const {control,reset, handleSubmit,formState: { errors } } = useForm();
+  const [error,setError] = useState({})
+  const formRef = React.createRef();
+
+
+  const handleRegistration = async(values) => {
+    console.log(values);
+
+    const data = await contactFetch(values)
+
+    if(data.Errors){
+      console.log("error");
+            setError(data.Errors)
+            
+          }
+    if(data.message){
+      console.log("success");
+      reset()
+      alert("Message sent!");
+      
+                  setError({})
+                  
+                
+      
+  }
+}
   const onFinish = (value) => {
     console.log(value);
   };
@@ -244,11 +273,11 @@ const ContactUs = () => {
             }
             items={[
               {
-                title: "Главная",
-                href: "",
+                title: t("home"),
+                href: "/",
               },
               {
-                title: "Kонтакт",
+                title: t("contact"),
               },
             ]}
           />
@@ -258,10 +287,10 @@ const ContactUs = () => {
             <p
               style={{ color: "#5282FF", fontSize: "20px", margin: "0 0 10px" }}
             >
-              Hапишите Hам
+              {t("contact-us")}
             </p>
             <p style={{ color: "#5F5F5F", fontSize: "16px", margin: "0" }}>
-              Обновите свою информацию и узнайте, как она используется.
+            {t("profileinfo2")}
             </p>
             <hr
               style={{
@@ -270,40 +299,87 @@ const ContactUs = () => {
                 marginBottom: "15px",
               }}
             />
-            <Form name="form_item_path" layout="vertical" onFinish={onFinish}>
+            <Form  name="form_item_path" layout="vertical"  onFinish={handleSubmit(handleRegistration)}>
               <MyFormItemGroup prefix={["user"]}>
                 <MyFormItemGroup prefix={["name"]}>
                   <Row gutter={16}>
                     <Col span={12}>
-                      <MyFormItem name="firstName" label="Имя">
-                        <Input className="inputName" placeholder="Имя" />
+                      <MyFormItem name="first_name" label= {t("name")}>
+                      <Controller
+             rules={{
+              required: "This field is required",
+            }}
+            name="first_name"
+            control={control}
+            render={({ field }) => (
+              <Input {...field} className="input" placeholder="First Name *"  />
+            )}
+          />
                       </MyFormItem>
+                      {errors?.first_name && errors.first_name.message}
+        {error.first_name ? <div
+        style={{
+          
+          width: '100%',
+        }}>{error.first_name}</div> : ""}
                     </Col>
                     <Col span={12}>
-                      <MyFormItem name="lastName" label="Фамилия">
-                        <Input
-                          placeholder="Фамилия "
-                          className="lastInputName"
-                        />
+                      <MyFormItem name="last_name" label={t("surname")}>
+                      <Controller
+             rules={{
+              required: "This field is required",
+            }}
+            name="last_name"
+            control={control}
+            render={({ field }) => (
+              <Input {...field} className="input" placeholder="Last Name *"  />
+            )}
+          />
                       </MyFormItem>
+
+                      {errors?.last_name && errors.last_name.message}
+        {error.last_name ? <div style={{
+          
+          width: '100%',
+          
+          
+        }}>{error.first_name}</div> : ""}
                     </Col>
                   </Row>
 
                   <Row>
                     <Col span={24}>
-                      <MyFormItem name="email" label="Электронной почты">
-                        <Input
-                          suffix={<img src={mailIcon} />}
-                          className="emailInput"
-                        />
+                      <MyFormItem name="email" label={t("mailadress")}>
+                      <Controller
+             rules={{
+              required: "This field is required",
+            }}
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <Input {...field} type="email" className="input" placeholder="Email"  />
+            )}
+          />
                       </MyFormItem>
+                      {error.email ? <span>{error.email}</span> : ""}
+                      {errors?.email && errors.email.message}
                     </Col>
                   </Row>
                   <Row>
                     <Col span={24}>
-                      <Form.Item name="заметка" label="Заметка">
-                        <Input.TextArea style={{ height: "156px" }} />
+                      <Form.Item name="text" label={t("note")}>
+                      <Controller
+             rules={{
+              required: "This field is required",
+            }}
+            name="text"
+            control={control}
+            render={({ field }) => (
+              <Input.TextArea {...field} className="input"  placeholder="Message"  />
+            )}
+          />
                       </Form.Item>
+                      {errors?.text && errors.text.message}
                     </Col>
                   </Row>
                 </MyFormItemGroup>
@@ -320,14 +396,14 @@ const ContactUs = () => {
                 type="primary"
                 htmlType="submit"
               >
-                Отправить сообщение
+               {t("sendmessage")}
               </Button>
             </Form>
           </div>
           <div
             className={"faq-contact"}
           >
-            <p style={{ color: "#FFF", fontSize: "24px" }}>Hужна помощь</p>
+            <p style={{ color: "#FFF", fontSize: "24px" }}>{t("help2")}</p>
             <hr style={{ marginBottom: "50px" }} />
             <p style={{ color: "#FFF" }}>+994 000 00 00 </p>
             <p style={{ color: "#FFF" }}>+994 000 00 00 </p>

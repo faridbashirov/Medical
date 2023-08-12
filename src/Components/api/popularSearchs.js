@@ -1,8 +1,8 @@
 import axios from "./index";
 
-export const PopularSearchFetch = async () => {
+export const PopularSearchFetch = async (lang) => {
     try {
-        const resp = await axios.get("hospital/popular_search")
+        const resp = await axios.get(`${lang === "ru" ? "" : lang +"/"}hospital/popular_search`)
     
         return resp.data
     } catch (error) {

@@ -1,18 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
+import { axiosPrivate } from '../../api/api';
 
 export const fetchHospitals = createAsyncThunk(
     'users/fetchHospitals',
-    async (thunkAPI) => {
+    async (obj,thunkAPI) => {
         
       try {
+        
        
-        const data =  await axios.get("https://hospitalbackend.efgroup.az/hospital/hospitals",{
-         
-        })
+        const data =  await axiosPrivate.get(`https://hospitalbackend.efgroup.az/${obj === "ru" ? "" : obj+"/"}hospital/hospitals`)
        
-
-        return data.data
+        console.log(data);
+        return data
       } catch (error) {
        return  error.message
       }

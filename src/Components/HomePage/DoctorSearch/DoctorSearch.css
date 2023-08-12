@@ -6,7 +6,7 @@
 }
 
 .doctor-search_item{
-    width: 283px;
+    width: 96%;
     height: 228px;
     background: #5282FF;
     border-radius: 19px;
@@ -27,6 +27,7 @@
 .doctor-search__desc{
     font-family: 'Gilroy';
     font-weight: 400;
+    margin-top: 20px;
     font-size: 28px;
     line-height: 34px;
 }

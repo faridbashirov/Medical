@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
@@ -23,7 +23,9 @@ import mailIcon from "../../assets/Svg/mailIcon.svg";
 import passwordIcon from "../../assets/Svg/passwordIcon.svg";
 import { useNavigate } from "react-router-dom";
 import "../Profile/Profile.css";
-
+import getUserFetch from "../api/getUser";
+import Password from "./Password";
+import Info from "./Info";
 import {
   Button,
   Dropdown,
@@ -35,11 +37,14 @@ import {
   Input,
   DatePicker,
   Select,
+  Tabs,
 } from "antd";
 
 import { ArrowRightOutlined } from "@ant-design/icons";
 import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
+import { useTranslation } from "react-i18next";
+
 
 const handleMenuClick = (e) => {
   console.log("click", e);
@@ -48,180 +53,181 @@ const handleMenuClick = (e) => {
 const handleMenuFlagClick = (e) => {
   console.log("click", e);
 };
-const onChange = (date, dateString) => {
-  console.log(date, dateString);
-};
 
-const items = [
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        USD
-      </span>
-    ),
-    key: "1",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={USD}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        EUR
-      </span>
-    ),
-    key: "2",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={EUO}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        {" "}
-        GBP
-      </span>
-    ),
-    key: "3",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={POU}
-      />
-    ),
-  },
-];
 
-const itemsFlag = [
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        AZ
-      </span>
-    ),
-    key: "1",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={azFlag}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        TR
-      </span>
-    ),
-    key: "2",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={trFlag}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        {" "}
-        EN
-      </span>
-    ),
-    key: "3",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={absFlag}
-      />
-    ),
-  },
-];
 
-const menuProps = {
-  items,
-  onClick: handleMenuClick,
-};
-const menuPropsFlag = {
-  items: itemsFlag,
-  onClick: handleMenuFlagClick,
-};
+
+
+// const items = [
+//   {
+//     label: (
+//       <span
+//         style={{
+//           fontFamily: "Gilroy",
+//           fontSize: "16px",
+//           fontWeight: "600",
+//           color: "black",
+//           paddingLeft: "10px",
+//         }}
+//       >
+//         USD
+//       </span>
+//     ),
+//     key: "1",
+//     icon: (
+//       <img
+//         style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
+//         src={USD}
+//       />
+//     ),
+//   },
+//   {
+//     label: (
+//       <span
+//         style={{
+//           fontFamily: "Gilroy",
+//           fontSize: "16px",
+//           fontWeight: "600",
+//           color: "black",
+//           paddingLeft: "10px",
+//         }}
+//       >
+//         EUR
+//       </span>
+//     ),
+//     key: "2",
+//     icon: (
+//       <img
+//         style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
+//         src={EUO}
+//       />
+//     ),
+//   },
+//   {
+//     label: (
+//       <span
+//         style={{
+//           fontFamily: "Gilroy",
+//           fontSize: "16px",
+//           fontWeight: "600",
+//           color: "black",
+//           paddingLeft: "10px",
+//         }}
+//       >
+//         {" "}
+//         GBP
+//       </span>
+//     ),
+//     key: "3",
+//     icon: (
+//       <img
+//         style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
+//         src={POU}
+//       />
+//     ),
+//   },
+// ];
+
+// const itemsFlag = [
+//   {
+//     label: (
+//       <span
+//         style={{
+//           fontFamily: "Gilroy",
+//           fontSize: "16px",
+//           fontWeight: "600",
+//           color: "black",
+//           paddingLeft: "10px",
+//         }}
+//       >
+//         AZ
+//       </span>
+//     ),
+//     key: "1",
+//     icon: (
+//       <img
+//         style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
+//         src={azFlag}
+//       />
+//     ),
+//   },
+//   {
+//     label: (
+//       <span
+//         style={{
+//           fontFamily: "Gilroy",
+//           fontSize: "16px",
+//           fontWeight: "600",
+//           color: "black",
+//           paddingLeft: "10px",
+//         }}
+//       >
+//         TR
+//       </span>
+//     ),
+//     key: "2",
+//     icon: (
+//       <img
+//         style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
+//         src={trFlag}
+//       />
+//     ),
+//   },
+//   {
+//     label: (
+//       <span
+//         style={{
+//           fontFamily: "Gilroy",
+//           fontSize: "16px",
+//           fontWeight: "600",
+//           color: "black",
+//           paddingLeft: "10px",
+//         }}
+//       >
+//         {" "}
+//         EN
+//       </span>
+//     ),
+//     key: "3",
+//     icon: (
+//       <img
+//         style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
+//         src={absFlag}
+//       />
+//     ),
+//   },
+// ];
+
+// const menuProps = {
+//   items,
+//   onClick: handleMenuClick,
+// };
+// const menuPropsFlag = {
+//   items: itemsFlag,
+//   onClick: handleMenuFlagClick,
+// };
 
 const MyFormItemContext = React.createContext([]);
 function toArr(str) {
   return Array.isArray(str) ? str : [str];
 }
-const MyFormItemGroup = ({ prefix, children }) => {
-  const prefixPath = React.useContext(MyFormItemContext);
-  const concatPath = React.useMemo(
-    () => [...prefixPath, ...toArr(prefix)],
-    [prefixPath, prefix]
-  );
-  return (
-    <MyFormItemContext.Provider value={concatPath}>
-      {children}
-    </MyFormItemContext.Provider>
-  );
-};
+// const MyFormItemGroup = ({ prefix, children }) => {
+//   const prefixPath = React.useContext(MyFormItemContext);
+//   const concatPath = React.useMemo(
+//     () => [...prefixPath, ...toArr(prefix)],
+//     [prefixPath, prefix]
+//   );
+//   return (
+//     <MyFormItemContext.Provider value={concatPath}>
+//       {children}
+//     </MyFormItemContext.Provider>
+//   );
+// };
 const MyFormItem = ({ name, ...props }) => {
   const prefixPath = React.useContext(MyFormItemContext);
   const concatName =
     name !== undefined ? [...prefixPath, ...toArr(name)] : undefined;
-  return <Form.Item name={concatName} {...props} />;
+  return <Form.Item  name={concatName} {...props} />;
 };
 
 const handleChange = (value) => {
@@ -229,10 +235,32 @@ const handleChange = (value) => {
 };
 
 const Profile = () => {
+  const {t}=useTranslation()
+  const items = [
+    {
+      key: '1',
+      label: t("info"),
+      children: <Info/>,
+    },
+    {
+      key: '2',
+      label: t("password"),
+      children: <Password/>,
+    },
+  ];
+
+  
+
   const navigate=useNavigate()
   const onFinish = (value) => {
     console.log(value);
   };
+ 
+
+  const onChange = (date, dateString) => {
+   
+  };
+  
 
   return (
     <>
@@ -254,11 +282,11 @@ const Profile = () => {
             }
             items={[
               {
-                title: "Главная",
-                href: "",
+                title: t("home"),
+                href: "/",
               },
               {
-                title: "Профиль",
+                title: t("profile"),
               },
             ]}
           />
@@ -279,55 +307,59 @@ const Profile = () => {
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={peopleIcon} />
-                Личная информация
+                {t("profileinfo")}
               </li>
-              <li onClick={()=> navigate("/fav-doctors")}
+              <li onClick={()=> navigate("/profile/fav-doctors")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "20px" }} src={favDoctors} />
-                Мои любимые врачи
+                {t("favoritedoctor")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/fav-hospitals")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "20px" }} src={favHospital} />
-                Мои любимые больницы
+                {t("favoritehospital")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/doctor-reviews")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={messageDoctor} />
-                Мои отзывы о врачах
+                {t("commentdoctor")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/hospital-reviews")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={messageHospital} />
-                Мой обзор больниц
+                {t("commenthospital")}
               </li>
               <li
                 style={{
@@ -339,7 +371,7 @@ const Profile = () => {
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={help112} />
-                Помощь
+                {t("help")}
               </li>
             </ul>
           </div>
@@ -358,7 +390,7 @@ const Profile = () => {
                   fontWeight: "500",
                 }}
               >
-                Личная информация
+               {t("profileinfo")}
               </p>
               <p
                 style={{
@@ -368,136 +400,11 @@ const Profile = () => {
                   paddingTop: "10px",
                 }}
               >
-                Обновите свою информацию и узнайте, как она используется.
+               {t("profileinfo2")}
               </p>
             </div>
 
-            <div>
-              <Form name="form_item_path" layout="vertical" onFinish={onFinish}>
-                <MyFormItemGroup prefix={["user"]}>
-                  <MyFormItemGroup prefix={["name"]}>
-                    <Row gutter={16}>
-                      <Col span={12}>
-                        <MyFormItem name="firstName" label="Имя">
-                          <Input className="inputName" placeholder="Имя" />
-                        </MyFormItem>
-                      </Col>
-                      <Col span={12}>
-                        <MyFormItem name="lastName" label="Фамилия">
-                          <Input
-                            placeholder="Фамилия "
-                            className="lastInputName"
-                          />
-                        </MyFormItem>
-                      </Col>
-                    </Row>
-                    <Row gutter={16}>
-                      <Col span={12}>
-                        <MyFormItem name="date" label="Дата рождения">
-                          <DatePicker
-                            className="datePicker"
-                            onChange={onChange}
-                          />
-                        </MyFormItem>
-                      </Col>
-                      <Col span={12}>
-                        <MyFormItem name="number" label="Номер телефона">
-                          <Row gutter={8}>
-                            <Col span={10}>
-                              <Select
-                                className={"phone-select"}
-                                defaultValue="+994"
-                                onChange={handleChange}
-                                options={[
-                                  {
-                                    value: "55",
-                                    label: "055",
-                                  },
-                                  {
-                                    value: "lucy",
-                                    label: "050",
-                                  },
-                                  {
-                                    value: "Yiminghe",
-                                    label: "070",
-                                  },
-                                  {
-                                    value: "disabled",
-                                    label: "099",
-                                  },
-                                ]}
-                              />
-                            </Col>
-
-                            <Col span={14}>
-                              <Input type="tel" className="lastInputName" />
-                            </Col>
-                          </Row>
-                        </MyFormItem>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col span={24}>
-                        <MyFormItem name="email" label="Электронной почты">
-                          <Input
-                            suffix={<img src={mailIcon} />}
-                            className="emailInput"
-                          />
-                        </MyFormItem>
-                      </Col>
-                      <Col span={24}>
-                        <MyFormItem name="password" label="Текущий пароль">
-                          <Input
-                            placeholder=""
-                            className="passwordInput"
-                            type="password"
-                            suffix={<img src={passwordIcon} />}
-                          />
-                        </MyFormItem>
-                      </Col>
-                      <Col span={24}>
-                        <MyFormItem name="newpassword" label="Новый пароль">
-                          <Input
-                            placeholder=""
-                            className="passwordInput"
-                            type="password"
-                            suffix={<img src={passwordIcon} />}
-                          />
-                          <p style={{ fontSize: "12.98px", color: "#5F5F5F" }}>
-                            Ваш пароль должен состоять минимум из 7 символов и
-                            максимум из 64 символов и содержать цифры.
-                          </p>
-                        </MyFormItem>
-                      </Col>
-                      <Col span={24}>
-                        <MyFormItem name="newpassword" label="Новый пароль">
-                          <Input
-                            placeholder=""
-                            className="passwordInput"
-                            type="password"
-                            suffix={<img src={passwordIcon} />}
-                          />
-                        </MyFormItem>
-                      </Col>
-                    </Row>
-                  </MyFormItemGroup>
-                </MyFormItemGroup>
-
-                <Button
-                  style={{
-                    backgroundColor: "#5282FF",
-                    color: "white",
-                    width: "100%",
-                    height: "61px",
-                    fontSize: "20px",
-                  }}
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Oбновлять
-                </Button>
-              </Form>
-            </div>
+            <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
           </div>
         </div>
       </div>

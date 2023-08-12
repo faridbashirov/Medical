@@ -7,23 +7,31 @@ import clinic1 from "../../../assets/Images/FavoriteHospitals.png"
 import clinic2 from "../../../assets/Images/FavoriteHospitals-2.png"
 import clinic3 from "../../../assets/Images/FavoriteHospitals-3.png"
 import location from "../../../assets/Svg/Location.svg"
+import singleStar from "../../../assets/Svg/SingleStar.svg"
 import stars from "../../../assets/Svg/starIcon.svg"
 import "./TopClinic.css"
+import likeReview from "../../../assets/Svg/reviewLike.svg/"
+
 import { Link } from 'react-router-dom';
 import { useSelector,useDispatch } from "react-redux";
 import { fetchHospitals } from '../../../store/thunk/hospitalsThunk';
 import { useNavigate } from 'react-router-dom';
-
+import { useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 const TopClinic = () => {
 
   const {hospitals}=useSelector((state)=>state.hospitals)
+  const {authToken}=useSelector((state)=>state.auth)
+  console.log(hospitals);
+  const {t}=useTranslation()
   const navigate=useNavigate()
   const dispatch=useDispatch()
  
 
   useEffect(()=>{
-    dispatch(fetchHospitals())
+    dispatch(fetchHospitals(localStorage.getItem("lang")))
    },[])
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -32,7 +40,7 @@ const TopClinic = () => {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3
+      items: 4
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -47,8 +55,7 @@ const TopClinic = () => {
       <section className="top-clinic">
     <div className={"container"}>
         <div className="top-clinic__header">
-          <h3 className="top-clinic__header-title">Клиники, <br/>
-            которые нравятся пациентам</h3>
+          <h3 className="top-clinic__header-title"><Trans i18nKey="tophospitals"></Trans></h3>
           <div className="top-clinic__header-btns">
             <div className="top-clinic__header-right-btns">
               <Button className={"right-btn-primary"} type={"primary"}>топ 30</Button>
@@ -58,7 +65,7 @@ const TopClinic = () => {
            <Button onClick={()=> navigate({
       pathname: "/hospitals",
       search: `?type=clinic`,
-    })} className="top-clinic__header-left d-none" type={"primary"}>Посмотреть клиники </Button>
+    })} className="top-clinic__header-left d-none" type={"primary"}>{t("tophospitals2")} </Button>
           </div>
         </div>
         <div className="top-clinic__carousel">
@@ -68,9 +75,11 @@ const TopClinic = () => {
               <div className="top-clinic__item-top">
                 <img src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
                 <div className="top-clinic__item-num">50%</div>
-                <div className="top-clinic__item-heart">
-                  <img src={heart} alt="heart"/>
-                </div>
+                
+                
+                {item.is_favorite ?  <img    className='top-clinic__item-heart' src={heart} />  :  <img   className='top-clinic__item-heart' src={likeReview} /> }
+                  {/* <img src={heart} alt="heart"/> */}
+                
               </div>
               <div className="clinic__item-footer">
                 <div className="clinic__item-footer-subtitle">
@@ -80,7 +89,18 @@ const TopClinic = () => {
                 <h3 className="clinic__item-footer-title">{item.name}</h3>
                 <div className="clinic__item-footer-stars">
                   <span>8.4</span>
-                  <img src={stars} alt=""/>
+                  {(()=>{
+                let star=[]
+                for(let index = 0; index < item.raiting; index++) {
+                 star.push( <img
+                  className={'reviews-stars'}
+                  src={singleStar}
+                />)
+                
+              }
+              return star
+              })()}
+                  {/* <img src={stars} alt=""/> */}
                 </div>
               </div>
             </div>

@@ -13,7 +13,7 @@ export const tokenRefresh = createAsyncThunk(
         
     
         const data =  await axios.post("https://hospitalbackend.efgroup.az/account/refresh-token/",{
-            "refresh":131231231
+            "refresh":token
            
         })
        

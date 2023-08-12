@@ -1,8 +1,9 @@
 import React from 'react';
 import singleStar from "../../assets/Svg/singleStar.svg"
 import mainLogo from "../../assets/Images/Vector.svg"
-
+import { useTranslation } from 'react-i18next';
 const QualityRating = () => {
+  const {t}=useTranslation()
   return (
     <div className={"container"}>
       <div className="quality-rating">
@@ -23,8 +24,8 @@ const QualityRating = () => {
           <div className="quality-rating__left-desc">112MED оценил качество</div>
         </div>
         <div className="quality-rating__right">
-          <h4 className="quality-rating__right-title">Оценка качества</h4>
-          <p className="quality-rating__right-desc">112MED оценил качество этого варианта 3 из 5 на основании критериев, как предлаrаемые услуги, досупность, стоимость.</p>
+          <h4 className="quality-rating__right-title">{t("quality")}</h4>
+          <p className="quality-rating__right-desc">{t("quality2")}</p>
         </div>
         <div className="quality-rating__icon">
           <img src={mainLogo} alt=""/>

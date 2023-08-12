@@ -9,6 +9,8 @@ import {
   Collapse,
   Checkbox,
 } from "antd";
+import ClipLoader from "react-spinners/ClipLoader";
+
 import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
@@ -20,7 +22,7 @@ import absFlag from "../../assets/Svg/absFlag.svg";
 import likeReview from "../../assets/Svg/reviewLike.svg";
 import Iconstars from "../../assets/Svg/starIcon.svg";
 import experience from "../../assets/Svg/staj.svg";
-
+import { axiosPrivate } from "../../api/api";
 import russianFlag from "../../assets/Images/russianFlagIcon.png";
 import question from "../../assets/Images/question.png";
 import heart from "../../assets/Images/heart.png";
@@ -30,7 +32,7 @@ import vk from "../../assets/Images/vk.png";
 import reviewDoctor from "../../assets/Images/reviewDoctor.png";
 import CheckDoctor from "../../assets/Images/checkdoctor.png";
 import "./Doctors.css"
-import { useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { ArrowRightOutlined, EnvironmentOutlined } from "@ant-design/icons";
 import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
 import Sponsored from "../../assets/Svg/sponsored.svg";
@@ -41,8 +43,16 @@ import FilterButtons from "../FilterButtons/index.js";
 import { mainFilterSearch } from "../api/mainFilterFetch";
 import { allFilterSearch } from "../api/allFilterSearch";
 import { useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import favoritesDoctorsFetch from "../api/FavoriteDoctorsFetch";
+import Hospitals from "../Hospitals/Hospitals";
+import { useTranslation } from "react-i18next";
+import { allCountriesFetch } from "../api/allCountries";
+import { Trans } from "react-i18next";
+import i18next from "i18next";
 const { Panel } = Collapse;
+
+
 
 const onChange = (e) => {
   console.log(`checked = ${e.target.checked}`);
@@ -208,27 +218,72 @@ const menuPropsFlag = {
 
 const Doctors = () => {
   const navigate=useNavigate()
-    const [searchParams,setSearchParams] = useSearchParams()
+  const {t}=useTranslation()
+  const [searchParams,setSearchParams] = useSearchParams()
   const [type,setType]=useState(searchParams.get("type") ? searchParams.get("type") :"doctor")
   const [name,setName]=useState(searchParams.get("name") ? searchParams.get("name") : "")
   const [doctors,setDoctors]=useState([])
   const [selectedCountryValue, setSelectedCountryValue] = useState(searchParams.get("country")? searchParams.get("country").split(",") : []);
   const [selectedRaitingValue, setSelectedRaitingValue] = useState(searchParams.get("raiting")? searchParams.get("raiting").split(",") : []);
   const [checkedValue, setCheckedValue] = useState(searchParams.get("type")? searchParams.get("type") :"doctor");
+  const [loading, setLoading] = useState(false)
+  const [country, setCountry] = useState([])
+  const [add,setAdd] = useState(false)
   const [count,setCount] = useState(0)
-  const [currentValue, setCurrentValue] = useState(searchParams.get("page") ? searchParams.get("page") : 1)
-  console.log(currentValue);
-  console.log(doctors)
-  
-  searchParams.set("type",checkedValue)
+  const {user,authToken}=useSelector(state=> state.auth)
+  const [activeElement, setActiveElement] = useState(null);
+  console.log(doctors);
+
+   searchParams.set("type",checkedValue)
+   const handleClick = (elementId) => {
+    setActiveElement(elementId);
+   
+  };
+
+
+ 
+   const AddToFavorite= async(id)=>{
+
+  axiosPrivate.post(`card/add_favorite_doctor/${id}`)
+  .then((res) => {
+      console.log(res);
+      setAdd(!add)
+  })
+  .catch((err) => {
+      setError(err);
+  })
+    
+ 
+       
+      
+  }
+  const DeleteFromFavorite= async(id)=>{
+
+    axiosPrivate.delete(`card/remove_favorite_doctor/${id}`)
+  .then((res) => {
+      console.log(res);
+      setAdd(!add)
+  })
+  .catch((err) => {
+      setError(err);
+  })
+    
+ 
+    
+      
+   
+      
+  }
+
   const CountryChange = (value) => {
     console.log(value);
     setSelectedCountryValue(value);
     searchParams.delete("page");
-    searchParams.delete("page");
-    setCurrentValue(1)
+    
+   
     searchParams.delete("location")
     searchParams.delete("name")
+    setName("")
      
     if (value.length === 0) {
       searchParams.delete("country");
@@ -247,6 +302,7 @@ const Doctors = () => {
       searchParams.delete("page");
       searchParams.delete("location")
       searchParams.delete("name")
+      setName("")
        
       if (value.length === 0) {
         searchParams.delete("raiting");
@@ -294,62 +350,59 @@ const Doctors = () => {
 
 
 
-
   useEffect(() => {
+    setSelectedCountryValue(searchParams.get("country")? searchParams.get("country").split(","):[])
+    setSelectedRaitingValue(searchParams.get("raiting")? searchParams.get("raiting").split(","):[])
+    console.log(name);
 
-   
-    searchParams.set("page",currentValue)
-
-    if(searchParams.get("country")){
-      searchParams.set("country",selectedCountryValue)
-      
-    }
-    else{
-      searchParams.delete("country")
-      setSelectedCountryValue([])
-
-    }
-    if(searchParams.get("raiting")){
-      searchParams.set("raiting",selectedRaitingValue)
-
-    }
-    else{
-      searchParams.delete("raiting")
-      setSelectedRaitingValue([])
-
-    }
     
     const getHospitals = async () => {
+      
 
 
       const data = await (searchParams.has("country")|| searchParams.has("raiting") 
       ? allFilterSearch(
-        checkedValue || "clinic",
+        checkedValue || "doctor",
         searchParams.get("country") || "",
         searchParams.get("raiting") || "",
         searchParams.get("page") || 0,
+        i18next.language
       )
       : mainFilterSearch(
-        checkedValue || "clinic",
+        checkedValue || "doctor",
           searchParams.get("location") || "",
           searchParams.get("name") || "",
           searchParams.get("page") || 0,
+          i18next.language
         ));
      
           setDoctors(data.results);
           setCount(data.count)
-
+      
           
          
           
           
-          navigate({ search: `?${searchParams.toString()}` });
+          
           
     };
+    
   
     getHospitals();
-  }, [searchParams]);
+  }, [searchParams,add,i18next.language]);
 
+  useEffect(()=>{
+    const getCountries=async()=>{
+      const data= await allCountriesFetch(localStorage.getItem("lang"))
+
+      setCountry(data)
+
+
+
+    }
+    getCountries()
+
+  },[i18next.language])
 
 
   return (
@@ -372,12 +425,19 @@ const Doctors = () => {
               </span>
             }
             items={[
+
               {
-                title: "Home",
-                href: "",
+                title: t("home"),
+                href: "/",
               },
               {
-                title: "Profile",
+                title:  t("Doctors"),
+                href: "",
+              },
+            
+               
+              {
+                title:  t("mainsearch"),
               },
             ]}
           />
@@ -410,17 +470,18 @@ const Doctors = () => {
                       fontStyle: "normal",
                     }}
                   >
-                    Найти
+                   {t("search")}
                   </span>
                 }
                 key="1"
               >
                 <p style={{ margin: "0px", color: "#000", fontSize: "15px" }}>
-                  Место / название клиники / врач
+                {t("search2")}
                 </p>
                 <hr style={{ border: "1px solid #F0F0F0" }} />
                 <Checkbox.Group style={{display:"block"}} value={selectedCountryValue} onChange={CountryChange}>
-                  <Checkbox value={"Turkey"} >
+                {country.map((item,index)=>{
+                    return <> <Checkbox value={item.name} >
                     <p
                       style={{
                         margin: "6px 0",
@@ -428,33 +489,14 @@ const Doctors = () => {
                         fontSize: "16px",
                       }}
                     >
-                      Турция
+                      {item.name}
                     </p>
                   </Checkbox>
                   <br />
-                  <Checkbox value={"Russia"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Pоссия
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox value={"Azerbaijan"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Aзербайджан
-                    </p>
-                  </Checkbox>
+                  </>
+                  
+                   })}
+                  
                   </Checkbox.Group>
                 <hr style={{ border: "1px solid #F0F0F0" }} />
                 <Checkbox  checked={checkedValue === 'doctor'}
@@ -467,7 +509,7 @@ const Doctors = () => {
                         fontSize: "16px",
                       }}
                     >
-                      Врачи
+                     {t("Doctors")}
                     </p>
                   </Checkbox>
                   <br />
@@ -481,7 +523,7 @@ const Doctors = () => {
                         fontSize: "16px",
                       }}
                     >
-                      Клиники
+                       {t("Clinics")}
                     </p>
                   </Checkbox>
                   <br />
@@ -495,252 +537,14 @@ const Doctors = () => {
                         fontSize: "16px",
                       }}
                     >
-                      Услуги
+                       {t("Services")}
                     </p>
                   </Checkbox>
                   <br />
                 <br />
               </Panel>
             </Collapse>
-            <Collapse
-              expandIconPosition="end"
-              bordered={false}
-              style={{
-                borderRadius: "0px",
-                border: "1px solid #F0F0F0",
-                backgroundColor: "#FBFBFB",
-                marginTop: "10px",
-              }}
-              accordion
-            >
-              <Panel
-                style={{ backgroundColor: "#FBFBFB" }}
-                header={
-                  <span
-                    style={{
-                      color: "#084BC2",
-                      fontSize: "18px",
-                      fontWeight: 500,
-                      fontFamily: "Inter",
-                      fontStyle: "normal",
-                    }}
-                  >
-                    Все фильтры
-                  </span>
-                }
-                key="1"
-              >
-                <p
-                  style={{
-                    margin: "0px",
-                    color: "#084BC2",
-                    fontSize: "18px",
-                    fontWeight: 500,
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                  }}
-                >
-                  Ваш бюджет
-                </p>
-                <hr style={{ border: "1px solid #F0F0F0" }} />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Минимальный $
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Средний $$
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Высокий $$$
-                  </p>
-                </Checkbox>
-              </Panel>
-            </Collapse>
-            <Collapse
-              expandIconPosition="end"
-              bordered={false}
-              style={{
-                borderRadius: "0px",
-                border: "1px solid #F0F0F0",
-                backgroundColor: "#FBFBFB",
-              }}
-              accordion
-            >
-              <Panel
-                style={{ backgroundColor: "#FBFBFB" }}
-                header={
-                  <span
-                    style={{
-                      color: "#084BC2",
-                      fontSize: "18px",
-                      fontWeight: 500,
-                      fontFamily: "Inter",
-                      fontStyle: "normal",
-                    }}
-                  >
-                    Популярные фильтры
-                  </span>
-                }
-                key="1"
-              >
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Лабораторные анализы
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Превосходно 9+
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    5 звезд 112MED
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Специализированные{" "}
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    клиники Многопрофильные
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    клиники
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Реабилитация Бесплатное
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    проживание
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    check up
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Центр города
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Аппаратные исследования
-                  </p>
-                </Checkbox>
-                <br />
-              </Panel>
-            </Collapse>
+           
             <Collapse
               expandIconPosition="end"
               bordered={false}
@@ -763,7 +567,7 @@ const Doctors = () => {
                       fontStyle: "normal",
                     }}
                   >
-                    Количество звезд 112MED
+                         {t("stars")}
                   </span>
                 }
                 key="1"
@@ -962,9 +766,9 @@ const Doctors = () => {
                     marginTop: "10px",
                   }}
                 >
-                  {name? `"${name}"`: " Hайден"}
+                  {name? `"${name}"`: t("found")}
                 </span>
-                {count} вариант
+                {count} {t("variant")}
               </p>
             </div>
             <div className="buttonsNav">
@@ -972,38 +776,79 @@ const Doctors = () => {
                 className={"doc-nav-btn doc-nav-btn-active"}
                 type="primary"
               >
-                Наши рекомендации
+                     {t("filter")}
               </Button>
               <Button
                 className={"doc-nav-btn"}
                 type="primary"
               >
-                Самая низкая цена в начале
+                     {t("filter1")}
               </Button>
               <Button
                 className={"doc-nav-btn"}
                 type="primary"
               >
-                Количество звезд и цена
+                      {t("filter2")}
               </Button>
               <Button
                 className={"doc-nav-btn"}
                 type="primary"
               >
-                Оценка + кол-во отзывов
+                     {t("filter3")}
               </Button>
             </div>
 
+            <div className="buttonsSort">
+                <Button value="doctor" onClick={handleCheckboxChange}
+                  className={checkedValue === "doctor" ? "doc-nav-btn-active" :"doc-nav-btn"}
+                  type="primary"
+                >
+                   <Trans i18nKey="Doctors"></Trans>
+                </Button>
+                <Button value="clinic" onClick={handleCheckboxChange}
+                 className={checkedValue === "clinic" ? "doc-nav-btn-active" :"doc-nav-btn"}
+                  type="primary"
+                >
+                   <Trans i18nKey="Clinics"></Trans>
+                </Button>
+                <Button  value="service" onClick={handleCheckboxChange}
+                  className={checkedValue === "service" ? "doc-nav-btn-active" :"doc-nav-btn"}
+                  type="primary"
+                >
+                      <Trans i18nKey="Services"></Trans>
+                </Button>
+              </div>
+
             <div>
-              {doctors.map((item,index)=>{
-                return <div className="doctors-card doctors-card-active">
+              <>{ loading ? <ClipLoader
+        color="blue"
+        style={{textAlign: "center"}}
+        
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      /> :
+              doctors.map((item,index)=>{
+                return <div key={index} onClick={()=> handleClick(item.id)} className={activeElement ===item.id ?  "doctors-card doctors-card-active" : "doctors-card"}>
                 <div className="doctors-img">
                   <img className="doctors-img-lg" src={"asd"}/>
-                  <img
-                    className={"doctors-heart"}
-                    id="likeImageFavHospitals"
-                    src={likeReview}
-                  />
+
+                  { user ? (
+                  
+                  item.is_favorite ? <img onClick={()=> DeleteFromFavorite(item.id)} 
+    className={"doctors-heart"}
+    id="likeImageFavHospitals"
+    src={heart}
+  />   :  <img  onClick={()=> AddToFavorite(item.id)} 
+  className={"doctors-heart"}
+  id="likeImageFavHospitals"
+  src={likeReview}
+  />   ): ""
+
+  }
+                 
+                  
+                 
                 </div>
                 <div
                   className="doctors-card-body"
@@ -1014,28 +859,27 @@ const Doctors = () => {
                         style={{
                           margin: "0 15px 0 0",
                           paddingTop: "0px !important",
-                          color: "#FFF",
                         }}
+                        className="changed"
                       >
-                        {item.position.name}
+                        {item.position?.name}
                       </p>
                     </div>
-                    <div className="d-none" style={{ marginRight: "auto" }}>
+                    <div className="" style={{ marginRight: "auto" }}>
                       <img src={Iconstars} />
                     </div>
                     <div>
-                      <p className="d-none"
+                      <p className="changed"
                         style={{
                           margin: "0 !important",
                           fontSize: "16px",
                           fontWeight: "400",
-                          color: "#FFF",
                         }}
                       >
                         Bеликолепно
                       </p>
                     </div>
-                    <div className="d-none">
+                    <div className="">
                       <p
                         style={{
                           backgroundColor: "#FFC224",
@@ -1063,46 +907,48 @@ const Doctors = () => {
                     >
                       <h3
                         style={{
-                          color: "#FFF",
                           fontSize: "24px !important",
                           margin: "0px",
                           paddingTop: "10px",
                         }}
+                        className="changed"
                       >
                         Dr.{capitalizeWords(item.first_name)} {capitalizeWords(item.last_name)}
                       </h3>
-                      <div style={{ color: "#FFF" }} >
+                      <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end" }} >
                         <p
                           className="comment d-none"
-                          style={{ color: "#FFF", textAlign: "right" }}
+                          style={{  textAlign: "right" }}
                         >
-                          <span>23</span> отзыва
+                          <span>{item.comment_count}</span>       {t("comments").toLowerCase()}
                         </p>
-                        <span className={"sort-text"}>
+                        <span className={"sort-text changed"} style={{marginTop:"10px"}}>
                         Соотношение цена/качество
                         </span>
+                        <Link to={`/doctor-reviews/${item.id}`} className="changed">{item.comment_count}  {t("comments").toLowerCase()}</Link>
                       </div>
                     </div>
 
                     <p
                       style={{
-                        color: "#FFF",
                         fontSize: "14px",
                         margin: "0px",
                         paddingTop: "10px",
                       }}
+                      className="changed"
                     >
                       <EnvironmentOutlined
                         style={{ marginRight: "6px", color: "#FFF" }}
                       />
-                      Больница Американ
+                      {item.hospital?.name}
                     </p>
-                    <div className={"doctors-card__ratings white"}>
-                      <p className={"doctors-card__ratings-num"}>9.0</p>
+                    <div className={"doctors-card__ratings "}>
+                      <p className={"doctors-card__ratings-num changed"}>9.0</p>
                       <img src={Iconstars} />
-                      <p>Bеликолепно</p>
-                      <p><span>23</span> отзыва</p>
+                      <p className="changed">Bеликолепно</p>
+                      <p className="changed">{item.comment_count} {t("comments").toLowerCase()}</p>
                     </div>
+                    
                     <div
                       style={{
                         display: "flex",
@@ -1123,9 +969,9 @@ const Doctors = () => {
                             textAlign: "center",
                           }}
                         >
-                          Сосудистая хирургия
+                          {item.position?.name}
                         </p>
-                        <p
+                        {item.experience ?  <p
                           style={{
                             color: "#000",
                             backgroundColor: "#F4F4F4",
@@ -1140,23 +986,27 @@ const Doctors = () => {
                             gap: "10px",
                           }}
                         >
+                          
                           <img src={experience} />
-                          20 лет опыта
-                        </p>
+                          {item.experience} лет опыта
+                        </p> : "" }
+                       
                       </div>
                       <div>
-                        <Button
+                        <Link to={`/doctor/${item.id}`}><Button
                           className={"doctors-more-btn"}
                           type="primary"
                         >
-                          Посмотреть Врачи
+                          {t("doctorlist")}
                         </Button>
+                        </Link>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               })}
+              </>
               
              
 
@@ -1169,11 +1019,11 @@ const Doctors = () => {
                 }}
               >
                 {count ?  <Pagination
-                   current={currentValue}  pageSize={2} onChange={(page)=>{
-                    setCurrentValue(page)
+                   current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
+                    // setCurrentValue(page)
                     searchParams.set("page", page)
-                    const newSearch = `?${searchParams.toString()}`;
-                    navigate({ search: newSearch });
+                    // const newSearch = `?${searchParams.toString()}`;
+                   setSearchParams(searchParams)
   
                   }}  total={count}
                    

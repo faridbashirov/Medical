@@ -1,64 +1,50 @@
 import React from 'react';
 import pathImg from "../../assets/Svg/path.svg"
-
-const GetService = () => {
+import { useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
+const GetService = ({hospital}) => {
+  const {t}=useTranslation()
   return (
     <div className={"container"}>
       <div className="get-service">
         <div className="get-service__header">
-          <h4 className={"detail-questions__header-title"}>Условия получения услуг </h4>
-          <p className={"detail-questions__header-subtitle"}>LuviMed принимает особые пожелания - добавьте их на следующем шаге
+          <h4 className={"detail-questions__header-title"}>{t("terms")} </h4>
+          <p className={"detail-questions__header-subtitle"}>{hospital?.name} {t("terms")}
           </p>
         </div>
         <div className="get-service__content">
           <div className="get-service__content-item">
             <div className="get-service__content-item-path">
               <img src={pathImg} alt=""/>
-              <span>Quiet hours</span>
+              <span>{t("quiet")}</span>
             </div>
-            <div className="get-service__content-item-desc">Guests need be quiet between 11:00 PM and 8:00 AM.</div>
+            <div className="get-service__content-item-desc">{t("quiet2")}</div>
           </div>
           <div className="get-service__content-item">
             <div className="get-service__content-item-path">
               <img src={pathImg} alt=""/>
-              <span>Parties</span>
+              <span>{t("party")}</span>
             </div>
-            <div className="get-service__content-item-desc">Parties/events are not allowed</div>
+            <div className="get-service__content-item-desc">{t("party2")}</div>
           </div>
           <div className="get-service__content-item">
             <div className="get-service__content-item-path">
               <img src={pathImg} alt=""/>
-              <span>Smoking</span>
+              <span>{t("smoking")}</span>
             </div>
-            <div className="get-service__content-item-desc">Smoking is not allowed.</div>
+            <div className="get-service__content-item-desc">{t("smoking2")}</div>
           </div>
+          
           <div className="get-service__content-item">
             <div className="get-service__content-item-path">
               <img src={pathImg} alt=""/>
-              <span>Quiet hours</span>
-            </div>
-            <div className="get-service__content-item-desc">Guests need be quiet between 11:00 PM and 8:00 AM.</div>
-          </div>
-          <div className="get-service__content-item">
-            <div className="get-service__content-item-path">
-              <img src={pathImg} alt=""/>
-              <span>Children & Beds</span>
+              <span>{t("children")}</span>
             </div>
             <div className="get-service__content-item-desc">
-              <span>Child policies</span>
-              <span>Children not allowed.</span>
-              <span>Crib and extra bed policies</span>
-              <span>There's no capacity for cribs at this property.</span>
-              <span>This property doesn't offer extra beds.</span>
+              <Trans i18nKey="children2"></Trans>
             </div>
           </div>
-          <div className="get-service__content-item">
-            <div className="get-service__content-item-path">
-              <img src={pathImg} alt=""/>
-              <span>Quiet hours</span>
-            </div>
-            <div className="get-service__content-item-desc">Guests need be quiet between 11:00 PM and 8:00 AM.</div>
-          </div>
+          
         </div>
       </div>
     </div>

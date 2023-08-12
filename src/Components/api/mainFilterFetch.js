@@ -1,6 +1,6 @@
 import axios from "./index";
-
-export const mainFilterSearch = async (type,location,names,page) => {
+import { axiosPrivate } from "../../api/api";
+export const mainFilterSearch = async (type,location,names,page,lang) => {
     try {
         console.log(type,location,names,page);
         var pageName =``
@@ -12,10 +12,10 @@ export const mainFilterSearch = async (type,location,names,page) => {
              pageName =`page=${page}`
         }
         console.log(`hospital/filter?type=${type}&location=${location}&name=${names}&${pageName}`)
-        const resp = await axios.get(`hospital/filter?type=${type}&location=${location}&name=${names}&${pageName}`)
-    
-        return resp.data
+        const resp = await axiosPrivate.get(`${lang === "ru" ? "" : lang + "/" }hospital/filter?type=${type}&location=${location}&name=${names}&${pageName}`)
+        
+        return resp
     } catch (error) {
-        console.log(error.message);
+        return {results:[]}
     }
 }

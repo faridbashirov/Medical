@@ -21,7 +21,7 @@ export const HospitalsReducer = createSlice({
   
     builder.addCase(fetchHospitals.fulfilled, (state, {payload}) => {
     
-     state.hospitals = payload.results
+     state.hospitals = payload
     })
     builder.addCase(fetchHospitals.pending, (state) => {
         state.loading=true

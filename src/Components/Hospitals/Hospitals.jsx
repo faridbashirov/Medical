@@ -19,7 +19,6 @@ import trFlag from "../../assets/Svg/trFlag.svg";
 import absFlag from "../../assets/Svg/absFlag.svg";
 import likeReview from "../../assets/Svg/reviewLike.svg";
 import Sponsored from "../../assets/Svg/sponsored.svg";
-
 import russianFlag from "../../assets/Images/russianFlagIcon.png";
 import question from "../../assets/Images/question.png";
 import heart from "../../assets/Images/heart.png";
@@ -28,8 +27,8 @@ import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowRightOutlined, EnvironmentOutlined } from "@ant-design/icons";
-
+import { ArrowRightOutlined, EnvironmentOutlined, FilterFilled } from "@ant-design/icons";
+import { axiosPrivate } from "../../api/api";
 import "../FavHospitals/FavHospitals.css";
 import "./Hospitals.css"
 import Iconstars from "../../assets/Svg/starIcon.svg";
@@ -47,6 +46,13 @@ import { useLocation } from "react-router-dom";
 import { allFilterSearch } from "../api/allFilterSearch";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
+import { allCountriesFetch } from "../api/allCountries";
+import i18next from "i18next";
+
+import favoritesFetch from "../api/favoriteHospitalsFetch";
+
 const { Panel } = Collapse;
 
 
@@ -212,56 +218,77 @@ const menuPropsFlag = {
 const  Hospitals = () => {
 
   const navigate=useNavigate()
-
+  const {t}=useTranslation()
   const [searchParams,setSearchParams] = useSearchParams()
   const [selectedCountryValue, setSelectedCountryValue] = useState(searchParams.get("country")? searchParams.get("country").split(",") : []);
   const [selectedRaitingValue, setSelectedRaitingValue] = useState(searchParams.get("raiting")? searchParams.get("raiting").split(",") : []);
   const [checkedValue, setCheckedValue] = useState(searchParams.get("type")? searchParams.get("type") : "clinic");
   const [hospitals,setHospitals]=useState([])
+  const [country,setCountry]=useState([])
   const [name,setName]=useState(searchParams.get("name") ? searchParams.get("name") : "")
   const [count,setCount] = useState(0)
-  const [currentValue, setCurrentValue] = useState(searchParams.get("page")? searchParams.get("page"): 1)
   const {user,authToken}=useSelector(state=> state.auth)
-  // console.log(user.user_id,authToken.access,"+++++");
+  const [add,setAdd] = useState(false)
+  const [activeElement, setActiveElement] = useState(null);
   console.log(hospitals);
-  console.log(checkedValue)
- 
-  searchParams.set("type",checkedValue)
-
-  // useEffect(()=>{
-  //   if(searchParams.get("type")==="doctor"){
-  //     searchParams.delete("name")
-  //     console.log(searchParams.get("name"));
-  //     // const newSearch = `?${searchParams.toString()}`;
-
-  //     // navigate({ pathname:"/doctors", search: newSearch });
-
-  //   }
   
-  // },[searchParams])
-
-
-
-  const liked= async(id)=>{
-    
-    const config = {
-      headers: { Authorization: `Bearer ${authToken.access}` }
+  const handleClick = (elementId) => {
+    setActiveElement(elementId);
+   
   };
   
-   
-    try {
-      const resp = await  axios.post( 
-        `https://hospitalbackend.efgroup.az/card/add_favorite/2`,{
-          headers: {
-              Authorization:`Bearer ${authToken.access}`,
-              
-          },
-        })
   
-      console.log( resp.data)
-  } catch (error) {
-    console.log(error.message);
-  }
+  searchParams.set("type",checkedValue)
+
+
+
+
+    
+const AddToFavorite= async(id)=>{
+
+  axiosPrivate.post(`card/add_favorite/${id}`)
+  .then((res) => {
+      console.log(res);
+      setAdd(!add)
+  })
+  .catch((err) => {
+      console.log(err);
+  })
+ 
+    
+  // fetch(`https://hospitalbackend.efgroup.az/card/add_favorite/${id}`, {
+  //   method: 'POST',
+  //    headers: {
+  //     'Content-type': 'application/json',
+  //     "Authorization":`Bearer ${authToken.access}`
+  //   },
+  // })
+  //    .then((response) => response.json())
+  //    .then((data) => {
+  //       console.log(data);
+  //       setAdd(!add)
+       
+       
+        
+  //    })
+  //    .catch((err) => {
+  //       console.log(err.message);
+  //    });
+     
+    
+}
+const DeleteFromFavorite= async(id)=>{
+
+  axiosPrivate.delete(`card/remove_favorite/${id}`)
+  .then((res) => {
+      console.log(res);
+      setAdd(!add)
+  })
+  .catch((err) => {
+      console.log(err);
+  })
+    
+    
 }
   const CountryChange = (value) => {
     console.log(value);
@@ -326,32 +353,13 @@ const  Hospitals = () => {
         const newSearch = `?${searchParams.toString()}`;
         navigate({ search: newSearch });
       }
+
      
     };
     useEffect(() => {
       
-      searchParams.set("page",currentValue)
-
-      if(searchParams.get("country")){
-        searchParams.set("country",selectedCountryValue)
-        
-      }
-      else{
-        searchParams.delete("country")
-        setSelectedCountryValue([])
-
-      }
-      if(searchParams.get("raiting")){
-        searchParams.set("raiting",selectedRaitingValue)
-
-      }
-      else{
-        searchParams.delete("raiting")
-        setSelectedRaitingValue([])
-
-      }
-      
-       
+      setSelectedCountryValue(searchParams.get("country")? searchParams.get("country").split(","):[])
+      setSelectedRaitingValue(searchParams.get("raiting")? searchParams.get("raiting").split(","):[])
       const getHospitals = async () => {
         
         
@@ -361,24 +369,48 @@ const  Hospitals = () => {
             searchParams.get("country") || "",
             searchParams.get("raiting") || "",
             searchParams.get("page") || 0,
+            i18next.language
           )
           : mainFilterSearch(
             checkedValue || "clinic",
               searchParams.get("location") || "",
               searchParams.get("name") || "",
               searchParams.get("page") || 0,
+              i18next.language
             ));
             setHospitals(data.results);
             setCount(data.count)
           
           
-            navigate({ search: `?${searchParams.toString()}` });
+            // setSearchParams(searchParams);
           
       
       };
-    
       getHospitals();
-    }, [searchParams]);
+
+  
+      
+      
+   
+      
+    }, [searchParams,add,i18next.language]);
+
+    useEffect(()=>{
+      const getCountries=async()=>{
+        const data= await allCountriesFetch(localStorage.getItem("lang"));
+
+        setCountry(data)
+
+
+
+      }
+      getCountries()
+
+    },[i18next.language])
+
+ 
+     
+      
 
 
 
@@ -402,18 +434,19 @@ const  Hospitals = () => {
                 </span>
               }
               items={[
+
                 {
-                  title: "Главная",
-                  href: "",
+                  title: t("home"),
+                  href: "/",
                 },
                 {
-                  title: "Клиники",
-                  href: "",
+                  title: t("Clinics"),
+                  href: "/hospitals",
                 },
               
                  
                 {
-                  title: "Результаты поиска",
+                  title:t("mainsearch"),
                 },
               ]}
             />
@@ -446,17 +479,34 @@ const  Hospitals = () => {
                         fontStyle: "normal",
                       }}
                     >
-                      Найти
+                      {t("search")}
                     </span>
                   }
                   key="1"
                 >
                   <p style={{ margin: "0px", color: "#000", fontSize: "15px" }}>
-                    Место / название клиники / врач
+                    {t("search2")}
                   </p>
                   <hr style={{ border: "1px solid #F0F0F0" }} />
                   <Checkbox.Group style={{display:"block"}} value={selectedCountryValue} onChange={ CountryChange}>
-                  <Checkbox value={"Turkey"} >
+                   {country.map((item,index)=>{
+                    return <> <Checkbox value={item.name} >
+                    <p
+                      style={{
+                        margin: "6px 0",
+                        color: "#000",
+                        fontSize: "16px",
+                      }}
+                    >
+                      {item.name}
+                    </p>
+                  </Checkbox>
+                  <br />
+                  </>
+                  
+                   })}
+                    
+                  {/* <Checkbox value={"Turkey"} >
                     <p
                       style={{
                         margin: "6px 0",
@@ -490,7 +540,7 @@ const  Hospitals = () => {
                     >
                       Aзербайджан
                     </p>
-                  </Checkbox>
+                  </Checkbox> */}
                   </Checkbox.Group>
                   <hr style={{ border: "1px solid #F0F0F0" }} />
                 
@@ -505,7 +555,7 @@ const  Hospitals = () => {
                         fontSize: "16px",
                       }}
                     >
-                      Врачи
+                     {t('Doctors')}
                     </p>
                   </Checkbox>
                   <br />
@@ -519,7 +569,7 @@ const  Hospitals = () => {
                         fontSize: "16px",
                       }}
                     >
-                      Клиники
+                      {t('Clinics')}
                     </p>
                   </Checkbox>
                   <br />
@@ -533,7 +583,7 @@ const  Hospitals = () => {
                         fontSize: "16px",
                       }}
                     >
-                      Услуги
+                      {t('Services')}
                     </p>
                   </Checkbox>
                   <br />
@@ -655,7 +705,7 @@ const  Hospitals = () => {
                         fontStyle: "normal",
                       }}
                     >
-                      Количество звезд 112MED
+                      {t("stars")}
                     </span>
                   }
                   key="1"
@@ -828,65 +878,97 @@ const  Hospitals = () => {
             </div>
 
             <div className="menuRight">
+            <div>
+              <p className={"result-text"}>
+                <span
+                  style={{
+                    color: "black",
+                    paddingRight: "5px",
+                    marginTop: "10px",
+                  }}
+                >
+                  {name? `"${name}"`: t("found")}
+                </span>
+                {count} {t("variant")}
+              </p>
+            </div>
               <div className="buttonsNav">
                 <Button
                   className={"doc-nav-btn doc-nav-btn-active"}
                   type="primary"
                 >
-                  Наши рекомендации
+                 {t("filter")}
                 </Button>
                 <Button
                   className={"doc-nav-btn"}
                   type="primary"
                 >
-                  Самая низкая цена в начале
+                 {t("filter1")}
                 </Button>
                 <Button
                   className={"doc-nav-btn"}
                   type="primary"
                 >
-                  Количество звезд и цена
+                   {t("filter2")}
                 </Button>
                 <Button
                   className={"doc-nav-btn"}
                   type="primary"
                 >
-                  Оценка + кол-во отзывов
+                  {t("filter3")}
                 </Button>
               </div>
               <FilterButtons/>
               <div className="buttonsSort">
-                <Button
-                  className={"doc-nav-btn"}
+                <Button value="doctor" onClick={handleCheckboxChange}
+                  className={checkedValue === "doctor" ? "doc-nav-btn-active" :"doc-nav-btn"}
                   type="primary"
                 >
-                  Врачи
+                   <Trans i18nKey="Doctors"></Trans>
                 </Button>
-                <Button
-                  className={"doc-nav-btn doc-nav-btn-active"}
+                <Button value="clinic" onClick={handleCheckboxChange}
+                 className={checkedValue === "clinic" ? "doc-nav-btn-active" :"doc-nav-btn"}
                   type="primary"
                 >
-                  Клиники
+                   <Trans i18nKey="Clinics"></Trans>
                 </Button>
-                <Button
-                  className={"doc-nav-btn"}
+                <Button  value="service" onClick={handleCheckboxChange}
+                  className={checkedValue === "service" ? "doc-nav-btn-active" :"doc-nav-btn"}
                   type="primary"
                 >
-                  Услуги
+                      <Trans i18nKey="Services"></Trans>
                 </Button>
               </div>
 
               <div>
                 {hospitals.map((item,index)=>{
-                  return  <div className="cardReviewDoctors cardReviewDoctors-active">
-                  <div className="display_grid img-wrapper">
+                  return  <div key={index} onClick={()=>handleClick(item.id)} className={activeElement ===item.id ? "cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors"} >
+                  <div  className="display_grid img-wrapper">
                     <img
                       className={"cardFavHospitals-img"}
                       id="hospitalsImage"
                       src={item.main_image}
                     />
-                    <img id="sponsoredImage" src={Sponsored} />
-                    <img   id="likeImageFavHospitals" src={likeReview} />
+                    <img   id="sponsoredImage" src={Sponsored} />
+                    
+                    
+                       { user ? (
+                       
+                       item.is_favorite ?  <img  onClick={()=> DeleteFromFavorite(item.id)}  id="likeImageFavHospitals" src={heart} />  :  <img onClick={()=> AddToFavorite(item.id)}   id="likeImageFavHospitals" src={likeReview} />) : "" }
+
+                      
+                        
+                         
+
+                        
+                       
+
+                        
+                      
+                      
+                    
+                   
+               
                   </div>
                   <div
                     style={{ width: "769px", paddingLeft: "110px" }}
@@ -903,25 +985,26 @@ const  Hospitals = () => {
                       <h3
                         style={{
                           margin: "0px",
-                          color: "white",
                           paddingLeft: "15px",
                         }}
+                        className="changed"
                       >
                        {item.name}
                       </h3>
-                      <div style={{ display: "flex", gap: "10px" }}>
-                        <p style={{ margin: "0px", color: "white" }}>Hеплохо</p>
+                      <div style={{ display: "flex", gap: "10px" }} className="changed">
+                        <p style={{ margin: "0px",  }} className="changed">Hеплохо</p>
 
                         <p
                           style={{
                             backgroundColor: "#FFC224",
-                            color: "#000",
+                           
                             width: "29.16px",
                             height: "21.53px",
                             borderRadius: "2.5px",
                             textAlign: "center",
                             margin: "0px",
                           }}
+                          className="changed"
                         >
                           6.0
                         </p>
@@ -944,30 +1027,31 @@ const  Hospitals = () => {
                       >
                         <p
                           style={{
-                            color: "white",
+                          
                             fontSize: "14px",
                             margin: "0px",
                           }}
+                          className="changed"
                         >
                           <EnvironmentOutlined
-                            style={{ marginRight: "6px", color: "white" }}
+                            style={{ marginRight: "6px",}}
                           />
                           {item.location}
                         </p>
-                        <a onClick={()=>liked(item.id)} style={{ margin: "0px", color: "#ffff" }}>
-                          Показать на карте
+                        <a  style={{ margin: "0px",  }} className="changed">
+                        {t("map")}
                         </a>
                       </div>
                       <div>
                         <p
                           className="comment_hospitals"
-                          style={{ color: "#FFFF", textAlign: "right" }}
+                          style={{textAlign: "right" }}
                         >
-                          <a style={{ color: "#FFFF" }} href="#">
-                            45 отзыва
-                          </a>
+                          <Link className="changed" to={`/hospital-reviews/${item.id}`} style={{  }} href="#">
+                            {item.comment_count}    {t("comments").toLowerCase()}
+                          </Link>
                         </p>
-                        <p style={{ color: "#FFFF", margin: "0px" }}>
+                        <p style={{  margin: "0px" }} className="changed">
                           Соотношение цена/качество
                         </p>
                       </div>
@@ -990,13 +1074,15 @@ const  Hospitals = () => {
                       >
                         <p
                           style={{
+                            color:"black",
                             fontSize: "12px",
                             textAlign: "center",
                             margin: "8px",
                             paddingLeft: "12px",
                           }}
+                          
                         >
-                          При бронировании <br /> на сайте - 40%
+                             {t("hosbooking")} - 40%
                         </p>
                       </div>
                       <div
@@ -1009,7 +1095,7 @@ const  Hospitals = () => {
                         }}
                       >
                         <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
+                        {t("hoslistbooking2")} 100%
                         </p>
                       </div>
                     </div>
@@ -1037,10 +1123,7 @@ const  Hospitals = () => {
                             lineHeight: "18px",
                           }}
                         >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
+                         <Trans i18nKey="hoslistbooking3"></Trans>
                         </p>
                       </div>
                       <div>
@@ -1056,7 +1139,7 @@ const  Hospitals = () => {
                           type="primary"
                          
                         >
-                          Посмотреть услуги
+                          {t("hoslistbooking4")}
                         </Button>
                         </Link>
                       </div>
@@ -1079,7 +1162,7 @@ const  Hospitals = () => {
                         <EnvironmentOutlined
                           style={{ marginRight: "6px", color: "white" }}
                         />
-                        Бейоглу, Стамбул
+                         {item.location}
                       </p>
                       <h3
                         style={{
@@ -1088,7 +1171,7 @@ const  Hospitals = () => {
                           paddingLeft: "15px",
                         }}
                       >
-                        LuviMed
+                         {item.name}
                       </h3>
                       <div style={{ display: "flex", gap: "10px", alignItems:"center" }}>
                         <p
@@ -1110,7 +1193,7 @@ const  Hospitals = () => {
                           style={{ color: "#FFFF", textAlign: "right" }}
                         >
                           <a style={{ color: "#FFFF" }} href="#">
-                            45 отзыва
+                          {item.comment_count} {t("comments")}
                           </a>
                         </p>
                       </div>
@@ -1138,7 +1221,7 @@ const  Hospitals = () => {
                             paddingLeft: "12px",
                           }}
                         >
-                          При бронировании <br /> на сайте - 40%
+                         <Trans i18nKey="hosbooking"></Trans> - 40%
                         </p>
                       </div>
                       <div
@@ -1148,10 +1231,11 @@ const  Hospitals = () => {
                           width: "143px",
                           height: "43px",
                           paddingLeft: "12px",
+                          color: "black",
                         }}
                       >
-                        <p style={{ fontSize: "12px", textAlign: "center" }}>
-                          B клинике 100%
+                        <p style={{ fontSize: "12px", textAlign: "center",  color: "black", }}>
+                          {t("hoslistbooking2")} 100%
                         </p>
                       </div>
                     </div>
@@ -1168,6 +1252,7 @@ const  Hospitals = () => {
                           borderRadius: "5px",
                           border: "1px solid #EFEFEF",
                           marginTop: "10px",
+                          color: "black"
                         }}
                       >
                         <p
@@ -1176,12 +1261,10 @@ const  Hospitals = () => {
                             fontSize: "12px",
                             margin: "10px",
                             lineHeight: "18px",
+                            color: "black"
                           }}
                         >
-                          Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                          фиксированной цене, платитe потом Без предоплаты
-                          БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                          договор и обязана соблюдать условия
+                          <Trans i18nKey="hoslistbooking3"></Trans>
                         </p>
                       </div>
                     </div>
@@ -1192,11 +1275,10 @@ const  Hospitals = () => {
                
                 <div className={'hospitals-pagination'}>
                   {count ?  <Pagination
-                   current={currentValue}  pageSize={2} onChange={(page)=>{
-                    setCurrentValue(page)
+                   current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
                     searchParams.set("page", page)
-                    const newSearch = `?${searchParams.toString()}`;
-                    navigate({ search: newSearch });
+                    // const newSearch = `?${searchParams.toString()}`;
+                   setSearchParams(searchParams)
   
                   }}  total={count}
                    

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { Dropdown, Button, Space, Breadcrumb, Pagination, Input } from "antd";
 
 import { ArrowRightOutlined, EnvironmentOutlined } from "@ant-design/icons";
@@ -21,6 +21,7 @@ import experience from "../../assets/Svg/staj.svg";
 import DrFB from "../../assets/Svg/DrFB.svg";
 import DrVK from '../../assets/Svg/DrVK.svg';
 import DrLn from "../../assets/Svg/DrLn.svg";
+import SingleStar from "../../assets/Svg/singleStar.svg";
 
 import russianFlag from "../../assets/Images/russianFlagIcon.png";
 import question from "../../assets/Images/question.png";
@@ -29,10 +30,19 @@ import facebook from "../../assets/Images/facebook.png";
 import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import DrReviewAll from "../../assets/Images/DrRwAll.png";
-
+import DoctorDetailFetch from "../api/doctorDetail";
 import "../DoctorsReviewsAll/DoctorsReviewsAll.css";
+import { useParams, useSearchParams } from "react-router-dom";
+import { doctorReviewsFetch } from "../api/doctorReviews";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import ReviewModal from "./ReviewModal";
 import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
+import { object } from "yup";
+import { useTranslation } from 'react-i18next';
+import i18next from "i18next";
+import DoctorBookingModal from "../DoctorDetail/DoctorBookingModal";
 
 const items = [
   {
@@ -193,8 +203,85 @@ const menuPropsFlag = {
 };
 
 const  DoctorsReviewsAll = () => {
+  const {t}=useTranslation()
+ const {user}=useSelector((state) => state.auth)
+  const {id}=useParams()
+  const [reviews,setReviews]=useState([])
+  const [searchParams,setSearchParams]=useSearchParams()
+  const navigate=useNavigate()
+  const [openReview, setOpenReview] = useState(false)
+  const [count,setCount] = useState(null)
+  const [add,Setadd]=useState(false)
+  const [openBooking, setOpenBooking] = useState(false)
+  console.log(reviews);
+  console.log(id);
+
+  const onOpenBookingModal = () => {
+    console.log('1')
+    setOpenBooking(true)
+  }
+  const onCloseBookingModal = () => {
+    setOpenBooking(false)
+  }
+
+
+  const capitalizeWords = (str) => {
+    return str
+       .toLowerCase()
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+  
+
+
+  const {data,error,loading,review}=DoctorDetailFetch(id,localStorage.getItem("lang")) 
+  console.log(data);
+  
+
+ 
+
+
+
+  const reviewOpen=()=>{
+    setOpenReview(true)
+
+  }
+  const onCloseReview = () =>{
+    setOpenReview(false)
+  }
+  
+   
+   useEffect(()=>{
+
+    console.log(Object.keys(data).length)
+    
+      const getReviews= async(id)=>{
+      const res=await doctorReviewsFetch(id,searchParams.get("page") || null)
+    
+     
+      setReviews(res.results)
+      setCount(res.count)
+
+    }
+    getReviews(id)
+},[id,searchParams,add,data,i18next.language ])
+
+
+
+if(error){
+  return <div>error </div>
+}
+
+
+  
   return (
-    <div style={{ backgroundColor: "#F4F4F4" }}>
+
+    <> 
+     {
+       
+       <div style={{ backgroundColor: "#F4F4F4" }}>
+        
       
 
       <div className="container">
@@ -211,22 +298,20 @@ const  DoctorsReviewsAll = () => {
                 {">"}
               </span>
             }
+           
             items={[
               {
-                title: "Главная",
-                href: "",
+                title: t("home"),
+                href: "/",
               },
               {
-                title: "Клиники",
-                href: "",
+                title: t("Doctors"),
+                href: "/doctors",
               },
 
               {
-                title: "Турция",
-              },
-              {
-                title: "Результаты поиска",
-              },
+                title: t("comments"),
+             },
             ]}
           />
         </div>
@@ -257,12 +342,22 @@ const  DoctorsReviewsAll = () => {
                       paddingTop: "0px !important",
                     }}
                   >
-                    Главный врач
+                    {data.position?.name}
                   </p>
                 </div>
                 <div style={{ marginRight: "auto" }}>
 
-                  <img src={Iconstars} />
+                {(()=>{
+                let star=[]
+                for(let index = 0; index < data.raiting; index++) {
+                 star.push( <img
+                  className={'reviews-stars'}
+                  src={SingleStar}
+                />)
+                
+              }
+              return star
+              })()}
                 </div>
                 <div className={"doc-card-ratings"}>
                   <p
@@ -309,7 +404,7 @@ const  DoctorsReviewsAll = () => {
                       paddingTop: "10px",
                     }}
                   >
-                    Dr. Алина Леонидовна
+                   Dr. {data?.first_name && capitalizeWords(data?.first_name)} {data?.last_name && capitalizeWords(data?.last_name)}
                   </h3>
                 </div>
 
@@ -325,7 +420,7 @@ const  DoctorsReviewsAll = () => {
                   <EnvironmentOutlined
                     style={{ marginRight: "6px", color: "#5282FF" }}
                   />
-                  Больница Американ
+                  {data?.hospital_name}
                 </p>
 
                 <div
@@ -350,7 +445,7 @@ const  DoctorsReviewsAll = () => {
                     >
                       Сосудистая хирургия
                     </p>
-                    <p
+                    {data.experience ? <p
                       style={{
                         color: "#000",
                         backgroundColor: "#F4F4F4",
@@ -367,10 +462,13 @@ const  DoctorsReviewsAll = () => {
                       }}
                     >
                       <img src={experience} />
-                      20 лет опыта
-                    </p>
+                      {data?.experience} {t("experienceyear")}
+                    </p> : "" } 
+                    
                     <div className={"doc-card-btns"} style={{marginTop:"20px"}}>
+                   
                       <Button
+                      onClick={onOpenBookingModal}
                         style={{
                           color: "#FFF",
                           backgroundColor: "#5282FF",
@@ -381,7 +479,7 @@ const  DoctorsReviewsAll = () => {
                         }}
                         type="primary"
                       >
-                        Онлайн книга
+                       {t("onlinebooking")}
                       </Button>
                       <Space.Compact>
                         <Input
@@ -393,6 +491,21 @@ const  DoctorsReviewsAll = () => {
                           defaultValue="26888888"
                         />
                       </Space.Compact>
+                      {user ?
+                      <Button  onClick={reviewOpen}
+                        style={{
+                          color: "#FFF",
+                          backgroundColor: "#5282FF",
+                          borderRadius: "5.55728px",
+                          width: "151.16px",
+                          height: "48.9px",
+                          marginLeft: "15px",
+                        }}
+                        type="primary"
+                      >
+                      {t("writecomment")}
+                      </Button>
+:""}
                     </div>
                   </div>
                   <div className="socialIconDr" style={{backgroundColor:"#F0F0F0",width:"160px",height:"48px",textAlign:"center"}}>
@@ -410,7 +523,7 @@ const  DoctorsReviewsAll = () => {
 
               type="primary"
             >
-              Онлайн книга
+             {t("onlinebooking")}
             </Button>
             <Space.Compact>
               <Input
@@ -448,8 +561,92 @@ const  DoctorsReviewsAll = () => {
             Оценка + кол-во отзывов
           </Button>
         </div>
+        {reviews.map((item,index)=>{
+          return <div key={index} className={"hospital-reviews-card"}>
+          <div style={{ display: "flex" }}>
+            <div className="userIconOrFlag">
+              <img src={userIcon} />
+              <img className="userFlag" src={userflag} />
+            </div>
 
-        <div className={"hospital-reviews-card"}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                gap: "5px",
+                marginRight: "auto",
+              }}
+            >
+              <div>
+                <p className={'reviews-name'}>
+                 {item.user.first_name}
+                </p>
+                {(()=>{
+                let star=[]
+                for(let index = 0; index < item.rate; index++) {
+                 star.push( <img
+                  className={'reviews-stars'}
+                  src={SingleStar}
+                />)
+                
+              }
+              return star
+              })()}
+               
+              </div>
+              <img
+                className="checkIcon"
+                style={{ paddingTop: "5px", marginRight: "8px" }}
+                src={check}
+              />
+              <p className={"reviews-category"}>
+                Травмотология
+              </p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
+              <p className={'reviews-rating'}>Великолепно </p>
+              <div
+                style={{
+                  backgroundColor: "#FFC224",
+                  borderRadius: "3.52262px",
+                  color: "#000",
+                  textAlign: "center",
+                  width: "39.92px",
+                  height: "30.53px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                9.9
+              </div>
+            </div>
+          </div>
+         {item.text}
+          <div className={"reviews-reacts"}>
+            <p style={{ color: "#BCBCBC", marginRight: "auto" }}>
+              {item.created_date}
+            </p>
+            <p style={{ color: "#2A353D", margin: "0px" }}>
+              <img className="likeIcon" src={likeIcon} />
+              полезно
+            </p>
+            <p style={{ color: "#2A353D", margin: "0px" }}>
+              <img className="unlikeIcon" src={unlikeIcon} />
+              Бесполезно
+            </p>
+          </div>
+        </div>
+        })}
+        
+        {/* <div className={"hospital-reviews-card"}>
           <div style={{ display: "flex" }}>
             <div className="userIconOrFlag">
               <img src={userIcon} />
@@ -606,86 +803,7 @@ const  DoctorsReviewsAll = () => {
               Бесполезно
             </p>
           </div>
-        </div>
-        <div className={"hospital-reviews-card"}>
-          <div style={{ display: "flex" }}>
-            <div className="userIconOrFlag">
-              <img src={userIcon} />
-              <img className="userFlag" src={userflag} />
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "baseline",
-                gap: "5px",
-                marginRight: "auto",
-              }}
-            >
-              <div>
-                <p className={'reviews-name'}>
-                  Надежда Р.
-                </p>
-                <img
-                  style={{ width: "67px", height: "11px" }}
-                  src={Iconstars}
-                />
-              </div>
-              <img
-                className="checkIcon"
-                style={{ paddingTop: "5px", marginRight: "8px" }}
-                src={check}
-              />
-              <p className={"reviews-category"}>
-                Травмотология
-              </p>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "10px",
-              }}
-            >
-              <p className={'reviews-rating'}>Великолепно </p>
-              <div
-                style={{
-                  backgroundColor: "#FFC224",
-                  borderRadius: "3.52262px",
-                  color: "#000",
-                  textAlign: "center",
-                  width: "39.92px",
-                  height: "30.53px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                9.9
-              </div>
-            </div>
-          </div>
-          <p className={"reviews-body-title"} style={{ marginBottom: "5px" }}>Oтлично! Bсем Cоветую</p>
-          <p className={"reviews-body-desc"} style={{ marginTop: "5px" }}>
-            “Great location with montain view. Helpful and responsive owners.
-            Well equipped and nicely designed cottage / challenge. <br />{" "}
-            Playground for kids outside as well as toys inside...”
-          </p>
-          <div className={"reviews-reacts"}>
-            <p style={{ color: "#BCBCBC", marginRight: "auto" }}>
-              29 июля - 2022 г.
-            </p>
-            <p style={{ color: "#2A353D", margin: "0px" }}>
-              <img className="likeIcon" src={likeIcon} />
-              полезно
-            </p>
-            <p style={{ color: "#2A353D", margin: "0px" }}>
-              <img className="unlikeIcon" src={unlikeIcon} />
-              Бесполезно
-            </p>
-          </div>
-        </div>
+        </div> */}
       </div>
 
       <div
@@ -696,11 +814,23 @@ const  DoctorsReviewsAll = () => {
           paddingBottom: "50px",
         }}
       >
-        <Pagination defaultCurrent={1} total={50} />
+      {count ? <Pagination
+        current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
+         searchParams.set("page", page)
+         // const newSearch = `?${searchParams.toString()}`;
+        setSearchParams(searchParams)
+
+       }}  total={count}
+        
+       /> : ""}
       </div>
+      <ReviewModal add={add} setAdd={Setadd} id={id} openReview={openReview} onCloseReview={onCloseReview}/>
 
       <Footer/>
+      <DoctorBookingModal openBooking={openBooking} onCloseBookingModal={onCloseBookingModal}/>
     </div>
+    }</>
+   
   );
 };
 

@@ -64,6 +64,11 @@ import { BestsellersFetch } from "../api/bestsellersFetch";
 import { allCountriesFetch } from "../api/allCountries";
 import { useNavigate } from "react-router-dom";
 import { PopularSearchFetch } from "../api/popularSearchs";
+import { allPositionsFetch } from "../api/allPositons";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
+import i18next from "i18next";
 const handleMenuClick = (e) => {
   console.log("click", e);
 };
@@ -225,14 +230,17 @@ const menuPropsFlag = {
 };
 
 const HomePage = ({}) => {
+ 
   const [bestoffer,setBestoffer] =useState([])
   const [likedoffer,setLikedoffer] =useState([])
   const[bestseller,setBestseller] =useState([])
   const [countries,setCountries] = useState([])
+  const [position,setPosition] = useState([])
   const [show,setShow] = useState(true)
   const [show2,setShow2] = useState(false)
   const [show3,setShow3] = useState(false)
   const [value,setValue] = useState("")
+  const {t,i18n}=useTranslation()
   const [search,setSearch] = useState({
     type:"service",
     path:"/hospitals"
@@ -241,7 +249,7 @@ const HomePage = ({}) => {
   const [type,setType]=useState("")
   const [location,setLocation] = useState("")
   
-  console.log(popularSearchs);
+  console.log(popularSearchs,"++++++");
   const navigate = useNavigate();
   
   const searchForm = (e) =>{
@@ -297,54 +305,39 @@ const HomePage = ({}) => {
   };
   
 
- useEffect(()=>{
-  console.log("++++++");
-  const getPopularSearchs =(async()=>{
-    const data=await PopularSearchFetch()
-    setPopularSearchs(data)
-    
-   })
-   getPopularSearchs()
-
- },[])
-
-  useEffect(()=>{
-     const getBestoffer =(async()=>{
-      const data=await BestoffersFetch()
-      setBestoffer(data)
-     })
-     getBestoffer()
-
-
-  },[])
-
-  useEffect(()=>{
-     const getlikedOffer =(async()=>{
-      const data=await LikedoffersFetch()
-      setLikedoffer(data)
-     })
-     getlikedOffer()
-
-
-  },[])
-  useEffect(()=>{
-     const getbestSellers =(async()=>{
-      const data=await BestsellersFetch()
-      setBestseller(data)
-     })
-     getbestSellers()
-
-
-  },[])
-  useEffect(()=>{
-     const getCountries =(async()=>{
-      const data=await allCountriesFetch()
-      setCountries(data)
-     })
-     getCountries()
-
-
-  },[])
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [popularSearchsData, bestOfferData, likedOfferData, bestSellersData, countriesData, positionsData] = await Promise.all([
+          PopularSearchFetch(localStorage.getItem("lang")),
+          BestoffersFetch(localStorage.getItem("lang")),
+          LikedoffersFetch(localStorage.getItem("lang")),
+          BestsellersFetch(localStorage.getItem("lang")),
+          allCountriesFetch(localStorage.getItem("lang")),
+          allPositionsFetch(localStorage.getItem("lang")),
+        ]);
+  
+        setPopularSearchs(popularSearchsData);
+        setBestoffer(bestOfferData);
+        setLikedoffer(likedOfferData);
+        setBestseller(bestSellersData);
+        setCountries(countriesData);
+        setPosition(positionsData);
+      } catch (error) {
+        // Handle errors here if necessary
+        console.error(error);
+      }
+    }
+  
+    fetchData();
+  }, [i18next.language]);
+ 
+  
+  
+  
+  
+  
+  
   
  const onChange = (e) => {
   
@@ -365,9 +358,11 @@ const onChange2 = (e) => {
       <div id="bgHome">
         <div className="container heroTitle">
           <p className="fontMed">
-            Бронируйте <br /> Mедицинскую услугу
+          <Trans i18nKey="booking">
+            
+            </Trans>
           </p>
-          <p className="text">Ищите клинику, врачей по всему миру</p>
+          <p className="text">{t("world")}</p>
         </div>
         <div id="marginBTN" className="container">
           <Space>
@@ -375,13 +370,13 @@ const onChange2 = (e) => {
             onClick={onToggleClick}
               className={show ? "btn_ activeBtn " :  "btn_ " }
             >
-              Услуги
+              {t("Services")}
             </Button>
             <Button
             onClick={onToggleClick2}
               className={show2 ? "btn_ activeBtn " :  "btn_ " }
             >
-              Клиники
+             {t("Clinics")}
             </Button>
             <Button
              onClick={onToggleClick3}
@@ -390,7 +385,7 @@ const onChange2 = (e) => {
              
              
             >
-              Врачи{" "}
+             {t("Doctors")}
             </Button>
           </Space>
         </div>
@@ -436,10 +431,13 @@ const onChange2 = (e) => {
             </Row>
           </div>
           <div className="textFlex">
-          {popularSearchs.map(item => (
+          {popularSearchs.map((item,index) => (
               item.name ==search.type ?
                item.category.map(innerItem => (
-               <Button style={{ backgroundColor: "#F4F4F4" }} type="text">
+               <Button onClick={()=>  navigate({
+                pathname: search.path,
+                search: `?type=${search.type}&name=${(innerItem.search)}`,
+              }) }  style={{ backgroundColor: "#F4F4F4" }} type="text">
                    {innerItem.search}
                   </Button>
                    )    )  : null
@@ -513,7 +511,7 @@ const onChange2 = (e) => {
           <div className="box1">
             <div className="box1_2">
               <p className={"box1-text"}>
-                Пластическая Хирургия
+               {position[0]?.name}
               </p>
             </div>
             <div
@@ -527,17 +525,18 @@ const onChange2 = (e) => {
               </Button>
             </div>
           </div>
+          
           <div id="_box2" className="box2">
-            <p>Нейрохирургия</p>
+            <p>{position[1]?.name} </p>
           </div>
           <div id="_box2_2" className="box2">
-            <p>Хирургия Снижен Веса </p>
+            <p>{position[2]?.name} </p>
           </div>
           <div id="_box2_3" className="box2">
-            <p>Офтальмология</p>
+            <p>{position[3]?.name}</p>
           </div>
           <div id="_box2_4" className="box2">
-            <p>Офтальмология</p>
+            <p>{position[4]?.name}</p>
           </div>
         </div>
       </div>
@@ -547,7 +546,7 @@ const onChange2 = (e) => {
           <div className="box1">
             <div className="box1_2">
               <p className={"box1-text"}>
-                Пластическая Хирургия
+              {position[5]?.name}
               </p>
             </div>
             <div className="box1_3">
@@ -561,7 +560,7 @@ const onChange2 = (e) => {
           <div className="box1">
             <div className="box1_2">
               <p className={"box1-text"}>
-                Пластическая Хирургия
+              {position[6]?.name}
               </p>
             </div>
             <div className="box1_3">
@@ -575,7 +574,7 @@ const onChange2 = (e) => {
           <div className="box1">
             <div className="box1_2">
               <p className={"box1-text"}>
-                Пластическая Хирургия
+              {position[7]?.name}
               </p>
             </div>
             <div className="box1_3">
@@ -592,7 +591,7 @@ const onChange2 = (e) => {
 
       <div style={{ paddingTop: "30px" }} className="container">
         <div className="bgDoctor">
-          <span>Нейрохирургия</span>
+          <span>{position[8]?.name}</span>
         </div>
       </div>
 
@@ -600,7 +599,7 @@ const onChange2 = (e) => {
         <p
           className={"deals-title"}
         >
-          Лучшие предложения
+            {t("offer")}
         </p>
         <div className="grid_2">
           {bestoffer.map((item,index)=>{
@@ -635,7 +634,7 @@ const onChange2 = (e) => {
 
       <div className="container">
         <p className={"deals-title"}>
-          Baм понравится
+        {t("liked")}
         </p>
         <div className="grid_3">
           {likedoffer.map((item,index)=>{
@@ -647,18 +646,19 @@ const onChange2 = (e) => {
           
         </div>
         <div style={{ paddingTop: "15px" }} className="grid_4">
-          <div>
-            <img style={{ width: "615px" }} src={group13} />
-          </div>
-          <div>
-            <img style={{ width: "615px" }} src={group14} />
-          </div>
+        {likedoffer.map((item,index)=>{
+          return    <div>
+          <img style={{ width: "615px" }} src={item.image} />
+        </div>
+        })}
+       
+
         </div>
       </div>
 
       <div className="container">
         <p className={"deals-title"}>
-          Хиты продаж
+         {t("bestseller")}
         </p>
         <div className="grid_3">
           {bestseller.map((item,index)=>{
@@ -678,7 +678,7 @@ const onChange2 = (e) => {
           </div> */}
         </div>
       </div>
-      <DiscoundSlider/>
+      <DiscoundSlider />
 
       <div style={{ paddingTop: "10px" }} className="container">
         <div>
@@ -686,12 +686,12 @@ const onChange2 = (e) => {
         </div>
       </div>
 
-      <div className="container">
+      <div className="container container-foreign">
         <h3 className={"foreign-title"} >
-          Выберите клинику в другой стране дешевле
+          {t("cheaphospital")}
         </h3>
         <p className={"foreign-subtitle"}>
-          Поиск по странам, популярные направления
+          {t("cheaphospital2")}
         </p>
       </div>
 
@@ -702,7 +702,7 @@ const onChange2 = (e) => {
       </div>
 
       <div
-        className="container"
+        className="container container-foreign"
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -712,9 +712,12 @@ const onChange2 = (e) => {
         <div>
           {" "}
           <h3 className={"foreign-title"}>
-            Бронируйте медицинскую услугу <br /> со скидкой до - 50%
+            <Trans i18nKey="discount">
+
+
+            </Trans>
           </h3>
-          <p className={"foreign-subtitle"}>Поиск по бюджетy</p>
+          <p className={"foreign-subtitle"}>{t("discount2")}</p>
         </div>
         <Button className={"foreign-btn-lg"}>
           Посмотреть категории
@@ -731,12 +734,12 @@ const onChange2 = (e) => {
         </Button>
       </div>
 
-      <div className="container">
+      <div className="container container-foreign">
         <h3 className={"foreign-title"}>
-          Спецпредложения
+          {t("specialoffer")}
         </h3>
         <p className={"foreign-subtitle"}>
-          Акции, скидки и специалные предложения для вас.
+        {t("specialoffer2")}
         </p>
       </div>
       <div className="containerSliderSecond">
@@ -744,7 +747,7 @@ const onChange2 = (e) => {
       </div>
 
       <TopClinic/>
-      <DoctorSearch/>
+      <DoctorSearch positions={position}/>
       <HomeReviews/>
       
 

@@ -1,7 +1,9 @@
 import React from 'react';
 import {Breadcrumb} from "antd";
+import { useTranslation } from 'react-i18next';
 
 const BreadCrumbs = () => {
+  const {t}=useTranslation()
   return (
     <div style={{ paddingTop: "30px" }} className="container">
       <div className={"breadcrumbs"}>
@@ -20,20 +22,14 @@ const BreadCrumbs = () => {
           }
           items={[
             {
-              title: "Главная",
-              href: "#",
+              title: t("home"),
+              href: "/",
             },
             {
-              title: "Клиники",
-              href: "#"
+              title: t("Clinics"),
+              href: "/hospitals"
             },
-            {
-              title: "Турция",
-              href: "#"
-            },
-            {
-              title: "Результаты поиска",
-            },
+            
           ]}
         />
       </div>

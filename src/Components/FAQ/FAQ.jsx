@@ -185,7 +185,7 @@ const menuPropsFlag = {
 const FAQ = () => {
   return (
     <div style={{ backgroundColor: "#F4F4F4" }}>
-      <Header/>
+    
       <div style={{ paddingTop: "30px" }} className="container">
         <div style={{ borderBottom: "1px solid #E7E7E7", padding: "20px 0" }}>
           <Breadcrumb

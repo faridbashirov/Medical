@@ -1,23 +1,23 @@
 export const infoButtons = [
   {
     id: 1,
-    label: 'возвращаем разницу в цене'
+    label: 'refund'
   },
   {
     id: 2,
-    label: 'Информация о стоимости'
+    label: 'hosinfo1'
   },
   {
     id: 3,
-    label: 'услуги'
+    label: 'Services'
   },
   {
     id: 4,
-    label: 'условия'
+    label: 'hosinfo2'
   },
   {
     id: 5,
-    label: 'Отзывы пациентов'
+    label: 'hosinfo3'
   }
 ]
 

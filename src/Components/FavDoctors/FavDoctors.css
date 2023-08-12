@@ -22,7 +22,14 @@
     width: 194px !important;
     height: auto !important;
 }
-
+.cardFavDoctors-active{
+    background-color: #5282FF !important;
+    padding-left: 20px;
+    border-radius: 10px;
+}
+.cardFavDoctors-active .changed{
+    color: #fff !important;
+}
 @media (max-width: 756px) {
     .cardReviewDoctors {
         flex-direction: column;

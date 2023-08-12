@@ -4,8 +4,12 @@ import vk from "../../assets/Images/vk.png";
 import instagram from "../../assets/Images/instagram.png";
 import {Button} from "antd";
 import footerArrow from "../../assets/Svg/footer-arrow.svg"
+import { useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
+
 
 const Footer = () => {
+  const {t}=useTranslation()
   return (
     <footer className="bgFooter">
       <div className="container footer-wrapper">
@@ -17,38 +21,37 @@ const Footer = () => {
                 112 Med
               </li>
               <li className={"footer-subtitle"} >
-                Медицинский <br />
-                маркетплейс
+               <Trans i18nKey="footer"></Trans>
               </li>
             </ul>
           </div>
           <div>
             <ul style={{ listStyle: "none" }} >
               <li className={"footer-nav-title"}>
-                Для пациентов
+                {t("footerh1")}
               </li>
               <li className={"footer-nav-link"}>
-                Врачи{" "}
+              {t("Doctors")}
               </li>
               <li className={"footer-nav-link"}>
-                Больницы
+              {t("Clinics")}
               </li>
               <li className={"footer-nav-link"}>
-                Услуги
+              {t("Services")}
               </li>
             </ul>
           </div>
           <div>
             <ul style={{ listStyle: "none" }}>
               <li className={"footer-nav-title"}>
-                O Hас
+              {t("footerh2")}
               </li>
               <li className={"footer-nav-link"}>
-                Условия Эксплуатации
+              {t("footerh2.1")}
               </li>
               <li className={"footer-nav-link"}>
                 {" "}
-                Политика Oтзывов
+                {t("footer2.2")}
               </li>
               <li className={"footer-nav-link"}>
                 О «112 мед».
@@ -61,17 +64,17 @@ const Footer = () => {
           <div>
             <ul style={{ listStyle: "none" }}>
               <li className={"footer-nav-title"}>
-                Для партнеров
+              {t("footerh3")}
               </li>
               <li className={"footer-nav-link"}>
-                Добавить больницу
+              {t("footer3.1")}
               </li>
               <li className={"footer-nav-link"}>
                 {" "}
-                добавить врача
+                {t("footer3.2")}
               </li>
               <li className={"footer-nav-link"}>
-                Войти как партнер
+              {t("footer3.3")}
               </li>
             </ul>
           </div>
@@ -97,8 +100,8 @@ const Footer = () => {
           </div>
 
           <div className="pad-wrapper" >
-            <Button className="pad">
-              КОНТАКТ
+            <Button  className="pad">
+             {t("contact1").toUpperCase()}
             </Button>
           </div>
         </div>

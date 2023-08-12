@@ -28,10 +28,18 @@ import facebook from "../../assets/Images/facebook.png";
 import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
-
+import { useState,useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "../HospitalReviewsAll/HospitalsReviewsAll.css";
 import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
+import { hospitalReviewsFetch } from "../api/hospitalReviews";
+import DetailFetch from "../api/hospitalDetailFetch";
+import ReviewModal from "./ReviewModal";
+import { useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const items = [
   {
@@ -192,6 +200,66 @@ const menuPropsFlag = {
 };
 
 const HospitalsReviewsAll = () => {
+  const {t}=useTranslation()
+    const {id}=useParams()   
+    const {user}=useSelector((state) => state.auth)
+    const [reviews,setReviews]=useState([])
+    const [searchParams,setSearchParams]=useSearchParams()
+    const [openReview, setOpenReview] = useState(false)
+    const [add,setAdd] = useState(false)
+    const [count,setCount] = useState(null)
+    console.log(reviews);
+    console.log(id);
+
+    
+
+
+   const {hospital,error}=DetailFetch(id,localStorage.getItem("lang"))
+   console.log(hospital);
+
+
+
+    const reviewOpen=()=>{
+      setOpenReview(true)
+
+    }
+    const onCloseReview = () =>{
+      setOpenReview(false)
+    }
+    
+     
+     useEffect(()=>{
+        const getReviews= async(id)=>{
+        const data=await hospitalReviewsFetch(id,searchParams.get("page") || null,localStorage.getItem("lang"))
+      
+       
+        setReviews(data.results)
+        setCount(data.count)
+
+      }
+      getReviews(id)
+ },[id,searchParams,add,i18next.language ])
+
+
+
+ if(error){
+  return <div>Errorr</div>
+}
+if(!hospital){
+  return <div>Loading .... </div>
+}
+    
+
+     
+
+
+
+
+
+
+  
+
+
   return (
     <div style={{ backgroundColor: "#F4F4F4" }}>
       
@@ -212,20 +280,18 @@ const HospitalsReviewsAll = () => {
             }
             items={[
               {
-                title: "Главная",
-                href: "",
+                title: t("home"),
+                href: "/",
               },
               {
-                title: "Клиники",
-                href: "",
+                title: t("Clinics"),
+                href: "/hospitals",
               },
 
               {
-                title: "Турция",
+                title: t("comments"),
               },
-              {
-                title: "Результаты поиска",
-              },
+              
             ]}
           />
         </div>
@@ -235,34 +301,48 @@ const HospitalsReviewsAll = () => {
               <img
                 className={"featured-img"}
                 id="hospitalReviewImage"
-                src={FavoriteHospitals}
+                src={ hospital && hospital?.main_image}
+                
               />
               <img id="hospitalReviewLike" src={likeReview} />
               <img id="hospitalNewRed" src={newRed} />
             </div>
             <div className={"featured-body"}>
               <div className={"featured-body-title-wrapper"}>
-                <img className={"featured-body-stars-lg"} src={Iconstars} />
+              {(()=>{
+                let star=[]
+                for(let index = 0; index < hospital?.raiting; index++) {
+                 star.push( <img
+                  className={"featured-body-stars-lg"} style={{marginRight:"6px"}}
+                  src={SingleStar}
+                />)
+                
+              }
+              return star
+              })()}
+               
                 <p className={"featured-body-title"}>
-                  LuviMed
+                  {hospital.name}
                 </p>
                 <p
                   className={"featured-location"}
                 >
                   <EnvironmentOutlined className={"featured-location-icon"}/>
-                  Бейоглу, Стамбул
+                 {hospital.location}
                 </p>
                 <div className={"featured__ratings"}>
                   <div className={'reviews__rating-num'}>6.6</div>
                   <img className={"featured-body-stars-sm"} src={Iconstars} />
                 </div>
                 <div className={"featured-btns"}>
-                  <Button
+                {user ?
+                  <Button onClick={()=>  reviewOpen()}
                     className={"featured-btn-review"}
                     type="primary"
                   >
-                    Написать отзыв
+                    {t("writecomment")}
                   </Button>
+                  : ""}
                   <Button
                     style={{
                       backgroundColor: "#FFC224",
@@ -275,7 +355,7 @@ const HospitalsReviewsAll = () => {
                     }}
                     type="primary"
                   >
-                    Показать на карте
+                  { t("map")}
                   </Button>
                 </div>
               </div>
@@ -320,17 +400,17 @@ const HospitalsReviewsAll = () => {
             </div>
           </div>
           <div className={"featured-btns-mobile"}>
-            <Button
+            <Button  onClick={reviewOpen}
               className={"button-1"}
               type="primary"
             >
-              Написать отзыв
+               {t("writecomment")}
             </Button>
-            <Button
+            <Button 
               className={"button-2"}
               type="primary"
             >
-              Показать на карте
+               {t("map")}
             </Button>
           </div>
         </div>
@@ -363,8 +443,93 @@ const HospitalsReviewsAll = () => {
             Оценка + кол-во отзывов
           </Button>
         </div>
-
-        <div className={"hospital-reviews-card"}>
+          {reviews.map((item,index)=>{
+            return <div key={index} className={"hospital-reviews-card"}>
+            <div style={{ display: "flex" }}>
+              <div className="userIconOrFlag">
+                <img className="userIconOrFlag-flag" src={userIcon} />
+                <img className="userFlag" src={userflag} />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "baseline",
+                  gap: "5px",
+                  marginRight: "auto",
+                }}
+              >
+                <div>
+                  <p className={'reviews-name'}>
+                    {item.user.first_name}
+                  </p>
+                  {/* {(()=>{
+                let star=[]
+                for(let index = 0; index < item.rate; index++) {
+                 star.push( <img
+                  className={'reviews-stars'}
+                  src={Iconstars}
+                />)
+                
+              }
+              return star
+              })()} */}
+                {(()=>{
+                let star=[]
+                for(let index = 0; index < item.rate; index++) {
+                 star.push( <img
+                  className={'reviews-stars'}
+                  src={SingleStar}
+                />)
+                
+              }
+              return star
+              })()}
+              
+                 
+                </div>
+                <img
+                  className="checkIcon"
+                  src={check}
+                />
+                <p  className={"reviews-category"}>
+                  Травмотология
+                </p>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <p className={'reviews-rating'}>Великолепно </p>
+                <div className={'reviews__rating-num'}>
+                  9.9
+                </div>
+              </div>
+            </div>
+            
+            <p className={"reviews-body-desc"} style={{ marginTop: "5px" }}>
+             {item.text}
+            </p>
+            <div className={"reviews-reacts"}>
+              <p style={{ color: "#BCBCBC", marginRight: "auto" }}>
+                {item.created_date}
+              </p>
+              <p style={{ color: "#2A353D", margin: "0px" }}>
+                <img className="likeIcon" src={likeIcon} />
+                <span className="likeIcon-desc">полезно</span>
+              </p>
+              <p style={{ color: "#2A353D", margin: "0px" }}>
+                <img className="unlikeIcon" src={unlikeIcon} />
+                <span className="likeIcon-desc">Бесполезно</span>
+              </p>
+            </div>
+          </div>
+          })}
+        
+        {/* <div className={"hospital-reviews-card"}>
           <div style={{ display: "flex" }}>
             <div className="userIconOrFlag">
               <img className="userIconOrFlag-flag" src={userIcon} />
@@ -493,72 +658,7 @@ const HospitalsReviewsAll = () => {
               <span className="likeIcon-desc">Бесполезно</span>
             </p>
           </div>
-        </div>
-        <div className={"hospital-reviews-card"}>
-          <div style={{ display: "flex" }}>
-            <div className="userIconOrFlag">
-              <img className="userIconOrFlag-flag" src={userIcon} />
-              <img className="userFlag" src={userflag} />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "baseline",
-                gap: "5px",
-                marginRight: "auto",
-              }}
-            >
-              <div>
-                <p className={'reviews-name'}>
-                  Надежда Р.
-                </p>
-                <img
-                  className={'reviews-stars'}
-                  src={Iconstars}
-                />
-              </div>
-              <img
-                className="checkIcon"
-                src={check}
-              />
-              <p className={"reviews-category"}>
-                Травмотология
-              </p>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "10px",
-              }}
-            >
-              <p className={'reviews-rating'}>Великолепно </p>
-              <div className={'reviews__rating-num'}>
-                9.9
-              </div>
-            </div>
-          </div>
-          <p className={"reviews-body-title"} style={{ marginBottom: "5px" }}>Oтлично! Bсем Cоветую</p>
-          <p className={"reviews-body-desc"} style={{ marginTop: "5px" }}>
-            “Great location with montain view. Helpful and responsive owners.
-            Well equipped and nicely designed cottage / challenge. <br />{" "}
-            Playground for kids outside as well as toys inside...”
-          </p>
-          <div className={"reviews-reacts"}>
-            <p style={{ color: "#BCBCBC", marginRight: "auto" }}>
-              29 июля - 2022 г.
-            </p>
-            <p style={{ color: "#2A353D", margin: "0px" }}>
-              <img className="likeIcon" src={likeIcon} />
-              <span className="likeIcon-desc">полезно</span>
-            </p>
-            <p style={{ color: "#2A353D", margin: "0px" }}>
-              <img className="unlikeIcon" src={unlikeIcon} />
-              <span className="likeIcon-desc">Бесполезно</span>
-            </p>
-          </div>
-        </div>
+        </div> */}
 
       </div>
 
@@ -569,11 +669,20 @@ const HospitalsReviewsAll = () => {
           paddingTop: "25px",
           paddingBottom: "50px",
         }}
-      >
-        <Pagination defaultCurrent={1} total={50} />
-      </div>
+      >{count ? <Pagination
+        current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
+         searchParams.set("page", page)
+         // const newSearch = `?${searchParams.toString()}`;
+        setSearchParams(searchParams)
 
+       }}  total={count}
+        
+       /> : ""}
+         
+      </div>
+  
       <Footer/>
+      <ReviewModal add={add} setAdd={setAdd} id={id} openReview={openReview} onCloseReview={onCloseReview}/>
     </div>
   );
 };

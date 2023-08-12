@@ -17,8 +17,9 @@ export const registerFetch = async (obj) => {
 
         }
         )
-    
-        return obj
+        
+       
+        return resp
     } catch (error) {
        return error.response.data
     }

@@ -1,16 +1,17 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
-
-const Categories = () => {
+import { useTranslation } from 'react-i18next';
+const Categories = ({services,hospital}) => {
+  const {t}=useTranslation()
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 5
+      items: 2
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3
+      items: 2
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -23,36 +24,40 @@ const Categories = () => {
   };
   return (
     <div className="hospital-detail__categories">
-      <h4 className="categories__title">Направления - LuviMed</h4>
+      <h4 className="categories__title">{t("direction")} - {hospital?.name}</h4>
       <Carousel responsive={responsive}>
-        <div className={"categories__carousel-item"}>
-          <button className={"categories__carousel-item-btn"}>Гинекология</button>
-          <button className={"categories__carousel-item-btn btn-first"}>Офтальмология</button>
-        </div>
+        {services.map((service,index) =>{
+         return  <div className={"categories__carousel-item"}>
+         <button className={"categories__carousel-item-btn"}>{service.illness.name}</button>
+         <button className={"categories__carousel-item-btn"}>{service.illness.name}</button>
+        
+       </div>
+        })}
+       
+        {/* <div className={"categories__carousel-item"}>
+          <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
+         <button className={"categories__carousel-item-btn"}>Репродуктология</button>
+     </div>
         <div className={"categories__carousel-item"}>
           <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
           <button className={"categories__carousel-item-btn"}>Репродуктология</button>
-        </div>
-        <div className={"categories__carousel-item"}>
+         </div>
+         <div className={"categories__carousel-item"}>
           <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
-          <button className={"categories__carousel-item-btn"}>Репродуктология</button>
-        </div>
-        <div className={"categories__carousel-item"}>
+           <button className={"categories__carousel-item-btn"}>Репродуктология</button>
+         </div>
+         <div className={"categories__carousel-item"}>
+           <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
+           <button className={"categories__carousel-item-btn"}>Репродуктология</button>
+         </div>
+         <div className={"categories__carousel-item"}>
+           <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
+           <button className={"categories__carousel-item-btn"}>Репродуктология</button>
+         </div>
+       <div className={"categories__carousel-item"}>
           <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
-          <button className={"categories__carousel-item-btn"}>Репродуктология</button>
-        </div>
-        <div className={"categories__carousel-item"}>
-          <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
-          <button className={"categories__carousel-item-btn"}>Репродуктология</button>
-        </div>
-        <div className={"categories__carousel-item"}>
-          <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
-          <button className={"categories__carousel-item-btn"}>Репродуктология</button>
-        </div>
-        <div className={"categories__carousel-item"}>
-          <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
-          <button className={"categories__carousel-item-btn"}>Репродуктология</button>
-        </div>
+        <button className={"categories__carousel-item-btn"}>Репродуктология</button>
+        </div> */}
       </Carousel>
     </div>
   );

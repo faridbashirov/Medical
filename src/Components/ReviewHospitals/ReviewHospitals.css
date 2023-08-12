@@ -6,6 +6,10 @@
     padding: 15px;
     margin-top: 20px;
 }
+.cardHospitals .card-body{
+    padding-left: 167px !important;
+    
+}
 
 #likeImageHospitals{
     grid-column: 12/13;
@@ -20,7 +24,9 @@
     grid-template-rows: repeat(12,1fr);
     width: 131px;
 }
-
+.reviews-stars{
+    width: 10px!important;
+}
 @media (max-width: 756px) {
     .cardHospitals{
         height: 100% ;

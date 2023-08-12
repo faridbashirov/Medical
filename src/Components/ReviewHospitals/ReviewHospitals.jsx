@@ -16,7 +16,7 @@ import messageHospital from "../../assets/Svg/messageHos.svg";
 import help112 from "../../assets/Svg/ambulans.svg";
 import likeReview from "../../assets/Svg/reviewLike.svg";
 import Iconstars from "../../assets/Svg/starIcon.svg";
-
+import SingleStar from "../../assets/Svg/singleStar.svg";
 import russianFlag from "../../assets/Images/russianFlagIcon.png";
 import question from "../../assets/Images/question.png";
 import heart from "../../assets/Images/heart.png";
@@ -31,7 +31,11 @@ import "../ReviewHospitals/ReviewHospitals.css";
 import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import FilterButtons from "../FilterButtons/index.js";
-
+import profileHospitalReviews from "../api/profileHospitalReviews";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 const items = [
   {
     label: (
@@ -191,6 +195,16 @@ const menuPropsFlag = {
 };
 
 const ReviewHospitals = () => {
+  const {t}=useTranslation()
+  const navigate=useNavigate()
+  const [searchParams,setSearchParams] =useSearchParams()
+  const {user,authToken}=useSelector(state=> state.auth)
+
+  console.log(authToken?.access);
+
+
+  const {data,error,count}=profileHospitalReviews(searchParams.get("page" || null))
+
   return (
     <>
      
@@ -212,11 +226,11 @@ const ReviewHospitals = () => {
             }
             items={[
               {
-                title: "Home",
-                href: "",
+                title: t("home"),
+                href: "/",
               },
               {
-                title: "Profile",
+                title: t("profile"),
               },
             ]}
           />
@@ -226,65 +240,71 @@ const ReviewHospitals = () => {
         <div className="displayGridReviewDr">
           <div style={{ height: "320px" }} className="menuNav">
             <ul>
-              <li
+            <li  onClick={()=> navigate("/profile")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={peopleIcon} />
-                Личная информация
+                {t("profileinfo")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/fav-doctors")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer",
+                  zIndex:1
                 }}
               >
                 <img style={{ paddingRight: "20px" }} src={favDoctors} />
-                Мои любимые врачи
+                {t("favoritedoctor")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/fav-hospitals")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "20px" }} src={favHospital} />
-                Мои любимые больницы
+                {t("favoritehospital")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/doctor-reviews")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={messageDoctor} />
-                Мои отзывы о врачах
+                {t("commentdoctor")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/hospital-reviews")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={messageHospital} />
-                Мой обзор больниц
+                {t("commenthospital")}
               </li>
               <li
                 style={{
@@ -296,21 +316,20 @@ const ReviewHospitals = () => {
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={help112} />
-                Помощь
+                {t("help")}
               </li>
             </ul>
           </div>
 
           <div className="menuRight">
-            <div className="buttonsNav">
+          {data?.length !== 0 ? <div className="buttonsNav">
               <Button
                 className={"doc-nav-btn doc-nav-btn-active"}
                 type="primary"
               >
                 Наши рекомендации
               </Button>
-              <Button
-                className={"doc-nav-btn"}
+              <Button className={"doc-nav-btn"}
                 type="primary"
               >
                 Самая низкая цена в начале
@@ -327,12 +346,13 @@ const ReviewHospitals = () => {
               >
                 Оценка + кол-во отзывов
               </Button>
-            </div>
+            </div> : <div style={{textAlign:"center"}}> Nothing Found </div>}
             <FilterButtons/>
             <div>
-              <div className="cardHospitals">
+              {data.map((item,index)=>{
+                return  <div key={index} className="cardHospitals">
                 <div className="card-head display_grid-hospital">
-                  <img style={{height:"166px"}} id="hospitalImage" src={Hospitals} />
+                  <img style={{height:"166px"}} id="hospitalImage" src={item.hospital?.main_image} />
                   <img id="likeImageHospitals" src={likeReview} />
                 </div>
                 <div
@@ -341,7 +361,20 @@ const ReviewHospitals = () => {
                   <div
                     style={{ display: "flex", justifyContent: "space-between",alignItems:"flex-start",paddingTop:"10px" }}
                   >
-                    <img src={Iconstars} />
+                    {/* <img src={Iconstars} /> */}
+                    <div>
+                    {(()=>{
+                let star=[]
+                for(let index = 0; index < item.hospital?.raiting; index++) {
+                 star.push( <img
+                  className={'reviews-stars'}
+                  src={SingleStar}
+                />)
+                
+              }
+              return star
+              })()}
+              </div>
                     <p
                       style={{
                         backgroundColor: "#FFC224",
@@ -357,15 +390,7 @@ const ReviewHospitals = () => {
                     </p>
                   </div>
                   <div>
-                    <p className={"card-title"}>
-                      Oтлично! Bсем Cоветую
-                    </p>
-                    <p className={"card-title"}>
-                      “Great location with montain view. Helpful and <br/> responsive
-                      owners. Well equipped and nicely designed cottage /
-                      challenge. Playground for kids outside as well as toys <br/>
-                      inside...”
-                    </p>
+                   {item.text}
                   </div>
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
@@ -373,7 +398,7 @@ const ReviewHospitals = () => {
                     <p style={{ color: "#464646", fontSize: "11.15px" }}>
                       Review To{" "}
                       <span style={{ color: "#5282FF", fontSize: "11.15px" }}>
-                        American Hospital
+                        {item.hospital?.name}
                       </span>
                     </p>
                     <p style={{ color: "#BCBCBC", fontSize: "12px" }}>
@@ -382,164 +407,19 @@ const ReviewHospitals = () => {
                   </div>
                 </div>
               </div>
-              <div className="cardHospitals">
-                <div className="card-head display_grid-hospital">
-                  <img style={{height:"166px"}}  id="hospitalImage" src={Hospitals} />
-                  <img id="likeImageHospitals" src={likeReview} />
-                </div>
-                <div className="card-body">
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between",alignItems:"flex-start",paddingTop:"10px" }}
-                  >
-                    <img src={Iconstars} />
-                    <p
-                      style={{
-                        backgroundColor: "#FFC224",
-                        color: "#000",
-                        width: "29.16px",
-                        height: "21.53px",
-                        borderRadius: "2.5px",
-                        textAlign: "center",
-                        margin:"0px"
-                      }}
-                    >
-                      9,9
-                    </p>
-                  </div>
-                  <div>
-                    <p className={"card-title"}>
-                      Oтлично! Bсем Cоветую
-                    </p>
-                    <p className={"card-text"}>
-                      “Great location with montain view. Helpful and <br/> responsive
-                      owners. Well equipped and nicely designed cottage /
-                      challenge. Playground for kids outside as well as toys <br/>
-                      inside...”
-                    </p>
-                  </div>
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <p style={{ color: "#464646", fontSize: "11.15px" }}>
-                      Review To{" "}
-                      <span style={{ color: "#5282FF", fontSize: "11.15px" }}>
-                        American Hospital
-                      </span>
-                    </p>
-                    <p style={{ color: "#BCBCBC", fontSize: "12px" }}>
-                      29 июля - 2022 г.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="cardHospitals">
-                <div className="card-head display_grid-hospital">
-                  <img style={{height:"166px"}}  id="hospitalImage" src={Hospitals} />
-                  <img id="likeImageHospitals" src={likeReview} />
-                </div>
-                <div className="card-body">
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between",alignItems:"flex-start",paddingTop:"10px" }}
-                  >
-                    <img src={Iconstars} />
-                    <p
-                      style={{
-                        backgroundColor: "#FFC224",
-                        color: "#000",
-                        width: "29.16px",
-                        height: "21.53px",
-                        borderRadius: "2.5px",
-                        textAlign: "center",
-                        margin:"0px"
-                      }}
-                    >
-                      9,9
-                    </p>
-                  </div>
-                  <div>
-                    <p className={"card-title"}>
-                      Oтлично! Bсем Cоветую
-                    </p>
-                    <p className={"card-text"}>
-                     “Great location with montain view. Helpful and <br/> responsive
-                      owners. Well equipped and nicely designed cottage /
-                      challenge. Playground for kids outside as well as toys <br/>
-                      inside...”
-                    </p>
-                  </div>
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <p style={{ color: "#464646", fontSize: "11.15px" }}>
-                      Review To{" "}
-                      <span style={{ color: "#5282FF", fontSize: "11.15px" }}>
-                        American Hospital
-                      </span>
-                    </p>
-                    <p style={{ color: "#BCBCBC", fontSize: "12px" }}>
-                      29 июля - 2022 г.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="cardHospitals">
-                <div className="card-head display_grid-hospital">
-                  <img style={{height:"166px"}}  id="hospitalImage" src={Hospitals} />
-                  <img id="likeImageHospitals" src={likeReview} />
-                </div>
-                <div
-                  className="card-body"
-                >
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between",alignItems:"flex-start",paddingTop:"10px" }}
-                  >
-                    <img src={Iconstars} />
-                    <p
-                      style={{
-                        backgroundColor: "#FFC224",
-                        color: "#000",
-                        width: "29.16px",
-                        height: "21.53px",
-                        borderRadius: "2.5px",
-                        textAlign: "center",
-                        margin:"0px"
-                      }}
-                    >
-                      9,9
-                    </p>
-                  </div>
-                  <div>
-                    <p className={"card-title"}>
-                      Oтлично! Bсем Cоветую
-                    </p>
-                    <p className={"card-text"}>
-                      “Great location with montain view. Helpful and <br/> responsive
-                      owners. Well equipped and nicely designed cottage /
-                      challenge. Playground for kids outside as well as toys <br/>
-                      inside...”
-                    </p>
-                  </div>
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <p style={{ color: "#464646", fontSize: "11.15px" }}>
-                      Review To{" "}
-                      <span style={{ color: "#5282FF", fontSize: "11.15px" }}>
-                        American Hospital
-                      </span>
-                    </p>
-                    <p style={{ color: "#BCBCBC", fontSize: "12px" }}>
-                      29 июля - 2022 г.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              })}
+             
+             
               <div className={'review-doctors-pagination'}>
-                <Pagination
-                  showSizeChanger={false}
-                  defaultCurrent={1}
-                  total={100}
-                />
+              {count ? <Pagination
+        current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
+         searchParams.set("page", page)
+         // const newSearch = `?${searchParams.toString()}`;
+        setSearchParams(searchParams)
+
+       }}  total={count}
+        
+       /> : ""}
               </div>
             </div>
           </div>

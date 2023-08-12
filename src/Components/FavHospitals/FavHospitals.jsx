@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { Dropdown, Button, Space, Breadcrumb, Pagination } from "antd";
 import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
@@ -13,11 +13,12 @@ import favDoctors from "../../assets/Svg/favDoctors.svg";
 import favHospital from "../../assets/Svg/favHospital.svg";
 import messageDoctor from "../../assets/Svg/messageDoc.svg";
 import messageHospital from "../../assets/Svg/messageHos.svg";
+
 import help112 from "../../assets/Svg/ambulans.svg";
 import likeReview from "../../assets/Svg/reviewLike.svg";
 import Iconstars from "../../assets/Svg/starIcon.svg";
 import Sponsored from "../../assets/Svg/sponsored.svg";
-
+import { axiosPrivate } from "../../api/api";
 import russianFlag from "../../assets/Images/russianFlagIcon.png";
 import question from "../../assets/Images/question.png";
 import heart from "../../assets/Images/heart.png";
@@ -32,6 +33,13 @@ import "../FavHospitals/FavHospitals.css";
 import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import FilterButtons from "../FilterButtons/index.js";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import favoritesFetch from "../api/favoriteHospitalsFetch";
+import I18nextBrowserLanguageDetector from "i18next-browser-languagedetector";
+import { useTranslation } from "react-i18next";
+
 
 const items = [
   {
@@ -192,9 +200,42 @@ const menuPropsFlag = {
 };
 
 const FavHospitals = () => {
+  const {t}=useTranslation()
+  const navigate=useNavigate()
+  const {user,authToken}=useSelector(state=> state.auth)
+  const [activeElement, setActiveElement] = useState(null);
+  console.log(authToken?.access);
+  const [searchParams,setSearchParams] = useSearchParams()
+
+  const handleClick = (elementId) => {
+    setActiveElement(elementId);
+   
+  };
+
+  const {data,setAdd,add,loading,count}=favoritesFetch(searchParams.get("page") || null)
+  console.log(data,count);
+
+  const DeleteFromFavorite= async(id)=>{
+    
+
+    axiosPrivate.delete(`card/remove_favorite/${id}`)
+    .then((res) => {
+        console.log(res);
+        setAdd(!add)
+    })
+    .catch((err) => {
+       console.log(err);
+    })
+
+   
+      
+  }
+
+
+
   return (
     <>
-      <Header/>
+      
 
       <div style={{ paddingTop: "30px" }} className="container">
         <div className={'breadcrumbs'}>
@@ -213,11 +254,11 @@ const FavHospitals = () => {
             }
             items={[
               {
-                title: "Home",
-                href: "",
+                title: t("home"),
+                href: "/",
               },
               {
-                title: "Profile",
+                title: t("profile"),
               },
             ]}
           />
@@ -227,65 +268,71 @@ const FavHospitals = () => {
         <div className="displayGridReviewDr">
           <div style={{ height: "320px" }} className="menuNav">
             <ul>
-              <li
+            <li  onClick={()=> navigate("/profile")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={peopleIcon} />
-                Личная информация
+                {t("profileinfo")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/fav-doctors")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer",
+                  zIndex:1
                 }}
               >
                 <img style={{ paddingRight: "20px" }} src={favDoctors} />
-                Мои любимые врачи
+                {t("favoritedoctor")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/fav-hospitals")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "20px" }} src={favHospital} />
-                Мои любимые больницы
+                {t("favoritehospital")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/doctor-reviews")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={messageDoctor} />
-                Мои отзывы о врачах
+                {t("commentdoctor")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/hospital-reviews")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={messageHospital} />
-                Мой обзор больниц
+                {t("commenthospital")}
               </li>
               <li
                 style={{
@@ -297,21 +344,20 @@ const FavHospitals = () => {
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={help112} />
-                Помощь
+                {t("help")}
               </li>
             </ul>
           </div>
 
           <div className="menuRight">
-            <div className="buttonsNav">
+          {data?.length !== 0 ? <div className="buttonsNav">
               <Button
                 className={"doc-nav-btn doc-nav-btn-active"}
                 type="primary"
               >
                 Наши рекомендации
               </Button>
-              <Button
-                className={"doc-nav-btn"}
+              <Button className={"doc-nav-btn"}
                 type="primary"
               >
                 Самая низкая цена в начале
@@ -328,22 +374,24 @@ const FavHospitals = () => {
               >
                 Оценка + кол-во отзывов
               </Button>
-            </div>
+            </div> : <div style={{textAlign:"center"}}> Nothing Found </div>}
+            
             <FilterButtons/>
             <div>
-              <div className="cardReviewDoctors cardReviewDoctors-active">
+              {data.map((item,index)=>{
+                return  <div   onClick={()=>handleClick(item.id)} className={activeElement ===item.id ? "cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors cardReviewDoctors"} >
                 <div className="display_grid img-wrapper">
                   <img
                     className={"cardFavHospitals-img"}
                     id="hospitalsImage"
-                    src={FavoriteHospitals}
+                    src={item.hospital.main_image}
                   />
                   <img id="sponsoredImage" src={Sponsored} />
-                  <img id="likeImageFavHospitals" src={likeReview} />
+                  <img onClick={()=> DeleteFromFavorite(item.hospital.id)}   id="likeImageFavHospitals" src={heart} />
                 </div>
                 <div
-                  style={{ width: "769px", paddingLeft: "110px" }}
-                  className="card-body card-content"
+                  style={{ width: "769px", paddingLeft: "167px" }}
+                  className="card-body  card-content"
                 >
                   <div
                     style={{
@@ -356,11 +404,11 @@ const FavHospitals = () => {
                     <h3
                       style={{
                         margin: "0px",
-                        color: "white",
                         paddingLeft: "15px",
                       }}
+                      className="changed"
                     >
-                      LuviMed
+                      {item.hospital.name}
                     </h3>
                     <div style={{ display: "flex", gap: "10px" }}>
                       <p style={{ margin: "0px", color: "white" }}>Hеплохо</p>
@@ -397,17 +445,17 @@ const FavHospitals = () => {
                     >
                       <p
                         style={{
-                          color: "white",
                           fontSize: "14px",
                           margin: "0px",
                         }}
+                        className="changed"
                       >
                         <EnvironmentOutlined
-                          style={{ marginRight: "6px", color: "white" }}
+                         className="" style={{ marginRight: "6px",  }}
                         />
-                        Бейоглу, Стамбул
+                        {item.hospital.location}
                       </p>
-                      <a href="#" style={{ margin: "0px", color: "#ffff" }}>
+                      <a   className="changed" href="" style={{ margin: "0px"}}>
                         Показать на карте
                       </a>
                     </div>
@@ -416,11 +464,11 @@ const FavHospitals = () => {
                         className="comment_hospitals"
                         style={{ color: "#FFFF", textAlign: "right" }}
                       >
-                        <a style={{ color: "#FFFF" }} href="#">
-                          45 отзыва
-                        </a>
+                        <Link   className="changed" to={`/hospital-reviews/${item.hospital.id}`} style={{  }} href="#">
+                         {item.hospital.comment_count} отзыва
+                        </Link>
                       </p>
-                      <p style={{ color: "#FFFF", margin: "0px" }}>
+                      <p   className="changed" style={{ margin: "0px" }}>
                         Соотношение цена/качество
                       </p>
                     </div>
@@ -497,7 +545,7 @@ const FavHospitals = () => {
                       </p>
                     </div>
                     <div>
-                      <Button
+                      <Button on onClick={()=> navigate(`/hospital/${item.hospital.id}`)}
                         style={{
                           backgroundColor: "#FFFF",
                           borderRadius: "5px",
@@ -637,7 +685,9 @@ const FavHospitals = () => {
                   </div>
                 </div>
               </div>
-              <div className="cardReviewDoctors">
+              })}
+             
+              {/* <div className="cardReviewDoctors">
                 <div className="display_grid img-wrapper">
                   <img
                     className={"cardFavHospitals-img"}
@@ -1240,17 +1290,22 @@ const FavHospitals = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className={'review-doctors-pagination'}>
-                <Pagination
-                  showSizeChanger={false}
-                  defaultCurrent={1}
-                  total={100}
-                />
-              </div>
+              </div> */}
+             
+              
             </div>
+            {count ? <Pagination style={{textAlign:"center"}}
+        current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
+         searchParams.set("page", page)
+         // const newSearch = `?${searchParams.toString()}`;
+        setSearchParams(searchParams)
+
+       }}  total={count}
+        
+       /> : ""}
+            
           </div>
+          
         </div>
       </div>
 

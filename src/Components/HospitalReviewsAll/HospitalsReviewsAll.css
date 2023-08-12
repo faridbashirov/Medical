@@ -180,7 +180,7 @@ display: flex;
     gap: 25px;
 }
 .reviews-stars{
-    width: 67px;
+    width: 20px;
     height: 11px;
 }
 .reviews__rating-num{

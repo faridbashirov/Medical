@@ -8,10 +8,79 @@ import { doctorRegisterFetch } from '../api/doctorRegisterFetch';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { Controller } from 'react-hook-form';
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useTranslation } from 'react-i18next';
 
 const {Item} = Form
-const DoctorForm = () => {
-  const {control, handleSubmit,formState: { errors } } = useForm();
+const DoctorForm = ({onCancel}) => {
+  const {t}=useTranslation()
+  const schema = Yup.object().shape({
+    first_name: Yup.string()
+        .label("First Name")
+        .trim()
+        .required()
+        .min(3)
+        .max(64),
+    last_name:Yup.string()
+    .label("Last name")
+    .trim()
+    .required()
+    .min(3)
+    .max(64),
+    email:Yup.string()
+    .label("Email")
+    .email()
+    .trim()
+    .required()
+    .min(3)
+    .max(64),
+    phone_number:Yup.string()
+    .label("Phone number")
+    .trim()
+    .required()
+    .min(3)
+    .max(64),
+    username:Yup.string()
+    .label("Username")
+    .trim()
+    .required()
+    .min(3)
+    .max(64),
+    location:Yup.string()
+    .label("Location")
+    .required(),
+    hospital:Yup.string()
+    .label("Hospital")
+    .required(),
+    position:Yup.string()
+    .label("Position")
+    .required(),
+    password:Yup.string()
+    .label("Password")
+    .min(3)
+    .max(64)
+    
+    .required()
+   
+      })
+    
+  
+  const {control, handleSubmit,formState: { errors } } = useForm(
+    ({
+      mode: "onChange",
+      
+      resolver: yupResolver(schema),
+    })
+  )
+  
+  
+  
+
+  
+
+
+ 
   console.log(errors);
 
 
@@ -66,7 +135,7 @@ const DoctorForm = () => {
   };
   return (
     <Form    onFinish={handleSubmit(handleRegistration)}>
-    <Item style={{
+    <Item className='flex items-start' style={{
       marginBottom: '10px',
       
     }}>
@@ -74,28 +143,30 @@ const DoctorForm = () => {
         display: 'inline-block',
         width: 'calc(50% - 0.5rem)',
       }}>
-      <Item >
+        <div style={{display:'flex',flexDirection:'column'}}>
+      <Item style={{marginBottom:'3px'}}>
       <Controller
-           rules={{
-            required: "This field is required",
-          }}
+          
+      
+           
           
           name="first_name"
           control={control}
           render={({ field }) => (
-            <Input {...field} className="input" placeholder="First Name *"  />
+            <Input {...field} className="input" placeholder={t("name")}  />
           )}
         />
         {/* <Input placeholder={'First Name'} name="first_name" className={'input'} {...register('first_name',{ required: "Name is required" })} /> */}
         
        </Item>
-      {errors?.first_name && errors.first_name.message}
+      <p style={{color:'red'}}>{errors?.first_name && errors.first_name.message}</p>
       {error.first_name ? <div
       style={{
         
         width: '100%',
+        color:'red'
       }}>{error.first_name}</div> : ""}
-      
+      </div>
       </div>
       
       <div style={{
@@ -103,27 +174,29 @@ const DoctorForm = () => {
         width: 'calc(50% - 0.5rem)',
         margin: '0 0 0 1rem',
       }}>
-      <Item >
+        <div style={{display:'flex',flexDirection:'column'}}>
+      <Item style={{marginBottom:'3px'}}>
       <Controller
-           rules={{
-            required: "This field is required",
-          }}
+           
           name="last_name"
           control={control}
           render={({ field }) => (
-            <Input {...field} className="input" placeholder="Last Name *"  />
+            <Input {...field} className="input" placeholder={t("surname")}  />
           )}
         />
         {/* <Input placeholder={'Last Name'} name="last_name" className={'input'}/> */}
         
       </Item>
-      {errors?.last_name && errors.last_name.message}
+      <p style={{color:'red'}}>{errors?.last_name && errors.last_name.message}</p>
       {error.last_name ? <div style={{
         
         width: '100%',
+        color:'red',
+        
         
         
       }}>{error.first_name}</div> : ""}
+      </div>
       </div>
      
      
@@ -136,13 +209,11 @@ const DoctorForm = () => {
       </div>
     <Item name="email">
     <Controller
-           rules={{
-            required: "This field is required",
-          }}
+         
           name="email"
           control={control}
           render={({ field }) => (
-            <Input {...field} className="input" placeholder="Email *"  />
+            <Input {...field} className="input" placeholder={t("mailadress")}  />
           )}
         />
       {/* <Input placeholder={'email'} name="email" className={'input'}/> */}
@@ -156,7 +227,7 @@ const DoctorForm = () => {
           name="phone_number"
           control={control}
           render={({ field }) => (
-            <Input {...field} className="input" placeholder="Phone Number *"  />
+            <Input {...field} className="input" placeholder={t("phonenumber")}  />
           )}
         />
       {/* <Input placeholder={'Phone number'} name="phone_number" className={'input'}/> */}
@@ -166,13 +237,11 @@ const DoctorForm = () => {
     {errors?.phone_number && errors.phone_number.message}
     <Item name="username">
     <Controller
-           rules={{
-            required: "This field is required",
-          }}
+          
           name="username"
           control={control}
           render={({ field }) => (
-            <Input {...field} className="input" placeholder="Username *"  />
+            <Input {...field} className="input" placeholder={t("username")}  />
           )}
         />
         
@@ -187,13 +256,11 @@ const DoctorForm = () => {
       name="password"
     >
        <Controller
-           rules={{
-            required: "This field is required",
-          }}
+          
           name="password"
           control={control}
           render={({ field }) => (
-            <Input.Password {...field}  placeholder={'Пароль'} name="password" className={'input'}/>
+            <Input.Password {...field}  placeholder={t("password")} name="password" className={'input'}/>
            
           )}
         />
@@ -217,7 +284,7 @@ const DoctorForm = () => {
            
              {...field} options={
               location.map((item)=>{
-              return { value: item.id , label: item.name }})} name="location"  className="input" placeholder="Select Country *"  />
+              return { value: item.id , label: item.name }})} name="location"  className="input" placeholder={t("selectcountry")}  />
           )}
           
           
@@ -237,7 +304,7 @@ const DoctorForm = () => {
           render={({ field }) => (
             <Select {...field} options={
               position.map((item)=>{
-              return { value: item.id , label: item.name }})}  className="input" placeholder="Select Position *"  />
+              return { value: item.id , label: item.name }})}  className="input" placeholder={t("selectposition")}  />
           )}
           
           control={control}
@@ -257,7 +324,7 @@ const DoctorForm = () => {
               hospital.map((item)=>{
               return { value: item.id , label: item.name }})}
               
-              className="input" placeholder="Select Hospital *"  />
+              className="input" placeholder={t("selecthospital")}  />
           )}
           
           control={control}
@@ -273,7 +340,7 @@ const DoctorForm = () => {
     
     
     <Button type={'primary'} htmlType={'submit'} block size={'large'}
-            style={{display: 'block', marginBottom: '.5rem'}}>register</Button>
+            style={{display: 'block', marginBottom: '.5rem'}}>{t("register")}</Button>
     </Form>
     
   );

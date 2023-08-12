@@ -361,6 +361,7 @@ border-radius: 2px;
     background-color: #fff;
     border-radius: 10px;
     overflow: hidden;
+    margin-left: 10px;
 }
 .reviews__carousel-item-content{
     padding: 28px 35px;

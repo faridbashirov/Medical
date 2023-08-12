@@ -19,14 +19,29 @@
     height: 100vh;
     width: 325px;
 }
-
+.card-body{
+    padding-left: 100px !important;
+}
+.card-content{
+    width: 100% !important;
+}
 .cardReviewDoctors{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     height: 260px;
     border-radius: 15px;
     margin: 35px 0;
     padding: 15px;
+    color: #000;
     background-color: #fff;
+}
+.cardReviewDoctors-active .changed{
+    color: #fff;
+}
+.cardReviewDoctors-active{
+    display: flex;
+    justify-content: space-between;
 }
 #hospitalsImage{
     grid-column: 1/13;
@@ -75,6 +90,8 @@
     }
 
 }
-
+.display_grid{
+    grid-template-rows: unset;
+}
 
  

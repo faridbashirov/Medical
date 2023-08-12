@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Button, Checkbox, Divider} from "antd";
 import singleStar from "../../assets/Svg/singleStar.svg"
 import location from "../../assets/Svg/Location.svg"
@@ -10,12 +10,14 @@ import detailImg2 from "../../assets/Images/hospital-detail/hospital-detail-2.jp
 import detailImg3 from "../../assets/Images/hospital-detail/hospital-detail-3.jpg"
 import arrowLeft from "../../assets/Svg/arrow-left.svg"
 import arrowRight from "../../assets/Svg/arrow-right.svg"
+import { useTranslation } from 'react-i18next';
+
 import Carousel from 'react-multi-carousel';
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
-    items: 5
+    items: 3
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
@@ -30,13 +32,18 @@ const responsive = {
     items: 1
   }
 };
-const Detail = ({hospital}) => {
+const Detail = ({images,hospital}) => {
+  
+  const {t}=useTranslation()
+ 
+
+ 
   return (
     <div className={'hospital-detail_content'}>
       <div className={'hospital-detail_content--search'}>
         <div className={'content__search'}>
-          <p>Найти</p>
-          <p>Место / название клиники / врач </p>
+          <p>{t("search")}</p>
+          <p>{t("search2")}</p>
           <Divider style={{background: "#fff"}}/>
           <p className={'content__search-checkbox'}><Checkbox>Турция</Checkbox></p>
           <p className={'content__search-checkbox'}><Checkbox>Услуги</Checkbox></p>
@@ -52,63 +59,81 @@ const Detail = ({hospital}) => {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
-          <Button type="primary" block style={{margin: "1rem 0 0", height: "3.8rem", backgroundColor: "#5282ff"}}>Показать
-            на карте</Button>
+          <Button type="primary" block style={{margin: "1rem 0 0", height: "3.8rem", backgroundColor: "#5282ff"}}>{t("map")}
+          </Button>
         </div>
       </div>
       <div className={'hospital-detail_content--info'}>
         <div className={'content__info-header'}>
           <div className={'content__info-header-left'}>
             <p>
-              Kлиника
-              <img style={{marginLeft: "9px"}} src={singleStar} alt="singleStar"/>
-              <img style={{marginLeft: "4px"}} src={singleStar} alt="singleStar"/>
-              <img style={{marginLeft: "4px"}} src={singleStar} alt="singleStar"/>
+              {hospital.name}
+              
+              {(()=>{
+                let star=[]
+                for(let index = 0; index < hospital.raiting; index++) {
+                 star.push(<img style={{marginLeft: "4px"}} src={singleStar} alt="singleStar"/>)
+                
+              }
+              return star
+              })()}
+              
+             
+              {/* <img style={{marginLeft: "4px"}} src={singleStar} alt="singleStar"/>
+              <img style={{marginLeft: "4px"}} src={singleStar} alt="singleStar"/> */}
             </p>
-            <p>Трансфер от/до аэропорта</p>
+            <p>{t("transport")}</p>
             <Divider/>
 
             <h3>{hospital.name}</h3>
             <p style={{display: "flex", gap: "10px", alignItems: "center", color: "#5282ff"}}>
               <img src={location} alt="Бейоглу, Стамбул, Турция "/>
               {hospital.location} </p>
-            <p>Отличное расположение - <span style={{color: "#5282ff"}}>Проверить карту</span></p>
+            <p>{t("location")} - <span style={{color: "#5282ff"}}>{t("map2")}</span></p>
           </div>
           <div className={'content__info-header-right'}>
             <div className={'right__share'}>
               <img src={heart} alt=""/>
               <img className={'right__share--btn'} src={share} alt=""/>
-              <Button style={{color:"#5282ff", borderColor:"#5282ff"}}>Забронировать клинику </Button>
+              <Button style={{color:"#5282ff", borderColor:"#5282ff"}}>{t("bron")} </Button>
             </div>
             <button className={'right__share--price-btn'}>
               <img src={dollar} alt=""/>
-              Возвращаем разницу в цене
+              {t("refund")}
             </button>
           </div>
         </div>
         <div className={'hospital-detail_img-box'} >
-          <div>
+          {images.map((item,index)=>{
+            if(index === 1){
+              return  <div className={'hospital-detail_img-lg'}>
+              <img src={item.image} alt=""/>
+              <div className={'detail_img-lg--rating'}>
+                <span>великолепно</span>
+                <span className={'detail_img-lg--rating-num'}>9.5</span>
+              </div>
+              <div className={'detail_img-lg--desc'}>
+                <p>“Great location with montain view. Helpful and responsive owners. Well equipped and nicely designed cottage / challenge. Playground for kids outside as well as toys inside...”</p>
+                <button className={'img-lg-desc-btn'}>
+                  <img src={arrowLeft} alt=""/>
+                  <span>Radovan Yuliya</span>
+                  <span className={'img-lg-desc-num'}>9.0</span>
+                  <img src={arrowRight} alt=""/>
+                </button>
+              </div>
+            </div>
+            }
+            return <div key={index}> 
+            <img src={item.image} alt=""/>
+          </div>
+          })}
+          {/* <div>
             <img src={detailImg1} alt=""/>
           </div>
-          <div className={'hospital-detail_img-lg'}>
-            <img src={detailImg3} alt=""/>
-            <div className={'detail_img-lg--rating'}>
-              <span>великолепно</span>
-              <span className={'detail_img-lg--rating-num'}>9.5</span>
-            </div>
-            <div className={'detail_img-lg--desc'}>
-              <p>“Great location with montain view. Helpful and responsive owners. Well equipped and nicely designed cottage / challenge. Playground for kids outside as well as toys inside...”</p>
-              <button className={'img-lg-desc-btn'}>
-                <img src={arrowLeft} alt=""/>
-                <span>Radovan Yuliya</span>
-                <span className={'img-lg-desc-num'}>9.0</span>
-                <img src={arrowRight} alt=""/>
-              </button>
-            </div>
-          </div>
+         
           <div>
             <img src={detailImg2} alt=""/>
-          </div>
+          </div> */}
           <div className={'hospital-detail_img-more'}>
             <img src={detailImg1} alt=""/>
 <span className={'hospital-detail_img-more-text'}>+20 ФОТОГРАФИЙ</span>

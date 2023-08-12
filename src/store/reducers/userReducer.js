@@ -6,7 +6,7 @@ import { tokenRefresh } from '../thunk/tokenRefresh';
 const initialState = {
   user:localStorage.getItem('authToken') ? jwt_decode(localStorage.getItem('authToken')) : null,
   authToken: localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('authToken')) :null,
-  errors:null,
+  errorss:null,
   loading: false,
   first_login:false
 }
@@ -16,11 +16,10 @@ export const AuthReducer = createSlice({
   initialState,
   reducers: {
     logoutuser: (state)=>{
-      console.log("++++");
         state.user = null
         state.authToken = null
         state.loading=false
-        state.errors = null
+        state.errorss = null
         localStorage.removeItem("authToken")
         state.first_login = false
         
@@ -50,16 +49,18 @@ export const AuthReducer = createSlice({
     builder.addCase(fetchLoginUser.rejected, (state, {payload}) => {
         console.log('errorr case');
         state.loading=false
-       state.errors = payload
+        state.errorss = payload
     
     
     })
     builder.addCase(tokenRefresh.fulfilled, (state, {payload}) => {
+      console.log(state.authToken.access, payload.data.access,"++++++++++")
 
       state.user = payload.data.access
-      state.authToken.access = payload.data
+      state.authToken.access = payload.data.access
+      console.log(state.authToken.access);
       localStorage.setItem("authToken", JSON.stringify(state.authToken))
-      state.first_login=true  
+      
     })
     builder.addCase(tokenRefresh.pending, (state) => {
         state.loading=true

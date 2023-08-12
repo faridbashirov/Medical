@@ -3,21 +3,26 @@ import Carousel from 'react-multi-carousel';
 import ruFlag from "../../assets/Svg/userFlag.svg"
 import trFlag from "../../assets/Svg/trFlag.svg"
 import azFlag from "../../assets/Svg/azFlag.svg"
+import Link from 'antd/es/typography/Link';
+import { useNavigate } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
-const Reviews = () => {
+import { useTranslation } from 'react-i18next';
+const Reviews = ({reviews,id}) => {
+  const {t}=useTranslation()
+   const navigate=useNavigate()
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
-      breakpoint: { max: 1500, min: 1200 },
-      items: 3
+      breakpoint: { max: 100, min: 500 },
+      items: 1
     },
     desktop: {
-      breakpoint: { max: 1200, min: 768 },
+      breakpoint: { max: 2500, min: 1200 },
       items: 3
     },
     tablet: {
       breakpoint: { max: 768, min: 464 },
-      items: 2
+      items: 1
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
@@ -29,86 +34,30 @@ const Reviews = () => {
     <section className="hospital-detail__reviews">
       <div className="container">
         <div className="reviews__header">
-          <h4 className="reviews__header-title">Отзывы пациентов</h4>
-          <p className="reviews__header-subtitle"><span className={"subtitle__rating"}>9,8</span>Великолепно <span>&#x2022;</span><span>23 отзыва</span> <a href="#">Читать все отзывы</a></p>
+          <h4 className="reviews__header-title">{t("hosinfo3")}</h4>
+          <p className="reviews__header-subtitle"><span className={"subtitle__rating"}>9,8</span>Великолепно <span>&#x2022;</span><span>{reviews.length} {t("comments")}</span> <a href="#">{t("allreviews")}</a></p>
         </div>
         <div className="reviews__carousel">
           <Carousel responsive={responsive} >
-            <div className="reviews__carousel-item">
+            {reviews.map((item,index)=>{
+              return   <div className="reviews__carousel-item">
               <div className="reviews__carousel-item-content">
-                <p>“Peaceful mountain view right from the terrace/window. Fireplace in the salon, cozy atmosphere of the house, toys for kids, playground for kids (and even sleds).”</p>
+                <p>{item.text}</p>
                 <a href="#">Читат больше</a>
               </div>
               <div className="reviews__carousel-item-footer">
                 <p><span className="item__footer-icon">H</span>
-                  <span className="item__footer-autor">Надежда Р.</span>
+                  <span className="item__footer-autor">{item.user.first_name}</span>
                   <img src={ruFlag} alt=""/></p>
                 <span className="item__footer-rating">8,8</span>
               </div>
             </div>
-            <div className="reviews__carousel-item">
-              <div className="reviews__carousel-item-content">
-                <p>“Peaceful mountain view right from the terrace/window. Fireplace in the salon, cozy atmosphere of the house, toys for kids, playground for kids (and even sleds).”</p>
-                <a href="#">Читат больше</a>
-              </div>
-              <div className="reviews__carousel-item-footer">
-                <p><span className="item__footer-icon">H</span>
-                  <span className="item__footer-autor">Buhra Ulker</span>
-                  <img src={trFlag} alt=""/></p>
-                <span className="item__footer-rating">9,9</span>
-              </div>
-            </div>
-            <div className="reviews__carousel-item">
-              <div className="reviews__carousel-item-content">
-                <p>“Peaceful mountain view right from the terrace/window. Fireplace in the salon, cozy atmosphere of the house, toys for kids, playground for kids (and even sleds).”</p>
-                <a href="#">Читат больше</a>
-              </div>
-              <div className="reviews__carousel-item-footer">
-                <p><span className="item__footer-icon">H</span>
-                  <span className="item__footer-autor">Vagif Huseyn</span>
-                  <img src={azFlag} alt=""/></p>
-                <span className="item__footer-rating">7,8</span>
-              </div>
-            </div>
-            <div className="reviews__carousel-item">
-              <div className="reviews__carousel-item-content">
-                <p>“Peaceful mountain view right from the terrace/window. Fireplace in the salon, cozy atmosphere of the house, toys for kids, playground for kids (and even sleds).”</p>
-                <a href="#">Читат больше</a>
-              </div>
-              <div className="reviews__carousel-item-footer">
-                <p><span className="item__footer-icon">H</span>
-                  <span className="item__footer-autor">Надежда Р.</span>
-                  <img src={ruFlag} alt=""/></p>
-                <span className="item__footer-rating">8,8</span>
-              </div>
-            </div>
-            <div className="reviews__carousel-item">
-              <div className="reviews__carousel-item-content">
-                <p>“Peaceful mountain view right from the terrace/window. Fireplace in the salon, cozy atmosphere of the house, toys for kids, playground for kids (and even sleds).”</p>
-                <a href="#">Читат больше</a>
-              </div>
-              <div className="reviews__carousel-item-footer">
-                <p><span className="item__footer-icon">H</span>
-                  <span className="item__footer-autor">Buhra Ulker</span>
-                  <img src={trFlag} alt=""/></p>
-                <span className="item__footer-rating">9,9</span>
-              </div>
-            </div>
-            <div className="reviews__carousel-item">
-              <div className="reviews__carousel-item-content">
-                <p>“Peaceful mountain view right from the terrace/window. Fireplace in the salon, cozy atmosphere of the house, toys for kids, playground for kids (and even sleds).”</p>
-                <a href="#">Читат больше</a>
-              </div>
-              <div className="reviews__carousel-item-footer">
-                <p><span className="item__footer-icon">H</span>
-                  <span className="item__footer-autor">Vagif Huseyn</span>
-                  <img src={azFlag} alt=""/></p>
-                <span className="item__footer-rating">7,8</span>
-              </div>
-            </div>
+            })}
+           
+            
           </Carousel>
         </div>
-        <button className="hospital-detail__reviews-btn">Читать все отзывы</button>
+      <button onClick={()=> navigate(`/hospital-reviews/${id}`)}  className="hospital-detail__reviews-btn">{t("allreviews")}</button>
       </div>
     </section>
   );

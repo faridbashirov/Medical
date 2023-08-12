@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {Button, ConfigProvider, Divider, Form, Input, Modal, Typography} from "antd";
+import {Button, ConfigProvider, Divider, Form, Input, message, Modal, Typography} from "antd";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
@@ -10,19 +10,53 @@ import {toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Password from 'antd/es/input/Password';
 import { use } from 'i18next';
+import { Controller } from 'react-hook-form';
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
+import i18next from 'i18next';
 
 
 
 const {Item} = Form
 const LoginModal = ({openLogin, onCloseLogin,onOpenRegister}) => {
-  
+   const {t}=useTranslation()
+  const schema = Yup.object().shape({
+   
+    
+    username:Yup.string()
+    .label("Username")
+    .trim()
+    .required(t("usernameerror"))
+    .min(3)
+    .max(64),
+    password:Yup.string()
+    .label("Password")
+    .trim()
+    .required(t("passworderror"))
+    .min(3,'must be at least 3 characters long')
+    .max(64,"invalid"),
+    
+   
+   
+   
+   
+      })
+  const {control,reset, handleSubmit,formState: { errors  } } = useForm(
+        ({
+          mode: "onChange",
+          
+          resolver: yupResolver(schema),
+        }))
    const navigate=useNavigate()
    const dispatch=useDispatch()
    const displayLoginNotification = () => {
    
     toast("You looged in!");
   };
-   const {errors, user,first_login}=useSelector((state)=>state.auth)
+   const {errorss, user,first_login}=useSelector((state)=>state.auth)
    
    const [error,setError]=useState({username:null,
     password:null})
@@ -30,29 +64,16 @@ const LoginModal = ({openLogin, onCloseLogin,onOpenRegister}) => {
     
    
    const userLogin= async (values)=>{
+    console.log(values);
+    values["lang"]=i18next.language
     
-
-    if (!values.email){
-      setError({username:"Username Required",
-      password:null})
-
-    }
-    if (!values.password){
-      setError({username:null,
-      password:"Password Required"})
-    }
-    if((!values.password && !values.email)){
-      setError({username:"Username Required",
-      password:"Password Required"})
-
-    }
-    if((values.password && values.email)){
-      setError({username:null,
-      password:null})
-      dispatch(fetchLoginUser(values))
-   
-      
-  }
+    
+  
+    dispatch(fetchLoginUser(values))
+    values={}
+    reset(values)
+  
+    
   }
 
   React.useEffect(() => {
@@ -83,28 +104,51 @@ const LoginModal = ({openLogin, onCloseLogin,onOpenRegister}) => {
     
     <Modal open={openLogin} onCancel={onCloseLogin} footer={[]}>
       
-      <Typography className={'login-title'}>Войти или <br/>завести аккаунт</Typography>
+      <Typography className={'login-title'}><Trans i18nKey="loginregister"></Trans></Typography>
       <Divider/>
-      <Form onFinish={userLogin} >
-        <Item name="email">
-          <Input placeholder={'электронной почты'} className={'login-input'} />
+      <Form  onFinish={handleSubmit(userLogin)} >
+        <Item name="username">
+        <Controller
+             rules={{
+              required: "This field is required",
+            }}
+            name="username"
+            control={control}
+            render={({ field }) => (
+             
+              <Input {...field} className="input" placeholder={t("username")}/>
+            )}
+          />
+           
+        
          
         </Item>
-        { error.username && <p>username error</p>}
+         {errors?.username && errors.username.message}
        
         <Item
           name="password"
         >
-          <Input.Password placeholder={'Пароль'} className={'login-input'} />
+           <Controller
+             rules={{
+              required: "This field is required",
+            }}
+            name="password"
+            control={control}
+            render={({ field }) => (
+             
+              <Input.Password {...field} className="input" placeholder={t("password")}/>
+            )}
+          />
          
         </Item>
-        { error.password ?<p>password error</p> : ""}
-
-        {errors ? <p>{errors}</p> : ""}
+        {errors?.password && errors.password.message}
+        {errorss && errorss}
+        
+       
        
         
         <Button type={'primary'} htmlType={'submit'} block size={'large'}
-                style={{display: 'block', marginBottom: '.5rem'}}>Войти</Button>
+                style={{display: 'block', marginBottom: '.5rem'}}>{t("login")}</Button>
         <Button type={'link'} htmlType={'submit'} block size={'large'} style={{ marginBottom: '.5rem'}}>Забыли
           пароль?</Button>
         <ConfigProvider
@@ -115,7 +159,7 @@ const LoginModal = ({openLogin, onCloseLogin,onOpenRegister}) => {
 
           }}
         >
-          <Button type={'primary'} htmlType={'button'} block size={'large'} style={{margin:'0 !important'}} onClick={onOpenRegister}>Создать новый аккаунт</Button>
+          <Button type={'primary'} htmlType={'button'} block size={'large'} style={{margin:'0 !important'}} onClick={onOpenRegister}>{t("newaccaunt")}</Button>
         </ConfigProvider>
       </Form>
      

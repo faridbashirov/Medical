@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import {Link} from 'react-router-dom'
 import { LogoutOutlined } from "@ant-design/icons";
 import Vector from "../../assets/Images/Vector.svg";
@@ -23,9 +23,10 @@ import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logoutuser } from "../../store/reducers/userReducer";
+import { useNavigate } from "react-router-dom";
 import {toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useTranslation } from "react-i18next";
 
 const items = [
   {
@@ -131,10 +132,32 @@ const itemsFlag = [
           paddingLeft: "10px",
         }}
       >
-        TR
+        RU
       </span>
     ),
     key: "2",
+    icon: (
+      <img
+        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
+        src={russianFlag}
+      />
+    ),
+  },
+  {
+    label: (
+      <span
+        style={{
+          fontFamily: "Gilroy",
+          fontSize: "16px",
+          fontWeight: "600",
+          color: "black",
+          paddingLeft: "10px",
+        }}
+      >
+        TR
+      </span>
+    ),
+    key: "3",
     icon: (
       <img
         style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
@@ -153,11 +176,11 @@ const itemsFlag = [
           paddingLeft: "10px",
         }}
       >
-        {" "}
+        
         EN
       </span>
     ),
-    key: "3",
+    key: "4 ",
     icon: (
       <img
         style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
@@ -173,6 +196,11 @@ const handleMenuClick = (e) => {
 
 const handleMenuFlagClick = (e) => {
   console.log("click", e);
+  console.log(itemsFlag.find(item => item.key === e.key).label.props.children)
+  localStorage.setItem("lang",itemsFlag.find(item => item.key === e.key).label.props.children.toLowerCase())
+  i18n.changeLanguage(localStorage.getItem("lang"))
+  
+
 };
 
 const menuProps = {
@@ -183,16 +211,43 @@ const menuProps = {
 const menuPropsFlag = {
   items: itemsFlag,
   onClick: handleMenuFlagClick,
+  
 };
 
 const Header = ({handleMenu,showMenu}) =>{
+  if(!localStorage.getItem("lang")){
+    localStorage.setItem("lang","ru")
+  }
+  
+ 
+  const handleMenuFlagClick = (e) => {
+    console.log("click", e);
+    console.log(itemsFlag.find(item => item.key === e.key).label.props.children)
+    localStorage.setItem("lang",itemsFlag.find(item => item.key === e.key).label.props.children.toLowerCase())
+    setActive(itemsFlag.find(item => item.key === e.key))
+    i18n.changeLanguage(itemsFlag.find(item => item.key === e.key).label.props.children.toLowerCase())
+    
+    
+  
+  };
+  const menuPropsFlag = {
+    items: itemsFlag,
+    onClick: handleMenuFlagClick,
+    
+  };
 
+  const {t,i18n}=useTranslation()
 
   const [openLogin, setOpenLogin] = useState(false)
   const [openRegister, setOpenRegister] = useState(false)
-
+  const [lang,setLang]=useState(localStorage.getItem("lang"))
+ 
+  const [active,setActive] = useState(itemsFlag.find( item => item.label.props.children === localStorage.getItem("lang").toUpperCase()))
+  const navigate=useNavigate()
+  console.log(lang);
   const {user, errors}=useSelector((state)=> state.auth)
   const {authToken}=useSelector((state)=> state.auth)
+
   const state=useSelector((state)=>state.auth)
   console.log(state)
  
@@ -210,6 +265,7 @@ const Header = ({handleMenu,showMenu}) =>{
 
 
  }
+ 
  
   const onOpenLogin = () => {
     setOpenLogin(true)
@@ -239,12 +295,13 @@ const Header = ({handleMenu,showMenu}) =>{
             </div>
             <div className="mR">
               <h1 className="textMed">112 Med</h1>
-              <p className="medMarket">Медицинский маркетплейс</p>
+              <p className="medMarket">{t("Medical marketplace")}</p>
             </div>
             <div className="dropdownBefore">
               <ul className="ul" id="ulList">
                 <li style={{ paddingBottom: "15px" }}>
-                  <Dropdown menu={menuProps}>
+                  <Dropdown 
+                       menu={menuProps}>
                     <Button type="text">
                       <Space>
                         <img id="rubl" src={RUB} />
@@ -263,20 +320,23 @@ const Header = ({handleMenu,showMenu}) =>{
                   </Dropdown>
                 </li>
                 <li style={{ paddingBottom: "15px" }}>
-                  <Dropdown menu={menuPropsFlag}>
+                  <Dropdown   menu={menuPropsFlag}>
                     <Button type="text">
                       <Space>
-                        <img id="flag" src={russianFlag} />
+                        {active.icon}
+                        
+
+                        
                         <span
-                          style={{
+                          style={{  
                             fontFamily: "Gilroy",
                             fontSize: "17.5px",
                             fontWeight: "500",
                             color: "white",
                           }}
                         >
-                          RU
-                        </span>
+                        {active.label.props.children}
+                        </span> 
                       </Space>
                     </Button>
                   </Dropdown>
@@ -286,10 +346,10 @@ const Header = ({handleMenu,showMenu}) =>{
                     <img src={question} />
                   </div>
                   <div>
-                    <p>связаться с нами </p>
+                    <p>{t("contact")} </p>
                   </div>
                 </li>
-                <li style={{ paddingBottom: "15px" }}>
+                <li onClick={()=>navigate("/profile")} style={{ paddingBottom: "15px" }}>
                   <img className="heart" src={heart} />
                 </li>
                 <li style={{ paddingBottom: "15px" }}>
@@ -299,14 +359,14 @@ const Header = ({handleMenu,showMenu}) =>{
                     icon={<ArrowRightOutlined className="Arrow" />}
                     onClick={()=> logout()}
                   >
-                    Logout
+                    {t("logout")}
                   </Button> : <Button
                     className="button"
                     type="primary"
                     icon={<ArrowRightOutlined className="Arrow" />}
                     onClick={onOpenLogin}
                   >
-                    Login
+                    {t("login")}
                   </Button>}
 
                 </li>

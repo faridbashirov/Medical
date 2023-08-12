@@ -5,14 +5,62 @@ import { locationFetch } from '../api/locationFetch';
 import { registerFetch } from '../api/registerFetch';
 import { useForm } from "react-hook-form";
 import { Controller } from 'react-hook-form';
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useTranslation } from 'react-i18next';
 
 
 const {Item} = Form
 const ClientForm = ({onCancel}) => {
-  const {control, handleSubmit,formState: { errors } } = useForm();
+  const {t}=useTranslation()
+  const schema = Yup.object().shape({
+    first_name: Yup.string()
+        
+        .trim()
+        .required(t("nameerror"))
+        ,
+    last_name:Yup.string()
+    
+    .trim()
+    .required(t("lastnameerror"))
+     ,
+    
+    email:Yup.string()
+    
+    .email(t("validemail"))
+    .trim()
+    .required(t("emailerror"))
+    
+    .max(64),
+    username:Yup.string()
+  
+    .trim()
+    .required(t("usernameerror"))
+    .min(3,t("length"))
+    .max(64),
+    password:Yup.string()
+   
+    .trim()
+    .required(t("passworderror"))
+    .min(3,t("length"))
+    .max(64),
+   
+   
+   
+   
+      })
+  const {control,reset, handleSubmit,formState: { errors } } = useForm(
+    ({
+      mode: "onChange",
+      
+      resolver: yupResolver(schema),
+    })
+  );
   const [location,setLocation]=useState([])
   const [error,setError] = useState({})
  
+
+
   const handleRegistration = async(values) => {
     console.log("here");
     const data = await registerFetch(values)
@@ -22,9 +70,12 @@ const ClientForm = ({onCancel}) => {
             setError(data.Errors)
             
           }
-    if(data.message){
+    
+    if(data.status===201){
       console.log("success");
                   setError({})
+                  values={}
+                  reset(values)
                   
                   onCancel()
       
@@ -56,6 +107,7 @@ const ClientForm = ({onCancel}) => {
   
   return (
     <Form    onFinish={handleSubmit(handleRegistration)}>
+  
       <Item style={{
         marginBottom: '10px',
         
@@ -64,7 +116,8 @@ const ClientForm = ({onCancel}) => {
           display: 'inline-block',
           width: 'calc(50% - 0.5rem)',
         }}>
-        <Item >
+          <div style={{display:'flex',flexDirection:'column'}}>
+        <Item style={{marginBottom:'3px'}}>
         <Controller
              rules={{
               required: "This field is required",
@@ -72,27 +125,29 @@ const ClientForm = ({onCancel}) => {
             name="first_name"
             control={control}
             render={({ field }) => (
-              <Input {...field} className="input" placeholder="First Name *"  />
+              <Input {...field} className="input" placeholder={t("name")}  />
             )}
           />
           {/* <Input placeholder={'First Name'} name="first_name" className={'input'} {...register('first_name',{ required: "Name is required" })} /> */}
           
          </Item>
-        {errors?.first_name && errors.first_name.message}
+         <p style={{color:'red'}}> {errors?.first_name && errors.first_name.message}</p>
         {error.first_name ? <div
         style={{
           
           width: '100%',
         }}>{error.first_name}</div> : ""}
-        
+         </div>
         </div>
+       
         
         <div style={{
           display: 'inline-block',
           width: 'calc(50% - 0.5rem)',
           margin: '0 0 0 1rem',
         }}>
-        <Item >
+          <div style={{display:'flex',flexDirection:'column'}}>
+        <Item style={{marginBottom:'3px'}}>
         <Controller
              rules={{
               required: "This field is required",
@@ -100,13 +155,14 @@ const ClientForm = ({onCancel}) => {
             name="last_name"
             control={control}
             render={({ field }) => (
-              <Input {...field} className="input" placeholder="Last Name *"  />
+              <Input {...field} className="input" placeholder={t("surname")}  />
             )}
+            
           />
           {/* <Input placeholder={'Last Name'} name="last_name" className={'input'}/> */}
           
         </Item>
-        {errors?.last_name && errors.last_name.message}
+        <p style={{color:'red'}}>{errors?.last_name && errors.last_name.message}</p>
         {error.last_name ? <div style={{
           
           width: '100%',
@@ -114,7 +170,7 @@ const ClientForm = ({onCancel}) => {
           
         }}>{error.first_name}</div> : ""}
         </div>
-       
+        </div>
        
       
       </Item>
@@ -131,7 +187,7 @@ const ClientForm = ({onCancel}) => {
             name="email"
             control={control}
             render={({ field }) => (
-              <Input {...field} className="input" placeholder="Email *"  />
+              <Input {...field} className="input" placeholder={t("mailadress")}   />
             )}
           />
         {/* <Input placeholder={'email'} name="email" className={'input'}/> */}
@@ -145,7 +201,7 @@ const ClientForm = ({onCancel}) => {
             name="phone_number"
             control={control}
             render={({ field }) => (
-              <Input {...field} className="input" placeholder="Phone Number *"  />
+              <Input {...field} className="input" placeholder={t("phonenumber")}  />
             )}
           />
         {/* <Input placeholder={'Phone number'} name="phone_number" className={'input'}/> */}
@@ -161,7 +217,7 @@ const ClientForm = ({onCancel}) => {
             name="username"
             control={control}
             render={({ field }) => (
-              <Input {...field} className="input" placeholder="Username *"  />
+              <Input {...field} className="input" placeholder={t("username")}  />
             )}
           />
           
@@ -171,15 +227,15 @@ const ClientForm = ({onCancel}) => {
       {errors?.username && errors.username.message}
       {error.username ? <span>{error.username}</span> : ""}
       
-      <Item name="category">
+      <Item name="location">
       <Controller
-            name="category"
+            name="location"
             render={({ field }) => (
-              <Select {...field} options={options} className="input" placeholder="Select Country *"  />
+              <Select {...field} options={options} className="input" placeholder={t("selectcountry")}  />
             )}
             
             control={control}
-            rules={{ required: true }}
+            
             onFocus={() => refReactSelect.current.focus()}
           />
         {/* <Select
@@ -192,18 +248,16 @@ const ClientForm = ({onCancel}) => {
         /> */}
          
       </Item>
-      {error.location ? <span>{error.location}</span> : ""}
+      {errors?.location && errors?.location.message}
       <Item
         name="password"
       >
          <Controller
-             rules={{
-              required: "This field is required",
-            }}
+             
             name="password"
             control={control}
             render={({ field }) => (
-              <Input.Password {...field}  placeholder={'Пароль'} name="password" className={'input'}/>
+              <Input.Password {...field}  placeholder={t("password")} name="password" className={'input'}/>
              
             )}
           />
@@ -213,7 +267,7 @@ const ClientForm = ({onCancel}) => {
       {errors?.password && errors.password.message}
 
       <Button type={'primary'} htmlType={'submit'} block size={'large'}
-              style={{display: 'block', marginBottom: '.5rem'}}>register</Button>
+              style={{display: 'block', marginBottom: '.5rem'}}>{t("register")}</Button>
     </Form>
   );
 };

@@ -2,22 +2,23 @@ import {Button, Divider, Form, Input, Modal, Tabs, Typography} from "antd";
 import './RegisterMOdal.css'
 import ClientForm from "./ClientForm.jsx";
 import DoctorForm from "./DoctorForm.jsx";
-
+import { useTranslation } from 'react-i18next';
 
 
 
 const RegisterModal = ({openRegister, onCloseRegister}) => {
+  const {t}=useTranslation()
 
   const items = [
     {
       key: '1',
-      label: `Как клиент`,
+      label: t("clientregister"),
       children: <ClientForm onCancel={onCloseRegister}/>,
     },
     {
       key: '2',
-      label: `Как доктор`,
-      children: <DoctorForm/>,
+      label: t("doctorregister"),
+      children: <DoctorForm onCancel={onCloseRegister}/>,
     },
   ];
 
@@ -30,7 +31,7 @@ const RegisterModal = ({openRegister, onCloseRegister}) => {
     <Modal open={openRegister} onCancel={onCloseRegister} footer={[
       
     ]}>
-      <Typography className={'login-title'}>Зарегистрироваться</Typography>
+      <Typography className={'login-title'}>{t("register")}</Typography>
       <Divider/>
       <Tabs
         defaultActiveKey="1"

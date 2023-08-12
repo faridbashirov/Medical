@@ -29,7 +29,7 @@ const Slider = ({countries}) => {
     <>
       <Carousel responsive={responsive}>
         {countries.map((item,index)=>{
-          return     <Cards img={item.image} />
+          return     <Cards key={index} img={item.image} />
         })}
     
       </Carousel>

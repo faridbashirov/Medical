@@ -31,7 +31,11 @@ import "../ReviewDoctors/ReviewDoctors.css";
 import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import FilterButtons from "../FilterButtons/index.js";
-
+import { useSelector } from "react-redux";
+import profileDoctorReviews from "../api/profileDoctorReviews";
+import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 const items = [
   {
     label: (
@@ -191,6 +195,19 @@ const menuPropsFlag = {
 };
 
 const  ReviewDoctors = () => {
+  const {t}=useTranslation()
+  const navigate=useNavigate()
+  const [searchParams,setSearchParams] = useSearchParams()
+
+  const {user,authToken}=useSelector(state=> state.auth)
+ 
+
+
+  const {data,error,count}=profileDoctorReviews(searchParams.get("page") || null)
+  console.log(data);
+  if(error) {
+    return <div>Page Not Found</div>
+  }
   return (
     <>
       
@@ -213,11 +230,11 @@ const  ReviewDoctors = () => {
             }
             items={[
               {
-                title: "Home",
-                href: "",
+                title: t("home"),
+                href: "/",
               },
               {
-                title: "Profile",
+                title: t("profile"),
               },
             ]}
           />
@@ -228,65 +245,71 @@ const  ReviewDoctors = () => {
         <div className="displayGridReviewDr">
           <div style={{ height: "320px" }} className="menuNav">
             <ul>
-              <li
+            <li  onClick={()=> navigate("/profile")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={peopleIcon} />
-                Личная информация
+                {t("profileinfo")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/fav-doctors")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer",
+                  zIndex:1
                 }}
               >
                 <img style={{ paddingRight: "20px" }} src={favDoctors} />
-                Мои любимые врачи
+                {t("favoritedoctor")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/fav-hospitals")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "20px" }} src={favHospital} />
-                Мои любимые больницы
+                {t("favoritehospital")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/doctor-reviews")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={messageDoctor} />
-                Мои отзывы о врачах
+                {t("commentdoctor")}
               </li>
-              <li
+              <li onClick={()=> navigate("/profile/hospital-reviews")}
                 style={{
                   listStyle: "none",
                   padding: "10px 20px",
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  cursor:"pointer"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={messageHospital} />
-                Мой обзор больниц
+                {t("commenthospital")}
               </li>
               <li
                 style={{
@@ -298,13 +321,13 @@ const  ReviewDoctors = () => {
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={help112} />
-                Помощь
+                {t("help")}
               </li>
             </ul>
           </div>
 
           <div className="menuRight">
-            <div className="buttonsNav">
+          {data?.length !== 0 ? <div className="buttonsNav">
               <Button
                 className={"doc-nav-btn doc-nav-btn-active"}
                 type="primary"
@@ -328,12 +351,14 @@ const  ReviewDoctors = () => {
               >
                 Оценка + кол-во отзывов
               </Button>
-            </div>
+            </div> : <div style={{textAlign:"center"}}> Nothing Found </div>}
+            
             <FilterButtons/>
             <div>
-              <div className="cardReviewDoctors-main">
+              {data.map((item,index)=>{
+                return  <div className="cardReviewDoctors-main">
                 <div className="card-head display_grid">
-                  <img id="doctorImage" src={reviewDoctor} />
+                  <img id="doctorImage"  src={item.doctor?.profile_photo}/>
                   <img id="likeImage" src={likeReview} />
                 </div>
                 <div className="card-body">
@@ -356,183 +381,45 @@ const  ReviewDoctors = () => {
                   </div>
                   <div>
                     <h3
-                      className={"card-title"}
+                      className={"card-title changed"}
                     >
-                      Oтлично! Bсем Cоветую
+                     
                     </h3>
                     <p
-                      className={"card-text"}
+                      className={"card-text changed"}
                     >
-                      Он очень образованный врач. Нам очень понравилось, он уже
-                      наш <br /> семейный доктор.
+                     {item.text}
                     </p>
                   </div>
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <p style={{ color: "#464646", fontSize: "11.15px" }}>
+                    <p className="changed" style={{ color: "#464646", fontSize: "11.15px" }}>
                       Review To{" "}
-                      <span style={{ color: "#5282FF", fontSize: "11.15px" }}>
-                        Dr. Алина Леонидовна
+                      <span className="changed" style={{ color: "#5282FF", fontSize: "11.15px" }}>
+                        Dr. {item.doctor?.first_name}
                       </span>
                     </p>
-                    <p style={{ color: "#BCBCBC", fontSize: "12px" }}>
+                    <p className="changed" style={{ color: "#BCBCBC", fontSize: "12px" }}>
                       29 июля - 2022 г.
                     </p>
                   </div>
                 </div>
               </div>
-              <div className="cardReviewDoctors-main">
-                <div className="card-head display_grid">
-                  <img id="doctorImage" src={reviewDoctor} />
-                  <img id="likeImage" src={likeReview} />
-                </div>
-                <div className="card-body">
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <img src={Iconstars} />
-                    <p
-                      style={{
-                        backgroundColor: "#FFC224",
-                        color: "#000",
-                        width: "29.16px",
-                        height: "21.53px",
-                        borderRadius: "2.5px",
-                        textAlign: "center",
-                      }}
-                    >
-                      9,9
-                    </p>
-                  </div>
-                  <div>
-                    <h3
-                      className={"card-title"}
-                    >
-                      Oтлично! Bсем Cоветую
-                    </h3>
-                    <p
-                      className={"card-text"}
-                    >
-                      Он очень образованный врач. Нам очень понравилось, он уже
-                      наш <br /> семейный доктор.
-                    </p>
-                  </div>
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <p style={{ color: "#464646", fontSize: "11.15px" }}>
-                      Review To{" "}
-                      <span style={{ color: "#5282FF", fontSize: "11.15px" }}>
-                        Dr. Алина Леонидовна
-                      </span>
-                    </p>
-                    <p style={{ color: "#BCBCBC", fontSize: "12px" }}>
-                      29 июля - 2022 г.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="cardReviewDoctors-main">
-                <div className="card-head display_grid">
-                  <img id="doctorImage" src={reviewDoctor} />
-                  <img id="likeImage" src={likeReview} />
-                </div>
-                <div
-                  className="card-body"
-                >
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <img src={Iconstars} />
-                    <p
-                      style={{
-                        backgroundColor: "#FFC224",
-                        color: "#000",
-                        width: "29.16px",
-                        height: "21.53px",
-                        borderRadius: "2.5px",
-                        textAlign: "center",
-                      }}
-                    >
-                      9,9
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className={"card-title"}
-                    >
-                      Oтлично! Bсем Cоветую
-                    </h3>
-                    <p className={"card-text"}>
-                      Он очень образованный врач. Нам очень понравилось, он уже
-                      наш <br /> семейный доктор.
-                    </p>
-                  </div>
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <p style={{ color: "#464646", fontSize: "11.15px" }}>
-                      Review To{" "}
-                      <span style={{ color: "#5282FF", fontSize: "11.15px" }}>
-                        Dr. Алина Леонидовна
-                      </span>
-                    </p>
-                    <p style={{ color: "#BCBCBC", fontSize: "12px" }}>
-                      29 июля - 2022 г.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="cardReviewDoctors-main">
-                <div className="card-head display_grid">
-                  <img id="doctorImage" src={reviewDoctor} />
-                  <img id="likeImage" src={likeReview} />
-                </div>
-                <div className="card-body">
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <img src={Iconstars} />
-                    <p
-                      style={{
-                        backgroundColor: "#FFC224",
-                        color: "#000",
-                        width: "29.16px",
-                        height: "21.53px",
-                        borderRadius: "2.5px",
-                        textAlign: "center",
-                      }}
-                    >
-                      9,9
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className={"card-title"}>
-                      Oтлично! Bсем Cоветую
-                    </h3>
-                    <p className={"card-text"}>
-                      Он очень образованный врач. Нам очень понравилось, он уже
-                      наш <br /> семейный доктор.
-                    </p>
-                  </div>
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <p style={{ color: "#464646", fontSize: "11.15px" }}>
-                      Review To{" "}
-                      <span style={{ color: "#5282FF", fontSize: "11.15px" }}>
-                        Dr. Алина Леонидовна
-                      </span>
-                    </p>
-                    <p style={{ color: "#BCBCBC", fontSize: "12px" }}>
-                      29 июля - 2022 г.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              })}
+             
+             
               <div className={'review-doctors-pagination'}
               >
-                <Pagination showSizeChanger={false} defaultCurrent={1} total={100} />
+                  {count ? <Pagination
+        current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
+         searchParams.set("page", page)
+         // const newSearch = `?${searchParams.toString()}`;
+        setSearchParams(searchParams)
+
+       }}  total={count}
+        
+       /> : ""}
               </div>
             </div>
           </div>

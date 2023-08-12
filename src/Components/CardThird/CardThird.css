@@ -1,7 +1,8 @@
 .cardThird{
     background-color: #E4E4E4 !important;
     border-radius: 12px !important;
-    width: 285px;
+    width: 90%;
     height: 285px;
     color: #E4E4E4 !important;
+    margin-bottom: 20px;
 }

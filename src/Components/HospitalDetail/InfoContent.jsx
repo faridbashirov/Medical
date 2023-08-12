@@ -1,12 +1,19 @@
-import React from 'react';
+import React from  'react';
 import {Button, Divider} from "antd";
 import infoIcon from '../../assets/Svg/info-green.svg'
+import { useTranslation } from 'react-i18next';
 
-const InfoContent = ({hospital}) => {
-  return (
+const InfoContent = ({hospital,discount,open}) => {
+  
+ const {t}=useTranslation()
+   return (
     <div className={"hospital__info-content container"}>
       <div className={"info__content-left"}>
-        <h4 className={"info__content-left--title"}>Вы можете получить скидку до -40%!</h4>
+        {discount.map((item)=>{
+          return <h4 key={item.id} className={"info__content-left--title"}>{item.text}</h4>
+
+        })}
+        
         <p className={"info__content-left--subtitle"}>Чтобы сэкономить, просто забронируйте клинику.
           ОПИСАНИЕ КЛИНИКИ кроме телефона, сайта и электронной почты.</p>
         <div className={"info__content-left--desc"}>
@@ -15,25 +22,23 @@ const InfoContent = ({hospital}) => {
       </div>
       <div className={"info__content-right"}>
           <div className={"info__content-right--benefit"}>
-            <h4 className={"info__content-right--benefit-title"}>Преимущества этого варианта</h4>
+            <h4 className={"info__content-right--benefit-title"}>{t("benefit")}</h4>
             <p className={"info__content-right--benefit-subtitle"}>идемьно подходит </p>
             <Divider style={{margin:"0.5rem 0"}}/>
             <ul>
-              <li>Отличное раположение</li>
-              <li>Понятная экономия</li>
-              <li>Бронирование без комисси</li>
-              <li>Бронируйте сейчас, платите и на месте</li>
-              <li>Бесплатное бронирование</li>
+              <li>{t("location")}</li>
+              <li>{t("ecenomic")}</li>
+              <li>{t("comission")}</li>
+              <li>{t("bron2")}</li>
+              <li>{t("bron3")}</li>
             </ul>
-            <Button type={"primary"} style={{backgroundColor:"#5282FF", height:"61px", fontSize:"18px"}} block>Забронировать</Button>
+            <Button onClick={open} type={"primary"} style={{backgroundColor:"#5282FF", height:"61px", fontSize:"18px"}} block>{t("bron4")}</Button>
           </div>
           <div className={"info__content-right--info"}>
             <h4 className={"info__content-right--info-title"}>
               <img src={infoIcon} alt=""/>
-              Надежная информация</h4>
-            <p className={"info__content-right--info-desc"}>Описание и фотографии этого варианта
-              noностью соответствуют
-              действительности. </p>
+              {t("maininformation")}</h4>
+            <p className={"info__content-right--info-desc"}> {t("maininformation2")} </p>
           </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 // import "./index.css";
 import "./Configs/i18n";
@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import { ConfigProvider } from "antd";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <HashRouter>
+    <BrowserRouter>
       <Provider store={store}>
         <ConfigProvider
           theme={{
@@ -45,5 +45,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <App />
         </ConfigProvider>
       </Provider>
-    </HashRouter>
+    </BrowserRouter>
 );

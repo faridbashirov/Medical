@@ -7,8 +7,10 @@ import {Button, Input, Space} from "antd";
 import DrFB from "../../assets/Svg/DrFB.svg";
 import DrVK from "../../assets/Svg/DrVK.svg";
 import DrLn from "../../assets/Svg/DrLn.svg";
+import { useTranslation } from 'react-i18next';
 
-const DoctorCard = ({onOpenBookingModal}) => {
+const DoctorCard = ({onOpenBookingModal,doctor}) => {
+  const {t}=useTranslation()
 
   return (
     <section className={"container"}>
@@ -19,7 +21,7 @@ const DoctorCard = ({onOpenBookingModal}) => {
           <div className="doc-card-img-wrapper">
             <img
               className="doc-card-img"
-              src={DrReviewAll}
+              src={doctor.profile_photo}
             />
           </div>
           <div className="doc-card-body">
@@ -39,7 +41,7 @@ const DoctorCard = ({onOpenBookingModal}) => {
                     paddingTop: "0px !important",
                   }}
                 >
-                  Главный врач
+                  {/* {doctor.position.name} */}
                 </p>
               </div>
               <div style={{marginRight: "auto"}}>
@@ -91,7 +93,7 @@ const DoctorCard = ({onOpenBookingModal}) => {
                     paddingTop: "10px",
                   }}
                 >
-                  Dr. Алина Леонидовна
+                  Dr. {doctor.first_name} {doctor.last_name}
                 </h3>
               </div>
 
@@ -107,7 +109,7 @@ const DoctorCard = ({onOpenBookingModal}) => {
                 <EnvironmentOutlined
                   style={{marginRight: "6px", color: "#5282FF"}}
                 />
-                Больница Американ
+               {doctor.hospital_name}
               </p>
 
               <div
@@ -130,9 +132,10 @@ const DoctorCard = ({onOpenBookingModal}) => {
                       textAlign: "center",
                     }}
                   >
-                    Сосудистая хирургия
+                        {doctor.position?.name}
                   </p>
-                  <p
+                 
+                      {doctor.experience ? <> <p
                     style={{
                       color: "#000",
                       backgroundColor: "#F4F4F4",
@@ -147,10 +150,11 @@ const DoctorCard = ({onOpenBookingModal}) => {
                       gap: "10px",
                       marginTop: "19px"
                     }}
-                  >
-                    <img src={experience}/>
-                    20 лет опыта
-                  </p>
+                  > <img src={experience}/>
+                  
+                  {doctor.experience} {t("experienceyear")} </p></>: ""}
+                   
+                
                   <div className={"doc-card-btns"} style={{marginTop: "20px"}}>
                     <Button
                       style={{
@@ -164,7 +168,7 @@ const DoctorCard = ({onOpenBookingModal}) => {
                       onClick={onOpenBookingModal}
                       type="primary"
                     >
-                      Онлайн книга
+                      {t("onlinebooking")}
                     </Button>
                     <Space.Compact>
                       <Input
@@ -194,7 +198,7 @@ const DoctorCard = ({onOpenBookingModal}) => {
             onClick={onOpenBookingModal}
             type="primary"
           >
-            Онлайн книга
+            {t("onlinebooking")}
           </Button>
           <Space.Compact>
             <Input

@@ -31,14 +31,23 @@
     height: 260px;
     border: 1px solid #DADADA;
     border-radius: 11px;
-    height: 260px;
+    height: 300px;
+    align-items: center;
+    justify-content: space-between;
     padding: 15px;
     margin-top: 20px;
     background-color: #fff;
+    color: #000 !important;
 }
-
+.doctors-card-body{
+    width: 100% !important;
+}
 .doctors-card-active {
     background-color: #5282FF;
+   
+}
+.doctors-card-active .changed{
+    color: #fff !important;
 }
 
 .doctors-img {
