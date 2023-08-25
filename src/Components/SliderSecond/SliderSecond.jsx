@@ -2,7 +2,7 @@ import React from "react";
 import CardsSecond from "../CardsSecond/CardsSecond";
 import Carousel from 'react-multi-carousel';
 
-const SliderSecond = () => {
+const SliderSecond = ({position}) => {
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -25,11 +25,11 @@ const SliderSecond = () => {
   return (
     <>
       <Carousel responsive={responsive}>
-        <CardsSecond p="Нейрохирургия" p2="-40%" />
-        <CardsSecond p="Травмотология" p2="-40%" />
-        <CardsSecond p="Хирургия Снижен Веса" p2="-40%" />
-        <CardsSecond p="Хирургия Снижен Веса" p2="-40%" />
-        <CardsSecond p="Хирургия Снижен Веса" p2="-40%" />
+        {position.map((item,index)=>{
+          return     <CardsSecond p={item.name} p2="-40%" />
+        })}
+    
+       
       </Carousel>
     </>
   );

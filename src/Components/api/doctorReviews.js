@@ -5,7 +5,7 @@ export const doctorReviewsFetch = async (id,page) => {
     try {
        
         if(page){
-            console.log(lang);
+            
             const resp = await axios.get(`account/doctor_reviews/${id}?page=${page}`)
             console.log(resp.data);
             return resp.data

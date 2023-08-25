@@ -39,6 +39,7 @@ import ReviewModal from "./ReviewModal";
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { axiosPrivate } from "../../api/api";
 import i18next from "i18next";
 
 const items = [
@@ -212,9 +213,54 @@ const HospitalsReviewsAll = () => {
     console.log(id);
 
     
+    const AddToFavorite= async(id)=>{
 
+      axiosPrivate.post(`card/add_favorite/${id}`)
+      .then((res) => {
+          console.log(res);
+          setAdd(!add)
+      })
+      .catch((err) => {
+          console.log(err);
+      })
+     
+        
+      // fetch(`https://hospitalbackend.efgroup.az/card/add_favorite/${id}`, {
+      //   method: 'POST',
+      //    headers: {
+      //     'Content-type': 'application/json',
+      //     "Authorization":`Bearer ${authToken.access}`
+      //   },
+      // })
+      //    .then((response) => response.json())
+      //    .then((data) => {
+      //       console.log(data);
+      //       setAdd(!add)
+           
+           
+            
+      //    })
+      //    .catch((err) => {
+      //       console.log(err.message);
+      //    });
+         
+        
+    }
+    const DeleteFromFavorite= async(id)=>{
+    
+      axiosPrivate.delete(`card/remove_favorite/${id}`)
+      .then((res) => {
+          console.log(res);
+          setAdd(!add)
+      })
+      .catch((err) => {
+          console.log(err);
+      })
+        
+        
+    }
 
-   const {hospital,error}=DetailFetch(id,localStorage.getItem("lang"))
+   const {hospital,error}=DetailFetch(id,i18next.language)
    console.log(hospital);
 
 
@@ -304,8 +350,8 @@ if(!hospital){
                 src={ hospital && hospital?.main_image}
                 
               />
-              <img id="hospitalReviewLike" src={likeReview} />
-              <img id="hospitalNewRed" src={newRed} />
+        
+
             </div>
             <div className={"featured-body"}>
               <div className={"featured-body-title-wrapper"}>
@@ -344,6 +390,7 @@ if(!hospital){
                   </Button>
                   : ""}
                   <Button
+                  onClick={()=>window.open(hospital.map_url)}
                     style={{
                       backgroundColor: "#FFC224",
                       borderRadius: "5px",
@@ -414,7 +461,7 @@ if(!hospital){
             </Button>
           </div>
         </div>
-        <div
+        {/* <div
           style={{ marginTop: "40px" }}
           className="buttonsNav"
         >
@@ -442,7 +489,7 @@ if(!hospital){
           >
             Оценка + кол-во отзывов
           </Button>
-        </div>
+        </div> */}
           {reviews.map((item,index)=>{
             return <div key={index} className={"hospital-reviews-card"}>
             <div style={{ display: "flex" }}>

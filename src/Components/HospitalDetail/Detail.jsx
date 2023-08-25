@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState,useMemo,memo } from 'react';
+
 import {Button, Checkbox, Divider} from "antd";
 import singleStar from "../../assets/Svg/singleStar.svg"
 import location from "../../assets/Svg/Location.svg"
@@ -11,6 +12,7 @@ import detailImg3 from "../../assets/Images/hospital-detail/hospital-detail-3.jp
 import arrowLeft from "../../assets/Svg/arrow-left.svg"
 import arrowRight from "../../assets/Svg/arrow-right.svg"
 import { useTranslation } from 'react-i18next';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import Carousel from 'react-multi-carousel';
 const responsive = {
@@ -35,6 +37,11 @@ const responsive = {
 const Detail = ({images,hospital}) => {
   
   const {t}=useTranslation()
+  const [visibleImages, setVisibleImages] = useState(3);
+  const navigate=useNavigate()
+  const handleShowMore = () => {
+    setVisibleImages(prevVisibleImages => prevVisibleImages + 20);
+  };
  
 
  
@@ -52,14 +59,14 @@ const Detail = ({images,hospital}) => {
         <div className={'content__location'}>
           <iframe
             style={{border: "none"}}
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17439.59682519633!2d49.97557041806164!3d40.39300414904405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x403063737e96e061%3A0x5b925e8db0b28d35!2sBaku%20Medical%20Plaza!5e0!3m2!1sen!2saz!4v1682591396345!5m2!1sen!2saz"
+            src={hospital.map_url}
             width="100%"
             height="335"
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
-          <Button type="primary" block style={{margin: "1rem 0 0", height: "3.8rem", backgroundColor: "#5282ff"}}>{t("map")}
+          <Button onClick={()=>window.open(hospital.map_url)} type="primary" block style={{margin: "1rem 0 0", height: "3.8rem", backgroundColor: "#5282ff"}}>{t("map")}
           </Button>
         </div>
       </div>
@@ -104,7 +111,7 @@ const Detail = ({images,hospital}) => {
           </div>
         </div>
         <div className={'hospital-detail_img-box'} >
-          {images.map((item,index)=>{
+          {images.slice(0,visibleImages).map((item,index)=>{
             if(index === 1){
               return  <div className={'hospital-detail_img-lg'}>
               <img src={item.image} alt=""/>
@@ -134,16 +141,25 @@ const Detail = ({images,hospital}) => {
           <div>
             <img src={detailImg2} alt=""/>
           </div> */}
-          <div className={'hospital-detail_img-more'}>
-            <img src={detailImg1} alt=""/>
+           {visibleImages < images.length && (
+        
+        <div onClick={handleShowMore} className={'hospital-detail_img-more'}>
+        <img src={detailImg1} alt=""/>
 <span className={'hospital-detail_img-more-text'}>+20 ФОТОГРАФИЙ</span>
-          </div>
+      </div>
+      )}
+         
         </div>
-        <Carousel responsive={responsive} className={'hospital-detail_img-slider'} >
-          <img src={detailImg1} alt=""/>
-          <img src={detailImg2} alt=""/>
-          <img src={detailImg2} alt=""/>
+       
+        <div  className={'hospital-detail_img-slider'}>
+        <Carousel responsive={responsive}  >
+          {images.map((item,index)=>{
+            return     <img src={item.image} alt=""/>
+          })}
+      
+          
         </Carousel>
+        </div>
       </div>
     </div>
   );

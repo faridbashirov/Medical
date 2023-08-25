@@ -254,10 +254,12 @@ const  DoctorsReviewsAll = () => {
    
    useEffect(()=>{
 
-    console.log(Object.keys(data).length)
+    
     
       const getReviews= async(id)=>{
-      const res=await doctorReviewsFetch(id,searchParams.get("page") || null)
+        console.log(searchParams.get("page"),"++++++++");
+        const res=await doctorReviewsFetch(id,searchParams.get("page") || null)
+        console.log(res);
     
      
       setReviews(res.results)
@@ -265,7 +267,7 @@ const  DoctorsReviewsAll = () => {
 
     }
     getReviews(id)
-},[id,searchParams,add,data,i18next.language ])
+},[id,searchParams,add,i18next.language ])
 
 
 
@@ -322,7 +324,7 @@ if(error){
             <div className="doc-card-img-wrapper">
               <img
                 className="doc-card-img"
-                src={DrReviewAll}
+                src={data.profile_photo}
               />
             </div>
             <div className="doc-card-body">
@@ -532,35 +534,7 @@ if(error){
             </Space.Compact>
           </div>
         </div>
-        <div
-          style={{ marginTop: "40px" }}
-          className="buttonsNav"
-        >
-          <Button
-            className={"doc-nav-btn doc-nav-btn-active"}
-            type="primary"
-          >
-            Наши рекомендации
-          </Button>
-          <Button
-            className={"doc-nav-btn"}
-            type="primary"
-          >
-            Самая низкая цена в начале
-          </Button>
-          <Button
-            className={"doc-nav-btn"}
-            type="primary"
-          >
-            Количество звезд и цена
-          </Button>
-          <Button
-            className={"doc-nav-btn"}
-            type="primary"
-          >
-            Оценка + кол-во отзывов
-          </Button>
-        </div>
+        
         {reviews.map((item,index)=>{
           return <div key={index} className={"hospital-reviews-card"}>
           <div style={{ display: "flex" }}>
@@ -629,7 +603,7 @@ if(error){
               </div>
             </div>
           </div>
-         {item.text}
+        <p> {item.text}</p> 
           <div className={"reviews-reacts"}>
             <p style={{ color: "#BCBCBC", marginRight: "auto" }}>
               {item.created_date}

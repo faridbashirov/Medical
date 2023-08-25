@@ -5,6 +5,8 @@ import "../Slider.css";
 import BakuPic from "../../src/assets/Images/BakuPic.png";
 import MoskovaPic from "../../src/assets/Images/MoskovaPic.png";
 import 'react-multi-carousel/lib/styles.css';
+
+
 const Slider = ({countries}) => {
   const responsive = {
     superLargeDesktop: {
@@ -18,7 +20,7 @@ const Slider = ({countries}) => {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2
+      items: 1
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },

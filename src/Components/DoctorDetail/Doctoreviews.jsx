@@ -58,7 +58,9 @@ const DoctorReviews = ({reviews,id}) => {
             
           </Carousel>
         </div>
-      <button onClick={()=> navigate(`/doctor-reviews/${id}`)}  className="hospital-detail__reviews-btn">{t("allreviews")}</button>
+      <button style={{
+        marginTop: '10px',
+      }} onClick={()=> navigate(`/doctor-reviews/${id}`)}  className="hospital-detail__reviews-btn">{t("allreviews")}</button>
       </div>
     </section>
   );

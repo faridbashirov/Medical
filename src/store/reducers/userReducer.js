@@ -27,6 +27,9 @@ export const AuthReducer = createSlice({
 
         
        
+    },
+    reseterrors:(state)=>{
+      state.errorss = null
     }
     
   },
@@ -70,7 +73,7 @@ export const AuthReducer = createSlice({
     builder.addCase(tokenRefresh.rejected, (state, {payload}) => {
         console.log('errorr case');
         state.loading=false
-        state.errors = payload
+        state.errorss = payload
         AuthReducer.caseReducers.logoutuser(state)
         
     
@@ -86,6 +89,6 @@ export const AuthReducer = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const {logoutuser,authToken} = AuthReducer.actions
+export const {logoutuser,authToken,reseterrors} = AuthReducer.actions
 
 export default AuthReducer.reducer

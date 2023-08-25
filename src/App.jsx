@@ -52,7 +52,7 @@ const App = () => {
    
 
   // },[authToken])
-  
+ 
 
  
   const handleMenu = () =>{
@@ -64,7 +64,7 @@ const App = () => {
     <main className={`${showMenu && 'overflowHidden'} `}>
        {/* <MobileLogin />  */}
        <Routes>
-         <Route element={<Header handleMenu={handleMenu} showMenu={showMenu}/>}>
+         <Route element={<Header setShowMenu={setShowMenu}  handleMenu={handleMenu} showMenu={showMenu}/>}>
            <Route  path="/" element={<HomePage handleMenu={handleMenu} showMenu={showMenu} setShowMenu={setShowMenu}/>}/>
          <Route element={<PrivateRoute/>}>
     <Route path="profile" element={ <Profile/>}/>

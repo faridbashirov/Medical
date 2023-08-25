@@ -6,9 +6,17 @@ import { useTranslation } from "react-i18next";
 const DoctorInfo = ({doctor}) => {
   const  [active,setActive]=useState(true)
   const {t}=useTranslation()
-  console.log(doctor);
+  if(doctor?.doctor_workexperience?.length === 0){
+    console.log(doctor?.doctor_workexperience);
+  }
+  else{
+    console.log("her2");
+  }
+  
 
   return (
+    <> 
+   {(doctor?.doctor_workexperience?.length === 0 && doctor?.doctor_education?.length === 0 ) ? <div className={"container"}></div> :
     <div className={"container"}>
       <div className="doctor-info">
         <div className="doctor-info__btns">
@@ -55,7 +63,8 @@ const DoctorInfo = ({doctor}) => {
         
         </div>
       </div>
-    </div>
+    </div>}
+    </>
   );
 };
 

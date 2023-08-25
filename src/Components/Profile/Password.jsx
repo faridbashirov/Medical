@@ -251,6 +251,7 @@ const Password = () => {
     const [password2,setPassword2]=useState("")
     const [active,setActive] = useState(true)
     const [error,setError]=useState({})
+    const [form] = Form.useForm()
 
     const handlechange =(e)=>{
         setError({})
@@ -278,7 +279,7 @@ const Password = () => {
     if(oldpassword.trim().length === 0){
         setError((prev) => ({
             ...prev,
-            ["oldpassword"]: "Please enter yout password"
+            ["oldpassword"]: t("passworderror")
           }))
           setActive(true)
 
@@ -301,7 +302,7 @@ setError((prev) => ({
     ...prev,
     ["oldpassword"]: ""
   }))
-  if( password?.trim().length < 8){
+  if( password?.trim().length < 3){
     setError((prev) => ({
         ...prev,
         ["password2"]: "Password is short !"
@@ -312,7 +313,7 @@ setError((prev) => ({
   if(password !== password2){
     setError((prev) => ({
         ...prev,
-        ["password"]: "Passwords did not match !"
+        ["password"]: t("wrongpasswordmatch")
       }))
       setActive(true)
  
@@ -328,15 +329,22 @@ setError((prev) => ({
 
 if(Object.keys(error).length === 0){
     const data=await resetPassword(value)
-   if(data?.Errors){
+   if(data?.message ||  data?.Errors){
     setError((prev) => ({
         ...prev,
-        ["oldpassword"]: "Wrong Password !"
+        ["oldpassword"]:  t("wrongpassword")
       }))
       
    }
    else{
     alert("Your password is updated!")
+    form.resetFields()
+    setPassword("")
+    setoldPassword("")
+    setPassword2("")
+    setActive(true)
+
+   
    }
 }
   
@@ -353,7 +361,8 @@ if(Object.keys(error).length === 0){
     if(
         password.trim() === ""&&
         oldpassword.trim() === "" &&
-        password2.trim() === ""
+        password2.trim() === "" &&
+        password.trim()  !==   password2.trim() 
    
     ){
      setActive(true)
@@ -380,7 +389,7 @@ if(Object.keys(error).length === 0){
      
 
             <div>
-              <Form   name="form_item_path" layout="vertical" onFinish={onFinish}>
+              <Form form={form}   name="form_item_path" layout="vertical" onFinish={onFinish}>
                 {/* <MyFormItemGroup  prefix={["user"]}>
                   <MyFormItemGroup  prefix={["name"]}> */}
                   

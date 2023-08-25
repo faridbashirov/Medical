@@ -27,7 +27,7 @@ import { useNavigate } from "react-router-dom";
 import {toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from "react-i18next";
-
+import { MenuOutlined } from "@ant-design/icons";
 const items = [
   {
     label: (
@@ -143,28 +143,7 @@ const itemsFlag = [
       />
     ),
   },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        TR
-      </span>
-    ),
-    key: "3",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={trFlag}
-      />
-    ),
-  },
+  
   {
     label: (
       <span
@@ -214,7 +193,7 @@ const menuPropsFlag = {
   
 };
 
-const Header = ({handleMenu,showMenu}) =>{
+const Header = ({handleMenu,showMenu,setShowMenu}) =>{
   if(!localStorage.getItem("lang")){
     localStorage.setItem("lang","ru")
   }
@@ -253,7 +232,7 @@ const Header = ({handleMenu,showMenu}) =>{
  
   const displayLogoutNotification = () => {
    
-    toast("You looged out!");
+    toast(t("suclogout"));
   };
   const dispatch =useDispatch()
 
@@ -272,6 +251,7 @@ const Header = ({handleMenu,showMenu}) =>{
   }
 
   const onCloseLogin = () =>{
+    
     setOpenLogin(false)
   }
 
@@ -341,7 +321,7 @@ const Header = ({handleMenu,showMenu}) =>{
                     </Button>
                   </Dropdown>
                 </li>
-                <li style={{ paddingBottom: "15px" }} className="dFlex">
+                <li onClick={()=> navigate("contact-us")}  style={{ paddingBottom: "15px",cursor:"pointer" }} className="dFlex">
                   <div className="question">
                     <img src={question} />
                   </div>
@@ -373,20 +353,20 @@ const Header = ({handleMenu,showMenu}) =>{
               </ul>
             </div>
             <div style={{display:"flex",gap:"2px"}} className={"mobile-menu"}>
-             {user ? "" :  <button className="userİconMobileMenu" style={{border:"none"}} onClick={onOpenLogin}>
-                <img src={userIcon} alt=""/>
-              </button>}
+             {user ? <LogoutOutlined  onClick={()=> logout()} className="white userİconMobileMenu"/> :  
+                <img className="userİconMobileMenu" onClick={onOpenLogin} src={userIcon} alt=""/>
+              }
              
-              <button className="userİconMobileMenu" style={{border:"none"}} onClick={handleMenu}>
-                <img src={menu} alt=""/>
-              </button>
+            
+              <MenuOutlined onClick={handleMenu} className="white userİconMobileMenu" />
+              
             </div>
           </div>
         </div>
       </header>
       <LoginModal openLogin={openLogin} onCloseLogin={onCloseLogin} onOpenRegister={onOpenRegister}/>
       <RegisterModal openRegister={openRegister} onCloseRegister={onCloseRegister}/>
-      <MobileMenu menuProps={menuProps} menuPropsFlag={menuPropsFlag} showMenu={showMenu} handleMenu={handleMenu}/>
+      <MobileMenu setShowMenu={setShowMenu}  active={active} menuProps={menuProps} menuPropsFlag={menuPropsFlag} showMenu={showMenu} handleMenu={handleMenu}/>
      <Outlet/>
      </>
     )

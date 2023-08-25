@@ -11,7 +11,7 @@ export const UserInfoUpdateFetch = async (obj) => {
           
             last_name:obj.lastName,
             phone_number:obj.number,
-            birthdate:obj?.date["$d"],
+           
 
         }
         )

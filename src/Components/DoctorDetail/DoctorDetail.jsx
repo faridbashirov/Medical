@@ -51,7 +51,7 @@ const DoctorDetail = () => {
      
       {/*breadcrumbs*/}
       <BreadCrumbs/>
-      <FilterButtons/>
+      
       <DoctorCard doctor={data} onOpenBookingModal={onOpenBookingModal}/>
       <DoctorInfo  doctor={data}/>
       {/* <Reviews /> */}

@@ -304,6 +304,7 @@ const HomePage = ({}) => {
     
   };
   
+  
 
   useEffect(() => {
     async function fetchData() {
@@ -328,7 +329,7 @@ const HomePage = ({}) => {
         console.error(error);
       }
     }
-  
+    
     fetchData();
   }, [i18next.language]);
  
@@ -397,7 +398,7 @@ const onChange2 = (e) => {
                 onInput={onChange}
                  value={type}
                   size="large"
-                  placeholder="Процедура, заболевание, клинка, врач"
+                  placeholder={t("searchinfo")}
                   prefix={
                     <SearchOutlined
                       style={{ fontSize: "23px", color: "#5282FF" }}
@@ -412,7 +413,7 @@ const onChange2 = (e) => {
                  value={location}
                 
                   size="large"
-                  placeholder="Москва, Россия"
+                  placeholder={t("searchinfo2")}
                   
                   
                   prefix={
@@ -425,7 +426,7 @@ const onChange2 = (e) => {
               </Col>
               <Col lg={4} xs={12}>
                 <Button onClick={()=>searchForm()} className="inputBtn" type="primary">
-                  Yзнать цены
+                  {t("search")}
                 </Button>
               </Col>
             </Row>
@@ -434,7 +435,7 @@ const onChange2 = (e) => {
           {popularSearchs.map((item,index) => (
               item.name ==search.type ?
                item.category.map(innerItem => (
-               <Button onClick={()=>  navigate({
+               <Button key={index} onClick={()=>  navigate({
                 pathname: search.path,
                 search: `?type=${search.type}&name=${(innerItem.search)}`,
               }) }  style={{ backgroundColor: "#F4F4F4" }} type="text">
@@ -526,10 +527,17 @@ const onChange2 = (e) => {
             </div>
           </div>
           
-          <div id="_box2" className="box2">
+   
+          {position.filter((item,index)=> index <4).map((item,index)=>{
+            return  <div style={{
+              background:`linear-gradient(180deg, rgba(82, 130, 255, 0) 0%, #5282ff 100%),url(${item.image}`
+              
+            }} id="_box2" className="box2">
             <p>{position[1]?.name} </p>
           </div>
-          <div id="_box2_2" className="box2">
+          })}
+         
+          {/* <div id="_box2_2" className="box2">
             <p>{position[2]?.name} </p>
           </div>
           <div id="_box2_3" className="box2">
@@ -537,7 +545,7 @@ const onChange2 = (e) => {
           </div>
           <div id="_box2_4" className="box2">
             <p>{position[4]?.name}</p>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -637,17 +645,17 @@ const onChange2 = (e) => {
         {t("liked")}
         </p>
         <div className="grid_3">
-          {likedoffer.map((item,index)=>{
-            return  <div key={index}>
-            <img src={item.image} />
-          </div>
+        {likedoffer.filter((item,index)=> index <4 ).map((item,index)=>{
+           return <div key={index}>
+           <img src={item.image} />
+         </div>
           })}
-         
+          
           
         </div>
         <div style={{ paddingTop: "15px" }} className="grid_4">
         {likedoffer.map((item,index)=>{
-          return    <div>
+          return    <div key={index}>
           <img style={{ width: "615px" }} src={item.image} />
         </div>
         })}
@@ -663,7 +671,7 @@ const onChange2 = (e) => {
         <div className="grid_3">
           {bestseller.map((item,index)=>{
             return  <div key={index}>
-            <img src={item.image} />
+            <img  src={item.image} />
           </div>
 })}
           
@@ -724,8 +732,8 @@ const onChange2 = (e) => {
         </Button>
       </div>
 
-      <div className="containerSliderSecond" style={{ paddingTop: "50px" }}>
-        <SliderSecond />
+      <div className="containerSliderSeconds" style={{ paddingTop: "50px" }}>
+        <SliderSecond position={position} />
         <Button
           className={"foreign-btn-sm"}
           type={"primary"}

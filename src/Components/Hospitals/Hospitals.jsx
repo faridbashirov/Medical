@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState,useRef} from "react";
 
 import {
   Dropdown,
@@ -9,6 +9,7 @@ import {
   Collapse,
   Checkbox,
 } from "antd";
+import { FadeLoader } from "react-spinners";
 import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
@@ -218,6 +219,8 @@ const menuPropsFlag = {
 const  Hospitals = () => {
 
   const navigate=useNavigate()
+  
+
   const {t}=useTranslation()
   const [searchParams,setSearchParams] = useSearchParams()
   const [selectedCountryValue, setSelectedCountryValue] = useState(searchParams.get("country")? searchParams.get("country").split(",") : []);
@@ -229,7 +232,9 @@ const  Hospitals = () => {
   const [count,setCount] = useState(0)
   const {user,authToken}=useSelector(state=> state.auth)
   const [add,setAdd] = useState(false)
-  const [activeElement, setActiveElement] = useState(null);
+  const [liked,setLiked] = useState(false)
+  const [activeElement, setActiveElement] = useState(0);
+  const [loading, setLoading] = useState(false)
   console.log(hospitals);
   
   const handleClick = (elementId) => {
@@ -245,6 +250,7 @@ const  Hospitals = () => {
 
     
 const AddToFavorite= async(id)=>{
+  setLiked(true)
 
   axiosPrivate.post(`card/add_favorite/${id}`)
   .then((res) => {
@@ -278,7 +284,7 @@ const AddToFavorite= async(id)=>{
     
 }
 const DeleteFromFavorite= async(id)=>{
-
+  setLiked(true)
   axiosPrivate.delete(`card/remove_favorite/${id}`)
   .then((res) => {
       console.log(res);
@@ -360,6 +366,7 @@ const DeleteFromFavorite= async(id)=>{
       
       setSelectedCountryValue(searchParams.get("country")? searchParams.get("country").split(","):[])
       setSelectedRaitingValue(searchParams.get("raiting")? searchParams.get("raiting").split(","):[])
+      setLoading(true)
       const getHospitals = async () => {
         
         
@@ -380,6 +387,7 @@ const DeleteFromFavorite= async(id)=>{
             ));
             setHospitals(data.results);
             setCount(data.count)
+            setLoading(false)
           
           
             // setSearchParams(searchParams);
@@ -419,7 +427,7 @@ const DeleteFromFavorite= async(id)=>{
       {/* <Header/> */}
 
       <div className="hospitalbg" style={{ backgroundColor: "#F4F4F4" }}>
-        <div style={{ paddingTop: "30px" }} className="container">
+        <div style={{ paddingTop: "30px",paddingBottom:"20px" }} className="container">
           <div className={"breadcrumbs"}>
             <Breadcrumb
               separator={
@@ -453,6 +461,27 @@ const DeleteFromFavorite= async(id)=>{
           </div>
         </div>
         <div className="container">
+        <FilterButtons country={country} />
+              <div className="buttonsSort">
+                <Button value="doctor" onClick={handleCheckboxChange}
+                  className={checkedValue === "doctor" ? "doc-nav-btn-active" :"doc-nav-btn"}
+                  type="primary"
+                >
+                   <Trans i18nKey="Doctors"></Trans>
+                </Button>
+                <Button value="clinic" onClick={handleCheckboxChange}
+                 className={checkedValue === "clinic" ? "doc-nav-btn-active" :"doc-nav-btn"}
+                  type="primary"
+                >
+                   <Trans i18nKey="Clinics"></Trans>
+                </Button>
+                <Button  value="service" onClick={handleCheckboxChange}
+                  className={checkedValue === "service" ? "doc-nav-btn-active" :"doc-nav-btn"}
+                  type="primary"
+                >
+                      <Trans i18nKey="Services"></Trans>
+                </Button>
+              </div>
           <div className="displayGridReviewDr">
             <div
               className="menuNav menuNav-hospitals"
@@ -876,8 +905,17 @@ const DeleteFromFavorite= async(id)=>{
                 ></iframe>
               </div>
             </div>
-
-            <div className="menuRight">
+            <>{
+              loading && !liked ?  <div> <FadeLoader
+              color="black"
+              className={"loading"}
+              loading={true}
+              // style={{top:"50px"}}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            /> </div> : <div className="menuRight">
+           
             <div>
               <p className={"result-text"}>
                 <span
@@ -892,7 +930,7 @@ const DeleteFromFavorite= async(id)=>{
                 {count} {t("variant")}
               </p>
             </div>
-              <div className="buttonsNav">
+              {/* <div className="buttonsNav">
                 <Button
                   className={"doc-nav-btn doc-nav-btn-active"}
                   type="primary"
@@ -917,33 +955,13 @@ const DeleteFromFavorite= async(id)=>{
                 >
                   {t("filter3")}
                 </Button>
-              </div>
-              <FilterButtons/>
-              <div className="buttonsSort">
-                <Button value="doctor" onClick={handleCheckboxChange}
-                  className={checkedValue === "doctor" ? "doc-nav-btn-active" :"doc-nav-btn"}
-                  type="primary"
-                >
-                   <Trans i18nKey="Doctors"></Trans>
-                </Button>
-                <Button value="clinic" onClick={handleCheckboxChange}
-                 className={checkedValue === "clinic" ? "doc-nav-btn-active" :"doc-nav-btn"}
-                  type="primary"
-                >
-                   <Trans i18nKey="Clinics"></Trans>
-                </Button>
-                <Button  value="service" onClick={handleCheckboxChange}
-                  className={checkedValue === "service" ? "doc-nav-btn-active" :"doc-nav-btn"}
-                  type="primary"
-                >
-                      <Trans i18nKey="Services"></Trans>
-                </Button>
-              </div>
+              </div> */}
+            
 
               <div>
                 {hospitals.map((item,index)=>{
-                  return  <div key={index} onClick={()=>handleClick(item.id)} className={activeElement ===item.id ? "cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors"} >
-                  <div  className="display_grid img-wrapper">
+                  return  <div key={index} className={activeElement ===item.id ? "cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors"} >
+                  <div   className="display_grid img-wrapper">
                     <img
                       className={"cardFavHospitals-img"}
                       id="hospitalsImage"
@@ -954,7 +972,7 @@ const DeleteFromFavorite= async(id)=>{
                     
                        { user ? (
                        
-                       item.is_favorite ?  <img  onClick={()=> DeleteFromFavorite(item.id)}  id="likeImageFavHospitals" src={heart} />  :  <img onClick={()=> AddToFavorite(item.id)}   id="likeImageFavHospitals" src={likeReview} />) : "" }
+                       item.is_favorite ?  <img   onClick={()=> DeleteFromFavorite(item.id)}  id="likeImageFavHospitals" src={heart} />  :  <img onClick={()=> AddToFavorite(item.id)}   id="likeImageFavHospitals" src={likeReview} />) : "" }
 
                       
                         
@@ -970,7 +988,7 @@ const DeleteFromFavorite= async(id)=>{
                    
                
                   </div>
-                  <div
+                  <div  onClick={()=>handleClick(item.id)}
                     style={{ width: "769px", paddingLeft: "110px" }}
                     className="card-body card-content"
                   >
@@ -1082,12 +1100,16 @@ const DeleteFromFavorite= async(id)=>{
                           }}
                           
                         >
-                             {t("hosbooking")} - 40%
+                             {/* <{t("hosbooking")}>  */}
+                             <Trans i18nKey={"hosbooking"} >
+                           
+                             </Trans>
+                               - 40%
                         </p>
                       </div>
                       <div
                         style={{
-                          backgroundColor: "#E9ECFF",
+                          backgroundColor: "#D8F5DD",
                           borderRadius: "5px",
                           width: "143px",
                           height: "43px",
@@ -1226,7 +1248,7 @@ const DeleteFromFavorite= async(id)=>{
                       </div>
                       <div
                         style={{
-                          backgroundColor: "#E9ECFF",
+                          backgroundColor: "#D8F5DD",
                           borderRadius: "5px",
                           width: "143px",
                           height: "43px",
@@ -1274,21 +1296,30 @@ const DeleteFromFavorite= async(id)=>{
                
                
                 <div className={'hospitals-pagination'}>
-                  {count ?  <Pagination
-                   current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
-                    searchParams.set("page", page)
-                    // const newSearch = `?${searchParams.toString()}`;
-                   setSearchParams(searchParams)
-  
-                  }}  total={count}
-                   
-                  /> : <h1>Nothing Found !</h1>}
+                {<>
+                {count?  <Pagination
+      current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
+       // setCurrentValue(page)
+       searchParams.set("page", page)
+       // const newSearch = `?${searchParams.toString()}`;
+      setSearchParams(searchParams)
+
+     }}  total={count}
+      
+     /> :  <h1>Nothing Found !</h1> }
+                
+                  
+                  </> }
                  
                 </div>
                 {/* <PageLoginBox/> */}
               </div>
             </div>
+            }
+            
+            </>
           </div>
+       
         </div>
       </div>
       <Footer/>

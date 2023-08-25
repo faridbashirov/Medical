@@ -292,7 +292,8 @@ const  ReviewDoctors = () => {
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
-                  cursor:"pointer"
+                  cursor:"pointer",
+                  backgroundColor:"#F2F5FF"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={messageDoctor} />
@@ -327,39 +328,15 @@ const  ReviewDoctors = () => {
           </div>
 
           <div className="menuRight">
-          {data?.length !== 0 ? <div className="buttonsNav">
-              <Button
-                className={"doc-nav-btn doc-nav-btn-active"}
-                type="primary"
-              >
-                Наши рекомендации
-              </Button>
-              <Button className={"doc-nav-btn"}
-                type="primary"
-              >
-                Самая низкая цена в начале
-              </Button>
-              <Button
-                className={"doc-nav-btn"}
-                type="primary"
-              >
-                Количество звезд и цена
-              </Button>
-              <Button
-                className={"doc-nav-btn"}
-                type="primary"
-              >
-                Оценка + кол-во отзывов
-              </Button>
-            </div> : <div style={{textAlign:"center"}}> Nothing Found </div>}
+        
             
-            <FilterButtons/>
+            
             <div>
-              {data.map((item,index)=>{
+              { data?.length !== 0 ? data.map((item,index)=>{
                 return  <div className="cardReviewDoctors-main">
                 <div className="card-head display_grid">
                   <img id="doctorImage"  src={item.doctor?.profile_photo}/>
-                  <img id="likeImage" src={likeReview} />
+                  
                 </div>
                 <div className="card-body">
                   <div
@@ -394,9 +371,9 @@ const  ReviewDoctors = () => {
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <p className="changed" style={{ color: "#464646", fontSize: "11.15px" }}>
+                    <p  className="changed" style={{ color: "#464646", fontSize: "11.15px" }}>
                       Review To{" "}
-                      <span className="changed" style={{ color: "#5282FF", fontSize: "11.15px" }}>
+                      <span onClick={()=> navigate(`/doctor/${item.doctor.id}`)} className="changed" style={{ color: "#5282FF", fontSize: "11.15px",cursor:"pointer" }}>
                         Dr. {item.doctor?.first_name}
                       </span>
                     </p>
@@ -406,7 +383,7 @@ const  ReviewDoctors = () => {
                   </div>
                 </div>
               </div>
-              })}
+              }) : <div style={{textAlign:"center"}}> {t("nothingfound")}</div>}
              
              
               <div className={'review-doctors-pagination'}

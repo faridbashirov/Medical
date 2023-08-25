@@ -9,8 +9,11 @@ import facebook from "../../assets/Images/facebook.png";
 import vk from "../../assets/Images/vk.png";
 import instagram from "../../assets/Images/instagram.png";
 import './MobileMenu.css'
-
-const MobileMenu = ({menuProps, showMenu, menuPropsFlag}) => {
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => {
+  const {t,i18n}=useTranslation()
+  const navigate=useNavigate()
   console.log(showMenu)
   return (
     <div className={`menu ${showMenu && 'show'}`}>
@@ -38,41 +41,44 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag}) => {
               </Dropdown>
             </li>
             <li style={{ paddingBottom: "15px" }}>
-              <Dropdown menu={menuPropsFlag}>
-                <Button type="text">
-                  <Space>
-                    <img id="flag" src={russianFlag} />
-                    <span
-                      style={{
-                        fontFamily: "Gilroy",
-                        fontSize: "17.5px",
-                        fontWeight: "500",
-                        color: "white",
-                      }}
-                    >
-                        RU
-                      </span>
-                  </Space>
-                </Button>
-              </Dropdown>
-            </li>
+                  <Dropdown   menu={menuPropsFlag}>
+                    <Button type="text">
+                      <Space>
+                        {active.icon}
+                        
+
+                        
+                        <span
+                          style={{  
+                            fontFamily: "Gilroy",
+                            fontSize: "17.5px",
+                            fontWeight: "500",
+                            color: "white",
+                          }}
+                        >
+                        {active.label.props.children}
+                        </span> 
+                      </Space>
+                    </Button>
+                  </Dropdown>
+                </li>
           </div>
           <li className={"menuListItem"}>
             <div className="question">
               <img src={question} />
             </div>
             <div>
-              <p>связаться с нами </p>
+              <p>{t("contact")} </p>
             </div>
           </li>
-          <li className={"menuListItem"}>
+          <li className={"menuListItem"} onClick={()=> {navigate("profile");setShowMenu(!showMenu)}}>
             <img
               style={{ objectFit: "cover !important" }}
               className="heart"
               src={heart}
 
             />
-            <p>избранная</p>
+            <p>{t("favorites")}</p>
           </li>
         </ul>
       </div>
@@ -87,6 +93,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag}) => {
 
           <div style={{ paddingLeft: "30px" }}>
             <Button
+            onClick={()=> {navigate("contact-us");setShowMenu(!showMenu)}}
               style={{
                 fontFamily: "Gilroy",
                 fontSize: "20px",
@@ -94,7 +101,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag}) => {
               }}
               className="pad"
             >
-              КОНТАКТ
+              {t("contact1")}
             </Button>
           </div>
         </div>

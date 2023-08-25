@@ -64,6 +64,7 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
     if (data.message){
       onCloseBookingModal()
       toast(t("booksuccess"))
+      reset()
      
 
     }
@@ -99,7 +100,7 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
     theme='light'
   />
     <Modal open={openBooking} onCancel={onCloseBookingModal} footer={[]}>
-      <Typography className={'login-title'}>Войти или <br/>завести аккаунт</Typography>
+      <Typography className={'login-title'}>{t("bron4")}</Typography>
       <Divider/>
       <Form onFinish={handleSubmit(onFinish)}>
         <Item >
@@ -115,7 +116,9 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
               <Input {...field} placeholder={t("fullname")} className={'booking-input'} />
             )}
           />
-          {errors?.name && errors.name.message}
+         <p style={{
+          color:"red"
+         }}>{errors?.name && errors.name.message}</p> 
         
            
           
@@ -135,7 +138,9 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
               <Input {...field} placeholder={'(+994)'} className={'booking-input'} />
             )}
           />
-           {errors?.phone && errors.phone.message}
+           <p style={{
+          color:"red"
+         }}> {errors?.phone && errors.phone.message}</p>
         </Item>
         <Item name="category">
         <Controller
@@ -165,10 +170,14 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
             )}
 
           />
-              {errors?.category && errors.category.message}
+            <p style={{
+          color:"red"
+         }}>  {errors?.category && errors.category.message}</p>
           
         </Item>
-        <Item name={"time"}
+        <Item style={{
+          
+        }} name={"time"}
         >
           <Controller
              rules={{
@@ -183,7 +192,9 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
              
             )}
           />
-          {errors?.time && errors.time.message}
+          <p style={{
+          color:"red"
+         }}>{errors?.time && errors.time.message}</p>
            
           
       
@@ -204,7 +215,9 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
              
             )}
           />
-             {errors?.date && errors.date.message}
+             <p style={{
+          color:"red"
+         }}> {errors?.date && errors.date.message}</p>
           
       
         </Item>

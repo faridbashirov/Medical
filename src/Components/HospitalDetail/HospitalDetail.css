@@ -127,6 +127,7 @@
     padding: 18px;
     border-radius: 4px;
 }
+
 .img-lg-desc-btn{
     display: flex;
     align-items: center;
@@ -708,6 +709,7 @@ border-radius: 2px;
         width: 100%;
         height: 210px;
         object-fit: cover;
+        
     }
     .hospital__info-content{
         flex-direction: column;
@@ -790,6 +792,14 @@ border-radius: 2px;
     }
     .right__share button {
         display: none;
+    }
+    .hospital-detail_img-slider{
+        display: block!important;
+    }
+    .hospital-detail_img-slider img {
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
     }
     .right__share--price-btn{
         display: none;

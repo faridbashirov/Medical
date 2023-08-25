@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import {Button} from "antd";
 import Carousel from 'react-multi-carousel';
 import heart from "../../../assets/Svg/heart-sm.svg"
@@ -18,10 +18,12 @@ import { fetchHospitals } from '../../../store/thunk/hospitalsThunk';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import { Trans } from "react-i18next";
+import { axiosPrivate } from '../../../api/api';
 const TopClinic = () => {
 
   const {hospitals}=useSelector((state)=>state.hospitals)
-  const {authToken}=useSelector((state)=>state.auth)
+  const {authToken,user}=useSelector((state)=>state.auth)
+  const [add,setAdd]=useState(false)
   console.log(hospitals);
   const {t}=useTranslation()
   const navigate=useNavigate()
@@ -30,7 +32,7 @@ const TopClinic = () => {
 
   useEffect(()=>{
     dispatch(fetchHospitals(localStorage.getItem("lang")))
-   },[])
+   },[add])
 
   const responsive = {
     superLargeDesktop: {
@@ -51,6 +53,53 @@ const TopClinic = () => {
       items: 1
     }
   };
+
+  const AddToFavorite= async(id)=>{
+
+    axiosPrivate.post(`card/add_favorite/${id}`)
+    .then((res) => {
+        console.log(res);
+        setAdd(!add)
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+   
+      
+    // fetch(`https://hospitalbackend.efgroup.az/card/add_favorite/${id}`, {
+    //   method: 'POST',
+    //    headers: {
+    //     'Content-type': 'application/json',
+    //     "Authorization":`Bearer ${authToken.access}`
+    //   },
+    // })
+    //    .then((response) => response.json())
+    //    .then((data) => {
+    //       console.log(data);
+    //       setAdd(!add)
+         
+         
+          
+    //    })
+    //    .catch((err) => {
+    //       console.log(err.message);
+    //    });
+       
+      
+  }
+  const DeleteFromFavorite= async(id)=>{
+  
+    axiosPrivate.delete(`card/remove_favorite/${id}`)
+    .then((res) => {
+        console.log(res);
+        setAdd(!add)
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+      
+      
+  }
   return (
       <section className="top-clinic">
     <div className={"container"}>
@@ -71,13 +120,15 @@ const TopClinic = () => {
         <div className="top-clinic__carousel">
           <Carousel responsive={responsive}>
             {hospitals.map((item,index)=>{
-              return <div key={index} onClick={()=> navigate(`/hospital/${item.id}`)}  className="top-clinic_item">
+              return <div key={index}  className="top-clinic_item">
               <div className="top-clinic__item-top">
-                <img src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
+                <img onClick={()=> navigate(`/hospital/${item.id}`)}  src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
                 <div className="top-clinic__item-num">50%</div>
                 
-                
-                {item.is_favorite ?  <img    className='top-clinic__item-heart' src={heart} />  :  <img   className='top-clinic__item-heart' src={likeReview} /> }
+                { user ? (
+                       
+                       item.is_favorite ?  <img style={{cursor:"pointer"}}  onClick={()=> DeleteFromFavorite(item.id)}   className='top-clinic__item-heart' src={heart} />  :  <img style={{cursor:"pointer"}}  onClick={()=> AddToFavorite(item.id)}    className='top-clinic__item-heart' src={likeReview} />) : "" }
+                {/* {item.is_favorite ?  <img    className='top-clinic__item-heart' src={heart} />  :  <img   className='top-clinic__item-heart' src={likeReview} /> } */}
                   {/* <img src={heart} alt="heart"/> */}
                 
               </div>
@@ -328,7 +379,10 @@ const TopClinic = () => {
             </div>
           </div>
         </div> */}
-        <Button className="top-clinic__header-left d-mobile-block" type={"primary"}>Посмотреть клиники </Button>
+        <Button onClick={()=> navigate({
+      pathname: "/hospitals",
+      search: `?type=clinic`,
+    })} className="top-clinic__header-left d-mobile-block" type={"primary"}>{t("tophospitals2")} </Button>
       </div>
     </div>
       </section>

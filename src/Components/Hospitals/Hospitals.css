@@ -7,7 +7,15 @@
     font-family: "Gilroy";
     src: url("../../../src//Fonts/gilroy/Gilroy-Regular.ttf");
 }
+@font-face {
+    font-family: "Roboto";
+    src: url("../../Fonts/Roboto/Roboto-Regular.ttf");
+}
 
+@font-face {
+    font-family: "Poppins-Test";
+    src: url("../../Fonts/Poppins/Poppins-Regular");
+}
 .buttonsSort {
     justify-content: space-between;
     margin-top: 20px;
@@ -93,5 +101,13 @@
 .display_grid{
     grid-template-rows: unset;
 }
-
+.loading{
+    display: inherit;
+    position: relative;
+    font-size: 0px;
+    top: 20px;
+    left: 50% !important;
+    width: 60px;
+    height: 60px;
+}
  

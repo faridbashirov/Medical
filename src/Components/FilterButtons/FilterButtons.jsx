@@ -5,9 +5,10 @@ import allSort from "../../assets/Svg/all-sort.svg"
 import AllFiltersModal from "./AllFiltersModal.jsx";
 import AllSortModal from "./AllSortModal.jsx";
 
-const FilterButtons = () => {
+const FilterButtons = ({country}) => {
   const [openFilters, setOpenFilters] = useState(false)
   const [openSort, setOpenSort] = useState(false)
+  console.log(country);
   const onOpenFilter = () =>{
     setOpenFilters(true)
   }
@@ -26,13 +27,13 @@ const FilterButtons = () => {
         <img src={allFilters} alt=""/>
         <span>Все фильтры</span>
       </button>
-      <div className="filters-divider"></div>
-      <button className={"filters-btn"} onClick={onOpenSort}>
+      {/* <div className="filters-divider"></div> */}
+      {/* <button className={"filters-btn"} onClick={onOpenSort}>
         <img src={allSort} alt=""/>
         <span>Сортировать</span>
-      </button>
-      <AllFiltersModal openFilters={openFilters} onCloseFilter={onCloseFilter} />
-      <AllSortModal openSort={openSort} onCloseSort={onCloseSort} />
+      </button> */}
+      <AllFiltersModal country={country} openFilters={openFilters} onCloseFilter={onCloseFilter} />
+      {/* <AllSortModal openSort={openSort} onCloseSort={onCloseSort} /> */}
     </section>
   );
 };

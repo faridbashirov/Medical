@@ -22,6 +22,9 @@
     width: 194px !important;
     height: auto !important;
 }
+.fav-card-mob.card-body{
+    padding-left: 0 !important;
+}
 .cardFavDoctors-active{
     background-color: #5282FF !important;
     padding-left: 20px;

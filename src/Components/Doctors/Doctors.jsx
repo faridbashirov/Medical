@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,CSSProperties,useRef} from "react";
 
 import {
   Dropdown,
@@ -10,6 +10,7 @@ import {
   Checkbox,
 } from "antd";
 import ClipLoader from "react-spinners/ClipLoader";
+import { FadeLoader } from "react-spinners";
 
 import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
@@ -51,6 +52,9 @@ import { allCountriesFetch } from "../api/allCountries";
 import { Trans } from "react-i18next";
 import i18next from "i18next";
 const { Panel } = Collapse;
+
+
+
 
 
 
@@ -211,6 +215,8 @@ const menuProps = {
   onClick: handleMenuClick,
 };
 
+
+
 const menuPropsFlag = {
   items: itemsFlag,
   onClick: handleMenuFlagClick,
@@ -219,6 +225,7 @@ const menuPropsFlag = {
 const Doctors = () => {
   const navigate=useNavigate()
   const {t}=useTranslation()
+  const ref=useRef()
   const [searchParams,setSearchParams] = useSearchParams()
   const [type,setType]=useState(searchParams.get("type") ? searchParams.get("type") :"doctor")
   const [name,setName]=useState(searchParams.get("name") ? searchParams.get("name") : "")
@@ -229,10 +236,12 @@ const Doctors = () => {
   const [loading, setLoading] = useState(false)
   const [country, setCountry] = useState([])
   const [add,setAdd] = useState(false)
+  const [liked,setLiked]=useState(false)
   const [count,setCount] = useState(0)
   const {user,authToken}=useSelector(state=> state.auth)
-  const [activeElement, setActiveElement] = useState(null);
+  const [activeElement, setActiveElement] = useState(0);
   console.log(doctors);
+  // console.log(ref.current);
 
    searchParams.set("type",checkedValue)
    const handleClick = (elementId) => {
@@ -243,6 +252,7 @@ const Doctors = () => {
 
  
    const AddToFavorite= async(id)=>{
+    setLiked(true)
 
   axiosPrivate.post(`card/add_favorite_doctor/${id}`)
   .then((res) => {
@@ -258,7 +268,7 @@ const Doctors = () => {
       
   }
   const DeleteFromFavorite= async(id)=>{
-
+   setLiked(true)
     axiosPrivate.delete(`card/remove_favorite_doctor/${id}`)
   .then((res) => {
       console.log(res);
@@ -355,7 +365,7 @@ const Doctors = () => {
     setSelectedRaitingValue(searchParams.get("raiting")? searchParams.get("raiting").split(","):[])
     console.log(name);
 
-    
+    setLoading(true)
     const getHospitals = async () => {
       
 
@@ -378,6 +388,7 @@ const Doctors = () => {
      
           setDoctors(data.results);
           setCount(data.count)
+          setLoading(false)
       
           
          
@@ -403,6 +414,8 @@ const Doctors = () => {
     getCountries()
 
   },[i18next.language])
+
+  
 
 
   return (
@@ -445,7 +458,27 @@ const Doctors = () => {
       </div>
 
       <div className="container">
-        <FilterButtons/>
+        <FilterButtons country={country}/>
+        <div className="buttonsSort">
+                <Button value="doctor" onClick={handleCheckboxChange}
+                  className={checkedValue === "doctor" ? "doc-nav-btn-active" :"doc-nav-btn"}
+                  type="primary"
+                >
+                   <Trans i18nKey="Doctors"></Trans>
+                </Button>
+                <Button value="clinic" onClick={handleCheckboxChange}
+                 className={checkedValue === "clinic" ? "doc-nav-btn-active" :"doc-nav-btn"}
+                  type="primary"
+                >
+                   <Trans i18nKey="Clinics"></Trans>
+                </Button>
+                <Button  value="service" onClick={handleCheckboxChange}
+                  className={checkedValue === "service" ? "doc-nav-btn-active" :"doc-nav-btn"}
+                  type="primary"
+                >
+                      <Trans i18nKey="Services"></Trans>
+                </Button>
+              </div>
         <div className="displayGridReviewDr">
           <div className="menuNav menuNav-hospitals">
             <Collapse
@@ -475,9 +508,7 @@ const Doctors = () => {
                 }
                 key="1"
               >
-                <p style={{ margin: "0px", color: "#000", fontSize: "15px" }}>
-                {t("search2")}
-                </p>
+               
                 <hr style={{ border: "1px solid #F0F0F0" }} />
                 <Checkbox.Group style={{display:"block"}} value={selectedCountryValue} onChange={CountryChange}>
                 {country.map((item,index)=>{
@@ -755,7 +786,15 @@ const Doctors = () => {
               </Panel>
             </Collapse>
           </div>
-
+          <>{loading & !liked ?  <div> <FadeLoader
+          color="black"
+          className={"loading"}
+          loading={true}
+          // style={{top:"50px"}}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        /> </div> :
           <div className="menuRight">
             <div>
               <p className={"result-text"}>
@@ -771,7 +810,7 @@ const Doctors = () => {
                 {count} {t("variant")}
               </p>
             </div>
-            <div className="buttonsNav">
+            {/* <div className="buttonsNav">
               <Button
                 className={"doc-nav-btn doc-nav-btn-active"}
                 type="primary"
@@ -817,29 +856,22 @@ const Doctors = () => {
                 >
                       <Trans i18nKey="Services"></Trans>
                 </Button>
-              </div>
+              </div> */}
 
             <div>
-              <>{ loading ? <ClipLoader
-        color="blue"
-        style={{textAlign: "center"}}
-        
-        size={150}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      /> :
-              doctors.map((item,index)=>{
-                return <div key={index} onClick={()=> handleClick(item.id)} className={activeElement ===item.id ?  "doctors-card doctors-card-active" : "doctors-card"}>
+            
+             {doctors.map((item,index)=>{
+                return <div key={item.id}  className={activeElement ===item.id ?  "doctors-card doctors-card-active" : "doctors-card"}>
                 <div className="doctors-img">
-                  <img className="doctors-img-lg" src={"asd"}/>
+                  <img className="doctors-img-lg" src={item.profile_photo}/>
 
                   { user ? (
                   
-                  item.is_favorite ? <img onClick={()=> DeleteFromFavorite(item.id)} 
+                  item.is_favorite ? <img  ref={ref} onClick={()=> DeleteFromFavorite(item.id)} 
     className={"doctors-heart"}
     id="likeImageFavHospitals"
     src={heart}
-  />   :  <img  onClick={()=> AddToFavorite(item.id)} 
+  />   :  <img ref={ref}  onClick={()=> AddToFavorite(item.id)} 
   className={"doctors-heart"}
   id="likeImageFavHospitals"
   src={likeReview}
@@ -850,7 +882,7 @@ const Doctors = () => {
                   
                  
                 </div>
-                <div
+                <div onClick={()=> handleClick(item.id)}
                   className="doctors-card-body"
                 >
                   <div className={"card-ratings"}>
@@ -1006,7 +1038,7 @@ const Doctors = () => {
                 </div>
               </div>
               })}
-              </>
+             
               
              
 
@@ -1018,20 +1050,26 @@ const Doctors = () => {
                   paddingBottom: "50px",
                 }}
               >
-                {count ?  <Pagination
-                   current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
-                    // setCurrentValue(page)
-                    searchParams.set("page", page)
-                    // const newSearch = `?${searchParams.toString()}`;
-                   setSearchParams(searchParams)
-  
-                  }}  total={count}
-                   
-                  /> : <h1>Nothing Found !</h1>}
+                  {<>
+                  { count?  <Pagination
+        current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
+        // setCurrentValue(page)
+        searchParams.set("page", page)
+        // const newSearch = `?${searchParams.toString()}`;
+        setSearchParams(searchParams)
+
+      }}  total={count}
+        
+      /> :  <h1>Nothing Found !</h1> }
+                  
+                    
+                    </> }
               </div>
               {/* <PageLoginBox/> */}
             </div>
           </div>
+}
+          </>
         </div>
       </div>
 

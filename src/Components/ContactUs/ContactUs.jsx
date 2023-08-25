@@ -34,7 +34,11 @@ import { contactFetch } from "../api/contactFetch";
 import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import { useTranslation } from "react-i18next";
-
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import ContactInfoFetch from "../api/getContactInfo";
+import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 const items = [
   {
     label: (
@@ -218,10 +222,48 @@ const MyFormItem = ({ name, ...props }) => {
 
 const ContactUs = () => {
   const {t}=useTranslation()
-  const {control,reset, handleSubmit,formState: { errors } } = useForm();
+  const schema = Yup.object().shape({
+    first_name: Yup.string()
+        
+        .trim()
+        .required(t("nameerror"))
+        ,
+    last_name:Yup.string()
+    
+    .trim()
+    .required(t("lastnameerror"))
+     ,
+    
+    email:Yup.string()
+    
+    .email(t("validemail"))
+    .trim()
+    .required(t("emailerror"))
+    
+    .max(64),
+    text:Yup.string()
+  
+    .trim()
+    .required(t("messageerror"))
+    .min(3,t("length"))
+    .max(64),
+   
+   
+   
+   
+   
+      })
+  const {control,reset, handleSubmit,formState: { errors } } = useForm(
+    ({
+      mode: "onChange",
+      
+      resolver: yupResolver(schema),
+    })
+  );;
   const [error,setError] = useState({})
   const formRef = React.createRef();
-
+  
+  const {data1,error1,loading1}=ContactInfoFetch()
 
   const handleRegistration = async(values) => {
     console.log(values);
@@ -316,7 +358,7 @@ const ContactUs = () => {
             )}
           />
                       </MyFormItem>
-                      {errors?.first_name && errors.first_name.message}
+                      <p style={{color:'red'}}>   {errors?.first_name && errors.first_name.message}</p>
         {error.first_name ? <div
         style={{
           
@@ -337,7 +379,7 @@ const ContactUs = () => {
           />
                       </MyFormItem>
 
-                      {errors?.last_name && errors.last_name.message}
+                      <p style={{color:'red'}}>   {errors?.last_name && errors.last_name.message}</p>
         {error.last_name ? <div style={{
           
           width: '100%',
@@ -361,8 +403,8 @@ const ContactUs = () => {
             )}
           />
                       </MyFormItem>
-                      {error.email ? <span>{error.email}</span> : ""}
-                      {errors?.email && errors.email.message}
+                      <p style={{color:'red'}}>   {error.email ? <span>{error.email}</span> : ""}</p>
+                      <p style={{color:'red'}}>   {errors?.email && errors.email.message}</p>
                     </Col>
                   </Row>
                   <Row>
@@ -379,7 +421,7 @@ const ContactUs = () => {
             )}
           />
                       </Form.Item>
-                      {errors?.text && errors.text.message}
+                      <p style={{color:'red'}}>    {errors?.text && errors.text.message}</p>
                     </Col>
                   </Row>
                 </MyFormItemGroup>
@@ -403,11 +445,11 @@ const ContactUs = () => {
           <div
             className={"faq-contact"}
           >
-            <p style={{ color: "#FFF", fontSize: "24px" }}>{t("help2")}</p>
+            <p style={{ color: "#FFF", fontSize: "24px" }}>{t("help")}</p>
             <hr style={{ marginBottom: "50px" }} />
-            <p style={{ color: "#FFF" }}>+994 000 00 00 </p>
-            <p style={{ color: "#FFF" }}>+994 000 00 00 </p>
-            <p style={{ color: "#FFF" }}>info@112med.com</p>
+            <p style={{ color: "#FFF" }}>{data1.number}</p>
+            <p style={{ color: "#FFF" }}>{data1.number_second} </p>
+            <p style={{ color: "#FFF" }}>{data1.email}</p>
 
             <div
               style={{
@@ -439,7 +481,7 @@ const ContactUs = () => {
         <div style={{ width: "100%", height: "409px",backgroundColor:"#FBFBFB",padding:"40px",marginBottom:"20px" }}>
           <iframe
             style={{ border: "none" }}
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17439.59682519633!2d49.97557041806164!3d40.39300414904405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x403063737e96e061%3A0x5b925e8db0b28d35!2sBaku%20Medical%20Plaza!5e0!3m2!1sen!2saz!4v1682591396345!5m2!1sen!2saz"
+            src={data1.map_url}
             width="100%"
             height="323"
             allowFullScreen=""

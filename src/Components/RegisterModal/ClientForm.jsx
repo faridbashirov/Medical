@@ -5,13 +5,14 @@ import { locationFetch } from '../api/locationFetch';
 import { registerFetch } from '../api/registerFetch';
 import { useForm } from "react-hook-form";
 import { Controller } from 'react-hook-form';
+import {toast, ToastContainer } from "react-toastify";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from 'react-i18next';
 
 
 const {Item} = Form
-const ClientForm = ({onCancel}) => {
+const ClientForm = ({onCancel,keys}) => {
   const {t}=useTranslation()
   const schema = Yup.object().shape({
     first_name: Yup.string()
@@ -49,7 +50,7 @@ const ClientForm = ({onCancel}) => {
    
    
       })
-  const {control,reset, handleSubmit,formState: { errors } } = useForm(
+  const {control,reset, handleSubmit,formState: { errors },clearErrors } = useForm(
     ({
       mode: "onChange",
       
@@ -58,8 +59,11 @@ const ClientForm = ({onCancel}) => {
   );
   const [location,setLocation]=useState([])
   const [error,setError] = useState({})
- 
-
+  console.log(keys);
+ if(keys !== "1"){
+  console.log(1);
+  clearErrors()
+ }
 
   const handleRegistration = async(values) => {
     console.log("here");
@@ -78,6 +82,7 @@ const ClientForm = ({onCancel}) => {
                   reset(values)
                   
                   onCancel()
+                  toast(t("succesreg"));
       
   }
 }
@@ -106,6 +111,19 @@ const ClientForm = ({onCancel}) => {
   })
   
   return (
+    <>
+     <ToastContainer
+    position='top-right'
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme='light'
+  />
     <Form    onFinish={handleSubmit(handleRegistration)}>
   
       <Item style={{
@@ -193,8 +211,15 @@ const ClientForm = ({onCancel}) => {
         {/* <Input placeholder={'email'} name="email" className={'input'}/> */}
         
       </Item>
-      {error.email ? <span>{error.email}</span> : ""}
-      {errors?.email && errors.email.message}
+      <p style={{color:'red'}}>{errors?.email && errors.email.message}</p>
+        {error.email ? <div style={{
+          
+          width: '100%',
+          
+          
+        }}>{error.email}</div> : ""}
+      {/* {error.email ? <span>{error.email}</span> : ""}
+      {errors?.email && errors.email.message} */}
       <Item name="phone_number">
       <Controller
             
@@ -208,7 +233,13 @@ const ClientForm = ({onCancel}) => {
         
       </Item>
 
-      {errors?.phone_number && errors.phone_number.message}
+      <p style={{color:'red'}}>{errors?.phone_number && errors.phone_number.message}</p>
+        {error.phone_number ? <div style={{
+          
+          width: '100%',
+          
+          
+        }}>{error.phone_number}</div> : ""}
       <Item name="username">
       <Controller
              rules={{
@@ -224,8 +255,14 @@ const ClientForm = ({onCancel}) => {
         {/* <Input placeholder={'Username'} name="username" className={'input'}/> */}
         
       </Item>
-      {errors?.username && errors.username.message}
-      {error.username ? <span>{error.username}</span> : ""}
+
+      <p style={{color:'red'}}>{errors?.username && errors.username.message}</p>
+        {error.username ? <div style={{
+          
+          width: '100%',
+          
+          
+        }}>{error.username}</div> : ""}
       
       <Item name="location">
       <Controller
@@ -264,11 +301,18 @@ const ClientForm = ({onCancel}) => {
         
       
       </Item>
-      {errors?.password && errors.password.message}
+      <p style={{color:'red'}}>{errors?.password && errors.password.message}</p>
+        {error.password ? <div style={{
+          
+          width: '100%',
+          
+          
+        }}>{error.password}</div> : ""}
 
       <Button type={'primary'} htmlType={'submit'} block size={'large'}
               style={{display: 'block', marginBottom: '.5rem'}}>{t("register")}</Button>
     </Form>
+    </>
   );
 };
 

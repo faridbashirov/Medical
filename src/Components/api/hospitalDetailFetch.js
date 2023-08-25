@@ -1,4 +1,5 @@
 import axios from "./index";
+import { axiosPrivate } from "../../api/api";
 import { useState,useEffect } from "react";
 export default function DetailFetch(id,lang){
 

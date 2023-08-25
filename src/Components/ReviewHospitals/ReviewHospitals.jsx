@@ -300,7 +300,8 @@ const ReviewHospitals = () => {
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
-                  cursor:"pointer"
+                  cursor:"pointer",
+                  backgroundColor:"#F2F5FF"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={messageHospital} />
@@ -322,38 +323,14 @@ const ReviewHospitals = () => {
           </div>
 
           <div className="menuRight">
-          {data?.length !== 0 ? <div className="buttonsNav">
-              <Button
-                className={"doc-nav-btn doc-nav-btn-active"}
-                type="primary"
-              >
-                Наши рекомендации
-              </Button>
-              <Button className={"doc-nav-btn"}
-                type="primary"
-              >
-                Самая низкая цена в начале
-              </Button>
-              <Button
-                className={"doc-nav-btn"}
-                type="primary"
-              >
-                Количество звезд и цена
-              </Button>
-              <Button
-                className={"doc-nav-btn"}
-                type="primary"
-              >
-                Оценка + кол-во отзывов
-              </Button>
-            </div> : <div style={{textAlign:"center"}}> Nothing Found </div>}
-            <FilterButtons/>
+         
+           
             <div>
-              {data.map((item,index)=>{
+              { data?.length !== 0 ? data.map((item,index)=>{
                 return  <div key={index} className="cardHospitals">
                 <div className="card-head display_grid-hospital">
                   <img style={{height:"166px"}} id="hospitalImage" src={item.hospital?.main_image} />
-                  <img id="likeImageHospitals" src={likeReview} />
+                 
                 </div>
                 <div
                   className="card-body"
@@ -397,7 +374,7 @@ const ReviewHospitals = () => {
                   >
                     <p style={{ color: "#464646", fontSize: "11.15px" }}>
                       Review To{" "}
-                      <span style={{ color: "#5282FF", fontSize: "11.15px" }}>
+                      <span onClick={()=> navigate(`/hospital/${item.hospital.id}`)}  style={{ color: "#5282FF", fontSize: "11.15px",cursor:"pointer" }}>
                         {item.hospital?.name}
                       </span>
                     </p>
@@ -407,7 +384,7 @@ const ReviewHospitals = () => {
                   </div>
                 </div>
               </div>
-              })}
+              }) : <div style={{textAlign:"center"}}> {t("nothingfound")}</div>}
              
              
               <div className={'review-doctors-pagination'}>

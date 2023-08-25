@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box !important;
     /*margin: 0 !important;*/
-    font-family: "Gilroy";
+    font-family: "roboto";
 }
 
 body {
@@ -86,7 +86,7 @@ h3{
     margin-bottom: 10px;
 }
 .container-foreign{
-    width: 89% !important;
+    width: 85% !important;
     margin-top: 40px !important;
 }
 
@@ -289,9 +289,8 @@ h3{
     /*background: url("../../assets/Images/girlImage.png") no-repeat center/cover;*/
 }
 
-#_box2 {
-    background: linear-gradient(180deg, rgba(82, 130, 255, 0) 0%, #5282ff 100%),
-    url("../../assets//Images/Doctors41.png") no-repeat center/cover;
+/* #_box2 {
+    
 }
 
 #_box2_2 {
@@ -307,7 +306,7 @@ h3{
 #_box2_4 {
     background: linear-gradient(180deg, rgba(82, 130, 255, 0) 0%, #5282ff 100%),
     url("../../assets//Images/eyeOfMan47.png") no-repeat center/cover;
-}
+} */
 
 .box1_3 {
     padding-left: 50px;
@@ -350,8 +349,8 @@ h3{
     /* height: 600px; */
 }
 .grid_2 img{
-    width: 285px;
-    height: 285px;
+    width: 254px;
+    height: 274px;
 }
 
 
@@ -363,7 +362,7 @@ h3{
 }
 .grid_3 img{
     width: 285px;
-    height: 285px;
+    height: 373px;
 }
 
 
@@ -374,7 +373,7 @@ h3{
 }
 .grid_4 img{
     width: 285px;
-    height: 285px;
+    height: 373px;
 }
 
 
@@ -463,6 +462,11 @@ h3{
     margin: 0 auto !important;
     text-align: center;
 }
+.containerSliderSeconds {
+    width: 85% !important;
+    margin: 0 auto !important;
+    text-align: center;
+}
 
 .footer-title {
     color: #fff;
@@ -486,7 +490,7 @@ h3{
 
 .footer-nav-link {
     color: #B6D0FF;
-    font-family: "Gilroy";
+    font-family:"roboto";
     padding-bottom: 10px;
 }
 
@@ -504,8 +508,18 @@ h3{
 
 @font-face {
     font-family: "Gilroy";
-    src: url("../../Fonts/gilroy/Gilroy-Regular.ttf");
+    src: url("../../Fonts/gilroy/Gilroy-RegularItalic.ttf");
 }
+@font-face {
+    font-family: "Roboto";
+    src: url("../../Fonts/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Poppins-Test";
+    src: url("../../Fonts/Poppins/Poppins-LightItalic.ttf");
+}
+
 
 @font-face {
     font-family: "Inter";
@@ -848,7 +862,7 @@ h3{
     }
     .pad {
         padding: 11px 46px 28px;
-        font-family: "Gilroy";
+        font-family: "roboto";
         font-size: 13px;
     }
     .footer-copy{

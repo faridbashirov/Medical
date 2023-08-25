@@ -114,12 +114,16 @@
         max-width: 100%;
         height: 280px;
         overflow: hidden;
+        margin-right: unset !important  ;
+
     }
 
     .doctors-img-lg {
         object-fit: cover;
         overflow: hidden;
         object-position: top center;
+        
+       
     }
     .d-none {
         display: none;
@@ -145,4 +149,14 @@
         justify-content: center;
     }
 
+}
+
+.loading{
+    display: inherit;
+    position: relative;
+    font-size: 0px;
+    top: 20px;
+    left: 50% !important;
+    width: 60px;
+    height: 60px;
 }

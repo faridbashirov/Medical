@@ -6,10 +6,13 @@ import {Button} from "antd";
 import footerArrow from "../../assets/Svg/footer-arrow.svg"
 import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next';
-
-
+import { useNavigate } from 'react-router-dom';
+import SocialsFetch from '../api/socialsFetch';
 const Footer = () => {
+
+  const navigate=useNavigate();
   const {t}=useTranslation()
+  const {data,error,loading}=SocialsFetch()
   return (
     <footer className="bgFooter">
       <div className="container footer-wrapper">
@@ -89,18 +92,18 @@ const Footer = () => {
         <div  className="footerIcons">
           <div style={{display:"flex", gap:"16px",marginTop:"10px"}}>
             <div >
-              <img className={"footer-social"} src={facebook} />
+              <img onClick={()=>window.open(data.facebook)} className={"footer-social"} src={facebook} />
             </div>
             <div>
-              <img className={"footer-social"} src={vk} />
+              <img onClick={()=>window.open(data.linkedin)} className={"footer-social"} src={vk} />
             </div>
             <div>
-              <img className={"footer-social"} src={instagram} />
+              <img onClick={()=>window.open(data.instagram)} className={"footer-social"} src={instagram} />
             </div>
           </div>
 
           <div className="pad-wrapper" >
-            <Button  className="pad">
+            <Button onClick={()=> navigate("/contact-us")}  className="pad">
              {t("contact1").toUpperCase()}
             </Button>
           </div>

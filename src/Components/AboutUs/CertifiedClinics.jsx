@@ -5,8 +5,10 @@ import isapsLogo from "../../assets/Images/certified-clinics/isaps.png"
 import adaLogo from "../../assets/Images/certified-clinics/ada.png"
 import dkgLogo from "../../assets/Images/certified-clinics/dkg.png"
 import efqmLogo from "../../assets/Images/certified-clinics/efqm.png"
-
+import CertificatedHospitalsFetch from '../api/certificatedHospitals';
+import { useTranslation } from 'react-i18next';
 const CertifiedClinics = () => {
+  const {t,i18n} =useTranslation()
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -26,33 +28,28 @@ const CertifiedClinics = () => {
       items: 1
     }
   };
+
+
+  const {data,error,loading}=CertificatedHospitalsFetch(localStorage.getItem("lang"))
+
+
   return (
     <section className={"container"}>
       <div className="certified">
         <div className="certified__header">
-          <h4 className="certified__header-title">Только сертифицированные клиники</h4>
-          <p className="certified__header-subtitle">Lorem ipsum dolor sit amet consectetur dolor sit amet.</p>
+          <h4 className="certified__header-title">{t("sertificateclinics")}</h4>
+          
         </div>
         <div className="certified__items">
           <Carousel responsive={responsive}>
-            <div className="certified__item">
-              <img src={isoLogo} alt=""/>
-            </div>
-            <div className="certified__item">
-              <img src={isapsLogo} alt=""/>
-            </div>
-            <div className="certified__item">
-              <img src={adaLogo} alt=""/>
-            </div>
-            <div className="certified__item">
-              <img src={dkgLogo} alt=""/>
-            </div>
-            <div className="certified__item">
-              <img src={efqmLogo} alt=""/>
-            </div>
-            <div className="certified__item">
-              <img src={efqmLogo} alt=""/>
-            </div>
+          {data.map((item,index)=>{
+            return <div className="certified__item">
+            <img src={`https://hospitalbackend.efgroup.az/`+item.logo} alt={item.title}/>
+         
+          </div>
+          })}
+            
+            
           </Carousel>
         </div>
       </div>

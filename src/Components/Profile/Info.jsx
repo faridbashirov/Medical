@@ -113,7 +113,7 @@ const Info = () => {
  console.log(data);
 
   const onFinish = async(value) => {
-    console.log(value.date["$d"]);
+    
 
     const data = await UserInfoUpdateFetch(value)
     alert("Your details have been updated")

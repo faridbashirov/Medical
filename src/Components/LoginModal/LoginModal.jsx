@@ -16,6 +16,9 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next';
+
+import { reseterrors } from '../../store/reducers/userReducer';
+
 import i18next from 'i18next';
 
 
@@ -30,13 +33,12 @@ const LoginModal = ({openLogin, onCloseLogin,onOpenRegister}) => {
     .label("Username")
     .trim()
     .required(t("usernameerror"))
-    .min(3)
+    .min(3,t("length"))
     .max(64),
     password:Yup.string()
     .label("Password")
     .trim()
     .required(t("passworderror"))
-    .min(3,'must be at least 3 characters long')
     .max(64,"invalid"),
     
    
@@ -44,7 +46,7 @@ const LoginModal = ({openLogin, onCloseLogin,onOpenRegister}) => {
    
    
       })
-  const {control,reset, handleSubmit,formState: { errors  } } = useForm(
+  const {control,reset, handleSubmit,formState: { errors  },clearErrors } = useForm(
         ({
           mode: "onChange",
           
@@ -54,15 +56,23 @@ const LoginModal = ({openLogin, onCloseLogin,onOpenRegister}) => {
    const dispatch=useDispatch()
    const displayLoginNotification = () => {
    
-    toast("You looged in!");
+    toast(t("succeslog"));
   };
    const {errorss, user,first_login}=useSelector((state)=>state.auth)
-   
+   const {active,setActive}=useState(false)
    const [error,setError]=useState({username:null,
     password:null})
 
     
-   
+   const resetform=()=>{
+    onCloseLogin()
+    reset()
+    clearErrors()
+    dispatch(reseterrors())
+    
+
+
+   }
    const userLogin= async (values)=>{
     console.log(values);
     values["lang"]=i18next.language
@@ -102,11 +112,11 @@ const LoginModal = ({openLogin, onCloseLogin,onOpenRegister}) => {
     theme='light'
   />
     
-    <Modal open={openLogin} onCancel={onCloseLogin} footer={[]}>
+    <Modal destroyOnClose open={openLogin} onCancel={resetform} footer={[]}>
       
       <Typography className={'login-title'}><Trans i18nKey="loginregister"></Trans></Typography>
       <Divider/>
-      <Form  onFinish={handleSubmit(userLogin)} >
+      <Form   onFinish={handleSubmit(userLogin)} >
         <Item name="username">
         <Controller
              rules={{

@@ -289,7 +289,8 @@ const  FavDoctors = () => {
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
                   cursor:"pointer",
-                  zIndex:1
+                  zIndex:1,
+                  backgroundColor:"#F2F5FF"
                 }}
               >
                 <img style={{ paddingRight: "20px" }} src={favDoctors} />
@@ -350,36 +351,12 @@ const  FavDoctors = () => {
           </div>
 
           <div className="menuRight">
-          {data?.length !== 0 ? <div className="buttonsNav">
-              <Button
-                className={"doc-nav-btn doc-nav-btn-active"}
-                type="primary"
-              >
-                Наши рекомендации
-              </Button>
-              <Button className={"doc-nav-btn"}
-                type="primary"
-              >
-                Самая низкая цена в начале
-              </Button>
-              <Button
-                className={"doc-nav-btn"}
-                type="primary"
-              >
-                Количество звезд и цена
-              </Button>
-              <Button
-                className={"doc-nav-btn"}
-                type="primary"
-              >
-                Оценка + кол-во отзывов
-              </Button>
-            </div> : <div style={{textAlign:"center"}}> Nothing Found </div>}
+          
             
-            <FilterButtons/>
+         
             <div>
-             {data.map((item,index)=>{
-                return  <div  onClick={()=>handleClick(item.id)} className={activeElement ===item.id ? "cardFavDoctors cardFavDoctors-active" : "cardFavDoctors cardFavDoctors"}>
+             { data?.length !== 0 ?data.map((item,index)=>{
+                return  <div   className={activeElement ===item.id ? "cardFavDoctors cardFavDoctors-active" : "cardFavDoctors cardFavDoctors"}>
                 <div className="display_grid doctor-fav">
                   <img
                     id="favDoctorImage"
@@ -394,12 +371,13 @@ const  FavDoctors = () => {
                       width: "30px",
                       transform: "translateX(-40px)",
                       zIndex:1,
+                      cursor:"pointer"
                     }}
                     id="likeImage"
                     src={likeReview}
                   />
                 </div>
-                <div className="card-body fav-card-body">
+                <div onClick={()=>handleClick(item.id)} className="card-body fav-card-body">
                   <div
                     style={{
                       display: "flex",
@@ -677,7 +655,7 @@ const  FavDoctors = () => {
                   </div>
                 </div>
               </div>
-              })}
+              }): <div style={{textAlign:"center"}}> {t("nothingfound")} </div>}
              
              
               

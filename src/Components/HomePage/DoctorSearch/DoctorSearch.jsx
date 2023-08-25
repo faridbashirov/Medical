@@ -84,27 +84,20 @@ const DoctorSearch = ({positions}) => {
             </div> */}
           </Carousel>
         </div>
+       
         <div className="top-clinic__mobile-items">
-          <div className="doctor-search_item">
-            <img src={tooth} alt="tooth"/>
-            <p className={"doctor-search_item-desc"}>стоматология</p>
-          </div>
-          <div className="doctor-search_item">
-            <img src={surgery} alt="tooth"/>
-            <p className={"doctor-search_item-desc"}>Пластическая
-              Хирургия </p>
-          </div>
-          <div className="doctor-search_item">
-            <img src={eye} alt="tooth"/>
-            <p className={"doctor-search_item-desc"}>офтальмология</p>
-          </div>
-          <div className="doctor-search_item">
-            <img src={boyrek} alt="tooth"/>
-            <p className={"doctor-search_item-desc"}>офтальмология</p>
-          </div>
+        {positions.map((item,index)=>{
+              return <div className="doctor-search_item">
+              <img src={tooth} alt="tooth"/>
+              <p className={"doctor-search_item-desc"}>{item.name}</p>
+            </div>
+            })}
+          
+         
         </div>
         <div className={"doctor-search-footer"}>
-          <Button className="top-clinic__header-left d-mobile-block" type={"primary"}>Посмотреть клиники </Button>
+        <Link to={"doctors"} > <Button className="top-clinic__header-left d-mobile-block" type={"primary"}>{t("doctorsearch4")}</Button></Link>
+     
           <div className="doctor-search__desc">
           <p><Trans i18nKey="doctorsearch3"></Trans></p>
           </div>

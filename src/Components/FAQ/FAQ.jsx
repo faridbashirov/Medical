@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Dropdown, Button, Space, Breadcrumb, Collapse } from "antd";
 import Vector from "../../assets/Images/Vector.svg";
@@ -21,7 +21,11 @@ import "./FAQ.css"
 import { ArrowRightOutlined} from "@ant-design/icons";
 import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
-
+import faqFetch from "../api/Faqfetch";
+import ContactInfoFetch from "../api/getContactInfo";
+import i18next from "i18next";
+import { useTranslation } from "react-i18next";
+import faqContentFetch from "../api/FaqContentfetch";
 const { Panel } = Collapse;
 
 const items = [
@@ -183,6 +187,22 @@ const menuPropsFlag = {
 };
 
 const FAQ = () => {
+  const [reload,setReload]=useState(false)
+  const {t,i18n}=useTranslation()
+  console.log(reload);
+  console.log(i18next.language);
+
+
+  const {data,error,loading}=faqFetch(localStorage.getItem("lang"))
+  const {data1,error1,loading1}=ContactInfoFetch(localStorage.getItem("lang"))
+  const {data2,error2,loading2}=faqContentFetch(localStorage.getItem("lang"))
+  
+  console.log(data,data1);
+
+  // useEffect(()=>{
+  //   console.log("here");
+  //   setReload(!reload)
+  // },[])
   return (
     <div style={{ backgroundColor: "#F4F4F4" }}>
     
@@ -203,8 +223,8 @@ const FAQ = () => {
             }
             items={[
               {
-                title: "Главная",
-                href: "",
+                title: t("home"),
+                href: "/",
               },
               {
                 title: "FAQ",
@@ -220,51 +240,28 @@ const FAQ = () => {
             <Collapse
               className={"faq-nav"}
               bordered={false}
-              defaultActiveKey={["1"]}
+              defaultActiveKey={[0]}
             >
-              <Panel
+              {/* {data} */}
+              {data?.map((item,index)=>{
+                return  <Panel
                 style={{ border: "none" }}
-                header="Врачи и медицинский персонал говорят по-английски?"
-                key="1"
-              ></Panel>
-              <Panel
-                style={{ border: "none" }}
-                header="Безопасен ли медицинский туризм?"
-                key="2"
-              ></Panel>
-              <Panel
-                style={{ border: "none" }}
-                header="Какие процедуры доступны?"
-                key="3"
-              ></Panel>
-              <Panel
-                style={{ border: "none" }}
-                header="Сколько я экономлю?"
-                key="4"
-              ></Panel>
-              <Panel
-                style={{ border: "none" }}
-                header="Сколько я экономлю?"
-                key="5"
-              ></Panel>
-              <Panel
-                style={{ border: "none" }}
-                header="Сколько я экономлю?"
-                key="6"
-              ></Panel>
-              <Panel
-                style={{ border: "none" }}
-                header="Сколько я экономлю?"
-                key="7"
-              ></Panel>
+                header={item.question}
+               key={index}
+              >
+                {item.answer}
+              </Panel>
+              })}
+             
+          
             </Collapse>
             <div className={"faq-contact"}
             >
-              <p style={{ color: "#FFF", fontSize: "24px" }}>Hужна помощь</p>
+              <p style={{ color: "#FFF", fontSize: "24px" }}>{t("help")}</p>
               <hr style={{ marginBottom: "50px" }} />
-              <p style={{ color: "#FFF" }}>+994 000 00 00 </p>
-              <p style={{ color: "#FFF" }}>+994 000 00 00 </p>
-              <p style={{ color: "#FFF" }}>info@112med.com</p>
+              <p style={{ color: "#FFF" }}>{data1.number}</p>
+              <p style={{ color: "#FFF" }}>{data1.number_second}</p>
+              <p style={{ color: "#FFF" }}>{data1.email}</p>
 
               <div
                 style={{
@@ -295,43 +292,7 @@ const FAQ = () => {
 
           <div className="menuRight">
             <p className={"faq-desc"} >
-              Это первый и, наверное, самый главный вопрос, который приходит на
-              ум, когда речь <br /> заходит о медицинском туризме. <br /> Любая
-              медицинская операция или процедура, где бы она ни проводилась,
-              сопряжена <br /> с определенным риском. Чтобы снизить этот риск,
-              мы прилагаем все усилия, чтобы <br /> исследовать и предоставлять
-              нашим клиентам информацию о различных вариантах <br />{" "}
-              высококачественных медицинских учреждений.
-              <br /> Ниже приведены некоторые важные аспекты, которые мы
-              учитываем при добавлении <br /> любого поставщика медицинских
-              услуг в нашу сеть (одного или нескольких из <br /> перечисленных
-              ниже):
-              <br />
-              Сертификат ISO 9000 или аккредитация от Joint Commission
-              International (JCI), США.
-              <br /> (JCI является международным подразделением Объединенной
-              комиссии по <br /> аккредитации организаций здравоохранения,
-              которое оценивает стандарты качества <br /> больниц США). Если они
-              еще не аккредитованы ни одним из них, они должны, по <br />{" "}
-              крайней мере, работать над получением этих сертификатов или
-              аккредитаций. Они <br /> следуют лучшим практикам и стандартам
-              качества в отрасли.
-              <br /> Послужной список качественного обслуживания, отсутствие
-              очередей, персональное <br /> внимание врачей. Отзывы, которые мы
-              получаем от предыдущих пациентов, позволяют <br /> нам получить
-              эту информацию.
-              <br /> Предпочтение отдается медицинскому персоналу с опытом
-              работы в медицинских <br /> учреждениях США, Европы или других
-              развитых стран.
-              <br /> Сертифицирован одной из ведущих мировых компаний по
-              производству медицинских <br /> протезов.
-              <br /> Персонал, который говорит по-английски или имеет
-              англоговорящего переводчика <br /> для иностранных пациентов.{" "}
-              <br /> Отличная инфраструктура (чистые комнаты с кондиционером,
-              телевидение, <br /> подключение к Интернету) <br /> Комфортное
-              размещение и удобства для всех, кто сопровождает пациента.
-              <br />
-              Лицензия на практику в своей стране
+             {data2?.text}
             </p>
           </div>
         </div>

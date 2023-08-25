@@ -304,6 +304,7 @@ const Profile = () => {
                   fontSize: "16px !important",
                   fontWeight: "500 !important",
                   color: "#2A353D !important",
+                  backgroundColor:"#F2F5FF"
                 }}
               >
                 <img style={{ paddingRight: "27px" }} src={peopleIcon} />

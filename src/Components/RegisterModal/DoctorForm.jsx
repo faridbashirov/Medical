@@ -5,6 +5,7 @@ import { hospitalFetch } from '../api/hospitalFetch';
 import { positionFetch } from '../api/positionFetch';
 import { locationFetch } from '../api/locationFetch';
 import { doctorRegisterFetch } from '../api/doctorRegisterFetch';
+import {toast, ToastContainer } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { Controller } from 'react-hook-form';
@@ -13,67 +14,68 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from 'react-i18next';
 
 const {Item} = Form
-const DoctorForm = ({onCancel}) => {
+const DoctorForm = ({onCancel,keys}) => {
   const {t}=useTranslation()
   const schema = Yup.object().shape({
     first_name: Yup.string()
-        .label("First Name")
+        .label(t("name"))
         .trim()
-        .required()
-        .min(3)
+        .required(t("nameerror"))
+        .min(3,t("length"))
         .max(64),
     last_name:Yup.string()
-    .label("Last name")
+    .label(t("surname"))
     .trim()
-    .required()
-    .min(3)
+    .required(t("lastnameerror"))
+    .min(3,(t("surname"),t("length")))
     .max(64),
     email:Yup.string()
-    .label("Email")
-    .email()
+    .label(t("mailadress")) 
+    .email(t("validemail"))
     .trim()
-    .required()
-    .min(3)
-    .max(64),
-    phone_number:Yup.string()
-    .label("Phone number")
-    .trim()
-    .required()
-    .min(3)
-    .max(64),
+    .required(t("emailerror"))
+    ,
+    // phone_number:Yup.string()
+    // .label("Phone number")
+    // .trim()
+    // .required()
+    // .min(3)
+    // .max(64),
     username:Yup.string()
-    .label("Username")
+    .label(t("username"))
     .trim()
-    .required()
-    .min(3)
+    .required(t("usernameerror"))
+    .min(3,t("length"))
     .max(64),
-    location:Yup.string()
-    .label("Location")
-    .required(),
+    // location:Yup.string()
+    // .label("Location")
+    // .required(),
     hospital:Yup.string()
     .label("Hospital")
-    .required(),
-    position:Yup.string()
-    .label("Position")
-    .required(),
+    .required(t("hospitalserror")),
+    // position:Yup.string()
+    // .label("Position")
+    // .required(),
     password:Yup.string()
-    .label("Password")
+    .label(t("password"))
     .min(3)
     .max(64)
     
-    .required()
+    .required(t("passworderror"))
    
       })
     
   
-  const {control, handleSubmit,formState: { errors } } = useForm(
+  const {control, handleSubmit,formState: { errors },clearErrors } = useForm(
     ({
       mode: "onChange",
       
       resolver: yupResolver(schema),
     })
   )
-  
+  useEffect(()=>{
+    clearErrors()
+  },[])
   
   
 
@@ -134,6 +136,19 @@ const DoctorForm = ({onCancel}) => {
     console.log(`selected ${value}`);
   };
   return (
+    <>
+      <ToastContainer
+    position='top-right'
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme='light'
+  />
     <Form    onFinish={handleSubmit(handleRegistration)}>
     <Item className='flex items-start' style={{
       marginBottom: '10px',
@@ -219,8 +234,14 @@ const DoctorForm = ({onCancel}) => {
       {/* <Input placeholder={'email'} name="email" className={'input'}/> */}
       
     </Item>
-    {error.email ? <span>{error.email}</span> : ""}
-    {errors?.email && errors.email.message}
+    
+    <p style={{color:'red'}}>{errors?.email && errors.email.message}</p>
+      {error.email ? <div
+      style={{
+        
+        width: '100%',
+        color:'red'
+      }}>{error.email}</div> : ""}
     <Item name="phone_number">
     <Controller
           
@@ -248,8 +269,14 @@ const DoctorForm = ({onCancel}) => {
       {/* <Input placeholder={'Username'} name="username" className={'input'}/> */}
       
     </Item>
-    {errors?.username && errors.username.message}
-    {error.username ? <span>{error.username}</span> : ""}
+   
+    <p style={{color:'red'}}>{errors?.username && errors.username.message}</p>
+      {error.username ? <div
+      style={{
+        
+        width: '100%',
+        color:'red'
+      }}>{error.username}</div> : ""}
     
     
     <Item
@@ -267,7 +294,14 @@ const DoctorForm = ({onCancel}) => {
       
     
     </Item>
-    {errors?.password && errors.password.message}
+    
+    <p style={{color:'red'}}>{errors?.password && errors.password.message}</p>
+      {error.password ? <div
+      style={{
+        
+        width: '100%',
+        color:'red'
+      }}>{error.password}</div> : ""}
     
     <Item name="location">
     <Controller
@@ -336,12 +370,14 @@ const DoctorForm = ({onCancel}) => {
       
        
     </Item>
-    {errors?.hospital && errors.hospital.message}
+    <p style={{color:'red'}}>{errors?.hospital && errors.hospital.message}</p>
     
     
     <Button type={'primary'} htmlType={'submit'} block size={'large'}
             style={{display: 'block', marginBottom: '.5rem'}}>{t("register")}</Button>
     </Form>
+
+    </>
     
   );
 };
