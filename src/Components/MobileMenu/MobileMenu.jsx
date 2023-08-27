@@ -9,6 +9,7 @@ import facebook from "../../assets/Images/facebook.png";
 import vk from "../../assets/Images/vk.png";
 import instagram from "../../assets/Images/instagram.png";
 import './MobileMenu.css'
+import userIcon from "../../assets/Svg/userlogin.svg"
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => {
@@ -63,7 +64,9 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
                   </Dropdown>
                 </li>
           </div>
-          <li className={"menuListItem"}>
+          <li style={{
+            cursor:"pointer"
+          }}  onClick={()=> {navigate("contact-us");setShowMenu(!showMenu)}} className={"menuListItem"}>
             <div className="question">
               <img src={question} />
             </div>
@@ -71,14 +74,16 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
               <p>{t("contact")} </p>
             </div>
           </li>
-          <li className={"menuListItem"} onClick={()=> {navigate("profile");setShowMenu(!showMenu)}}>
+          <li style={{
+            cursor:"pointer"
+          }} className={"menuListItem"} onClick={()=> {navigate("profile");setShowMenu(!showMenu)}}>
             <img
               style={{ objectFit: "cover !important" }}
-              className="heart"
-              src={heart}
+             
+              src={userIcon}
 
             />
-            <p>{t("favorites")}</p>
+            <p>{t("profile")}</p>
           </li>
         </ul>
       </div>

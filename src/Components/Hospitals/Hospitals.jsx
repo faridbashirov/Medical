@@ -405,7 +405,7 @@ const DeleteFromFavorite= async(id)=>{
 
     useEffect(()=>{
       const getCountries=async()=>{
-        const data= await allCountriesFetch(localStorage.getItem("lang"));
+        const data= await allCountriesFetch(localStorage.getItem("lang"))
 
         setCountry(data)
 
@@ -959,7 +959,7 @@ const DeleteFromFavorite= async(id)=>{
             
 
               <div>
-                {hospitals.map((item,index)=>{
+                {hospitals?.map((item,index)=>{
                   return  <div key={index} className={activeElement ===item.id ? "cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors"} >
                   <div   className="display_grid img-wrapper">
                     <img

@@ -7,12 +7,13 @@ export default function favoritesDoctorsFetch(page){
     const [data,setData] = useState([])
     const [filterdata,setFilterdata] = useState([])
     const [error,setError] = useState(null)
-    const [loading,setLoading] = useState(false)
+    const [loading,setLoading] = useState(true)
     const [count,setCount] = useState("")
     const [add,setAdd] = useState(false)
 
     useEffect(() => {
         (
+            
             async function(){
                 setLoading(true)
                 if(page){

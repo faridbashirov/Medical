@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Dropdown, Button, Space, Breadcrumb, Pagination } from "antd";
 import Vector from "../../assets/Images/Vector.svg";
@@ -39,6 +39,7 @@ import { useNavigate,Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { axiosPrivate } from "../../api/api";
 import { useTranslation } from "react-i18next";
+import { FadeLoader } from "react-spinners";
 
 const items = [
   {
@@ -204,19 +205,21 @@ const  FavDoctors = () => {
   const [searchParams,setSearchParams]=useSearchParams()
   const {user,authToken}=useSelector(state=> state.auth)
   const [activeElement, setActiveElement] = useState(null);
+  const [liked,setLiked] = useState(false)
+  // const [loading,setLoading]=useState(false)
  
 
-  const {data,setAdd,add,count}=favoritesDoctorsFetch(searchParams.get("page") || null)
-  
+  const {data,setAdd,add,count,loading}=favoritesDoctorsFetch(searchParams.get("page") || null)
+  console.log(loading,count);
 
-  console.log(data,count);
+
 
   const handleClick = (elementId) => {
     setActiveElement(elementId);
    
   };
   const DeleteFromFavorite= async(id)=>{
-
+    setLiked(true)
     axiosPrivate.delete(`card/remove_favorite_doctor/${id}`)
   .then((res) => {
       console.log(res);
@@ -228,6 +231,8 @@ const  FavDoctors = () => {
       
       
   }
+
+  
 
 
 
@@ -265,7 +270,7 @@ const  FavDoctors = () => {
       </div>
 
       <div className="container">
-        <div className="displayGridReviewDr">
+        <div className="displayGridReviewDr doctorss">
           <div style={{ height: "320px" }} className="menuNav">
             <ul>
             <li  onClick={()=> navigate("/profile")}
@@ -353,9 +358,20 @@ const  FavDoctors = () => {
           <div className="menuRight">
           
             
-         
+            <>{
+              loading && !liked ?  <div> <FadeLoader
+              color="black"
+              className={"loading"}
+              loading={true}
+              // style={{top:"50px"}}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            /> </div> : 
+           
             <div>
-             { data?.length !== 0 ?data.map((item,index)=>{
+              
+             { data?.map((item,index)=>{
                 return  <div   className={activeElement ===item.id ? "cardFavDoctors cardFavDoctors-active" : "cardFavDoctors cardFavDoctors"}>
                 <div className="display_grid doctor-fav">
                   <img
@@ -374,7 +390,7 @@ const  FavDoctors = () => {
                       cursor:"pointer"
                     }}
                     id="likeImage"
-                    src={likeReview}
+                    src={heart}
                   />
                 </div>
                 <div onClick={()=>handleClick(item.id)} className="card-body fav-card-body">
@@ -655,7 +671,7 @@ const  FavDoctors = () => {
                   </div>
                 </div>
               </div>
-              }): <div style={{textAlign:"center"}}> {t("nothingfound")} </div>}
+              })}
              
              
               
@@ -669,9 +685,11 @@ const  FavDoctors = () => {
 
        }}  total={count}
         
-       /> : ""}
+       /> :  <div style={{textAlign:"center"}}> {t("nothingfound")} </div>}
               </div>
             </div>
+             }
+            </>
           </div>
         </div>
       </div>

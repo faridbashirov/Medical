@@ -24,7 +24,7 @@ import facebook from "../../assets/Images/facebook.png";
 import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import Hospitals from "../../assets/Images/Hospitals.png";
-
+import { FadeLoader } from "react-spinners";
 import { ArrowRightOutlined } from "@ant-design/icons";
 
 import "../ReviewHospitals/ReviewHospitals.css";
@@ -203,7 +203,7 @@ const ReviewHospitals = () => {
   console.log(authToken?.access);
 
 
-  const {data,error,count}=profileHospitalReviews(searchParams.get("page" || null))
+  const {data,error,count,loading}=profileHospitalReviews(searchParams.get("page" || null))
 
   return (
     <>
@@ -237,7 +237,7 @@ const ReviewHospitals = () => {
         </div>
       </div>
       <div className="container">
-        <div className="displayGridReviewDr">
+        <div className="displayGridReviewDr doctorss1">
           <div style={{ height: "320px" }} className="menuNav">
             <ul>
             <li  onClick={()=> navigate("/profile")}
@@ -323,10 +323,19 @@ const ReviewHospitals = () => {
           </div>
 
           <div className="menuRight">
-         
+          <>{
+              loading  ?  <div> <FadeLoader
+              color="black"
+              className={"loading"}
+              loading={true}
+              // style={{top:"50px"}}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            /> </div> : 
            
             <div>
-              { data?.length !== 0 ? data.map((item,index)=>{
+              {  data.map((item,index)=>{
                 return  <div key={index} className="cardHospitals">
                 <div className="card-head display_grid-hospital">
                   <img style={{height:"166px"}} id="hospitalImage" src={item.hospital?.main_image} />
@@ -384,7 +393,7 @@ const ReviewHospitals = () => {
                   </div>
                 </div>
               </div>
-              }) : <div style={{textAlign:"center"}}> {t("nothingfound")}</div>}
+              })}
              
              
               <div className={'review-doctors-pagination'}>
@@ -396,9 +405,11 @@ const ReviewHospitals = () => {
 
        }}  total={count}
         
-       /> : ""}
+       />  : <div style={{textAlign:"center"}}> {t("nothingfound")}</div>}
               </div>
             </div>
+}
+</>
           </div>
         </div>
       </div>

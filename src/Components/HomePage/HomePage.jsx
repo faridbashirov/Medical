@@ -473,7 +473,7 @@ const onChange2 = (e) => {
       </div>
 
       <div style={{ paddingTop: "200px" }} className="container">
-        <Space wrap>
+        {/* <Space wrap>
           <p style={{ fontWeight: "600", fontSize: "20px", color: "#000" }}>
             Поиск по:
           </p>
@@ -504,7 +504,7 @@ const onChange2 = (e) => {
              Бюджету
            </Button>
          </div>
-        </Space>
+        </Space> */}
       </div>
 
       <div style={{ paddingTop: "40px" }} className="container">
@@ -519,21 +519,28 @@ const onChange2 = (e) => {
               className="box1_3"
             >
               <Button
+              onClick={()=> navigate({
+                pathname: "/hospitals",
+                search: `?type=service&name=${position[0]?.name}`,
+              })}
                 className={"box1-btn"}
                 type="primary"
               >
-                Смотреть еще
+                Смотреть еще 
               </Button>
             </div>
           </div>
           
    
           {position.filter((item,index)=> index <4).map((item,index)=>{
-            return  <div style={{
+            return  <div onClick={()=> navigate({
+              pathname: "/hospitals",
+              search: `?type=service&name=${item?.name}`,
+            })} style={{
               background:`linear-gradient(180deg, rgba(82, 130, 255, 0) 0%, #5282ff 100%),url(${item.image}`
               
             }} id="_box2" className="box2">
-            <p>{position[1]?.name} </p>
+            <p>{item?.name} </p>
           </div>
           })}
          
@@ -551,14 +558,17 @@ const onChange2 = (e) => {
 
       <div className="container">
         <div style={{ paddingTop: "30px" }} className="grid">
-          <div className="box1">
+          <div   className="box1">
             <div className="box1_2">
               <p className={"box1-text"}>
               {position[5]?.name}
               </p>
             </div>
             <div className="box1_3">
-              <Button className={"box1-btn"}
+              <Button onClick={()=> navigate({
+              pathname: "/hospitals",
+              search: `?type=service&name=${position[5]?.name}`,
+            })} className={"box1-btn"}
                 type="primary"
               >
                 Смотреть еще
@@ -572,7 +582,10 @@ const onChange2 = (e) => {
               </p>
             </div>
             <div className="box1_3">
-              <Button className={"box1-btn"}
+              <Button onClick={()=> navigate({
+              pathname: "/hospitals",
+              search: `?type=service&name=${position[6]?.name}`,
+            })} className={"box1-btn"}
                 type="primary"
               >
                 Смотреть еще
@@ -586,7 +599,10 @@ const onChange2 = (e) => {
               </p>
             </div>
             <div className="box1_3">
-              <Button
+              <Button onClick={()=> navigate({
+              pathname: "/hospitals",
+              search: `?type=service&name=${position[7]?.name}`,
+            })}
                 className={"box1-btn"}
                 type="primary"
               >
@@ -598,7 +614,10 @@ const onChange2 = (e) => {
       </div>
 
       <div style={{ paddingTop: "30px" }} className="container">
-        <div className="bgDoctor">
+        <div  onClick={()=> navigate({
+              pathname: "/hospitals",
+              search: `?type=service&name=${position[8]?.name}`,
+            })} className="bgDoctor">
           <span>{position[8]?.name}</span>
         </div>
       </div>

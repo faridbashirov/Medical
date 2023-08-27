@@ -25,6 +25,33 @@
 .fav-card-mob.card-body{
     padding-left: 0 !important;
 }
+@media(min-width:1295px) and (max-width:1451px){
+    .doctorss{
+        /* grid-template-columns: minmax(auto, 2fr) minmax(auto, 1fr); */
+        gap: 0px;
+        grid-template-columns: 35% 65% !important;
+    }
+}
+.doctorss .card-body{
+    width: 90% !important;
+}
+@media(min-width:1025px) and (max-width:1294px){
+    .doctorss{
+        /* grid-template-columns: minmax(auto, 2fr) minmax(auto, 1fr); */
+        gap: 0px;
+        grid-template-columns: 35% 65% !important;
+    }
+    .doctorss .card-body{
+        padding-left: 20px !important;
+    }
+    
+    .cardReviewDoctors a,
+    .cardReviewDoctors p,
+    .cardReviewDoctors span{
+        font-size: 10px !important;
+    }
+    
+}
 .cardFavDoctors-active{
     background-color: #5282FF !important;
     padding-left: 20px;

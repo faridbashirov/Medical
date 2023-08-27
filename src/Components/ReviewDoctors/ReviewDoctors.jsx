@@ -36,6 +36,7 @@ import profileDoctorReviews from "../api/profileDoctorReviews";
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { FadeLoader } from "react-spinners";
 const items = [
   {
     label: (
@@ -200,10 +201,10 @@ const  ReviewDoctors = () => {
   const [searchParams,setSearchParams] = useSearchParams()
 
   const {user,authToken}=useSelector(state=> state.auth)
- 
+  
 
 
-  const {data,error,count}=profileDoctorReviews(searchParams.get("page") || null)
+  const {data,error,count,loading}=profileDoctorReviews(searchParams.get("page") || null)
   console.log(data);
   if(error) {
     return <div>Page Not Found</div>
@@ -242,7 +243,7 @@ const  ReviewDoctors = () => {
       </div>
 
       <div className="container">
-        <div className="displayGridReviewDr">
+        <div className="displayGridReviewDr doctorss">
           <div style={{ height: "320px" }} className="menuNav">
             <ul>
             <li  onClick={()=> navigate("/profile")}
@@ -328,11 +329,22 @@ const  ReviewDoctors = () => {
           </div>
 
           <div className="menuRight">
-        
+            
+
+            <>{
+              loading  ?  <div> <FadeLoader
+              color="black"
+              className={"loading"}
+              loading={true}
+              // style={{top:"50px"}}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            /> </div> : 
             
             
             <div>
-              { data?.length !== 0 ? data.map((item,index)=>{
+              {  data.map((item,index)=>{
                 return  <div className="cardReviewDoctors-main">
                 <div className="card-head display_grid">
                   <img id="doctorImage"  src={item.doctor?.profile_photo}/>
@@ -383,7 +395,7 @@ const  ReviewDoctors = () => {
                   </div>
                 </div>
               </div>
-              }) : <div style={{textAlign:"center"}}> {t("nothingfound")}</div>}
+              }) }
              
              
               <div className={'review-doctors-pagination'}
@@ -396,10 +408,13 @@ const  ReviewDoctors = () => {
 
        }}  total={count}
         
-       /> : ""}
+       /> : <div style={{textAlign:"center"}}> {t("nothingfound")}</div>}
               </div>
             </div>
+}
+            </>
           </div>
+          
         </div>
       </div>
 

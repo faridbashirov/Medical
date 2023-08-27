@@ -21,7 +21,7 @@ const AllFiltersModal = ({openFilters,onCloseFilter,country}) => {
   const [searchParams,setSearchParams] = useSearchParams()
   const [selectedRaitingValue, setSelectedRaitingValue] = useState(searchParams.get("raiting")? searchParams.get("raiting").split(",") : []);
   const [selectedCountryValue, setSelectedCountryValue] = useState(searchParams.get("country")? searchParams.get("country").split(",") : []);
-
+  
   const onFinish = (data) => {
     console.log(data)
     searchParams.delete("page");
@@ -59,18 +59,18 @@ const AllFiltersModal = ({openFilters,onCloseFilter,country}) => {
   
       };
 
-  useEffect(()=>{
-      const getCountries=async()=>{
-        const data= await allCountriesFetch(localStorage.getItem("lang"));
+  // useEffect(()=>{
+  //     const getCountries=async()=>{
+  //       const data= await allCountriesFetch(localStorage.getItem("lang"));
 
-        setCountry(data)
+  //       setCountry(data)
 
 
 
-      }
-      getCountries()
+  //     }
+  //     getCountries()
 
-    },[i18next.language])
+  //   },[i18next.language])
   return (
     <Modal open={openFilters} onCancel={onCloseFilter} footer={[]}>
       <Typography className={'login-title'}>All Filters</Typography>

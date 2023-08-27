@@ -39,7 +39,7 @@ import { useSearchParams } from "react-router-dom";
 import favoritesFetch from "../api/favoriteHospitalsFetch";
 import I18nextBrowserLanguageDetector from "i18next-browser-languagedetector";
 import { useTranslation } from "react-i18next";
-
+import { FadeLoader } from "react-spinners";
 
 const items = [
   {
@@ -206,7 +206,7 @@ const FavHospitals = () => {
   const [activeElement, setActiveElement] = useState(null);
   console.log(authToken?.access);
   const [searchParams,setSearchParams] = useSearchParams()
-
+  const [liked,setLiked]=useState(false)
   const handleClick = (elementId) => {
     setActiveElement(elementId);
    
@@ -217,7 +217,7 @@ const FavHospitals = () => {
 
   const DeleteFromFavorite= async(id)=>{
     
-
+    setLiked(true)
     axiosPrivate.delete(`card/remove_favorite/${id}`)
     .then((res) => {
         console.log(res);
@@ -351,10 +351,22 @@ const FavHospitals = () => {
           </div>
 
           <div className="menuRight">
+          <>
+          {loading && !liked ?  <div> <FadeLoader
+              color="black"
+              className={"loading"}
+              loading={true}
+              // style={{top:"50px"}}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            /> </div> : 
+           
+            
           
             <div>
-              {data?.length !== 0 ? data.map((item,index)=>{
-                return  <div    className={activeElement ===item.id ? "cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors cardReviewDoctors"} >
+              { data.map((item,index)=>{
+                return  <div   onClick={()=>handleClick(item.id)} className={activeElement ===item.id ? "cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors cardReviewDoctors"} >
                 <div className="display_grid img-wrapper">
                   <img
                     className={"cardFavHospitals-img"}
@@ -364,7 +376,7 @@ const FavHospitals = () => {
                   <img id="sponsoredImage" src={Sponsored} />
                   <img onClick={()=> DeleteFromFavorite(item.hospital.id)}   id="likeImageFavHospitals" src={heart} />
                 </div>
-                <div onClick={()=>handleClick(item.id)}
+                <div
                   style={{ width: "769px", paddingLeft: "167px" }}
                   className="card-body  card-content"
                 >
@@ -660,7 +672,7 @@ const FavHospitals = () => {
                   </div>
                 </div>
               </div>
-              }) : <div style={{textAlign:"center"}}> {t("nothingfound")} </div>}
+              })}
              
               {/* <div className="cardReviewDoctors">
                 <div className="display_grid img-wrapper">
@@ -1266,20 +1278,25 @@ const FavHospitals = () => {
                   </div>
                 </div>
               </div> */}
-             
-              
-            </div>
-            {count ? <Pagination style={{textAlign:"center"}}
+        <div className={'review-doctors-pagination'}>
+{count ? <Pagination style={{textAlign:"center"}}
         current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
          searchParams.set("page", page)
-         // const newSearch = `?${searchParams.toString()}`;
+         
         setSearchParams(searchParams)
 
        }}  total={count}
         
-       /> : ""}
+       />  : <div style={{textAlign:"center"}}> {t("nothingfound")} </div>}
+             </div>
+              
+            </div>
             
-          </div>
+            
+          
+}
+          </>
+        </div>
           
         </div>
       </div>

@@ -5,9 +5,10 @@ import "../Slider.css";
 import BakuPic from "../../src/assets/Images/BakuPic.png";
 import MoskovaPic from "../../src/assets/Images/MoskovaPic.png";
 import 'react-multi-carousel/lib/styles.css';
-
+import { useNavigate} from "react-router-dom";
 
 const Slider = ({countries}) => {
+ const navigate=useNavigate()
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -31,7 +32,7 @@ const Slider = ({countries}) => {
     <>
       <Carousel responsive={responsive}>
         {countries.map((item,index)=>{
-          return     <Cards key={index} img={item.image} />
+          return     <Cards title={item.name} key={index} img={item.image} />
         })}
     
       </Carousel>

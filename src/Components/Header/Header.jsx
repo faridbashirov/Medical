@@ -270,9 +270,10 @@ const Header = ({handleMenu,showMenu,setShowMenu}) =>{
       <header>
         <div id="bg">
           <div className="container container1">
-            <div>
+          <Link to="/">  <div>
               <img src={Vector} />
             </div>
+            </Link>
             <div className="mR">
               <h1 className="textMed">112 Med</h1>
               <p className="medMarket">{t("Medical marketplace")}</p>
@@ -329,9 +330,9 @@ const Header = ({handleMenu,showMenu,setShowMenu}) =>{
                     <p>{t("contact")} </p>
                   </div>
                 </li>
-                <li onClick={()=>navigate("/profile")} style={{ paddingBottom: "15px" }}>
-                  <img className="heart" src={heart} />
-                </li>
+                {user ?<li  onClick={()=>navigate("/profile")} style={{ paddingBottom: "15px",cursor:"pointer" }}>
+                  <img   src={userIcon} />
+                </li>:""}
                 <li style={{ paddingBottom: "15px" }}>
                  {user ? <Button
                     className="button"

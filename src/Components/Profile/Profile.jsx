@@ -294,7 +294,7 @@ const Profile = () => {
       </div>
 
       <div style={{ paddingBottom: "50px" }} className="container">
-        <div className="displayGrid">
+        <div className="displayGrid doctorss">
           <div style={{ height: "320px" }} className="menuNav">
             <ul>
               <li
