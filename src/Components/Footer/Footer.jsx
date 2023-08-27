@@ -35,17 +35,17 @@ const Footer = () => {
               </li>
               <li style={{
                 cursor:"pointer"
-              }} onClick={()=> {navigate("/doctors")}} className={"footer-nav-link"}>
+              }}  onClick={()=> {navigate("/doctors")}} className={"footer-nav-link"}>
               {t("Doctors")}
               </li>
               <li  style={{
                 cursor:"pointer"
-              }} onClick={()=> {navigate("/hospitals")}} className={"footer-nav-link"}>
+              }}  onClick={()=> {navigate("/hospitals")}} className={"footer-nav-link"}>
               {t("Clinics")}
               </li>
               <li  style={{
                 cursor:"pointer"
-              }} onClick={()=> {navigate("/hospitals")}} className={"footer-nav-link"}>
+              }}  onClick={()=> {navigate("/hospitals")}} className={"footer-nav-link"}>
               {t("Services")}
               </li>
             </ul>
@@ -55,23 +55,23 @@ const Footer = () => {
               <li className={"footer-nav-title"}>
               {t("footerh2")}
               </li>
-              <li  style={{
+              <li   style={{
                 cursor:"pointer"
               }} onClick={()=> {navigate("/privacy-policy")}} className={"footer-nav-link"}>
               {t("footerh2.1")}
               </li>
-              <li className={"footer-nav-link"}>
+              <li  className={"footer-nav-link"}>
                 {" "}
                 {t("footer2.2")}
               </li>
               <li  style={{
                 cursor:"pointer"
-              }} onClick={()=> {navigate("/about-us")}} className={"footer-nav-link"}>
+              }}  onClick={()=> {navigate("/about-us")}} className={"footer-nav-link"}>
                 О «112 мед».
               </li>
               <li  style={{
                 cursor:"pointer"
-              }} onClick={()=> {navigate("/faq")}} className={"footer-nav-link"}>
+              }}  onClick={()=> {navigate("/faq")}} className={"footer-nav-link"}>
                 FAQ
               </li>
             </ul>
