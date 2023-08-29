@@ -58,7 +58,7 @@ console.log(reviews);
           <button key={item.id} className={'detail__info-btn'}>{t(item.label)}</button>
         ))}
       </div>
-      <Detail images={images} hospital={hospital}/>
+      <Detail open={onOpenBookingModal} images={images} hospital={hospital}/>
       <div className={'detail__clinic-btns'}>
         {advantages.map(item => (
           <button key={item.id} className={'detail__clinic-btn'}>

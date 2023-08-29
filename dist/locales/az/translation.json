@@ -135,6 +135,7 @@
     "dateerror":"Tarix seçməlisiniz",
     "locationerror":"Yerinizi daxil etməlisiniz",
     "hospitalserror":"Siz Xəstəxana seçməlisiniz",
+    "positionerror":"Siz Mövqeyi seçməlisiniz",
     "selectcountry":"Ölkə seç",
     "selecthospital":"Xəstəxana seçin",
     "selectposition":"Mövqeyi seçin",

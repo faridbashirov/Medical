@@ -71,7 +71,7 @@ const Questions = ({questions}) => {
               </div>
             </div> */}
           </div>
-          <button className={"detail-questions__btn"}>{t("allanswers2")}</button>
+          {/* <button className={"detail-questions__btn"}>{t("allanswers2")}</button> */}
         </div>
       </div>
 

@@ -962,7 +962,7 @@ const DeleteFromFavorite= async(id)=>{
                 {hospitals?.map((item,index)=>{
                   return  <div key={index} className={activeElement ===item.id ? "cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors"} >
                   <div   className="display_grid img-wrapper">
-                    <img
+                    <img onClick={()=> navigate(`/hospital/${item.id}`)}
                       className={"cardFavHospitals-img"}
                       id="hospitalsImage"
                       src={item.main_image}

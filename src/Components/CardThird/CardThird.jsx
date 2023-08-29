@@ -1,8 +1,8 @@
 import React from "react";
 import '../CardThird/CardThird.css'
 
-const CardThird = () => (
-  <div style={{display:"flex",alignItems:"center",justifyContent:"center"}} className="cardThird">
+const CardThird = ({image}) => (
+  <div style={{display:"flex",alignItems:"center",justifyContent:"center",background:`url(${image})`,backgroundPosition:"center",backgroundSize:"cover"}} className="cardThird">
     
   </div>
 );

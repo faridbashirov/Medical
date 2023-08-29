@@ -22,10 +22,11 @@ const responsive = {
     items: 1
   }
 };
-const DiscountSlider = () => {
+const DiscountSlider = ({offer}) => {
   return (
     <div style={{ paddingTop: "10px" }} className="container">
       <Carousel responsive={responsive}>
+      
         <div style={{marginRight:"10px"}}>
           <img style={{width:"100%", height:"100%"}} src={group15} />
         </div>

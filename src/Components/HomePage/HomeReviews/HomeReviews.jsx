@@ -36,7 +36,7 @@ const HomeReviews = () => {
       <div className="container">
         <h3 className="home-reviews__title">{t("comments")}</h3>
         <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
-        <Button className={"home-review-btn"} type={"link"}>{t("comments2")}</Button>
+       
       </div>
     </section>
   );

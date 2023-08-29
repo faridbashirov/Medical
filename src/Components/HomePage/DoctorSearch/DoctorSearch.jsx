@@ -9,9 +9,11 @@ import boyrek from "../../../assets/Svg/doctor-search/boyrek.svg"
 import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next';
 import "./DoctorSearch.css"
+import { useNavigate } from 'react-router-dom';
 
 const DoctorSearch = ({positions}) => {
   const {t}=useTranslation()
+  const navigate=useNavigate()
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -46,7 +48,11 @@ const DoctorSearch = ({positions}) => {
         <div className="top-clinic__carousel">
           <Carousel responsive={responsive}>
             {positions.map((item,index)=>{
-              return <div className="doctor-search_item">
+              return <div onClick={()=> navigate({
+                pathname:"/doctors",
+                search: `?type=service&name=${position[8]?.name}`
+                
+              })} className="doctor-search_item">
               <img src={tooth} alt="tooth"/>
               <p className={"doctor-search_item-desc"}>{item.name}</p>
             </div>

@@ -170,16 +170,7 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
                     >
                       {t("onlinebooking")}
                     </Button>
-                    <Space.Compact>
-                      <Input
-                        style={{
-                          border: "1.66718px solid #5282FF",
-                          width: "187.84px",
-                          height: "47.79px",
-                        }}
-                        defaultValue="26888888"
-                      />
-                    </Space.Compact>
+                  
                   </div>
                 </div>
                 <div className="socialIconDr"
@@ -200,11 +191,7 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
           >
             {t("onlinebooking")}
           </Button>
-          <Space.Compact>
-            <Input
-              defaultValue="26888888"
-            />
-          </Space.Compact>
+          
         </div>
       </div>
     </section>

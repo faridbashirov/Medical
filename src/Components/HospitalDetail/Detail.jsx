@@ -34,7 +34,7 @@ const responsive = {
     items: 1
   }
 };
-const Detail = ({images,hospital}) => {
+const Detail = ({images,hospital,open}) => {
   
   const {t}=useTranslation()
   const [visibleImages, setVisibleImages] = useState(3);
@@ -102,7 +102,7 @@ const Detail = ({images,hospital}) => {
             <div className={'right__share'}>
               <img src={heart} alt=""/>
               <img className={'right__share--btn'} src={share} alt=""/>
-              <Button style={{color:"#5282ff", borderColor:"#5282ff"}}>{t("bron")} </Button>
+              <Button onClick={()=> open()} style={{color:"#5282ff", borderColor:"#5282ff"}}>{t("bron")} </Button>
             </div>
             <button className={'right__share--price-btn'}>
               <img src={dollar} alt=""/>

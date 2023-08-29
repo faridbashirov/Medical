@@ -115,7 +115,7 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
               <Input {...field} placeholder={t("fullname")} className={'booking-input'} />
             )}
           />
-          {errors?.name && errors.name.message}
+            <p style={{color:"red"}}>{errors?.name && errors.name.message}</p>
         
            
           
@@ -135,7 +135,7 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
               <Input {...field} placeholder={'(+994)'} className={'booking-input'} />
             )}
           />
-           {errors?.phone && errors.phone.message}
+            <p style={{color:"red"}}>{errors?.phone && errors.phone.message}</p>
         </Item>
         <Item name="category">
         <Controller
@@ -165,10 +165,11 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
             )}
 
           />
-              {errors?.category && errors.category.message}
+              <p style={{color:"red"}}>{errors?.category && errors.category.message}</p>
           
         </Item>
-        <Item name={"time"}
+        <div style={{width:"100%",display:"flex",alignItems:"start",justifyContent:"space-between"}}>
+        <Item name={"time"} style={{width:"48%"}}
         >
           <Controller
              rules={{
@@ -179,16 +180,16 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
             render={({ field }) => (
              
               
-              <TimePicker placeholder={t("selecttime")} {...field} className={"booking-modal__time-input"}/>
+              <TimePicker style={{width:"100%"}} placeholder={t("selecttime")} {...field} className={"booking-modal__time-input"}/>
              
             )}
           />
-          {errors?.time && errors.time.message}
+          <p style={{color:"red"}}>{errors?.time && errors.time.message}</p>
            
           
       
         </Item>
-        <Item valuePropName={'date'} name={"date"}
+        <Item valuePropName={'date'} name={"date"} style={{width:"48%"}}
         >
          
            <Controller
@@ -200,14 +201,15 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
             render={({ field }) => (
              
               
-              <DatePicker   use12Hours     defaultDate={new Date(2016, 8, 15, 10, 30, 0)} {...field}    placeholder={t("selectdate")} {...field} className={"booking-modal__date-input"}/>
+              <DatePicker  style={{width:"100%"}} use12Hours     defaultDate={new Date(2016, 8, 15, 10, 30, 0)} {...field}    placeholder={t("selectdate")} {...field} className={"booking-modal__date-input"}/>
              
             )}
           />
-             {errors?.date && errors.date.message}
+             <p style={{color:"red"}}>{errors?.date && errors.date.message}</p>
           
       
         </Item>
+        </div>
         <Button type={'primary'} htmlType={'submit'} block size={'large'} style={{backgroundColor:"#5282ff",display: 'block', marginBottom: '.5rem'}}>{t("bron4")}</Button>
       </Form>
     </Modal>

@@ -136,6 +136,7 @@
     "category":"Category",
     "locationerror":"You must enter your location",
     "hospitalserror":"You must choose a Hospital",
+    "positionerror":"You must select your position",
     "selectcountry":"Select Country",
     "selecthospital":"Select Hospital",
     "selectposition":"Select Position",

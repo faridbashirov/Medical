@@ -863,7 +863,7 @@ const Doctors = () => {
              {doctors.map((item,index)=>{
                 return <div key={item.id}  className={activeElement ===item.id ?  "doctors-card doctors-card-active" : "doctors-card"}>
                 <div className="doctors-img">
-                  <img className="doctors-img-lg" src={item.profile_photo}/>
+                  <img onClick={()=> navigate(`/doctor/${item.id}`)} className="doctors-img-lg" src={item.profile_photo}/>
 
                   { user ? (
                   

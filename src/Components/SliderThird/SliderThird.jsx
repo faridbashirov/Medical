@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import CardThird from "../CardThird/CardThird";
 
-const SliderThird = () => {
+const SliderThird = ({offer}) => {
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -25,12 +25,11 @@ const SliderThird = () => {
   return (
     <>
       <Carousel responsive={responsive}>
-       <CardThird/>
-       <CardThird/>
-       <CardThird/>
-       <CardThird/>
-       <CardThird/>
-       <CardThird/>
+        {offer.map((item,index)=>{
+          return      <CardThird ird key={index} image={item.image}/>
+        })}
+   
+       
       </Carousel>
     </>
   );

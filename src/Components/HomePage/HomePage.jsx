@@ -705,7 +705,7 @@ const onChange2 = (e) => {
           </div> */}
         </div>
       </div>
-      <DiscoundSlider />
+      <DiscoundSlider offer={bestoffer} />
 
       <div style={{ paddingTop: "10px" }} className="container">
         <div>
@@ -770,7 +770,7 @@ const onChange2 = (e) => {
         </p>
       </div>
       <div className="containerSliderSecond">
-        <SliderThird />
+        <SliderThird offer={bestoffer} />
       </div>
 
       <TopClinic/>

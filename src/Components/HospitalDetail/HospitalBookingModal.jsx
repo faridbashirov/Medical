@@ -175,7 +175,8 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
          }}>  {errors?.category && errors.category.message}</p>
           
         </Item>
-        <Item style={{
+        <div style={{display:"flex",width:"100%",alignItems:"start",justifyContent:"space-between"}}>
+        <Item style={{ width:"48%"
           
         }} name={"time"}
         >
@@ -188,7 +189,7 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
             render={({ field }) => (
              
               
-              <TimePicker placeholder={t("selecttime")} {...field} className={"booking-modal__time-input"}/>
+              <TimePicker style={{width:"100%"}} placeholder={t("selecttime")} {...field} className={"booking-modal__time-input"}/>
              
             )}
           />
@@ -199,7 +200,8 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
           
       
         </Item>
-        <Item valuePropName={'date'} name={"date"}
+        
+        <Item valuePropName={'date'} name={"date"} style={{width:"48%"}}
         >
          
            <Controller
@@ -208,10 +210,11 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
             }}
             name="date"
             control={control}
+            
             render={({ field }) => (
              
               
-              <DatePicker   use12Hours     defaultDate={new Date(2016, 8, 15, 10, 30, 0)} {...field}    placeholder={t("selectdate")} {...field} className={"booking-modal__date-input"}/>
+              <DatePicker style={{width:"100%"}}  use12Hours     defaultDate={new Date(2016, 8, 15, 10, 30, 0)} {...field}    placeholder={t("selectdate")} {...field} className={"booking-modal__date-input"}/>
              
             )}
           />
@@ -221,6 +224,7 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
           
       
         </Item>
+        </div>
         <Button type={'primary'} htmlType={'submit'} block size={'large'} style={{backgroundColor:"#5282ff",display: 'block', marginBottom: '.5rem'}}>{t("bron4")}</Button>
       </Form>
     </Modal>

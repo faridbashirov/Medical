@@ -107,9 +107,7 @@ const TopClinic = () => {
           <h3 className="top-clinic__header-title"><Trans i18nKey="tophospitals"></Trans></h3>
           <div className="top-clinic__header-btns">
             <div className="top-clinic__header-right-btns">
-              <Button className={"right-btn-primary"} type={"primary"}>топ 30</Button>
-              <Button className={"right-btn-link"} type={"link"}><span>&#x2022;</span>топ 10</Button>
-              <Button className={"right-btn-link"} type={"link"}><span>&#x2022;</span>топ 5</Button>
+             
             </div>
            <Button onClick={()=> navigate({
       pathname: "/hospitals",

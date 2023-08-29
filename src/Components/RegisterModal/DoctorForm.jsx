@@ -49,13 +49,13 @@ const DoctorForm = ({onCancel,keys}) => {
     .max(64),
     // location:Yup.string()
     // .label("Location")
-    // .required(),
+    // .required(t("")),
     hospital:Yup.string()
     .label("Hospital")
     .required(t("hospitalserror")),
-    // position:Yup.string()
-    // .label("Position")
-    // .required(),
+    position:Yup.string()
+    .label("Position")
+    .required(t("positionerror")),
     password:Yup.string()
     .label(t("password"))
     .min(3)
@@ -348,7 +348,7 @@ const DoctorForm = ({onCancel,keys}) => {
       
        
     </Item>
-    {errors?.position && errors.position.message}
+    <p style={{color:'red'}}> {errors?.position && errors.position.message}</p>
     <Item name="hospital">
     <Controller
           name="hospital"
