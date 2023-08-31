@@ -64,6 +64,7 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
     if (data.message){
       onCloseBookingModal()
       toast(t("booksuccess"))
+      reset()
      
 
     }
@@ -86,18 +87,8 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
 
   return (
     <>
-    <ToastContainer
-    position='top-right'
-    autoClose={5000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme='light'
-  />
+   
+    
     <Modal open={openBooking} onCancel={onCloseBookingModal} footer={[]}>
       <Typography className={'login-title'}>Войти или <br/>завести аккаунт</Typography>
       <Divider/>

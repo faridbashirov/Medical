@@ -48,9 +48,9 @@ const DoctorSearch = ({positions}) => {
         <div className="top-clinic__carousel">
           <Carousel responsive={responsive}>
             {positions.map((item,index)=>{
-              return <div onClick={()=> navigate({
+              return <div key={index} onClick={()=> navigate({
                 pathname:"/doctors",
-                search: `?type=service&name=${position[8]?.name}`
+                search: `?type=doctor&position=${item?.name}`
                 
               })} className="doctor-search_item">
               <img src={tooth} alt="tooth"/>
@@ -93,7 +93,11 @@ const DoctorSearch = ({positions}) => {
        
         <div className="top-clinic__mobile-items">
         {positions.map((item,index)=>{
-              return <div className="doctor-search_item">
+              return <div key={index} onClick={()=> navigate({
+                pathname:"/doctors",
+                search: `?type=doctor&position=${item?.name}`
+                
+              })}  className="doctor-search_item">
               <img src={tooth} alt="tooth"/>
               <p className={"doctor-search_item-desc"}>{item.name}</p>
             </div>

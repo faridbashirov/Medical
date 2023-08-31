@@ -26,7 +26,7 @@ const SliderSecond = ({position}) => {
     <>
       <Carousel responsive={responsive}>
         {position.map((item,index)=>{
-          return     <CardsSecond p={item.name} p2="-40%" />
+          return     <CardsSecond key={index} p={item.name} p2="-40%" />
         })}
     
        

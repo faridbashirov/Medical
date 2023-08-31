@@ -47,7 +47,7 @@
     .displayGridReviewDr{
         /* grid-template-columns: minmax(auto, 2fr) minmax(auto, 1fr); */
         gap: 0px;
-        grid-template-columns: 35% 55% ;
+        grid-template-columns: 35% 65% ;
     }
     
     
@@ -58,7 +58,11 @@
     }
     
 }
+.cardFavHospitals{
 
+    background-color: #FAFAFA ;
+    border: 1px solid #EFEFEF !important;
+}
 .cardFavHospitals-img {
     height: 230px;
     width: 230px;

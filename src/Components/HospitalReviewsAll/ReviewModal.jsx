@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import { useSelector } from 'react-redux';
 import { axiosPrivate } from '../../api/api';
 import { useForm } from "react-hook-form";
@@ -13,7 +13,7 @@ const {Item} = Form
 const ReviewModal = ({openReview,onCloseReview,id,add,setAdd}) => {
   const {user,authToken}=useSelector((state)=>state.auth)
   const {t,i18n} = useTranslation()
-  const formRef = React.createRef();
+  const formRef = useRef();
   const schema = Yup.object().shape({
     message: Yup.string()
         
@@ -60,7 +60,7 @@ const ReviewModal = ({openReview,onCloseReview,id,add,setAdd}) => {
         setRaiting(1)
         onCloseReview()
         setAdd(!add)
-       
+        formRef.current.resetFields();
       toast(t("messagesuc"))
         
     })
@@ -114,23 +114,12 @@ const ReviewModal = ({openReview,onCloseReview,id,add,setAdd}) => {
 
   return (
     <>
-     <ToastContainer
-    position='top-right'
-    autoClose={5000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme='light'
-  />
+    
     <Modal open={openReview} onCancel={onCloseReview}  footer={[]}>
       
       <Typography className={'login-title'}>Write Review</Typography>
       <Divider/>
-      <Form   onFinish={handleSubmit(formhandler)}  >
+      <Form  ref={formRef}  onFinish={handleSubmit(formhandler)}  >
         <Item name="message">
         <Controller
              rules={{

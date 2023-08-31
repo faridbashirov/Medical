@@ -9,8 +9,8 @@ const Cards = ({ img,title }) => {
   <div  onClick={()=> navigate({
     pathname: "/hospitals",
     search: `?type=clinic&country=${title}`,
-  })} style={{ borderRadius: "12px" }} className="card">
-    <img  src={img} />
+  })} style={{ borderRadius: "12px",background:`url(${img})`,backgroundSize:"cover",backgroundPosition:"center" }} className="card">
+    {/* <img  src={img} /> */}
   </div>
   )
   };

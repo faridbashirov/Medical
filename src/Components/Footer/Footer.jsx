@@ -78,17 +78,13 @@ const Footer = () => {
           </div>
           <div>
             <ul style={{ listStyle: "none" }}>
-              <li className={"footer-nav-title"}>
+              <li  className={"footer-nav-title"}>
               {t("footerh3")}
               </li>
-              <li className={"footer-nav-link"}>
-              {t("footer3.1")}
-              </li>
-              <li className={"footer-nav-link"}>
-                {" "}
-                {t("footer3.2")}
-              </li>
-              <li className={"footer-nav-link"}>
+              
+              <li style={{
+                "cursor":"pointer"
+              }}  onClick={()=>window.open('tel:900300400')} className={"footer-nav-link"}>
               {t("footer3.3")}
               </li>
             </ul>

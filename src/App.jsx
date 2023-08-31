@@ -61,6 +61,8 @@ const App = () => {
   
   
   return (
+    <>
+   
     <main className={`${showMenu && 'overflowHidden'} `}>
        {/* <MobileLogin />  */}
        <Routes>
@@ -91,6 +93,7 @@ const App = () => {
 
       {/* <Slider/> */}
     </main>
+    </>
   );
 };
 

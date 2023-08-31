@@ -15,6 +15,7 @@ import i18next from 'i18next';
 const {Item} = Form
 const { Panel } = Collapse;
 import { useTranslation } from 'react-i18next';
+import uuid from 'react-uuid';
 const AllFiltersModal = ({openFilters,onCloseFilter,country}) => {
   const navigate = useNavigate()
   const {t,i18n}=useTranslation()
@@ -109,7 +110,7 @@ const AllFiltersModal = ({openFilters,onCloseFilter,country}) => {
                   <hr style={{ border: "1px solid #F0F0F0" }} />
                   <Checkbox.Group style={{display:"block"}} value={selectedCountryValue} onChange={ CountryChange}>
                    {country?.map((item,index)=>{
-                    return <> <Checkbox value={item.name} >
+                    return <> <Checkbox key={uuid()} value={item.name} >
                     <p
                       style={{
                         margin: "6px 0",

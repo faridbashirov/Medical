@@ -31,7 +31,7 @@
     padding-left: 100px !important;
 }
 .card-content{
-    width: 100% !important;
+    width: 80% !important;
 }
 .cardReviewDoctors{
     display: flex;
@@ -42,7 +42,8 @@
     margin: 35px 0;
     padding: 15px;
     color: #000;
-    background-color: #fff;
+    background-color: #FAFAFA ;
+    border: 1px solid #EFEFEF !important;
 }
 .cardReviewDoctors-active .changed{
     color: #fff;

@@ -9,6 +9,7 @@ import {
   Collapse,
   Checkbox,
 } from "antd";
+import uuid from "react-uuid";
 import { FadeLoader } from "react-spinners";
 import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
@@ -382,6 +383,7 @@ const DeleteFromFavorite= async(id)=>{
             checkedValue || "clinic",
               searchParams.get("location") || "",
               searchParams.get("name") || "",
+              searchParams.get("position") || "",
               searchParams.get("page") || 0,
               i18next.language
             ));
@@ -914,7 +916,7 @@ const DeleteFromFavorite= async(id)=>{
               size={150}
               aria-label="Loading Spinner"
               data-testid="loader"
-            /> </div> : <div className="menuRight">
+            /> </div> : <div className="menuRight" style={{width:"100%"}}>
            
             <div>
               <p className={"result-text"}>
@@ -960,7 +962,7 @@ const DeleteFromFavorite= async(id)=>{
 
               <div>
                 {hospitals?.map((item,index)=>{
-                  return  <div key={index} className={activeElement ===item.id ? "cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors"} >
+                  return  <div key={uuid()} className={activeElement ===item.id ? "cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors"} >
                   <div   className="display_grid img-wrapper">
                     <img onClick={()=> navigate(`/hospital/${item.id}`)}
                       className={"cardFavHospitals-img"}

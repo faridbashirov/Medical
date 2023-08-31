@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import { Trans } from "react-i18next";
 import { axiosPrivate } from '../../../api/api';
+import uuid from 'react-uuid';
 const TopClinic = () => {
 
   const {hospitals}=useSelector((state)=>state.hospitals)
@@ -118,7 +119,7 @@ const TopClinic = () => {
         <div className="top-clinic__carousel">
           <Carousel responsive={responsive}>
             {hospitals.map((item,index)=>{
-              return <div key={index}  className="top-clinic_item">
+              return <div key={uuid()}  className="top-clinic_item">
               <div className="top-clinic__item-top">
                 <img onClick={()=> navigate(`/hospital/${item.id}`)}  src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
                 <div className="top-clinic__item-num">50%</div>
@@ -297,7 +298,7 @@ const TopClinic = () => {
         </div>
       <div className="top-clinic__mobile-items">
         {hospitals.map((item,index)=>{
-          return    <div key={index} className="top-clinic_item">
+          return    <div key={uuid()} className="top-clinic_item">
           <div className="top-clinic__item-top">
             <img src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
             <div className="top-clinic__item-num">50%</div>

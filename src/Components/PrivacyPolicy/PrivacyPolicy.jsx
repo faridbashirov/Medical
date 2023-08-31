@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Dropdown, Button, Space, Breadcrumb, Collapse } from "antd";
 import Vector from "../../assets/Images/Vector.svg";
@@ -17,11 +17,13 @@ import facebook from "../../assets/Images/facebook.png";
 import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import "./PrivacyPolicy.css"
-
+import privacyFetch from "../api/privacyFetch";
 import { ArrowRightOutlined} from "@ant-design/icons";
 import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
-
+import { useRef } from "react";
+import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 const { Panel } = Collapse;
 
 const items = [
@@ -183,6 +185,24 @@ const menuPropsFlag = {
 };
 
 const PrivacyPolicy = () => {
+
+  const {t,i18n}=useTranslation()
+  const {data,loading,error}=privacyFetch(localStorage.getItem("lang"))
+
+  const [active,setActive]=useState(data[0]?.id)
+  
+  const handlechange=(id)=>{
+    setActive(id)
+    console.log("here",id)
+  }
+  useEffect(()=>{
+    console.log(data);
+    setActive(data[0]?.id)
+  },[data,i18next.language])
+
+
+
+
   return (
     <div style={{ backgroundColor: "#F4F4F4" }}>
      
@@ -203,8 +223,8 @@ const PrivacyPolicy = () => {
             }
             items={[
               {
-                title: "Главная",
-                href: "",
+                title: t("home"),
+                href: "/",
               },
               {
                 title: "FAQ",
@@ -218,16 +238,30 @@ const PrivacyPolicy = () => {
         <div className="displayGridReviewDr">
           <div className="menuNav faq-nav-wrapper mb-20">
             <Collapse
+            accordion
+            
+             onChange={handlechange}
               className={"faq-nav"}
               bordered={false}
               defaultActiveKey={["1"]}
+              
             >
-              <Panel
-                style={{ border: "none" }}
-                header="Финансовая политика"
-                key="1"
-              ></Panel>
-              <Panel
+              <ul>
+              {data.map((item,index)=>{
+                return <li key={index} onClick={()=>handlechange(item.id)} style={{
+                  marginTop:"10px",cursor:"pointer"
+                }}
+                className={active ===item.id ? "faq-active": ""}
+          >
+
+{item.category}
+          </li>
+              })}
+
+              </ul>
+             
+              
+              {/* <Panel
                 style={{ border: "none" }}
                 header="Политика отзывов"
                 key="2"
@@ -256,49 +290,14 @@ const PrivacyPolicy = () => {
                 style={{ border: "none" }}
                 header="Сколько я экономлю?"
                 key="7"
-              ></Panel>
+              ></Panel> */}
             </Collapse>
           </div>
 
           <div className="menuRight">
             <p className={"privacy-desc"}>
-              Это первый и, наверное, самый главный вопрос, который приходит на
-              ум, когда речь <br /> заходит о медицинском туризме. <br /> Любая
-              медицинская операция или процедура, где бы она ни проводилась,
-              сопряжена <br /> с определенным риском. Чтобы снизить этот риск,
-              мы прилагаем все усилия, чтобы <br /> исследовать и предоставлять
-              нашим клиентам информацию о различных вариантах <br />{" "}
-              высококачественных медицинских учреждений.
-              <br /> Ниже приведены некоторые важные аспекты, которые мы
-              учитываем при добавлении <br /> любого поставщика медицинских
-              услуг в нашу сеть (одного или нескольких из <br /> перечисленных
-              ниже):
-              <br />
-              Сертификат ISO 9000 или аккредитация от Joint Commission
-              International (JCI), США.
-              <br /> (JCI является международным подразделением Объединенной
-              комиссии по <br /> аккредитации организаций здравоохранения,
-              которое оценивает стандарты качества <br /> больниц США). Если они
-              еще не аккредитованы ни одним из них, они должны, по <br />{" "}
-              крайней мере, работать над получением этих сертификатов или
-              аккредитаций. Они <br /> следуют лучшим практикам и стандартам
-              качества в отрасли.
-              <br /> Послужной список качественного обслуживания, отсутствие
-              очередей, персональное <br /> внимание врачей. Отзывы, которые мы
-              получаем от предыдущих пациентов, позволяют <br /> нам получить
-              эту информацию.
-              <br /> Предпочтение отдается медицинскому персоналу с опытом
-              работы в медицинских <br /> учреждениях США, Европы или других
-              развитых стран.
-              <br /> Сертифицирован одной из ведущих мировых компаний по
-              производству медицинских <br /> протезов.
-              <br /> Персонал, который говорит по-английски или имеет
-              англоговорящего переводчика <br /> для иностранных пациентов.{" "}
-              <br /> Отличная инфраструктура (чистые комнаты с кондиционером,
-              телевидение, <br /> подключение к Интернету) <br /> Комфортное
-              размещение и удобства для всех, кто сопровождает пациента.
-              <br />
-              Лицензия на практику в своей стране
+           {(data?.find((item) => item.id === active ))?.text}
+             
             </p>
           </div>
         </div>

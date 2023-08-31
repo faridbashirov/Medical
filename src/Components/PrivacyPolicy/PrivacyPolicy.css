@@ -2,6 +2,9 @@
  padding-left: 100px;
     line-height: 40px;
 }
+.faq-active{
+    color: blue;
+}
 
 @media (max-width: 756px) {
     .privacy-desc{

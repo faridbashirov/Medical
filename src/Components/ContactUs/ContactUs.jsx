@@ -37,8 +37,8 @@ import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ContactInfoFetch from "../api/getContactInfo";
-import { ToastContainer } from "react-toastify";
-import { toast } from "react-toastify";
+import { ToastContainer,toast  } from "react-toastify";
+
 const items = [
   {
     label: (
@@ -278,7 +278,7 @@ const ContactUs = () => {
     if(data.message){
       console.log("success");
       reset()
-      alert("Message sent!");
+      toast(t("messagesuc"))
       
                   setError({})
                   
@@ -290,6 +290,9 @@ const ContactUs = () => {
     console.log(value);
   };
   return (
+    <>
+    
+     
     <div style={{ backgroundColor: "#F4F4F4" }}>
       
       <div style={{ paddingTop: "30px" }} className="container">
@@ -493,6 +496,8 @@ const ContactUs = () => {
 
       <Footer/>
     </div>
+
+    </>
   );
 };
 

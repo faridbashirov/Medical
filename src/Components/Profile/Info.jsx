@@ -26,6 +26,8 @@ import "../Profile/Profile.css";
 import getUserFetch from "../api/getUser";
 import { UserInfoUpdateFetch } from "../api/userUpdate";
 import { useTranslation } from "react-i18next";
+import { ToastContainer,toast  } from "react-toastify";
+
 import {
   Button,
   Dropdown,
@@ -38,7 +40,7 @@ import {
   DatePicker,
   Select,
 } from "antd";
-
+import dayjs from "dayjs";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
@@ -116,7 +118,10 @@ const Info = () => {
     
 
     const data = await UserInfoUpdateFetch(value)
-    alert("Your details have been updated")
+    
+    toast.success(t("updategesuc"), {
+      toastId: 'success1',
+  })
 
     
 }
@@ -246,12 +251,14 @@ useEffect(()=>{
 
   return (
     <>
+
+
      <div>
               <Form 
                 initialValues={{
                 firstName:data?.first_name,
                 lastName:data?.last_name,
-                date:data?.birthdate,
+                date: dayjs(data?.birthdate),
                 number:data?.phone_number,
                 email:data?.email,
 
@@ -281,13 +288,14 @@ useEffect(()=>{
                           <DatePicker
                             className="datePicker"
                             onChange={onChange}
+                            dateFormat="YYYY-MM-DD"
                           />
                         </MyFormItem>
                       </Col>
                       <Col span={12}>
                         <MyFormItem name="number" label={t("phonenumber")}>
                           <Row gutter={8}>
-                            <Col span={10}>
+                            {/* <Col span={10}>
                               <Select
                                 className={"phone-select"}
                                 defaultValue="+994"
@@ -311,9 +319,9 @@ useEffect(()=>{
                                   },
                                 ]}
                               />
-                            </Col>
+                            </Col> */}
                               
-                            <Col span={14}>
+                            <Col span={12}>
                            
                               <Input  onChange={handlechange} defaultValue={data?.phone_number}  name="number"   type="tel" className="lastInputName" />
                              

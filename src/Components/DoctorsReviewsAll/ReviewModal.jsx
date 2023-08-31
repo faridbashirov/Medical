@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import { useSelector } from 'react-redux';
 import { axiosPrivate } from '../../api/api';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +14,7 @@ const {Item} = Form
 const ReviewModal = ({openReview,onCloseReview,id,add,setAdd}) => {
   const {t}=useTranslation()
   const {user,authToken}=useSelector((state)=>state.auth)
-  const formRef = React.createRef();
+  const formRef =useRef()
   
   const [raiting,setRaiting]=useState(1)
   const schema = Yup.object().shape({
@@ -57,8 +57,11 @@ const ReviewModal = ({openReview,onCloseReview,id,add,setAdd}) => {
         console.log(res);
         onCloseReview()
         setAdd(!add)
-        formRef.current.resetFields();
         toast(t("messagesuc"))
+        formRef.current.resetFields();
+        reset()
+        setRaiting(1)
+       
     })
     .catch((err) => {
        console.log(err);
@@ -78,23 +81,12 @@ const ReviewModal = ({openReview,onCloseReview,id,add,setAdd}) => {
 
   return (
     <>
-      <ToastContainer
-    position='top-right'
-    autoClose={5000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme='light'
-  />
+   
     <Modal open={openReview} onCancel={onCloseReview}  footer={[]}>
       
     <Typography className={'login-title'}>Write Review</Typography>
     <Divider/>
-    <Form   onFinish={handleSubmit(formhandler)}  >
+    <Form  ref={formRef}  onFinish={handleSubmit(formhandler)}  >
       <Item name="message">
       <Controller
            rules={{
@@ -106,10 +98,11 @@ const ReviewModal = ({openReview,onCloseReview,id,add,setAdd}) => {
             <Input {...field} placeholder={'Message'} className={'login-input'} />
           )}
         />
-         <p style={{color:'red'}}> {errors?.message && errors.message.message}</p>
+        
     
        
       </Item>
+      <p style={{color:'red'}}> {errors?.message && errors.message.message}</p>
       <Item name="rate">
       
               <Rate  value={raiting} onChange={(value)=>onchange(value)}/>

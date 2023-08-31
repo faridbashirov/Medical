@@ -533,11 +533,13 @@ const onChange2 = (e) => {
           
    
           {position.filter((item,index)=> index <4).map((item,index)=>{
-            return  <div onClick={()=> navigate({
+            return  <div key={index} onClick={()=> navigate({
               pathname: "/hospitals",
               search: `?type=service&name=${item?.name}`,
             })} style={{
-              background:`linear-gradient(180deg, rgba(82, 130, 255, 0) 0%, #5282ff 100%),url(${item.image}`
+              background:`linear-gradient(180deg, rgba(82, 130, 255, 0) 0%, #5282ff 100%),url(${item.image},`,
+              cursor:"pointer"
+              
               
             }} id="_box2" className="box2">
             <p>{item?.name} </p>
@@ -614,9 +616,12 @@ const onChange2 = (e) => {
       </div>
 
       <div style={{ paddingTop: "30px" }} className="container">
-        <div  onClick={()=> navigate({
+        <div style={{
+           cursor:"pointer"
+        }}  onClick={()=> navigate({
               pathname: "/hospitals",
               search: `?type=service&name=${position[8]?.name}`,
+
             })} className="bgDoctor">
           <span>{position[8]?.name}</span>
         </div>

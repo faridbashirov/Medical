@@ -293,6 +293,7 @@ const Doctors = () => {
    
     searchParams.delete("location")
     searchParams.delete("name")
+    searchParams.delete("position")
     setName("")
      
     if (value.length === 0) {
@@ -312,6 +313,7 @@ const Doctors = () => {
       searchParams.delete("page");
       searchParams.delete("location")
       searchParams.delete("name")
+      searchParams.delete("position")
       setName("")
        
       if (value.length === 0) {
@@ -337,6 +339,7 @@ const Doctors = () => {
         searchParams.delete("location")
         searchParams.delete("country")
         searchParams.delete("raiting")
+        searchParams.delete("position")
         const newSearch = `?${searchParams.toString()}`;
         navigate({ pathname: "/hospitals", search: newSearch });
       } else {
@@ -345,6 +348,7 @@ const Doctors = () => {
         searchParams.delete("location")
         searchParams.delete("country")
         searchParams.delete("raiting")
+        searchParams.delete("position")
         navigate({ search: `?${searchParams.toString()}` });
         
       }
@@ -382,6 +386,7 @@ const Doctors = () => {
         checkedValue || "doctor",
           searchParams.get("location") || "",
           searchParams.get("name") || "",
+          searchParams.get("position") || "",
           searchParams.get("page") || 0,
           i18next.language
         ));

@@ -483,16 +483,7 @@ if(error){
                       >
                        {t("onlinebooking")}
                       </Button>
-                      <Space.Compact>
-                        <Input
-                          style={{
-                            border: "1.66718px solid #5282FF",
-                            width: "187.84px",
-                            height: "47.79px",
-                          }}
-                          defaultValue="26888888"
-                        />
-                      </Space.Compact>
+                      
                       {user ?
                       <Button  onClick={reviewOpen}
                         style={{
@@ -520,13 +511,23 @@ if(error){
             </div>
           </div>
           <div className={"doc-card-btns-mobile"} style={{marginTop:"20px"}}>
+         
             <Button
-              className={"doc-card-btn-1"}
-
-              type="primary"
-            >
-             {t("onlinebooking")}
-            </Button>
+                      onClick={onOpenBookingModal}
+                      className={"doc-card-btn-1"}
+                        type="primary"
+                      >
+                       {t("onlinebooking")}
+                      </Button>
+                      
+                      {user ?
+                      <Button  onClick={reviewOpen}
+                      className={"doc-card-btn-1"}
+                        type="primary"
+                      >
+                      {t("writecomment")}
+                      </Button>
+:""}
            
           </div>
         </div>
