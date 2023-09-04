@@ -15,7 +15,7 @@ const DoctorReviews = ({reviews,id}) => {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 100, min: 500 },
-      items: 1
+      items: 2
     },
     desktop: {
       breakpoint: { max: 2500, min: 1200 },
@@ -40,7 +40,7 @@ const DoctorReviews = ({reviews,id}) => {
         </div>
         <div className="reviews__carousel">
           <Carousel responsive={responsive} >
-            {reviews.map((item,index)=>{
+            {reviews?.map((item,index)=>{
               return   <div className="reviews__carousel-item">
               <div className="reviews__carousel-item-content">
                 <p>{item.text}</p>

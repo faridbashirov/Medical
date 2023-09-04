@@ -917,7 +917,7 @@ const DeleteFromFavorite= async(id)=>{
               aria-label="Loading Spinner"
               data-testid="loader"
             /> </div> : <div className="menuRight" style={{width:"100%"}}>
-           
+               
             <div>
               <p className={"result-text"}>
                 <span
@@ -1308,7 +1308,7 @@ const DeleteFromFavorite= async(id)=>{
 
      }}  total={count}
       
-     /> :  <h1>Nothing Found !</h1> }
+     /> :  <h1> {t("nothingfound")} </h1> }
                 
                   
                   </> }

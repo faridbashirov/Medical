@@ -66,6 +66,8 @@ import { useNavigate } from "react-router-dom";
 import { PopularSearchFetch } from "../api/popularSearchs";
 import { allPositionsFetch } from "../api/allPositons";
 import { useSelector } from "react-redux";
+import { lazy } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useTranslation } from "react-i18next";
 import { Trans } from "react-i18next";
 import i18next from "i18next";
@@ -306,33 +308,33 @@ const HomePage = ({}) => {
   
   
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const [popularSearchsData, bestOfferData, likedOfferData, bestSellersData, countriesData, positionsData] = await Promise.all([
-          PopularSearchFetch(localStorage.getItem("lang")),
-          BestoffersFetch(localStorage.getItem("lang")),
-          LikedoffersFetch(localStorage.getItem("lang")),
-          BestsellersFetch(localStorage.getItem("lang")),
-          allCountriesFetch(localStorage.getItem("lang")),
-          allPositionsFetch(localStorage.getItem("lang")),
-        ]);
-  
-        setPopularSearchs(popularSearchsData);
-        setBestoffer(bestOfferData);
-        setLikedoffer(likedOfferData);
-        setBestseller(bestSellersData);
-        setCountries(countriesData);
-        setPosition(positionsData);
-      } catch (error) {
-        // Handle errors here if necessary
-        console.error(error);
-      }
-    }
+    useEffect(() => {
+      async function fetchData() {
+        try {
+          const [popularSearchsData, bestOfferData, likedOfferData, bestSellersData, countriesData, positionsData] = await Promise.all([
+            PopularSearchFetch(localStorage.getItem("lang")),
+            BestoffersFetch(localStorage.getItem("lang")),
+            LikedoffersFetch(localStorage.getItem("lang")),
+            BestsellersFetch(localStorage.getItem("lang")),
+            allCountriesFetch(localStorage.getItem("lang")),
+            allPositionsFetch(localStorage.getItem("lang")),
+          ]);
     
-    fetchData();
-  }, [i18next.language]);
- 
+          setPopularSearchs(popularSearchsData);
+          setBestoffer(bestOfferData);
+          setLikedoffer(likedOfferData);
+          setBestseller(bestSellersData);
+          setCountries(countriesData);
+          setPosition(positionsData);
+        } catch (error) {
+          // Handle errors here if necessary
+          console.error(error);
+        }
+      }
+      
+      fetchData();
+    }, [i18next.language]);
+  
   
   
   
@@ -671,7 +673,7 @@ const onChange2 = (e) => {
         <div className="grid_3">
         {likedoffer.filter((item,index)=> index <4 ).map((item,index)=>{
            return <div key={index}>
-           <img src={item.image} />
+           <LazyLoadImage loading="lazy" src={item.image} />
          </div>
           })}
           
@@ -680,7 +682,7 @@ const onChange2 = (e) => {
         <div style={{ paddingTop: "15px" }} className="grid_4">
         {likedoffer.map((item,index)=>{
           return    <div key={index}>
-          <img style={{ width: "615px" }} src={item.image} />
+          <LazyLoadImage style={{ width: "615px" }} src={item.image} />
         </div>
         })}
        
