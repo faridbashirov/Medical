@@ -157,7 +157,7 @@
         padding-left: 15px;
     }
     .review-doctors-pagination{
-        display: none;
+        /* display: none; */
     }
     .breadcrumbs {
         border-bottom: none;

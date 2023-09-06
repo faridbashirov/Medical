@@ -34,7 +34,7 @@ import reviewDoctor from "../../assets/Images/reviewDoctor.png";
 import CheckDoctor from "../../assets/Images/checkdoctor.png";
 import "./Doctors.css"
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { ArrowRightOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import { ArrowRightOutlined, EnvironmentOutlined, StarFilled} from "@ant-design/icons";
 import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
 import Sponsored from "../../assets/Svg/sponsored.svg";
 import Header from "../Header/index.js";
@@ -903,7 +903,18 @@ const Doctors = () => {
                       </p>
                     </div>
                     <div className="" style={{ marginRight: "auto" }}>
-                      <img src={Iconstars} />
+                    <div>
+                        {(()=>{
+                let star=[]
+                for(let index = 0; index < item?.raiting; index++) {
+                 star.push( 
+                  <StarFilled   style={{color:"#FFC224",marginLeft:"2px"}}  />
+                 )
+                
+              }
+              return star
+              })()}
+                        </div>
                     </div>
                     <div>
                       <p className="changed"
@@ -974,14 +985,25 @@ const Doctors = () => {
                       }}
                       className="changed"
                     >
-                      <EnvironmentOutlined
-                        style={{ marginRight: "6px", color: "#FFF" }}
+                      <EnvironmentOutlined 
+                        style={activeElement === item.id ?{ marginRight: "6px", color: "white" } :{ marginRight: "6px", color: "#5282FF" } }
                       />
                       {item.hospital?.name}
                     </p>
                     <div className={"doctors-card__ratings "}>
                       <p className={"doctors-card__ratings-num changed"}>9.0</p>
-                      <img src={Iconstars} />
+                      <div>
+                        {(()=>{
+                let star=[]
+                for(let index = 0; index < item?.raiting; index++) {
+                 star.push( 
+                  <StarFilled   style={{color:"#FFC224",marginLeft:"2px"}}  />
+                 )
+                
+              }
+              return star
+              })()}
+                        </div>
                       <p className="changed">Bеликолепно</p>
                       <p className="changed">{item.comment_count} {t("comments").toLowerCase()}</p>
                     </div>
@@ -1031,7 +1053,7 @@ const Doctors = () => {
                       </div>
                       <div>
                         <Link to={`/doctor/${item.id}`}><Button
-                          className={"doctors-more-btn"}
+                          className={activeElement ===item.id ?"doctors-more-btn-active" : "doctors-more-btn"}
                           type="primary"
                         >
                           {t("doctorlist")}

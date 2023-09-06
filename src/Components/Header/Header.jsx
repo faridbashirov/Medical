@@ -28,6 +28,7 @@ import {toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from "react-i18next";
 import { MenuOutlined } from "@ant-design/icons";
+import {CloseOutlined } from "@ant-design/icons";
 const items = [
   {
     label: (
@@ -359,7 +360,7 @@ const Header = ({handleMenu,showMenu,setShowMenu}) =>{
               }
              
             
-              <MenuOutlined onClick={handleMenu} className="white userİconMobileMenu" />
+              { showMenu ? <CloseOutlined className="white userİconMobileMenu" onClick={handleMenu}/> : <MenuOutlined onClick={handleMenu} className="white userİconMobileMenu" />}
               
             </div>
           </div>

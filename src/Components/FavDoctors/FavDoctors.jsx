@@ -513,8 +513,9 @@ const  FavDoctors = () => {
                             textAlign: "center",
                           }}
                         >
-                          Сосудистая хирургия
+                          {item.doctor.position?.name}
                         </p>
+                        {item.doctor?.experience ?
                         <p
                           style={{
                             color: "#000",
@@ -531,8 +532,9 @@ const  FavDoctors = () => {
                           }}
                         >
                           <img src={experience} />
-                          {/* {item.doctor.experience} */}
+                          {item.doctor.experience}
                         </p>
+              : ""}
                       </div>
                       <div>
                         <Button onClick={()=>navigate(`/doctor/${item.doctor.id}`)}
@@ -543,7 +545,7 @@ const  FavDoctors = () => {
                           }}
                           type="primary"
                         >
-                          Посмотреть Врачи
+                       {t("doctorlist")}
                         </Button>
                       </div>
                     </div>
@@ -559,7 +561,7 @@ const  FavDoctors = () => {
                           paddingTop: "0px !important",
                         }}
                       >
-                        Главный врач
+                         {item.doctor.position?.name}
                       </p>
                       <h3
                         style={{
@@ -569,7 +571,7 @@ const  FavDoctors = () => {
                           paddingTop: "10px",
                         }}
                       >
-                        Dr. Алина Леонидовна
+                        Dr. {item.doctor.first_name} {item.doctor.last_name}
                       </h3>
                       <p
                         style={{
@@ -582,7 +584,7 @@ const  FavDoctors = () => {
                         <EnvironmentOutlined
                           style={{ marginRight: "6px", color: "#5282FF" }}
                         />
-                        Больница Американ
+                        {item.doctor.hospital?.name}
                       </p>
                     </div>
                     <div style={{display:"flex", alignItems:"center",gap:"9px",fontSize:"12px"}}>
@@ -614,7 +616,7 @@ const  FavDoctors = () => {
                       <p
                         style={{ color: "#5282FF", textAlign: "right" }}
                       >
-                        <span>23</span> отзыва
+                          <Link className="changed" to={`/doctor-reviews/${item.doctor.id}`} style={{cursor:"pointer"}}><span>{item.doctor.comment_count}</span> отзыва</Link> 
                       </p>
                     </div>
                   </div>
@@ -646,7 +648,7 @@ const  FavDoctors = () => {
                             textAlign: "center",
                           }}
                         >
-                          Сосудистая хирургия
+                           {item.doctor.position?.name}
                         </p>
                         <p
                           style={{
@@ -669,7 +671,7 @@ const  FavDoctors = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div>  
               </div>
               })}
              

@@ -9,6 +9,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { useTranslation } from 'react-i18next';
 const DoctorReviews = ({reviews,id}) => {
   const {t}=useTranslation()
+  console.log(reviews);
     
    const navigate=useNavigate()
   const responsive = {
@@ -48,7 +49,7 @@ const DoctorReviews = ({reviews,id}) => {
               </div>
               <div className="reviews__carousel-item-footer">
                 <p><span className="item__footer-icon">H</span>
-                  <span className="item__footer-autor">{item.first_name}</span>
+                  <span className="item__footer-autor">{item.doctor.first_name}</span>
                   <img src={ruFlag} alt=""/></p>
                 <span className="item__footer-rating">8,8</span>
               </div>

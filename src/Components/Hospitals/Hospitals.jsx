@@ -10,6 +10,7 @@ import {
   Checkbox,
 } from "antd";
 import uuid from "react-uuid";
+import SingleStar from "../../assets/Svg/singleStar.svg";
 import { FadeLoader } from "react-spinners";
 import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
@@ -29,7 +30,7 @@ import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowRightOutlined, EnvironmentOutlined, FilterFilled } from "@ant-design/icons";
+import { ArrowRightOutlined, EnvironmentOutlined, FilterFilled,StarFilled   } from "@ant-design/icons";
 import { axiosPrivate } from "../../api/api";
 import "../FavHospitals/FavHospitals.css";
 import "./Hospitals.css"
@@ -1153,13 +1154,7 @@ const DeleteFromFavorite= async(id)=>{
                       <div>
                         <Link to={`/hospital/${item.id}`}>
                         <Button
-                          style={{
-                            backgroundColor: "#FFFF",
-                            borderRadius: "5px",
-                            width: "155px",
-                            height: "40px",
-                            color: "black",
-                          }}
+                           className={activeElement ===item.id ?"doctors-more-btn-active" : "doctors-more-btn"}
                           type="primary"
                          
                         >
@@ -1169,7 +1164,7 @@ const DeleteFromFavorite= async(id)=>{
                       </div>
                     </div>
                   </div>
-                  <div
+                  <div onClick={()=>handleClick(item.id)}
                     className="card-content-mobile"
                   >
                     <div
@@ -1211,7 +1206,18 @@ const DeleteFromFavorite= async(id)=>{
                         >
                           6.0
                         </p>
-                        <img src={Iconstars} />
+                        <div>
+                        {(()=>{
+                let star=[]
+                for(let index = 0; index < item?.raiting; index++) {
+                 star.push( 
+                  <StarFilled   style={{color:"#FFC224",marginLeft:"2px"}}  />
+                 )
+                
+              }
+              return star
+              })()}
+                        </div>
                         <p style={{ margin: "0px", color: "white" }}>Hеплохо</p>
                         <p
                           style={{ color: "#FFFF", textAlign: "right" }}

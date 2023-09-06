@@ -3,13 +3,14 @@ import RUB from "../../assets/Svg/rub.svg";
 import russianFlag from "../../assets/Images/russianFlagIcon.png";
 import question from "../../assets/Images/question.png";
 import heart from "../../assets/Images/heart.png";
-import {ArrowRightOutlined} from "@ant-design/icons";
+import {ArrowRightOutlined,CloseOutlined } from "@ant-design/icons";
 import React from "react";
 import facebook from "../../assets/Images/facebook.png";
 import vk from "../../assets/Images/vk.png";
 import instagram from "../../assets/Images/instagram.png";
 import './MobileMenu.css'
 import userIcon from "../../assets/Svg/userlogin.svg"
+
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => {
