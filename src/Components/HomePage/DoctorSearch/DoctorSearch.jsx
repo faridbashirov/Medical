@@ -9,30 +9,52 @@ import boyrek from "../../../assets/Svg/doctor-search/boyrek.svg"
 import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next';
 import "./DoctorSearch.css"
+
+import Slider from "react-slick";
+
 import { useNavigate } from 'react-router-dom';
 
 const DoctorSearch = ({positions}) => {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4.5,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 1023,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          initialSlide: 1
+        }
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots:false,
+          autoplay: true,
+          speed: 2000,
+          autoplaySpeed: 4000,
+        }
+      }
+    ]
+  };
   const {t}=useTranslation()
   const navigate=useNavigate()
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
-  };
+  
   return (
     <section className="top-clinic">
       <div className={"container"}>
@@ -45,9 +67,9 @@ const DoctorSearch = ({positions}) => {
             <Link to={"doctors"} ><Button className="top-clinic__header-left d-none" type={"primary"}>{t("doctorsearch4")} </Button></Link>
           </div>
         </div>
-        <div className="top-clinic__carousel">
-          <Carousel responsive={responsive}>
-            {positions.map((item,index)=>{
+        <div className="slider-second-desktop-version top-clinic__carousel">
+        <Slider {...settings}>
+        {positions.map((item,index)=>{
               return <div key={index} onClick={()=> navigate({
                 pathname:"/doctors",
                 search: `?type=doctor&position=${item?.name}`
@@ -57,6 +79,10 @@ const DoctorSearch = ({positions}) => {
               <p className={"doctor-search_item-desc"}>{item.name}</p>
             </div>
             })}
+        
+      </Slider>
+          
+          
             
             {/* <div className="doctor-search_item">
               <img src={surgery} alt="tooth"/>
@@ -88,16 +114,11 @@ const DoctorSearch = ({positions}) => {
               <img src={boyrek} alt="tooth"/>
               <p className={"doctor-search_item-desc"}>офтальмология</p>
             </div> */}
-          </Carousel>
         </div>
        
         <div className="top-clinic__mobile-items">
         {positions.map((item,index)=>{
-              return <div key={index} onClick={()=> navigate({
-                pathname:"/doctors",
-                search: `?type=doctor&position=${item?.name}`
-                
-              })}  className="doctor-search_item">
+              return <div className="doctor-search_item">
               <img src={tooth} alt="tooth"/>
               <p className={"doctor-search_item-desc"}>{item.name}</p>
             </div>

@@ -17,7 +17,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
   const navigate=useNavigate()
   console.log(showMenu)
   return (
-    <div className={`menu ${showMenu && 'show'}`}>
+    <div className={`menu  ${showMenu && 'show'}`}>
       <div style={{width:"100%"}}>
         <div className={"divider"}></div>
         <ul className={"menuList"}>
@@ -30,7 +30,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
                     <span
                       style={{
                         fontFamily: "Gilroy",
-                        fontSize: "17.5px",
+                        fontSize: "14px",
                         fontWeight: "500",
                         color: "white",
                       }}
@@ -52,7 +52,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
                         <span
                           style={{  
                             fontFamily: "Gilroy",
-                            fontSize: "17.5px",
+                            fontSize: "14px",
                             fontWeight: "500",
                             color: "white",
                           }}
@@ -71,7 +71,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
               <img src={question} />
             </div>
             <div>
-              <p>{t("contact")} </p>
+              <p className="question-text">{t("contact")} </p>
             </div>
           </li>
           <li style={{
@@ -83,7 +83,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
               src={userIcon}
 
             />
-            <p>{t("profile")}</p>
+            <p className="profile-text">{t("profile")}</p>
           </li>
         </ul>
       </div>
@@ -91,9 +91,9 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
       <div className={"menuFooter"}>
         <div  className="footerIcons reverse">
           <div style={{display:"flex", gap: "10px"}}>
-            <li><img style={{ width: "30.66px"}} src={facebook} /></li>
-            <li><img style={{ width: "36.66px" }} src={vk} /></li>
-            <li><img style={{ width: "30.66px" }} src={instagram} /></li>
+            <li><img  src={facebook} /></li>
+            <li><img  src={vk} /></li>
+            <li><img  src={instagram} /></li>
           </div>
 
           <div style={{ paddingLeft: "30px" }}>
@@ -104,7 +104,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
                 fontSize: "20px",
                 fontWeight: "600",
               }}
-              className="pad"
+              className="pad contact-btn"
             >
               {t("contact1")}
             </Button>
@@ -112,7 +112,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
         </div>
 
         <p
-          className="white"
+          className="white profile-text"
           style={{
             textAlign: "center",
             paddingBottom: "30px",

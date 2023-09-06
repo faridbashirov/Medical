@@ -2,35 +2,61 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import CardThird from "../CardThird/CardThird";
 
+import Slider from "react-slick";
+
 const SliderThird = ({offer}) => {
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 4
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 1023,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          initialSlide: 1
+        }
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots:false,
+          autoplay: true,
+          speed: 2000,
+          autoplaySpeed: 4000,
+        }
+      }
+    ]
   };
   return (
-    <>
-      <Carousel responsive={responsive}>
-        {offer.map((item,index)=>{
+    <> <div className="slider-second-desktop-version">
+    <Slider {...settings}>
+    {offer.map((item,index)=>{
           return      <CardThird ird key={index} image={item.image}/>
         })}
-   
-       
-      </Carousel>
+        
+      </Slider>
+    </div>
+    <div className="slider-second-mobile-version slider-third"> 
+    {offer.map((item,index)=>{
+          return      <CardThird ird key={index} image={item.image}/>
+        })}
+    </div>
+    
     </>
   );
 };

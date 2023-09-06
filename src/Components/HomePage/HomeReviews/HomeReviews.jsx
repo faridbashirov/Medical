@@ -12,6 +12,7 @@ import allReviewsFetch from '../../api/allReviews';
 
 
 
+
 const HomeReviews = () => {
   const {t}=useTranslation()
   const items = [
@@ -30,6 +31,7 @@ const HomeReviews = () => {
  
   const onChange = (children) => {
   }
+  
 
   return (
     <section className={"home-review"}>

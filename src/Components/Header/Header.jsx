@@ -266,12 +266,12 @@ const Header = ({handleMenu,showMenu,setShowMenu}) =>{
 
     return(
       <>
-    
-      <header>
+    <div className={showMenu ? "mobileMenu" : ""}>
+      <header >
         <div id="bg">
           <div className="container container1">
           <Link to="/">  <div>
-              <img src={Vector} />
+              <img  className="navbar-logo" src={Vector} />
             </div>
             </Link>
             <div className="mR">
@@ -327,7 +327,7 @@ const Header = ({handleMenu,showMenu,setShowMenu}) =>{
                     <img src={question} />
                   </div>
                   <div>
-                    <p>{t("contact")} </p>
+                    <p style={{color:"white"}}>{t("contact")} </p>
                   </div>
                 </li>
                 {user ?<li  onClick={()=>navigate("/profile")} style={{ paddingBottom: "15px",cursor:"pointer" }}>
@@ -368,7 +368,7 @@ const Header = ({handleMenu,showMenu,setShowMenu}) =>{
       <LoginModal openLogin={openLogin} onCloseLogin={onCloseLogin} onOpenRegister={onOpenRegister}/>
       <RegisterModal openRegister={openRegister} onCloseRegister={onCloseRegister}/>
       <MobileMenu setShowMenu={setShowMenu}  active={active} menuProps={menuProps} menuPropsFlag={menuPropsFlag} showMenu={showMenu} handleMenu={handleMenu}/>
-     <Outlet/>
+     <Outlet/></div>
      </>
     )
 }

@@ -618,9 +618,7 @@ h3{
         overflow: hidden;
     }
 
-    .grid_2 {
-        grid-template-columns: repeat(3, 1fr) !important;
-    }
+   
 
     .grid_2 img {
         width: 100%;
@@ -705,7 +703,7 @@ h3{
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
     .textMed {
         font-size: 16px !important;
     }
@@ -906,4 +904,170 @@ h3{
 .cardThird{
     width: 75% !important;
     margin: auto;
+}
+@media(max-width:768px){
+    .navbar-logo{
+        width: 44px;
+        height: 44px;
+    }
+    .textMed{
+        font-size: 16px !important;
+    }
+    .medMarket{
+        font-size: 11px !important;
+    }
+    :where(.css-dev-only-do-not-override-lgxug1).ant-input-affix-wrapper >input.ant-input{
+        font-size: 13px;
+    }
+}
+@media(min-width:768px) and (max-width:1024px){
+    .fontMed{
+        font-size: 50px;
+    }
+    .navbar-logo{
+        width: 50px;
+        height: 50px;
+    }
+    .textMed{
+        font-size: 20px !important;
+    }
+    .medMarket{
+        font-size: 13px !important;
+    }
+    .box2{
+        height: 180px;
+    }
+}
+.btn_{
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media(min-width:768px) and (max-width:1023px){
+    .grid_2 {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .box2{
+        padding-bottom: 0;
+        font-size: 18px !important;
+    }
+    .box1-text{
+        font-size: 22px !important;
+    }
+    .box1{
+        height: 250px;
+    }
+    .box1_3{
+        padding-top: 30px;
+    }
+}
+@media(max-width:768px){
+    .box2{
+        font-size: 14px !important;
+       
+    }
+    .box1-text{ 
+        padding-top: 20px;
+        padding-left: 20px;
+    }
+    .box1{
+        height: 129px;
+    }
+}
+.box1{
+    position: relative;
+}
+.box1_3{
+    position: absolute;
+    bottom: 20px;
+}
+.box1-text{
+    font-weight: bold;
+}
+.grid_2 img,.grid_3 img,.grid_4 img{
+    border-radius: 10px;
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-row{
+    width: 100%;
+}
+.containerSliderSeconds .slick-active{
+    margin: 0 !important;
+}
+.countryy .slick-active{
+    margin: 0 30px !important;
+}
+.containerSliderSeconds .slick-slide:first-child{
+    margin-left: 0.15% !important;
+}.countriess .slick-active{
+    margin: 0 10px !important;
+}
+@media(max-width:767px){
+    .slider-second-desktop-version{
+        display: none;
+    }
+    .slider-second-mobile-version{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media(min-width:768px){
+    .slider-second-desktop-version{
+        display: block;
+    }
+    .slider-second-mobile-version{
+      display: none !important;
+    }
+}
+.cardThird{
+    width: 95% !important;
+}
+.slider-second-mobile-version .cardThird{
+    height: 111px !important;
+}
+.slider-second-mobile-version{
+    row-gap: 30px;
+    column-gap: 15px;
+    margin-bottom: 20px;
+}
+.containerSliderSecond .slick-slide:first-child{
+    margin-left: 0.5% !important;
+}
+.slider-second-mobile-version .cardSecond{
+    flex-direction: column !important;
+    align-items: start !important;
+    padding-left: 20px;
+    height: 111px !important;
+}
+.foreign-btn-sm{
+    height: 35px;
+}
+.slider-second-mobile-version .cardSecond p:first-child{
+    font-size: 18px !important;
+}
+.slider-second-mobile-version .cardSecond p:last-child{
+    font-size: 15px !important;
+    width: 56px;
+    height: 24px;
+    background: #5282FF;
+    color: #fff !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.slider-second-mobile-version .cardSecond{
+    width: 100% !important;
+}
+.containerSliderSeconds .slider-second-mobile-version{
+    row-gap: 0 !important;
+}
+.top-clinic .slick-slide:first-child{
+    margin-left: 0.20% !important;
+}
+.top-clinic .slider-second-desktop-version .doctor-search_item{
+    width: 96% !important;
+}
+.top-clinic .slick-active{
+    margin: 0 10px!important;
 }

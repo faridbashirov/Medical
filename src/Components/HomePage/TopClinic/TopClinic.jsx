@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import { Trans } from "react-i18next";
 import { axiosPrivate } from '../../../api/api';
+import Slider from "react-slick";
 import uuid from 'react-uuid';
 const TopClinic = () => {
 
@@ -35,24 +36,42 @@ const TopClinic = () => {
     dispatch(fetchHospitals(localStorage.getItem("lang")))
    },[add])
 
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
+   const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 1023,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          initialSlide: 1
+        }
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots:false,
+          autoplay: true,
+          speed: 2000,
+          autoplaySpeed: 4000,
+        }
+      }
+    ]
   };
 
   const AddToFavorite= async(id)=>{
@@ -117,48 +136,8 @@ const TopClinic = () => {
           </div>
         </div>
         <div className="top-clinic__carousel">
-          <Carousel responsive={responsive}>
-            {hospitals.map((item,index)=>{
-              return <div key={uuid()}  className="top-clinic_item">
-              <div className="top-clinic__item-top">
-                <img onClick={()=> navigate(`/hospital/${item.id}`)}  src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
-                <div className="top-clinic__item-num">50%</div>
-                
-                { user ? (
-                       
-                       item.is_favorite ?  <img style={{cursor:"pointer"}}  onClick={()=> DeleteFromFavorite(item.id)}   className='top-clinic__item-heart' src={heart} />  :  <img style={{cursor:"pointer"}}  onClick={()=> AddToFavorite(item.id)}    className='top-clinic__item-heart' src={likeReview} />) : "" }
-                {/* {item.is_favorite ?  <img    className='top-clinic__item-heart' src={heart} />  :  <img   className='top-clinic__item-heart' src={likeReview} /> } */}
-                  {/* <img src={heart} alt="heart"/> */}
-                
-              </div>
-              <div className="clinic__item-footer">
-                <div className="clinic__item-footer-subtitle">
-                  <img src={location} alt=""/>
-                  <span>{item.location}</span>
-                </div>
-                <h3 className="clinic__item-footer-title">{item.name}</h3>
-                <div className="clinic__item-footer-stars">
-                  <span>8.4</span>
-                  {(()=>{
-                let star=[]
-                for(let index = 0; index < item.raiting; index++) {
-                 star.push( <img
-                  className={'reviews-stars'}
-                  src={singleStar}
-                />)
-                
-              }
-              return star
-              })()}
-                  {/* <img src={stars} alt=""/> */}
-                </div>
-              </div>
-            </div>
-            
-
-            })}
-            
-            {/* <div className="top-clinic_item">
+        <Slider {...settings}>
+        <div className="top-clinic_item">
               <div className="top-clinic__item-top">
                 <img src={clinic2} alt="clinic" className="top-clinic__item-img"/>
                 <div className="top-clinic__item-num">50%</div>
@@ -293,8 +272,10 @@ const TopClinic = () => {
                   <img src={stars} alt=""/>
                 </div>
               </div>
-            </div> */}
-          </Carousel>
+            </div>
+            </Slider>
+            
+           
         </div>
       <div className="top-clinic__mobile-items">
         {hospitals.map((item,index)=>{

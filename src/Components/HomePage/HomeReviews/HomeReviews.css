@@ -167,3 +167,12 @@
         line-height: 17px;
     }
 }
+.home-reviews__items .home-reviews__item{
+    width: 97% !important;
+}
+.home-reviews__items .slick-slide:first-child{
+    margin-left: 0.20% !important;
+}
+.home-reviews__items .slick-active{
+    margin: 0 10px !important;
+}

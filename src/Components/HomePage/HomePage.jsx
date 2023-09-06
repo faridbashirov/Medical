@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Dropdown, Space, Input, Row, Col } from "antd";
 
-import Slider from "../Slider";
+import Sliders from "../Slider";
 import SliderSecond from "../SliderSecond/SliderSecond";
 import SliderThird from "../SliderThird/SliderThird";
 
@@ -474,7 +474,7 @@ const onChange2 = (e) => {
         </div>
       </div>
 
-      <div style={{ paddingTop: "200px" }} className="container">
+      <div style={{ paddingTop: "100px" }} className="container">
         {/* <Space wrap>
           <p style={{ fontWeight: "600", fontSize: "20px", color: "#000" }}>
             Поиск по:
@@ -673,7 +673,7 @@ const onChange2 = (e) => {
         <div className="grid_3">
         {likedoffer.filter((item,index)=> index <4 ).map((item,index)=>{
            return <div key={index}>
-           <LazyLoadImage loading="lazy" src={item.image} />
+           <img  src={item.image} />
          </div>
           })}
           
@@ -682,7 +682,7 @@ const onChange2 = (e) => {
         <div style={{ paddingTop: "15px" }} className="grid_4">
         {likedoffer.map((item,index)=>{
           return    <div key={index}>
-          <LazyLoadImage style={{ width: "615px" }} src={item.image} />
+          <img style={{ width: "615px" }} src={item.image} />
         </div>
         })}
        
@@ -729,9 +729,9 @@ const onChange2 = (e) => {
         </p>
       </div>
 
-      <div className="containerSliderSecond">
+      <div className="containerSliderSecond countryy">
         {" "}
-        <Slider countries={countries} />
+        <Sliders countries={countries} />
 
       </div>
 
@@ -759,6 +759,7 @@ const onChange2 = (e) => {
       </div>
 
       <div className="containerSliderSeconds" style={{ paddingTop: "50px" }}>
+        
         <SliderSecond position={position} />
         <Button
           className={"foreign-btn-sm"}
@@ -776,7 +777,7 @@ const onChange2 = (e) => {
         {t("specialoffer2")}
         </p>
       </div>
-      <div className="containerSliderSecond">
+      <div className="containerSliderSecond countriess">
         <SliderThird offer={bestoffer} />
       </div>
 

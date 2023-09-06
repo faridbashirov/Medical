@@ -49,7 +49,7 @@
 }
 .top-clinic__item-img{
     border-radius: 10px;
-
+    
     width: 100%;
     height: 100%;
 }
@@ -150,4 +150,7 @@
         line-height: 17px;
         height: 35px;
     }
+}
+.top-clinic_item{
+    width: 100% !important;
 }
