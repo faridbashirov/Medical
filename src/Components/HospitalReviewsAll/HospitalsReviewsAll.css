@@ -145,7 +145,7 @@
     margin-top: 10px;
 }
 .button-2{
-    background-color: #fff;
+    background-color: #fff !important;
     border-radius: 0;
     color: #5282FF;
     height: 44px;
@@ -212,7 +212,7 @@ display: flex;
     display: none;
 }
 .featured-btn-review{
-    background-color: #fff;
+    background-color: #fff !important;
     border-radius: 5px;
     color: #000;
     height: 44px;

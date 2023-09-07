@@ -301,8 +301,8 @@ const Header = ({handleMenu,showMenu,setShowMenu}) =>{
                     </Button>
                   </Dropdown>
                 </li>
-                <li style={{ paddingBottom: "15px" }}>
-                  <Dropdown   menu={menuPropsFlag}>
+                <li style={{ paddingBottom: "15px"}}>
+                  <Dropdown style={{display:"flex"}}  menu={menuPropsFlag}>
                     <Button type="text">
                       <Space>
                         {active.icon}

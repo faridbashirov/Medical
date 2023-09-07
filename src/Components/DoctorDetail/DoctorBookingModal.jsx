@@ -90,7 +90,7 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
    
     
     <Modal open={openBooking} onCancel={onCloseBookingModal} footer={[]}>
-      <Typography className={'login-title'}>Войти или <br/>завести аккаунт</Typography>
+      <Typography className={'login-title'}>{t("bron4")}</Typography>
       <Divider/>
       <Form onFinish={handleSubmit(onFinish)}>
         <Item >

@@ -1071,3 +1071,6 @@ h3{
 .top-clinic .slick-active{
     margin: 0 10px!important;
 }
+.ant-dropdown-menu-item{
+    padding: 15px 12px 10px 1px !important;
+}
