@@ -381,7 +381,7 @@ const  ReviewDoctors = () => {
                     </p>
                   </div>
                   <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
+                   className="card-footerr" style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <p  className="changed" style={{ color: "#464646", fontSize: "11.15px" }}>
                       Review To{" "}

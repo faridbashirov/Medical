@@ -7,40 +7,61 @@ import Link from 'antd/es/typography/Link';
 import { useNavigate } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
 import { useTranslation } from 'react-i18next';
+
+import Slider from "react-slick";
 const DoctorReviews = ({reviews,id}) => {
   const {t}=useTranslation()
   console.log(reviews);
     
    const navigate=useNavigate()
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 100, min: 500 },
-      items: 2
-    },
-    desktop: {
-      breakpoint: { max: 2500, min: 1200 },
-      items: 3
-    },
-    tablet: {
-      breakpoint: { max: 768, min: 464 },
-      items: 1
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
+ 
+   const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2.5,
+          slidesToScroll: 1,
+          initialSlide: 1
+        }
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 1.3,
+          slidesToScroll: 1,
+          dots:false,
+          autoplay: true,
+          speed: 2000,
+          autoplaySpeed: 4000,
+        }
+      }
+    ]
   };
-  
   return (
     <section className="hospital-detail__reviews">
       <div className="container">
         <div className="reviews__header">
           <h4 className="reviews__header-title">{t("hosinfo3")}</h4>
-          <p className="reviews__header-subtitle"><span className={"subtitle__rating"}>9,8</span>Великолепно <span>&#x2022;</span><span>{reviews.length} {t("comments")}</span> <Link onClick={()=> navigate(`/doctor-reviews/${id}`)} >{t("allreviews")}</Link></p>
+          <p className="reviews__header-subtitle"><span className={"subtitle__rating"}>9,8</span>Великолепно <span>&#x2022;</span><span>{reviews.length} {t("comments")}</span> </p>
         </div>
         <div className="reviews__carousel">
-          <Carousel responsive={responsive} >
+        <Slider {...settings}>
             {reviews?.map((item,index)=>{
               return   <div className="reviews__carousel-item">
               <div className="reviews__carousel-item-content">
@@ -57,7 +78,7 @@ const DoctorReviews = ({reviews,id}) => {
             })}
            
             
-          </Carousel>
+          </Slider>
         </div>
       <button style={{
         marginTop: '10px',

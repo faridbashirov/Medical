@@ -1167,7 +1167,7 @@ const DeleteFromFavorite= async(id)=>{
                   <div onClick={()=>handleClick(item.id)}
                     className="card-content-mobile"
                   >
-                    <div
+                    <div className="card-header"
                       style={{
                         paddingTop: "10px",
                       }}
@@ -1179,7 +1179,7 @@ const DeleteFromFavorite= async(id)=>{
                         }}
                       >
                         <EnvironmentOutlined
-                          style={{ marginRight: "6px", color: "white" }}
+                          style={{ marginRight: "6px"}}
                         />
                          {item.location}
                       </p>

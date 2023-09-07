@@ -140,3 +140,12 @@
         width: 100%;
     }
 }
+.reviews__carousel .slick-slide:first-child{
+    margin-left: 0.20% !important;
+}
+.reviews__carousel .reviews__carousel-item{
+    width: 96% !important;
+}
+.reviews__carousel .slick-active{
+    margin: 0 10px!important;
+}

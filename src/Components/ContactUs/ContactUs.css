@@ -14,11 +14,14 @@
     padding: 20px;
 }
 
-@media (max-width: 756px) {
+@media (max-width: 1024px) {
     .ContacUs_Grid{
         grid-template-columns: repeat(1, 1fr);
     }
     .mailContactUs{
+        width: 100%;
+    }
+    .faq-contact{
         width: 100%;
     }
 }

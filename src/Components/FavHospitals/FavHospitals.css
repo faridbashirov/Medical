@@ -43,12 +43,13 @@
     }
 }
 
-@media(min-width:1025px) and (max-width:1294px){
-    .displayGridReviewDr{
+@media(min-width:1024px) and (max-width:1451px){
+    .displayGrid{
         /* grid-template-columns: minmax(auto, 2fr) minmax(auto, 1fr); */
         gap: 0px;
-        grid-template-columns: 35% 65% ;
+        grid-template-columns: 35% 65% !important;
     }
+
     
     
     .cardReviewDoctors a,

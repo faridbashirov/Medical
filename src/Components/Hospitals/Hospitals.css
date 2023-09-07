@@ -111,4 +111,13 @@
     width: 60px;
     height: 60px;
 }
+ .cardReviewDoctors .card-content-mobile .card-header p, .cardReviewDoctors-active .card-content-mobile .card-header .anticon,.cardReviewDoctors .card-content-mobile .card-header a, .cardReviewDoctors .card-content-mobile .card-header h3{
+    color: #000 !important;
+ }
+ .cardReviewDoctors-active .card-content-mobile .card-header p,.cardReviewDoctors-active .card-content-mobile .card-header .anticon, .cardReviewDoctors-active .card-content-mobile .card-header a, .cardReviewDoctors-active .card-content-mobile .card-header h3{
+    color: #fff !important;
+ }
  
+ .cardReviewDoctors .card-content-mobile .card-header h3{
+    padding-left: 0 !important;
+ }

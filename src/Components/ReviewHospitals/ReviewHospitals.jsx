@@ -25,7 +25,7 @@ import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import Hospitals from "../../assets/Images/Hospitals.png";
 import { FadeLoader } from "react-spinners";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { ArrowRightOutlined,StarFilled } from "@ant-design/icons";
 
 import "../ReviewHospitals/ReviewHospitals.css";
 import Header from "../Header/index.js";
@@ -352,10 +352,7 @@ const ReviewHospitals = () => {
                     {(()=>{
                 let star=[]
                 for(let index = 0; index < item.hospital?.raiting; index++) {
-                 star.push( <img
-                  className={'reviews-stars'}
-                  src={SingleStar}
-                />)
+                 star.push(<StarFilled key={index}   style={{color:"#FFC224",marginLeft:"2px"}}  />)
                 
               }
               return star
@@ -378,7 +375,7 @@ const ReviewHospitals = () => {
                   <div>
                    {item.text}
                   </div>
-                  <div
+                  <div className="hospital-footerr"
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <p style={{ color: "#464646", fontSize: "11.15px" }}>

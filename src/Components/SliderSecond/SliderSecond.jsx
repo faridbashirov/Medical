@@ -29,7 +29,7 @@ const SliderSecond = ({position}) => {
       </div>
       <div className="slider-second-mobile-version"> 
       {position.map((item,index)=>{
-          return     <CardsSecond key={index} p={item.name} p2="-40%" />
+            if (index <4) return     <CardsSecond key={index} p={item.name} p2="-40%" />
         })}
       </div>
       

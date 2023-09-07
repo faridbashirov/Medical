@@ -27,7 +27,7 @@ import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
 
-import { ArrowRightOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import { ArrowRightOutlined, EnvironmentOutlined,StarFilled } from "@ant-design/icons";
 
 import "../FavHospitals/FavHospitals.css";
 import Header from "../Header/index.js";
@@ -40,6 +40,7 @@ import favoritesFetch from "../api/favoriteHospitalsFetch";
 import I18nextBrowserLanguageDetector from "i18next-browser-languagedetector";
 import { useTranslation } from "react-i18next";
 import { FadeLoader } from "react-spinners";
+import { Trans } from "react-i18next";
 
 const items = [
   {
@@ -398,8 +399,9 @@ const FavHospitals = () => {
                       {item.hospital.name}
                     </h3>
                     <div style={{ display: "flex", gap: "10px" }}>
+                      
                       <p style={{ margin: "0px", color: "white" }}>Hеплохо</p>
-
+                      
                       <p
                         style={{
                           backgroundColor: "#FFC224",
@@ -442,8 +444,8 @@ const FavHospitals = () => {
                         />
                         {item.hospital.location}
                       </p>
-                      <a   className="changed" href="" style={{ margin: "0px"}}>
-                        Показать на карте
+                      <a   className="changed" href={item.hospital.map_url} style={{ margin: "0px"}}>
+                        {t("map")}
                       </a>
                     </div>
                     <div>
@@ -452,7 +454,7 @@ const FavHospitals = () => {
                         style={{ color: "#FFFF", textAlign: "right" }}
                       >
                         <Link   className="changed" to={`/hospital-reviews/${item.hospital.id}`} style={{  }} href="#">
-                         {item.hospital.comment_count} отзыва
+                        {item.hospital.comment_count} {t("comments")}
                         </Link>
                       </p>
                       <p   className="changed" style={{ margin: "0px" }}>
@@ -484,7 +486,7 @@ const FavHospitals = () => {
                           paddingLeft: "12px",
                         }}
                       >
-                        При бронировании <br /> на сайте - 40%
+                          <Trans i18nKey="hosbooking"></Trans> - 40%
                       </p>
                     </div>
                     <div
@@ -497,7 +499,7 @@ const FavHospitals = () => {
                       }}
                     >
                       <p style={{ fontSize: "12px", textAlign: "center" }}>
-                        B клинике 100%
+                      {t("hoslistbooking2")} 100%
                       </p>
                     </div>
                   </div>
@@ -525,10 +527,7 @@ const FavHospitals = () => {
                           lineHeight: "18px",
                         }}
                       >
-                        Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                        фиксированной цене, платитe потом Без предоплаты
-                        БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                        договор и обязана соблюдать условия
+                         <Trans i18nKey="hoslistbooking3"></Trans>
                       </p>
                     </div>
                     <div>
@@ -564,7 +563,7 @@ const FavHospitals = () => {
                       <EnvironmentOutlined
                         style={{ marginRight: "6px", color: "white" }}
                       />
-                      Бейоглу, Стамбул
+                      {item.hospital.location}
                     </p>
                     <h3
                       style={{
@@ -573,7 +572,7 @@ const FavHospitals = () => {
                         paddingLeft: "15px",
                       }}
                     >
-                      LuviMed
+                      {item.hospital.name}
                     </h3>
                     <div style={{ display: "flex", gap: "10px", alignItems:"center" }}>
                       <p
@@ -589,13 +588,24 @@ const FavHospitals = () => {
                       >
                         6.0
                       </p>
-                      <img src={Iconstars} />
+                      <div>
+                        {(()=>{
+                let star=[]
+                for(let index = 0; index < item.hospital?.raiting; index++) {
+                 star.push( 
+                  <StarFilled   style={{color:"#FFC224",marginLeft:"2px"}}  />
+                 )
+                
+              }
+              return star
+              })()}
+                        </div>
                       <p style={{ margin: "0px", color: "white" }}>Hеплохо</p>
                       <p
                         style={{ color: "#FFFF", textAlign: "right" }}
                       >
                         <a style={{ color: "#FFFF" }} href="#">
-                          45 отзыва
+                        {item.hospital.comment_count} {t("comments")}
                         </a>
                       </p>
                     </div>
@@ -623,7 +633,7 @@ const FavHospitals = () => {
                           paddingLeft: "12px",
                         }}
                       >
-                        При бронировании <br /> на сайте - 40%
+                         <Trans i18nKey="hosbooking"></Trans> - 40%
                       </p>
                     </div>
                     <div
@@ -636,7 +646,7 @@ const FavHospitals = () => {
                       }}
                     >
                       <p style={{ fontSize: "12px", textAlign: "center" }}>
-                        B клинике 100%
+                      {t("hoslistbooking2")} 100%
                       </p>
                     </div>
                   </div>
@@ -663,10 +673,7 @@ const FavHospitals = () => {
                           lineHeight: "18px",
                         }}
                       >
-                        Дешевле, чем в клинике <br /> Бронируйте сейчас по
-                        фиксированной цене, платитe потом Без предоплаты
-                        БЕСПЛАТНАЯ отмена бронирования. Клиника подписала
-                        договор и обязана соблюдать условия
+                        <Trans i18nKey="hoslistbooking3"></Trans>
                       </p>
                     </div>
                   </div>

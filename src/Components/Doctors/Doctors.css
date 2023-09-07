@@ -177,3 +177,6 @@
     width: 60px;
     height: 60px;
 }
+:where(.css-dev-only-do-not-override-lgxug1).ant-btn-primary{
+    color: #fff;
+}

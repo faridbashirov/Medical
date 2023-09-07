@@ -27,7 +27,7 @@ import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import reviewDoctor from "../../assets/Images/reviewDoctor.png";
 
-import { ArrowRightOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import { ArrowRightOutlined, EnvironmentOutlined,StarFilled } from "@ant-design/icons";
 
 import "../FavDoctors/FavDoctors.css";
 import Header from "../Header/index.js";
@@ -416,7 +416,18 @@ const  FavDoctors = () => {
                     </div>
                     <div style={{ marginRight: "auto" }}>
                       {" "}
-                      <img src={Iconstars} />
+                      <div>
+                        {(()=>{
+                let star=[]
+                for(let index = 0; index < item.hospital?.raiting; index++) {
+                 star.push( 
+                  <StarFilled   style={{color:"#FFC224",marginLeft:"2px"}}  />
+                 )
+                
+              }
+              return star
+              })()}
+                        </div>
                     </div>
                     <div>
                       <p
@@ -603,7 +614,18 @@ const  FavDoctors = () => {
                       >
                         9.0
                       </p>
-                      <img src={Iconstars} />
+                      <div>
+                        {(()=>{
+                let star=[]
+                for(let index = 0; index < item.hospital?.raiting; index++) {
+                 star.push( 
+                  <StarFilled   style={{color:"#FFC224",marginLeft:"2px"}}  />
+                 )
+                
+              }
+              return star
+              })()}
+                        </div>
                       <p
                         style={{
                           margin: "0 !important",

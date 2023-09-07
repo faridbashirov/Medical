@@ -65,7 +65,7 @@
     }
     #hospitalImage{
         width: 131px;
-        height: 144px;
+        height: 144px !important;
     }
     .doc-nav-btn{
         padding-left: 9px;
@@ -73,4 +73,44 @@
         font-size: 12px;
     }
 
+}
+@media(max-width:767px){
+    .doctorss1 .card-body{
+        padding-left: 10px !important;
+        padding-right: 5px !important;
+    }
+    .hospital-footerr{
+        position: absolute;
+        bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .cardHospitals{
+        position: relative;
+    }
+}
+@media(max-width:576px){
+    .hospital-footerr{
+        flex-direction: column !important;
+    }
+}
+#hospitalImage{
+    border-radius: 15px;
+}
+.cardHospitals{
+    padding: 20px 10px 20px 20px !important;
+}
+.hospital-footerr{
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.cardHospitals{
+    position: relative;
+}
+.hospital-footerr p:nth-child(2){
+    margin-left: 10px;
 }
