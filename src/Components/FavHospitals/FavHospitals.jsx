@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { Dropdown, Button, Space, Breadcrumb, Pagination } from "antd";
+import { Dropdown, Button, Space, Breadcrumb, Pagination,Rate} from "antd";
 import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
@@ -367,7 +367,7 @@ const FavHospitals = () => {
           
             <div>
               { data.map((item,index)=>{
-                return  <div   onClick={()=>handleClick(item.id)} className={activeElement ===item.id ? "cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors cardReviewDoctors"} >
+                return  <div   onClick={()=>handleClick(item.id)} className={activeElement ===item.id ? "hospitalcard cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors cardReviewDoctors"} >
                 <div className="display_grid img-wrapper">
                   <img
                     className={"cardFavHospitals-img"}
@@ -379,9 +379,9 @@ const FavHospitals = () => {
                 </div>
                 <div
                   style={{ width: "769px", paddingLeft: "167px" }}
-                  className="card-body  card-content"
+                  className="card-body hospitalcardbody card-content"
                 >
-                  <div
+                  <div className="card-headerrr"
                     style={{
                       display: "flex",
                       justifyContent: "space-between",
@@ -417,14 +417,16 @@ const FavHospitals = () => {
                       </p>
                     </div>
                   </div>
-                  <div
+                  <div className="header-card"
                     style={{
                       display: "flex",
                       justifyContent: "space-between",
+                      width:"100%",
+                      position: "relative",
                       alignItems: "baseline",
                     }}
                   >
-                    <div
+                    <div  className="card-section1" 
                       style={{
                         display: "flex",
                         alignItems: "center",
@@ -448,7 +450,7 @@ const FavHospitals = () => {
                         {t("map")}
                       </a>
                     </div>
-                    <div>
+                    <div className="card-section2">
                       <p
                         className="comment_hospitals"
                         style={{ color: "#FFFF", textAlign: "right" }}
@@ -469,8 +471,9 @@ const FavHospitals = () => {
                       gap: "10px",
                       paddingLeft: "15px",
                     }}
+                    className="card-buttons"
                   >
-                    <div
+                    <div className="card-button1"
                       style={{
                         backgroundColor: "#E9ECFF",
                         borderRadius: "5px",
@@ -489,7 +492,7 @@ const FavHospitals = () => {
                           <Trans i18nKey="hosbooking"></Trans> - 40%
                       </p>
                     </div>
-                    <div
+                    <div className="card-button2"
                       style={{
                         backgroundColor: "#E9ECFF",
                         borderRadius: "5px",
@@ -532,6 +535,7 @@ const FavHospitals = () => {
                     </div>
                     <div>
                       <Button on onClick={()=> navigate(`/hospital/${item.hospital.id}`)}
+                        
                         style={{
                           backgroundColor: "#FFFF",
                           borderRadius: "5px",
@@ -541,7 +545,7 @@ const FavHospitals = () => {
                         }}
                         type="primary"
                       >
-                        Посмотреть услуги
+                       {t("hoslistbooking4")}
                       </Button>
                     </div>
                   </div>
@@ -549,7 +553,7 @@ const FavHospitals = () => {
                 <div
                   className="card-content-mobile"
                 >
-                  <div
+                  <div className="card-header"
                     style={{
                       paddingTop: "10px",
                     }}
@@ -561,7 +565,7 @@ const FavHospitals = () => {
                       }}
                     >
                       <EnvironmentOutlined
-                        style={{ marginRight: "6px", color: "white" }}
+                        style={{ marginRight: "6px"}}
                       />
                       {item.hospital.location}
                     </p>
@@ -589,16 +593,7 @@ const FavHospitals = () => {
                         6.0
                       </p>
                       <div>
-                        {(()=>{
-                let star=[]
-                for(let index = 0; index < item.hospital?.raiting; index++) {
-                 star.push( 
-                  <StarFilled   style={{color:"#FFC224",marginLeft:"2px"}}  />
-                 )
-                
-              }
-              return star
-              })()}
+                      <Rate style={{fontSize:"16"}} disabled={true} value={item.hospital?.raiting}/>
                         </div>
                       <p style={{ margin: "0px", color: "white" }}>Hеплохо</p>
                       <p

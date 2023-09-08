@@ -1,6 +1,6 @@
 import React, { useState,useMemo,memo } from 'react';
 
-import {Button, Checkbox, Divider} from "antd";
+import {Button, Checkbox, Divider,Rate} from "antd";
 import singleStar from "../../assets/Svg/singleStar.svg"
 import location from "../../assets/Svg/Location.svg"
 import heart from "../../assets/Svg/heart.svg"
@@ -76,14 +76,7 @@ const Detail = ({images,hospital,open}) => {
             <p>
               {hospital.name}
               
-              {(()=>{
-                let star=[]
-                for(let index = 0; index < hospital.raiting; index++) {
-                 star.push(<img style={{marginLeft: "4px"}} src={singleStar} alt="singleStar"/>)
-                
-              }
-              return star
-              })()}
+              <Rate style={{fontSize:"16"}} disabled={true} value={hospital?.raiting}/>
               
              
               {/* <img style={{marginLeft: "4px"}} src={singleStar} alt="singleStar"/>

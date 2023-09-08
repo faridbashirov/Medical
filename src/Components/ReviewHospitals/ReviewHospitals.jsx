@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown, Button, Space, Breadcrumb, Pagination } from "antd";
+import { Dropdown, Button, Space, Breadcrumb, Pagination,Rate } from "antd";
 import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
@@ -349,14 +349,8 @@ const ReviewHospitals = () => {
                   >
                     {/* <img src={Iconstars} /> */}
                     <div>
-                    {(()=>{
-                let star=[]
-                for(let index = 0; index < item.hospital?.raiting; index++) {
-                 star.push(<StarFilled key={index}   style={{color:"#FFC224",marginLeft:"2px"}}  />)
-                
-              }
-              return star
-              })()}
+                      <Rate style={{fontSize:"16"}} disabled={true} value={item.hospital?.raiting}/>
+                 
               </div>
                     <p
                       style={{

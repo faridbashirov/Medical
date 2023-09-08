@@ -8,6 +8,7 @@ import {
   Pagination,
   Collapse,
   Checkbox,
+  Rate
 } from "antd";
 import ClipLoader from "react-spinners/ClipLoader";
 import { FadeLoader } from "react-spinners";
@@ -904,16 +905,8 @@ const Doctors = () => {
                     </div>
                     <div className="" style={{ marginRight: "auto" }}>
                     <div>
-                        {(()=>{
-                let star=[]
-                for(let index = 0; index < item?.raiting; index++) {
-                 star.push( 
-                  <StarFilled   style={{color:"#FFC224",marginLeft:"2px"}}  />
-                 )
-                
-              }
-              return star
-              })()}
+                    <Rate className="rate" style={{fontSize:"16"}} disabled={true} value={item?.raiting}/>
+                   
                         </div>
                     </div>
                     <div>
@@ -993,16 +986,8 @@ const Doctors = () => {
                     <div className={"doctors-card__ratings "}>
                       <p className={"doctors-card__ratings-num changed"}>9.0</p>
                       <div>
-                        {(()=>{
-                let star=[]
-                for(let index = 0; index < item?.raiting; index++) {
-                 star.push( 
-                  <StarFilled   style={{color:"#FFC224",marginLeft:"2px"}}  />
-                 )
-                
-              }
-              return star
-              })()}
+                      <Rate style={{fontSize:"16"}} disabled={true} value={item?.raiting}/>
+                       
                         </div>
                       <p className="changed">Bеликолепно</p>
                       <p className="changed">{item.comment_count} {t("comments").toLowerCase()}</p>

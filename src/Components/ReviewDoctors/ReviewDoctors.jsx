@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown, Button, Space, Breadcrumb, Pagination } from "antd";
+import { Dropdown, Button, Space, Breadcrumb, Pagination,Rate } from "antd";
 import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
@@ -25,7 +25,7 @@ import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import reviewDoctor from "../../assets/Images/reviewDoctor.png";
 
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { ArrowRightOutlined,StarFilled } from "@ant-design/icons";
 
 import "../ReviewDoctors/ReviewDoctors.css";
 import Header from "../Header/index.js";
@@ -354,7 +354,9 @@ const  ReviewDoctors = () => {
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <img src={Iconstars} />
+                      <div>
+                      <Rate style={{fontSize:"16"}} disabled={true} value={item.doctor?.raiting}/>
+              </div>
                     <p
                       style={{
                         backgroundColor: "#FFC224",

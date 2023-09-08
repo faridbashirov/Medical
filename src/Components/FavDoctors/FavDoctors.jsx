@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Dropdown, Button, Space, Breadcrumb, Pagination } from "antd";
+import { Dropdown, Button, Space, Breadcrumb, Pagination,Rate } from "antd";
 import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
@@ -417,16 +417,7 @@ const  FavDoctors = () => {
                     <div style={{ marginRight: "auto" }}>
                       {" "}
                       <div>
-                        {(()=>{
-                let star=[]
-                for(let index = 0; index < item.hospital?.raiting; index++) {
-                 star.push( 
-                  <StarFilled   style={{color:"#FFC224",marginLeft:"2px"}}  />
-                 )
-                
-              }
-              return star
-              })()}
+                      <Rate style={{fontSize:"16"}} disabled={true} value={item.hospital?.raiting}/>
                         </div>
                     </div>
                     <div>
@@ -615,16 +606,7 @@ const  FavDoctors = () => {
                         9.0
                       </p>
                       <div>
-                        {(()=>{
-                let star=[]
-                for(let index = 0; index < item.hospital?.raiting; index++) {
-                 star.push( 
-                  <StarFilled   style={{color:"#FFC224",marginLeft:"2px"}}  />
-                 )
-                
-              }
-              return star
-              })()}
+                      <Rate style={{fontSize:"16"}} disabled={true} value={item.hospital?.raiting}/>
                         </div>
                       <p
                         style={{

@@ -91,3 +91,61 @@
     }
 }
 
+@media(max-width:1440px){
+    .card-button2{
+        width: unset !important;
+        height: unset !important;
+        padding-right: 15px;
+    }
+    .card-button1{
+        width: max-content !important;
+        height: unset !important;
+    }
+    .card-buttons{
+        padding-left: 0 !important;
+    }
+    .cardReviewDoctors{
+        height: unset !important;
+    }
+}
+@media(min-width:757px) and (max-width:1200px){
+   .card-section1{
+    width: 65% !important;
+    font-size: 11px !important;
+    margin-top: 20px;
+   }
+   .card-section2{
+    font-size: 11px !important;
+    position: absolute;
+    margin-top: 5px;
+    right: 0;
+   }
+   .header-card{
+    margin-bottom: 20px;
+   }
+   #hospitalsImage{
+    width: 170px !important;
+    height: 170px !important;
+   }
+   .card-body{
+    padding-left: 70px !important;
+   }
+   
+}
+.card-body{
+    padding-left: 100px !important;
+   }
+@media(min-width:1650px){
+.card-body{
+    padding-left: 50px !important;
+   }}
+.cardReviewDoctors .card-content-mobile .card-header p, .cardReviewDoctors-active .card-content-mobile .card-header .anticon,.cardReviewDoctors .card-content-mobile .card-header a, .cardReviewDoctors .card-content-mobile .card-header h3{
+    color: #000 !important;
+ }
+ .cardReviewDoctors-active .card-content-mobile .card-header p,.cardReviewDoctors-active .card-content-mobile .card-header .anticon, .cardReviewDoctors-active .card-content-mobile .card-header a, .cardReviewDoctors-active .card-content-mobile .card-header h3{
+    color: #fff !important;
+ }
+ 
+ .cardReviewDoctors .card-content-mobile .card-header h3{
+    padding-left: 0 !important;
+ }

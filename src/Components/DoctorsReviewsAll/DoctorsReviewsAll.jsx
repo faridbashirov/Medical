@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import { Dropdown, Button, Space, Breadcrumb, Pagination, Input } from "antd";
+import { Dropdown, Button, Space, Breadcrumb, Pagination, Input,Rate } from "antd";
 
 import { ArrowRightOutlined, EnvironmentOutlined } from "@ant-design/icons";
 
@@ -348,18 +348,8 @@ if(error){
                   </p>
                 </div>
                 <div style={{ marginRight: "auto" }}>
-
-                {(()=>{
-                let star=[]
-                for(let index = 0; index < data.raiting; index++) {
-                 star.push( <img
-                  className={'reviews-stars'}
-                  src={SingleStar}
-                />)
                 
-              }
-              return star
-              })()}
+                <Rate style={{fontSize:"16"}} disabled={true} value={data?.raiting}/>
                 </div>
                 <div className={"doc-card-ratings"}>
                   <p
@@ -552,17 +542,7 @@ if(error){
                 <p className={'reviews-name'}>
                  {item.user.first_name}
                 </p>
-                {(()=>{
-                let star=[]
-                for(let index = 0; index < item.rate; index++) {
-                 star.push( <img
-                  className={'reviews-stars'}
-                  src={SingleStar}
-                />)
-                
-              }
-              return star
-              })()}
+                <Rate style={{fontSize:"16"}} disabled={true} value={item?.rate}/>
                
               </div>
               <img

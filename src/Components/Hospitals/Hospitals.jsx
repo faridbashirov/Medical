@@ -8,6 +8,7 @@ import {
   Pagination,
   Collapse,
   Checkbox,
+  Rate
 } from "antd";
 import uuid from "react-uuid";
 import SingleStar from "../../assets/Svg/singleStar.svg";
@@ -993,7 +994,7 @@ const DeleteFromFavorite= async(id)=>{
                   </div>
                   <div  onClick={()=>handleClick(item.id)}
                     style={{ width: "769px", paddingLeft: "110px" }}
-                    className="card-body card-content"
+                    className="card-body  card-bodyy card-content"
                   >
                     <div
                       style={{
@@ -1031,14 +1032,15 @@ const DeleteFromFavorite= async(id)=>{
                         </p>
                       </div>
                     </div>
-                    <div
+                    <div className="header-card"
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "baseline",
+                        position:"relative"
                       }}
                     >
-                      <div
+                      <div className="card-section1"
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -1063,7 +1065,7 @@ const DeleteFromFavorite= async(id)=>{
                         {t("map")}
                         </a>
                       </div>
-                      <div>
+                      <div className="card-section2">
                         <p
                           className="comment_hospitals"
                           style={{textAlign: "right" }}
@@ -1085,7 +1087,7 @@ const DeleteFromFavorite= async(id)=>{
                         paddingLeft: "15px",
                       }}
                     >
-                      <div
+                      <div className="card-button1"
                         style={{
                           backgroundColor: "#E9ECFF",
                           borderRadius: "5px",
@@ -1110,7 +1112,7 @@ const DeleteFromFavorite= async(id)=>{
                                - 40%
                         </p>
                       </div>
-                      <div
+                      <div className="card-button2"
                         style={{
                           backgroundColor: "#D8F5DD",
                           borderRadius: "5px",
@@ -1207,16 +1209,7 @@ const DeleteFromFavorite= async(id)=>{
                           6.0
                         </p>
                         <div>
-                        {(()=>{
-                let star=[]
-                for(let index = 0; index < item?.raiting; index++) {
-                 star.push( 
-                  <StarFilled   style={{color:"#FFC224",marginLeft:"2px"}}  />
-                 )
-                
-              }
-              return star
-              })()}
+                        <Rate style={{fontSize:"16"}} disabled={true} value={item?.raiting}/>
                         </div>
                         <p style={{ margin: "0px", color: "white" }}>Hеплохо</p>
                         <p

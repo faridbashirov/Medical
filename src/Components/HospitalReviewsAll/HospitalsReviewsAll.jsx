@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown, Button, Space, Breadcrumb, Pagination } from "antd";
+import { Dropdown, Button, Space, Breadcrumb, Pagination,Rate } from "antd";
 
 import { ArrowRightOutlined, EnvironmentOutlined } from "@ant-design/icons";
 
@@ -355,17 +355,7 @@ if(!hospital){
             </div>
             <div className={"featured-body"}>
               <div className={"featured-body-title-wrapper"}>
-              {(()=>{
-                let star=[]
-                for(let index = 0; index < hospital?.raiting; index++) {
-                 star.push( <img
-                  className={"featured-body-stars-lg"} style={{marginRight:"6px"}}
-                  src={SingleStar}
-                />)
-                
-              }
-              return star
-              })()}
+            
                
                 <p className={"featured-body-title"}>
                   {hospital.name}
@@ -520,17 +510,7 @@ if(!hospital){
               }
               return star
               })()} */}
-                {(()=>{
-                let star=[]
-                for(let index = 0; index < item.rate; index++) {
-                 star.push( <img
-                  className={'reviews-stars'}
-                  src={SingleStar}
-                />)
-                
-              }
-              return star
-              })()}
+                     <Rate style={{fontSize:"16"}} disabled={true} value={item?.rate}/>
               
                  
                 </div>

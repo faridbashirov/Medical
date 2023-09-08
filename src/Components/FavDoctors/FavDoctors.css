@@ -41,6 +41,7 @@
 .doctorss .card-body{
     width: 90% !important;
 }
+
 @media(min-width:1295px) and (max-width:1451px){
     .doctorss{
         /* grid-template-columns: minmax(auto, 2fr) minmax(auto, 1fr); */
