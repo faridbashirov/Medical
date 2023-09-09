@@ -121,6 +121,19 @@ const Detail = ({images,hospital,open}) => {
                   <img src={arrowRight} alt=""/>
                 </button>
               </div>
+              <div className={'detail_img-lg--rating'}>
+                <span>великолепно</span>
+                <span className={'detail_img-lg--rating-num'}>9.5</span>
+              </div>
+              <div className={'detail_img-lg--desc'}>
+                <p>“Great asda location with montain view. Helpful and responsive owners. Well equipped and nicely designed cottage / challenge. Playground for kids outside as well as toys inside...”</p>
+                <button className={'img-lg-desc-btn'}>
+                  <img src={arrowLeft} alt=""/>
+                  <span>Radovan Yuliya</span>
+                  <span className={'img-lg-desc-num'}>9.0</span>
+                  <img src={arrowRight} alt=""/>
+                </button>
+              </div>
             </div>
             }
             return <div key={index}> 

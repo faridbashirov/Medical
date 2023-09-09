@@ -2,7 +2,7 @@ import React from "react";
 import { Dropdown, Button, Space, Breadcrumb, Pagination,Rate } from "antd";
 
 import { ArrowRightOutlined, EnvironmentOutlined } from "@ant-design/icons";
-
+import { FadeLoader } from "react-spinners";
 import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
@@ -205,6 +205,7 @@ const HospitalsReviewsAll = () => {
     const {id}=useParams()   
     const {user}=useSelector((state) => state.auth)
     const [reviews,setReviews]=useState([])
+    const [loading,setLoading]=useState(false)
     const [searchParams,setSearchParams]=useSearchParams()
     const [openReview, setOpenReview] = useState(false)
     const [add,setAdd] = useState(false)
@@ -275,12 +276,14 @@ const HospitalsReviewsAll = () => {
     
      
      useEffect(()=>{
+      setLoading(true)
         const getReviews= async(id)=>{
         const data=await hospitalReviewsFetch(id,searchParams.get("page") || null,localStorage.getItem("lang"))
       
        
         setReviews(data.results)
         setCount(data.count)
+        setLoading(false)
 
       }
       getReviews(id)
@@ -480,8 +483,16 @@ if(!hospital){
             Оценка + кол-во отзывов
           </Button>
         </div> */}
-          {reviews.map((item,index)=>{
-            return <div key={index} className={"hospital-reviews-card"}>
+          {loading ? <div style={{padding:"50px"}}> <FadeLoader
+          color="black"
+          className={"loading"}
+          loading={true}
+          // style={{top:"50px"}}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        /> </div> :<div> { reviews.map((item,index)=>{
+            return <> <div key={index} className={"hospital-reviews-card"}>
             <div style={{ display: "flex" }}>
               <div className="userIconOrFlag">
                 <img className="userIconOrFlag-flag" src={userIcon} />
@@ -554,9 +565,29 @@ if(!hospital){
               </p>
             </div>
           </div>
+           </>
           })}
+          <div
+           style={{
+             display: "flex",
+             justifyContent: "center",
+             paddingTop: "25px",
+             paddingBottom: "50px",
+           }}
+         >{count ? <Pagination
+           current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
+            searchParams.set("page", page)
+            // const newSearch = `?${searchParams.toString()}`;
+           setSearchParams(searchParams)
+   
+          }}  total={count}
+           
+          /> : <div style={{marginTop:"10"}}>{t("nocomments")}</div>}
+            
+         </div>
+          </div>
         
-        {/* <div className={"hospital-reviews-card"}>
+        /* <div className={"hospital-reviews-card"}>
           <div style={{ display: "flex" }}>
             <div className="userIconOrFlag">
               <img className="userIconOrFlag-flag" src={userIcon} />
@@ -689,24 +720,7 @@ if(!hospital){
 
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          paddingTop: "25px",
-          paddingBottom: "50px",
-        }}
-      >{count ? <Pagination
-        current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
-         searchParams.set("page", page)
-         // const newSearch = `?${searchParams.toString()}`;
-        setSearchParams(searchParams)
-
-       }}  total={count}
-        
-       /> : ""}
-         
-      </div>
+     
   
       <Footer/>
       <ReviewModal add={add} setAdd={setAdd} id={id} openReview={openReview} onCloseReview={onCloseReview}/>

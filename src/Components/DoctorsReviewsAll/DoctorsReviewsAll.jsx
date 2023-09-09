@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import { Dropdown, Button, Space, Breadcrumb, Pagination, Input,Rate } from "antd";
 
 import { ArrowRightOutlined, EnvironmentOutlined } from "@ant-design/icons";
-
+import { FadeLoader } from "react-spinners";
 import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
@@ -213,6 +213,7 @@ const  DoctorsReviewsAll = () => {
   const [count,setCount] = useState(null)
   const [add,Setadd]=useState(false)
   const [openBooking, setOpenBooking] = useState(false)
+  const [loading,setLoading]=useState(false)
   console.log(reviews);
   console.log(id);
 
@@ -235,7 +236,7 @@ const  DoctorsReviewsAll = () => {
   
 
 
-  const {data,error,loading,review}=DoctorDetailFetch(id,localStorage.getItem("lang")) 
+  const {data,error,review}=DoctorDetailFetch(id,localStorage.getItem("lang")) 
   console.log(data);
   
 
@@ -255,7 +256,7 @@ const  DoctorsReviewsAll = () => {
    useEffect(()=>{
 
     
-    
+      setLoading(true)
       const getReviews= async(id)=>{
         console.log(searchParams.get("page"),"++++++++");
         const res=await doctorReviewsFetch(id,searchParams.get("page") || null)
@@ -264,6 +265,7 @@ const  DoctorsReviewsAll = () => {
      
       setReviews(res.results)
       setCount(res.count)
+      setLoading(false)
 
     }
     getReviews(id)
@@ -522,7 +524,15 @@ if(error){
           </div>
         </div>
         
-        {reviews.map((item,index)=>{
+        { loading ? <div style={{padding:"50px"}}> <FadeLoader
+          color="black"
+          className={"loading"}
+          loading={true}
+          // style={{top:"50px"}}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        /> </div>: <div> {reviews.map((item,index)=>{
           return <div key={index} className={"hospital-reviews-card"}>
           <div style={{ display: "flex" }}>
             <div className="userIconOrFlag">
@@ -596,167 +606,10 @@ if(error){
           </div>
         </div>
         })}
-        
-        {/* <div className={"hospital-reviews-card"}>
-          <div style={{ display: "flex" }}>
-            <div className="userIconOrFlag">
-              <img src={userIcon} />
-              <img className="userFlag" src={userflag} />
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "baseline",
-                gap: "5px",
-                marginRight: "auto",
-              }}
-            >
-              <div>
-                <p className={'reviews-name'}>
-                  Надежда Р.
-                </p>
-                <img
-                  style={{ width: "67px", height: "11px" }}
-                  src={Iconstars}
-                />
-              </div>
-              <img
-                className="checkIcon"
-                style={{ paddingTop: "5px", marginRight: "8px" }}
-                src={check}
-              />
-              <p className={"reviews-category"}>
-                Травмотология
-              </p>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "10px",
-              }}
-            >
-              <p className={'reviews-rating'}>Великолепно </p>
-              <div
-                style={{
-                  backgroundColor: "#FFC224",
-                  borderRadius: "3.52262px",
-                  color: "#000",
-                  textAlign: "center",
-                  width: "39.92px",
-                  height: "30.53px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                9.9
-              </div>
-            </div>
-          </div>
-          <p className={"reviews-body-title"} style={{ marginBottom: "5px" }}>Oтлично! Bсем Cоветую</p>
-          <p className={"reviews-body-desc"} style={{ marginTop: "5px" }}>
-            “Great location with montain view. Helpful and responsive owners.
-            Well equipped and nicely designed cottage / challenge. <br />{" "}
-            Playground for kids outside as well as toys inside...”
-          </p>
-          <div className={"reviews-reacts"}>
-            <p style={{ color: "#BCBCBC", marginRight: "auto" }}>
-              29 июля - 2022 г.
-            </p>
-            <p style={{ color: "#2A353D", margin: "0px" }}>
-              <img className="likeIcon" src={likeIcon} />
-              полезно
-            </p>
-            <p style={{ color: "#2A353D", margin: "0px" }}>
-              <img className="unlikeIcon" src={unlikeIcon} />
-              Бесполезно
-            </p>
-          </div>
         </div>
-        <div className={"hospital-reviews-card"}>
-          <div style={{ display: "flex" }}>
-            <div className="userIconOrFlag">
-              <img src={userIcon} />
-              <img className="userFlag" src={userflag} />
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "baseline",
-                gap: "5px",
-                marginRight: "auto",
-              }}
-            >
-              <div>
-                <p className={'reviews-name'}>
-                  Надежда Р.
-                </p>
-                <img
-                  style={{ width: "67px", height: "11px" }}
-                  src={Iconstars}
-                />
-              </div>
-              <img
-                className="checkIcon"
-                style={{ paddingTop: "5px", marginRight: "8px" }}
-                src={check}
-              />
-              <p className={"reviews-category"}>
-                Травмотология
-              </p>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "10px",
-              }}
-            >
-              <p className={'reviews-rating'}>Великолепно </p>
-              <div
-                style={{
-                  backgroundColor: "#FFC224",
-                  borderRadius: "3.52262px",
-                  color: "#000",
-                  textAlign: "center",
-                  width: "39.92px",
-                  height: "30.53px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                9.9
-              </div>
-            </div>
-          </div>
-          <p className={"reviews-body-title"} style={{ marginBottom: "5px" }}>Oтлично! Bсем Cоветую</p>
-          <p className={"reviews-body-desc"} style={{ marginTop: "5px" }}>
-            “Great location with montain view. Helpful and responsive owners.
-            Well equipped and nicely designed cottage / challenge. <br />{" "}
-            Playground for kids outside as well as toys inside...”
-          </p>
-          <div className={"reviews-reacts"}>
-            <p style={{ color: "#BCBCBC", marginRight: "auto" }}>
-              29 июля - 2022 г.
-            </p>
-            <p style={{ color: "#2A353D", margin: "0px" }}>
-              <img className="likeIcon" src={likeIcon} />
-              полезно
-            </p>
-            <p style={{ color: "#2A353D", margin: "0px" }}>
-              <img className="unlikeIcon" src={unlikeIcon} />
-              Бесполезно
-            </p>
-          </div>
-        </div> */}
+        
+        }
       </div>
-
       <div
         style={{
           display: "flex",
@@ -773,8 +626,11 @@ if(error){
 
        }}  total={count}
         
-       /> : ""}
+       /> : <div style={{marginTop:"10"}}>{t("nocomments")}</div>}
       </div>
+
+    
+      
       <ReviewModal add={add} setAdd={Setadd} id={id} openReview={openReview} onCloseReview={onCloseReview}/>
 
       <Footer/>
