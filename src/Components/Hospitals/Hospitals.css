@@ -5,12 +5,9 @@
 
 @font-face {
     font-family: "Gilroy";
-    src: url("../../../src//Fonts/gilroy/Gilroy-Regular.ttf");
+    src: url("../../../src//Fonts/gilroy/Gilroy-Regular-AZ_0.ttf");
 }
-@font-face {
-    font-family: "Roboto";
-    src: url("../../Fonts/Roboto/Roboto-Regular.ttf");
-}
+
 
 @font-face {
     font-family: "Poppins-Test";

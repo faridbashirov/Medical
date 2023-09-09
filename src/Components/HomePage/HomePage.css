@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box !important;
     /*margin: 0 !important;*/
-    font-family: "roboto";
+    font-family: "Gilroy";
 }
 
 body {
@@ -492,7 +492,7 @@ h3{
 
 .footer-nav-link {
     color: #B6D0FF;
-    font-family:"roboto";
+    font-family:"Gilroy";
     padding-bottom: 10px;
 }
 
@@ -510,12 +510,9 @@ h3{
 
 @font-face {
     font-family: "Gilroy";
-    src: url("../../Fonts/gilroy/Gilroy-RegularItalic.ttf");
+    src: url("../../Fonts/gilroy/Gilroy-Regular-AZ_0.ttf");
 }
-@font-face {
-    font-family: "Roboto";
-    src: url("../../Fonts/Roboto/Roboto-Regular.ttf");
-}
+
 
 @font-face {
     font-family: "Poppins-Test";
@@ -864,7 +861,7 @@ h3{
     }
     .pad {
         padding: 11px 46px 28px;
-        font-family: "roboto";
+        font-family: "Gilriy";
         font-size: 13px;
     }
     .footer-copy{

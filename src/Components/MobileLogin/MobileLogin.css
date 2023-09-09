@@ -2,7 +2,7 @@
   /* margin: 0 !important;
   padding: 0 !important; */
   box-sizing: border-box !important;
-  font-family: "roboto";
+  font-family: "Gilroy";
 }
 
 body {
@@ -114,7 +114,7 @@ b {
 
 @font-face {
   font-family: "Gilroy";
-  src: url("../../Fonts/gilroy/Gilroy-Regular.ttf");
+  src: url("../../Fonts/gilroy/Gilroy-Regular-AZ_0.ttf");
 }
 
 @font-face {
