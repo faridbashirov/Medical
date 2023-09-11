@@ -139,10 +139,10 @@
 .card-body{
     padding-left: 50px !important;
    }}
-.cardReviewDoctors .card-content-mobile .card-header p, .cardReviewDoctors-active .card-content-mobile .card-header .anticon,.cardReviewDoctors .card-content-mobile .card-header a, .cardReviewDoctors .card-content-mobile .card-header h3{
+.cardReviewDoctors .card-content-mobile .card-header p,.cardReviewDoctors .card-content-mobile .card-header a, .cardReviewDoctors .card-content-mobile .card-header h3{
     color: #000 !important;
  }
- .cardReviewDoctors-active .card-content-mobile .card-header p,.cardReviewDoctors-active .card-content-mobile .card-header .anticon, .cardReviewDoctors-active .card-content-mobile .card-header a, .cardReviewDoctors-active .card-content-mobile .card-header h3{
+ .cardReviewDoctors-active .card-content-mobile .card-header p .cardReviewDoctors-active .card-content-mobile .card-header a, .cardReviewDoctors-active .card-content-mobile .card-header h3{
     color: #fff !important;
  }
  

@@ -1215,9 +1215,10 @@ const DeleteFromFavorite= async(id)=>{
                         <p
                           style={{ color: "#FFFF", textAlign: "right" }}
                         >
-                          <a style={{ color: "#FFFF" }} href="#">
+                         
+                          <Link className="changed" to={`/hospital-reviews/${item.id}`} style={{  }}  href="#">
                           {item.comment_count} {t("comments")}
-                          </a>
+                          </  Link>
                         </p>
                       </div>
                     </div>

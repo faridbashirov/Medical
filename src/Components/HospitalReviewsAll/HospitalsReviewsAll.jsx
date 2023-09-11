@@ -440,13 +440,15 @@ if(!hospital){
             </div>
           </div>
           <div className={"featured-btns-mobile"}>
-            <Button  onClick={reviewOpen}
-              className={"button-1"}
-              type="primary"
-            >
-               {t("writecomment")}
-            </Button>
-            <Button 
+          {user ?
+                  <Button onClick={()=>  reviewOpen()}
+                    className={"featured-btn-review"}
+                    type="primary"
+                  >
+                    {t("writecomment")}
+                  </Button>
+                  : ""}
+            <Button  onClick={()=>window.open(hospital.map_url)}
               className={"button-2"}
               type="primary"
             >
