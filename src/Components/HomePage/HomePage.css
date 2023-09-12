@@ -71,9 +71,26 @@ ul, li {
     display: none;
 }
 
-
-.group-18 {
+.group18-section{
     width: 99%;
+    height: 235px;
+    position: relative;
+}
+.group-18-btn{
+    background-color: #fff !important;
+    color: #000 !important;
+    position: absolute;
+    right: 5%;
+    top: 40%;
+    font-size: 20px;
+    height: 65px;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+}
+.group-18 {
+    width: 100%;
+    position: absolute;
+    height: 100%;
 }
 h3{
     margin-top: 20px !important;
@@ -178,8 +195,17 @@ h3{
     color: white !important;
     font-weight: 500 !important;
     font-size: 18px;
+    margin-top: -10px;
 }
-
+.footer-subtitle br{
+}
+.footer-subtitle{
+    height: 20px;
+    line-height: 18px !important;
+    margin-top: 5px;
+    text-transform: capitalize;
+    
+}
 .textFlex {
     display: flex;
     flex-wrap: wrap;
@@ -339,12 +365,16 @@ h3{
     display: flex;
     align-items: flex-end;
 }
-
+@media(max-width:1024px){
+    .grid_2{
+        gap: 20px !important;
+    }
+}
 .grid_2 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     /* grid-template-rows: repeat(4,1fr); */
-    gap: 25px 15px;
+    gap: 25px 50px;
 
     /* height: 600px; */
 }
@@ -792,7 +822,16 @@ h3{
     }
 
     .deals-title {
-        font-size: 12px !important;
+        font-size: 18px !important;
+        font-weight: bold;
+    }
+    .top-clinic__header-title{
+        font-size: 18px !important;
+        font-weight: bold;
+        line-height: 24px !important;
+    }
+    .clinic__item-footer-title{
+        font-size: 16px !important;
     }
 
     .grid_2 img {
@@ -808,18 +847,51 @@ h3{
         width: 100%;
         height: 200px;
     }
-
+    .clinic__item-footer-subtitle{
+        font-size: 13px !important;
+    }
+    .doctor-search_item{
+        height: 156px !important;
+    }
+    .doctor-search_item img{
+        width: 39px;
+        height: 39px;
+    }
+    .doctor-search_item p{
+        font-size: 18px !important;
+    }
+    .home-review{
+        padding-top: 0 !important;
+    }
+    .top-clinic{
+        padding-top: 0 !important;
+    }
     .grid_4 img {
         width: 100% !important;
         height: 126px;
     }
 
-    .group-18 {
-        width: 95% !important;
+    .group18-section {
+        width: 96% !important;
+        margin: auto;
+        height: 125px;
     }
-
+    
+    .group-18-btn{
+        background-color: #fff !important;
+        color: #000 !important;
+        font-size: 11px !important;
+        height: 28px;
+        border-radius: 5px !important;
+    }
     .foreign-title {
-        font-size: 16px !important;
+        font-size: 18px !important;
+    }
+    .countryy .slick-track{
+        padding: 20px 0 !important;
+    }
+    .containerSliderSeconds{
+        padding-top: 0 !important;
     }
 
     .foreign-subtitle {
@@ -993,7 +1065,16 @@ h3{
     margin: 0 !important;
 }
 .countryy .slick-active{
-    margin: 0 30px !important;
+    margin: 0 10px !important;
+}
+.countryy .slick-slide .card{
+    width: 95% !important;
+}
+.countryy .slick-slide .card:hover{
+    transform: scale(1.07);
+    transition: all .4s ease-in-out;
+    box-shadow: 0px 4px 40px 10px #00000026;
+
 }
 .containerSliderSeconds .slick-slide:first-child{
     margin-left: 0.15% !important;
@@ -1037,6 +1118,12 @@ h3{
     padding-left: 20px;
     height: 111px !important;
 }
+.clinic__item-footer-stars{
+    align-items: center;
+}
+.clinic__item-footer-stars img{
+    margin-top: -5px;
+}
 .foreign-btn-sm{
     height: 35px;
 }
@@ -1071,3 +1158,41 @@ h3{
 .ant-dropdown-menu-item{
     padding: 15px 12px 10px 1px !important;
 }
+.top-clinic__header-btns{
+    margin-top: -10px !important;
+}
+@media(min-width:1024px){
+.ant-tabs-tab{
+    font-size: 22px !important;
+}}
+@media(max-width:992px){
+    .home-review,.top-clinic{
+        background: #fff !important;
+    }
+}
+@media(min-width:992px){
+.activeBtn{
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+}}
+.discount-slider .slick-slider{
+    width: 100% !important;
+}
+.discount-slider .slick-slide{
+    margin-left: 20px !important;
+}
+.discount-slider .slick-track{
+    padding: 15px 0 !important;
+}
+.discount-slider{
+    padding-top: 0 !important;
+}
+.discount-slider .slick-active{
+    margin: 0 0 0 20px !important;
+}
+@media(min-width:1024px){
+.foreign-subtitle{
+    font-size: 22px !important;
+}}

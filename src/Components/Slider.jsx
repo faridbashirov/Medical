@@ -33,11 +33,10 @@ function SamplePrevArrow(props) {
 const Sliders = ({countries}) => {
   
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  console.log(countries);
   const settings = {
     className: "center",
-    centerMode: true,
     infinite: true,
-    centerPadding: "60px",
     slidesToShow: 3,
     speed: 500,
     dots:false,
@@ -67,9 +66,10 @@ const Sliders = ({countries}) => {
         {
           breakpoint: 576,
           settings: {
-            slidesToShow: 1,
+            slidesToShow: 1.4,
             slidesToScroll: 1,
             dots:false,
+            arrows:false,
             autoplay: true,
             speed: 2000,
             autoplaySpeed: 4000,
@@ -84,7 +84,7 @@ const Sliders = ({countries}) => {
 
 <Slider {...settings}>
 {countries.map((item,index)=>{
-          return     <Cards title={item.name} key={index} img={item.image} />
+          return     <Cards flag={item.flag} title={item.name} key={index} img={item.image} />
         })}
         </Slider>
        

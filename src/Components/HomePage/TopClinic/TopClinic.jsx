@@ -123,9 +123,9 @@ const TopClinic = () => {
   return (
       <section className="top-clinic">
     <div className={"container"}>
-        <div className="top-clinic__header">
+        <div className="top-clinic__header" style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
           <h3 className="top-clinic__header-title"><Trans i18nKey="tophospitals"></Trans></h3>
-          <div className="top-clinic__header-btns">
+          <div className="top-clinic__header-btns" style={{width:"max-content"}}>
             <div className="top-clinic__header-right-btns">
              
             </div>

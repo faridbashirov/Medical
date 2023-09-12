@@ -17,7 +17,7 @@ const Footer = () => {
     <footer className="bgFooter">
       <div className="container footer-wrapper">
         <div className="rowGrid">
-          <div id="textFooterid" className={"textFooterid"}>
+          <div id="textFooterid" className={"textFooterid"} style={{display:"flex"}}>
             <ul style={{ listStyle: "none" }} className={"footer-med"}>
               <li className={"footer-title"}
               >

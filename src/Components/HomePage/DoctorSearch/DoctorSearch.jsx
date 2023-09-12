@@ -61,7 +61,7 @@ const DoctorSearch = ({positions}) => {
         <div className="top-clinic__header">
           <h3 className="top-clinic__header-title">{t("doctorsearch")}</h3>
           <div className="top-clinic__header-btns">
-            <div className="doctor-search__header-subtitle">
+            <div className="doctor-search__header-subtitle" style={{fontWeight:"600"}}>
             {t("doctorsearch2")}
             </div>
             <Link to={"doctors"} ><Button className="top-clinic__header-left d-none" type={"primary"}>{t("doctorsearch4")} </Button></Link>

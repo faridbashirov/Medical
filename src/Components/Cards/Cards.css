@@ -16,3 +16,45 @@
         height: 286px;
     }
 }
+@media(max-width:1023px){
+    .flag-card{
+        height: 30px;
+        width: 30px;
+    }
+}
+@media(min-width:1024px){
+    .flag-card{
+        width: 52px;
+        height: 52px;
+    }
+}
+.card-title-country{
+    position: absolute;
+    z-index: 10000;
+    bottom: 30px;
+    left: 20px;
+    font-size: 28px;
+    font-weight: 600;
+    display: none;
+    transition: all .4s ease-in-out;
+}
+.countryy .card{
+
+    transition: all .4s ease-in-out;
+}
+.countryy .card:hover .card-title-country{
+    display: flex;
+    transition: all .4s ease-in-out;
+}
+.countryy .anticon{
+    font-size: 25px !important;
+    margin-right: 10px;
+    margin-top: -3px;
+}
+.shadow-card{
+    display: none !important;
+}
+.countryy .card:hover .shadow-card{
+    transition: all .4s ease-in-out;
+    display: flex !important;
+}

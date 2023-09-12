@@ -161,7 +161,6 @@ margin-left: -40px !important;
   margin-right: -30px;
 }
 
-
 .slick-prev:before{
   content: url(./assets/Images/icons8-left-chevron-15.png) !important;
   /* transform: scale(.7); */
@@ -183,4 +182,9 @@ margin-left: -40px !important;
   .slick-next,.slick-prev{
     margin-right: -10px !important;
   }
+}
+.countryy .slick-slide div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

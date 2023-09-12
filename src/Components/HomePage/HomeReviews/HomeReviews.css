@@ -55,7 +55,11 @@
 
 .reviews-item__rating {
     text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
+
 
 .reviews-item__rating-name {
     margin: 0 0 3px 0;

@@ -9,7 +9,7 @@ import { Button, Dropdown, Space, Input, Row, Col } from "antd";
 import Sliders from "../Slider";
 import SliderSecond from "../SliderSecond/SliderSecond";
 import SliderThird from "../SliderThird/SliderThird";
-
+import rectangle from "../../assets/Images/Rectangle-103.png"
 import russianFlag from "../../assets/Images/russianFlagIcon.png";
 import question from "../../assets/Images/question.png";
 import heart from "../../assets/Images/heart.png";
@@ -372,6 +372,7 @@ const onChange2 = (e) => {
             <Button
             onClick={onToggleClick}
               className={show ? "btn_ activeBtn " :  "btn_ " }
+              
             >
               {t("Services")}
             </Button>
@@ -539,12 +540,16 @@ const onChange2 = (e) => {
               pathname: "/hospitals",
               search: `?type=service&name=${item?.name}`,
             })} style={{
-              background:`linear-gradient(180deg, rgba(82, 130, 255, 0) 0%, #5282ff 100%),url(${item.image},`,
-              cursor:"pointer"
-              
+              background:`url(${item.image}`,
+              backgroundRepeat:"no-repeat",
+              backgroundSize:"cover",
+              cursor:"pointer",
+              position:"relative",
+              paddingLeft:"0"
               
             }} id="_box2" className="box2">
-            <p>{item?.name} </p>
+            <p style={{position:"absolute",zIndex:"10",bottom:"0px",left:"15px"}}>{item?.name} </p>
+            <img src={rectangle} style={{zIndex:"0",position:"absolute",width:"100%",bottom:"0"}} alt="" />
           </div>
           })}
          
@@ -619,12 +624,13 @@ const onChange2 = (e) => {
 
       <div style={{ paddingTop: "30px" }} className="container">
         <div style={{
-           cursor:"pointer"
+           cursor:"pointer",
+           background:`linear-gradient(180deg, rgba(82, 130, 255, 0) 0%, #5282ff 100%), url(${position[8]?.image}) no-repeat top/cover`
         }}  onClick={()=> navigate({
               pathname: "/hospitals",
               search: `?type=service&name=${position[8]?.name}`,
 
-            })} className="bgDoctor">
+            })} className="bgDoctor" >
           <span>{position[8]?.name}</span>
         </div>
       </div>
@@ -714,9 +720,19 @@ const onChange2 = (e) => {
       </div>
       <DiscoundSlider offer={bestoffer} />
 
-      <div style={{ paddingTop: "10px" }} className="container">
-        <div>
+      <div style={{  }} className="container">
+        <div className={"group18-section"}>
+
           <img className={"group-18"} src={group18} />
+          <Button onClick={()=> navigate({
+              pathname: "/hospitals",
+              search: `?type=service&name=${position[7]?.name}`,
+            })}
+                className={"group-18-btn"}
+                type="primary"
+              >
+                Смотреть еще
+              </Button>
         </div>
       </div>
 
@@ -740,7 +756,7 @@ const onChange2 = (e) => {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "flex-end",
+          alignItems: "center",
         }}
       >
         <div>
@@ -758,7 +774,7 @@ const onChange2 = (e) => {
         </Button>
       </div>
 
-      <div className="containerSliderSeconds" style={{ paddingTop: "50px" }}>
+      <div className="containerSliderSeconds">
         
         <SliderSecond position={position} />
         <Button
