@@ -15,7 +15,7 @@ const TabClinics = () => {
  
 
   const {data,error,hospitalreviews}=allReviewsFetch()
-  
+  console.log(hospitalreviews);
   const onChange = (key) => {
     console.log(key);
   };

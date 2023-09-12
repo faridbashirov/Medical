@@ -258,7 +258,7 @@ useEffect(()=>{
                 initialValues={{
                 firstName:data?.first_name,
                 lastName:data?.last_name,
-                date: dayjs(data?.birthdate),
+                date:data?.birthdate ? dayjs(data?.birthdate ): "",
                 number:data?.phone_number,
                 email:data?.email,
 

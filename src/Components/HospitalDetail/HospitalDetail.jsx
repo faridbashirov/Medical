@@ -80,7 +80,7 @@ console.log(reviews);
     </div>
     <Reviews id={id} reviews={reviews}/>
     <Questions questions={questions}/>
-    <QualityRating/>
+    <QualityRating  hospital={hospital}  />
     <GetService hospital={hospital}/>
     <PaySection/>
     <HospitalBookingModal  openBooking={openBooking} onCloseBookingModal={onCloseBookingModal}/>

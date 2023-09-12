@@ -405,7 +405,7 @@ const Profile = () => {
               </p>
             </div>
 
-            <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+            <Tabs tabBarStyle={{fontSize:"15px"}} defaultActiveKey="1" items={items} onChange={onChange} />
           </div>
         </div>
       </div>

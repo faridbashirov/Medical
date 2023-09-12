@@ -339,7 +339,7 @@ const Header = ({handleMenu,showMenu,setShowMenu}) =>{
                     className="button"
                     type="primary"
                     icon={<ArrowRightOutlined className="Arrow" />}
-                    style={{fontSize:"20px",fontWeight:"600"}}
+                   
                     onClick={()=> logout()}
                   >
                     {t("logout")}
@@ -347,6 +347,7 @@ const Header = ({handleMenu,showMenu,setShowMenu}) =>{
                     className="button"
                     type="primary"
                     icon={<ArrowRightOutlined className="Arrow" />}
+                    
                     onClick={onOpenLogin}
                   >
                     {t("login")}

@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import group15 from "../../assets/Images/Group15.png";
 import group16 from "../../assets/Images/Group16.png";
 import group17 from "../../assets/Images/Group17.png";
+import uuid from 'react-uuid';
 const settings = {
   dots: false,
   infinite: true,
@@ -45,11 +46,13 @@ const DiscountSlider = ({offer}) => {
   return (
     <div style={{ paddingTop: "10px" }} className="container discount-slider">
         <Slider {...settings}>
-      
-        <div style={{marginRight:"10px"}}>
-          <img style={{width:"100%", height:"100%"}} src={group15} />
+         {offer.map((item,index)=>{
+          return  <div className='slider-img' key={uuid()} style={{marginRight:"10px"}}>
+          <img style={{width:"100%", height:"100%" ,borderRadius:"5%"}} src={item?.image} />
         </div>
-        <div style={{marginRight:"10px"}}>
+         })}
+       
+        {/* <div style={{marginRight:"10px"}}>
           <img style={{width:"100%", height:"100%"}} src={group16} />
         </div>
         <div style={{marginRight:"10px"}}>
@@ -63,7 +66,7 @@ const DiscountSlider = ({offer}) => {
         </div>
         <div style={{marginRight:"10px"}}>
           <img style={{width:"100%", height:"100%"}} src={group17} />
-        </div>
+        </div> */}
       </Slider>
     </div>
   );

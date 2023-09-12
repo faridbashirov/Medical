@@ -76,7 +76,7 @@ const Detail = ({images,hospital,open}) => {
             <p>
               {hospital.name}
               
-              <Rate style={{fontSize:"16"}} disabled={true} value={hospital?.raiting}/>
+              <Rate  style={{fontSize:"16",marginLeft:"10px"}} disabled={true} value={hospital?.raiting}/>
               
              
               {/* <img style={{marginLeft: "4px"}} src={singleStar} alt="singleStar"/>

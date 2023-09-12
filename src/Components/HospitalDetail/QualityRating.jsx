@@ -2,14 +2,14 @@ import React from 'react';
 import singleStar from "../../assets/Svg/singleStar.svg"
 import mainLogo from "../../assets/Images/Vector.svg"
 import { useTranslation } from 'react-i18next';
-const QualityRating = () => {
+const QualityRating = ({hospital}) => {
   const {t}=useTranslation()
   return (
     <div className={"container"}>
       <div className="quality-rating">
         <div className="quality-rating__left">
           <div className="quality-rating__left-nums">
-            <span className="quality-rating__left-num-main">3</span>
+            <span className="quality-rating__left-num-main">{hospital?.raiting}</span>
             <img className="quality-rating__left-num-star" src={singleStar} alt=""/>
             <span className="quality-rating__left-num-slash">/</span>
             <span className="quality-rating__left-num-second">5</span>
