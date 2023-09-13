@@ -790,7 +790,7 @@ h3{
     .box1 {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        /* justify-content: space-around; */
     }
 
     .box1-text, .box1-btn, .box2 {
@@ -1028,9 +1028,12 @@ h3{
     justify-content: center;
 }
 @media(max-width:576px){
-    .search-container{
-        padding-top: 60px !important;
+    .sortBtn {
+        height: unset !important;
     }
+    /* .search-container{
+        padding-top: 60px !important;
+    } */
     :where(.css-dev-only-do-not-override-lgxug1).ant-input-affix-wrapper-lg{
         padding: 0 7px !important;
         font-size: 14px !important;

@@ -475,8 +475,8 @@ const onChange2 = (e) => {
         </div>
       </div>
 
-      <div style={{ paddingTop: "100px" }} className="container">
-        {/* <Space wrap>
+      <div style={{ paddingTop: "152px" }} className="container">
+        <Space wrap>
           <p style={{ fontWeight: "600", fontSize: "20px", color: "#000" }}>
             Поиск по:
           </p>
@@ -507,7 +507,7 @@ const onChange2 = (e) => {
              Бюджету
            </Button>
          </div>
-        </Space> */}
+        </Space>
       </div>
 
       <div style={{ paddingTop: "40px" }} className="container search-container">
