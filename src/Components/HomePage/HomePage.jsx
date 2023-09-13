@@ -510,7 +510,7 @@ const onChange2 = (e) => {
         </Space> */}
       </div>
 
-      <div style={{ paddingTop: "40px" }} className="container">
+      <div style={{ paddingTop: "40px" }} className="container search-container">
         <div className="grid">
           <div className="box1">
             <div className="box1_2">

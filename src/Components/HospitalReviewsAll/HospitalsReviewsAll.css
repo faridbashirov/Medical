@@ -223,6 +223,7 @@ display: flex;
 }
 
 
+
 @media (max-width: 756px) {
     .featured-hospital{
         flex-direction: column;
@@ -252,6 +253,12 @@ display: flex;
 
     .featured-location {
         margin-bottom: 10px;
+    }
+    .featured-btn-review{
+        background-color: #5282FF !important;
+    }
+    .featured-btn-review span{
+        color: #fff !important;
     }
 
     .rating-wrapper {

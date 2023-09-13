@@ -107,7 +107,7 @@
     padding: 20px -0px;
 }
 .menuRight{
-    margin-left: 15px;
+    /* margin-left: 15px; */
 }
 @media(max-width:400px){
     .card-footerr{
