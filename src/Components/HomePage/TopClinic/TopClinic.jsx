@@ -123,16 +123,21 @@ const TopClinic = () => {
   return (
       <section className="top-clinic">
     <div className={"container"}>
-        <div className="top-clinic__header" style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+        <div className="top-clinic__header" >
           <h3 className="top-clinic__header-title"><Trans i18nKey="tophospitals"></Trans></h3>
-          <div className="top-clinic__header-btns" style={{width:"max-content"}}>
+
+          <div className="top-clinic__header-btns" >
             <div className="top-clinic__header-right-btns">
+            <Button className={"right-btn-primary"} type={"primary"}>топ 30</Button>
+              <Button className={"right-btn-link"} type={"link"}><span>&#x2022;</span>топ 10</Button>
+              <Button className={"right-btn-link"} type={"link"}><span>&#x2022;</span>топ 5</Button>
+            
+          
+              
              
             </div>
-           <Button onClick={()=> navigate({
-      pathname: "/hospitals",
-      search: `?type=clinic`,
-    })} className="top-clinic__header-left d-none" type={"primary"}>{t("tophospitals2")} </Button>
+            <Link to={"hospitals"}><Button className="top-clinic__header-left d-none" type={"primary"}>Посмотреть клиники </Button></Link> 
+        
           </div>
         </div>
         <div className="top-clinic__carousel">
