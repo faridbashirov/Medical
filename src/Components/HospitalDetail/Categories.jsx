@@ -1,64 +1,109 @@
 import React from 'react';
-import Carousel from 'react-multi-carousel';
+import Slider from 'react-slick';
 import { useTranslation } from 'react-i18next';
 const Categories = ({services,hospital}) => {
   const {t}=useTranslation()
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 2
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 2
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
+  const settings = {
+    // className: "center",
+    navigate: true,
+    infinite: true,
+    autoPlay: true,
+    speed: 500,
+    rows: 1,
+    autoplay: true,
+      autoplaySpeed: 2000,
+    slidesPerRow: 2,
+    slidesToShow: 2.3,
+      slidesToScroll: 1,
+      initialSlide: 0,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 8,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 5,
+            slidesToScroll: 2,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 2.3,
+            slidesToScroll: 1
+          }
+        }
+      ]
   };
   return (
     <div className="hospital-detail__categories">
       <h4 className="categories__title">{t("direction")} - {hospital?.name}</h4>
-      <Carousel responsive={responsive}>
-        {services.map((service,index) =>{
-         return  <div className={"categories__carousel-item"}>
-         <button className={"categories__carousel-item-btn"}>{service.illness.name}</button>
-         <button className={"categories__carousel-item-btn"}>{service.illness.name}</button>
+      <Slider {...settings}>
+        {/* {services.map((service,index) =>{
+         return  <div className={"categories__carousel-item"} style={{width:"100%"}}>
+         <button className={"categories__carousel-item-btn"} style={{marginBottom:"20px"}}>{service.illness.name}</button>
+         
         
        </div>
-        })}
+        })} */}
        
-        {/* <div className={"categories__carousel-item"}>
+        <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
           <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
-         <button className={"categories__carousel-item-btn"}>Репродуктология</button>
+         {/* <button className={"categories__carousel-item-btn"}>Репродуктология</button> */}
      </div>
-        <div className={"categories__carousel-item"}>
+        <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
           <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
-          <button className={"categories__carousel-item-btn"}>Репродуктология</button>
+          {/* <button className={"categories__carousel-item-btn"}>Репродуктология</button> */}
          </div>
-         <div className={"categories__carousel-item"}>
+         <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
           <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
-           <button className={"categories__carousel-item-btn"}>Репродуктология</button>
+           {/* <button className={"categories__carousel-item-btn"}>Репродуктология</button> */}
          </div>
-         <div className={"categories__carousel-item"}>
+         <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
            <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
-           <button className={"categories__carousel-item-btn"}>Репродуктология</button>
+           {/* <button className={"categories__carousel-item-btn"}>Репродуктология</button> */}
          </div>
-         <div className={"categories__carousel-item"}>
+         <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
            <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
-           <button className={"categories__carousel-item-btn"}>Репродуктология</button>
+           {/* <button className={"categories__carousel-item-btn"}>Репродуктология</button> */}
          </div>
-       <div className={"categories__carousel-item"}>
+       <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
           <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
-        <button className={"categories__carousel-item-btn"}>Репродуктология</button>
-        </div> */}
-      </Carousel>
+        {/* <button className={"categories__carousel-item-btn"}>Репродуктология</button> */}
+        </div>
+        <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
+          <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
+        {/* <button className={"categories__carousel-item-btn"}>Репродуктология</button> */}
+        </div>
+        <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
+          <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
+        {/* <button className={"categories__carousel-item-btn"}>Репродуктология</button> */}
+        </div>
+        <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
+          <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
+        {/* <button className={"categories__carousel-item-btn"}>Репродуктология</button> */}
+        </div>
+          <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
+          <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
+        {/* <button className={"categories__carousel-item-btn"}>Репродуктология</button> */}
+        </div>  <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
+          <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
+        {/* <button className={"categories__carousel-item-btn"}>Репродуктология</button> */}
+        </div>
+
+        <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
+          <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
+        {/* <button className={"categories__carousel-item-btn"}>Репродуктология</button> */}
+        </div>
+      </Slider>
     </div>
   );
 };

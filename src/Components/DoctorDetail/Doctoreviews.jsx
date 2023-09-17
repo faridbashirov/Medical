@@ -58,7 +58,7 @@ const DoctorReviews = ({reviews,id}) => {
       <div className="container">
         {reviews?.length !== 0  ? <>  <div className="reviews__header">
           <h4 className="reviews__header-title">{t("hosinfo3")}</h4>
-          <p className="reviews__header-subtitle"><span className={"subtitle__rating"}>9,8</span>Великолепно <span>&#x2022;</span><span>{reviews.length} {t("comments")}</span> <a href="#">{t("allreviews")}</a></p>
+          <p className="reviews__header-subtitle"><span className={"subtitle__rating"}>9,8</span>Великолепно <span>&#x2022;</span><span>{reviews.length} {t("comments")}</span> <a href="#" className='read-btn'>{t("allreviews")}</a></p>
         </div>
         <div className="reviews__carousel">
         <Slider {...settings}>

@@ -6,6 +6,9 @@
     padding: 15px;
     margin-top: 20px;
 }
+.cardHospitals{
+    padding: 20px 10px 20px 20px !important;
+}
 .cardHospitals .card-body{
     padding-left: 167px !important;
     
@@ -47,17 +50,17 @@
         padding-left: 100px !important;
     }
     
-    .cardReviewDoctors a,
+    /* .cardReviewDoctors a,
     .cardReviewDoctors p,
     .cardReviewDoctors span{
         font-size: 10px !important;
-    }
+    } */
     
 }
 @media (max-width: 756px) {
     .cardHospitals{
         height: 100% ;
-        padding: 5px;
+        padding: 5px 10px !important;
     }
     .display_grid-hospital{
         grid-template-columns: repeat(1,1fr);
@@ -90,17 +93,15 @@
         position: relative;
     }
 }
-@media(max-width:576px){
+/* @media(max-width:576px){
     .hospital-footerr{
         flex-direction: column !important;
     }
-}
+} */
 #hospitalImage{
     border-radius: 15px;
 }
-.cardHospitals{
-    padding: 20px 10px 20px 20px !important;
-}
+
 .hospital-footerr{
     position: absolute;
     bottom: 10px;
@@ -113,4 +114,121 @@
 }
 .hospital-footerr p:nth-child(2){
     margin-left: 10px;
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active a,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item a {
+    border: none !important;
+    width: 30px !important;
+    height: 30px !important;
+    
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item a{
+    display: flex !important;
+    align-items: center !important;
+    color: #000 !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active a{
+    background: #5282FF !important;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #fff !important;
+}
+
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active{
+    background: #5282FF !important;
+    border: none !important;
+    min-width: unset !important;
+    
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item{
+    background: transparent !important;
+}
+.cardHospitals :where(.css-dev-only-do-not-override-lgxug1).ant-rate{
+    margin-top: -5px !important;
+}
+.cardHospitals :where(.css-dev-only-do-not-override-lgxug1).ant-rate .ant-rate-star:not(:last-child){
+    margin-inline-end: 3px !important;
+}
+@media(min-width:1024px){
+    .cardHospitals .anticon{
+        font-size: 13px !important;
+    }
+ 
+    .cardHospitals .card-title{
+        font-size: 16px !important;
+        line-height: 20px !important;
+        font-weight: 600 !important;
+        margin-top: 10px;
+    }
+    .cardHospitals .card-text{
+        font-size: 16px !important;
+        line-height: 20px !important;
+        /* font-weight: 500 !important; */
+        margin-top: 5px;
+    }
+    .cardHospitals{
+        margin-top: 0 !important;
+    }
+    .displaygridrevdoctors{
+        gap: 10px !important;
+    }
+    
+}
+@media(max-width:1023px){
+    .cardHospitals .card-body{
+        height: 156px;
+    }
+    
+}
+@media(max-width:755px){
+    .cardHospitals p,.cardHospitals .anticon{
+        font-size: 10px !important;
+    }
+    .comment-average{
+        margin: 0 !important;
+    }
+    
+}
+.cardHospitals .card-body{
+    position: relative;
+}
+.cardHospitals .hospital-footerr{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    bottom: 0px;
+  
+}
+@media(min-width:756px){
+    .cardHospitals .hospital-footerr{
+        width: 70%;
+    }
+}
+@media(max-width:755px){
+    .cardHospitals .hospital-footerr{
+        width: 90%;
+    }
+}
+@media(max-width:400px){
+    .hospital-footerr p,.hospital-footerr span{
+        font-size: 7px !important;
+    }
+    .hospital-footerr{
+        bottom: 10px !important;
+    }
+    #hospitalImage{
+        width: 110px !important;
+    }
+    .hospital-footerr p:nth-child(2){
+        margin-left: 3px !important;
+    }
+}
+@media(min-width:400px) and (max-width:756px){
+    .hospital-footerr p,.hospital-footerr span{
+        font-size: 8px !important;
+    }
 }

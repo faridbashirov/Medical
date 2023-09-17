@@ -17,7 +17,7 @@ const InfoContent = ({hospital,discount,open}) => {
         <p className={"info__content-left--subtitle"}>Чтобы сэкономить, просто забронируйте клинику.
           ОПИСАНИЕ КЛИНИКИ кроме телефона, сайта и электронной почты.</p>
         <div className={"info__content-left--desc"}>
-          {hospital.description}
+          {/* {hospital.description} */}
         </div>
       </div>
       <div className={"info__content-right"}>

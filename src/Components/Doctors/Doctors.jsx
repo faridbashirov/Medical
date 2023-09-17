@@ -909,7 +909,7 @@ const Doctors = () => {
                    
                         </div>
                     </div>
-                    <div>
+                    <div className="rating-desktop">
                       <p className="changed"
                         style={{
                           margin: "0 !important",
@@ -920,7 +920,7 @@ const Doctors = () => {
                         Bеликолепно
                       </p>
                     </div>
-                    <div className="">
+                    <div  className="rating-desktop">
                       <p
                         style={{
                           backgroundColor: "#FFC224",
@@ -945,6 +945,7 @@ const Doctors = () => {
                         display: "flex",
                         justifyContent: "space-between",
                       }}
+                      className="doctors-card-header"
                     >
                       <h3
                         style={{
@@ -956,17 +957,18 @@ const Doctors = () => {
                       >
                         Dr.{capitalizeWords(item.first_name)} {capitalizeWords(item.last_name)}
                       </h3>
-                      <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end" }} >
-                        <p
+                      <div  style={{display:"flex",flexDirection:"column",alignItems:"flex-end" }} >
+                      <Link to={`/doctor-reviews/${item.id}`} className="changed comment-count-doc">{item.comment_count}  {t("comments").toLowerCase()}</Link>
+
+                        {/* <p
                           className="comment d-none"
                           style={{  textAlign: "right" }}
                         >
                           <span>{item.comment_count}</span>       {t("comments").toLowerCase()}
-                        </p>
+                        </p> */}
                         <span className={"sort-text changed"} style={{marginTop:"10px"}}>
                         Соотношение цена/качество
                         </span>
-                        <Link to={`/doctor-reviews/${item.id}`} className="changed">{item.comment_count}  {t("comments").toLowerCase()}</Link>
                       </div>
                     </div>
 
@@ -974,9 +976,8 @@ const Doctors = () => {
                       style={{
                         fontSize: "14px",
                         margin: "0px",
-                        paddingTop: "10px",
                       }}
-                      className="changed"
+                      className="changed hospital-location"
                     >
                       <EnvironmentOutlined 
                         style={activeElement === item.id ?{ marginRight: "6px", color: "white" } :{ marginRight: "6px", color: "#5282FF" } }
@@ -990,7 +991,7 @@ const Doctors = () => {
                        
                         </div>
                       <p className="changed">Bеликолепно</p>
-                      <p className="changed">{item.comment_count} {t("comments").toLowerCase()}</p>
+                      <Link to={`/doctor-reviews/${item.id}`} className="changed">{item.comment_count}  {t("comments").toLowerCase()}</Link>
                     </div>
                     
                     <div
@@ -999,6 +1000,7 @@ const Doctors = () => {
                         justifyContent: "space-between",
                         alignItems: "flex-end",
                       }}
+                      className="doctors-card-buttons"
                     >
                       <div>
                         <p

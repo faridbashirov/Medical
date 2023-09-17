@@ -3,26 +3,37 @@
     src: url("../../../src/Fonts/Inter/static/Inter-Regular.ttf");
 }
 
-@font-face {
+/* @font-face {
     font-family: "Gilroy";
     src: url("../../../src//Fonts/gilroy/Gilroy-Regular-AZ_0.ttf");
-}
+} */
 
 
 @font-face {
     font-family: "Poppins-Test";
     src: url("../../Fonts/Poppins/Poppins-Regular");
 }
+@font-face {
+    font-family: "Gilroy";
+    src: url("../../Fonts/gilroy/Gilroy-Medium.ttf");
+}
+@font-face {
+    font-family: "Gilroy-semibold";
+    src: url("../../Fonts/gilroy/Gilroy-SemiBold.ttf");
+}
 .buttonsSort {
     justify-content: space-between;
     margin-top: 20px;
     display: none;
 }
+.buttonsSort button{
+    width: 29% !important;
+}
 
 .menuNav-hospitals {
     border: none;
   
-    width: 325px;
+    /* width: 325px; */
 }
 @media(max-width:1024px){
     .menuNav-hospitals{
@@ -47,12 +58,15 @@
     .header-card{
      margin-bottom: 20px;
     }
-    #hospitalsImage{
-     width: 170px !important;
-     height: 170px !important;
+    .hospitals-card #hospitalsImage{
+        width: 170px !important;
+        height: 250px !important;
     }
     .card-body{
      padding-left: 70px !important;
+    }
+    .hospitals-card .card-content{
+        padding-left: 70px !important;
     }
     
  }
@@ -77,14 +91,18 @@
      padding-left: 100px !important;
     }
  @media(min-width:1650px){
- .card-body{
-     padding-left: 50px !important;
-    }}
+    .hospitals-card .card-content{
+        padding-left: 70px !important;
+    }
+}
+    
+
 /* .card-bodyy{
     padding-left: 100px !important;
 } */
-.card-content{
-    width: 80% !important;
+.hospitals-card .card-content{
+    width: 83% !important;
+    
 }
 .cardReviewDoctors{
     display: flex;
@@ -153,7 +171,29 @@
         justify-content: center;
         padding: 0 0 35px;
     }
+   .breadcrumbs a,.breadcrumbs span{
+        font-size: 12px !important;
+        font-weight: 500 !important;
+    }
+    .breadcrumbs{
+        display: none !important;
+    }
+    .result-desktop{
+        display: none !important;
+    }
 
+}
+@media(min-width:756px){
+    .result-mobile{
+        display: none !important;
+    }
+    #sponsoredImage{
+        margin-left: 5px !important;
+    }
+    #likeImageFavHospitals{
+        padding-right: 15px !important;
+        width: 40px !important;
+    }
 }
 .display_grid{
     grid-template-rows: unset;
@@ -177,3 +217,195 @@
  .cardReviewDoctors .card-content-mobile .card-header h3{
     padding-left: 0 !important;
  }
+ .hospitals-card :where(.css-dev-only-do-not-override-lgxug1).ant-rate {
+     font-size: 11px !important;
+     line-height: 11px !important;
+     margin: 11px 0 !important;
+ }
+ .hospitals-card .card-content-mobile .card-header-inner{
+    margin: 3% 0 !important;
+ }
+ @media(max-width:756px){
+    .hospitals-card-buttons  p{
+        font-size: 11px !important;
+        font-weight: 600 !important;
+       
+    }
+   .hospitals-card-button{
+    text-align: left !important;
+   }
+    .displayGridHospitals{
+        padding-top: 0 !important;
+    }
+    .hospitals-card .card-content-mobile  .anticon-environment{
+        font-size: 12px !important;
+    }
+    #sponsoredImage,#likeImageFavHospitals{
+        margin: 0 5px !important;
+    }
+
+ }
+ @media(min-width:400px){
+    .hospitals-card-button{
+        margin-right:20px;
+    }
+    .hospitals-card-buttons{
+        justify-content: start !important;
+    }
+   
+ }
+ @media(max-width:399px){
+    .hospitals-card-buttons{
+        justify-content: space-between !important;
+    }
+ }
+ 
+ .rating-number{
+    font-size: 13px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.hospitals-card .card-header-inner p:first-child{
+    font-size: 11px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.buttonsSort button{
+    display: flex;
+    font-family: Gilroy !important;
+    align-items: center;
+    justify-content: center;
+}
+.hospitals-card #sponsoredImage{
+    grid-column: 1/5 !important;
+}
+
+
+@media(min-width:1024px){
+    .hospitals-card .card-content span{
+        font-size: 13px !important;
+    }
+}
+.hospitals-card p,.hospitals-card span,.hospitals-card a{
+    font-family: Gilroy;
+}
+h3{
+    font-family: Gilroy-semibold !important;
+}
+.hospitals-card{
+    align-items: start !important;
+}
+.hospitals-card .header-card{
+    margin: 10px 0;
+}
+.hospitals-card{
+    padding: 30px 20px !important;
+    height: unset !important;
+}
+.hospitals-card .card-descc{
+    margin-left: 15px !important;
+}
+.hospitals-card .doctors-more-btn,.hospitals-card .doctors-more-btn-active{
+    margin-left: 10px;
+}
+@media(min-width:1024px) and (max-width:1200px){
+    .hospitals-card .card-descc{
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+    .hospitals-card .doctors-more-btn,.hospitals-card .doctors-more-btn-active{
+        margin-top: 15px;
+    }
+    .hospitals-card .card-content{
+        padding-left: 40px !important;
+    }
+ 
+}
+.hospitals-card .comment_hospitals{
+    margin-bottom: 6px !important; 
+}
+.hospitals-card .card-content-mobile .ant-rate{
+    margin: 0 !important;
+    font-size: 9px !important;
+    margin-block-end:0 !important;
+    margin-block-start:0 !important;
+    margin-top: -5px !important;
+}
+.hospitals-card .card-content-mobile p,.hospitals-card .card-content-mobile span{
+    font-size: 10px !important;
+}
+.hospitals-card .doctors-more-btn,.hospitals-card .doctors-more-btn-active{
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.hospitals-card .card-descc a{
+text-decoration: none !important;
+
+}
+.hospitals-sidebar{
+    width: 90% !important;
+}
+.hospitals-sidebar iframe{
+    width: 100% !important;
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active a,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item a {
+    border: none !important;
+    width: 30px !important;
+    height: 30px !important;
+    
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item a{
+    display: flex !important;
+    align-items: center !important;
+    color: #000 !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active a{
+    background: #5282FF !important;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #fff !important;
+}
+
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active{
+    background: #5282FF !important;
+    border: none !important;
+    min-width: unset !important;
+    
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item{
+    background: transparent !important;
+}
+@media(min-width:1024px) and (max-width:1199px){
+    .hospitals-card p,.hospitals-card a.changed{
+        font-size: 10px !important;
+    }
+}
+@media(min-width:1200px) and (max-width:1439px){
+    .hospitals-card p,.hospitals-card a.changed{
+        font-size: 11px !important;
+    }
+}
+@media(min-width:1440px){
+    .hospitals-card p,.hospitals-card a.changed{
+        font-size: 13px !important;
+    }
+}
+@media(max-width:756px){
+   .hospitals-card .percentage{
+        padding: 0 5px !important;
+    }
+    
+}
+
+@media(max-width:1024px){
+    .hospitals-sidebar{
+        width: 100% !important;
+    }
+}

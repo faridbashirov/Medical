@@ -409,12 +409,12 @@ const  FavDoctors = () => {
                           margin: "0 15px 0 0",
                           paddingTop: "0px !important",
                         }}
-                        className="changed"
+                        className="changed favdoctor-position"
                       >
                         {item.doctor.position?.name}
                       </p>
                     </div>
-                    <div style={{ marginRight: "auto" }}>
+                    <div className="rating-sec" style={{ marginRight: "auto" }}>
                       {" "}
                       <div>
                       <Rate style={{fontSize:"16"}} disabled={true} value={item.hospital?.raiting}/>
@@ -469,7 +469,7 @@ const  FavDoctors = () => {
                       >
                         Dr. {item.doctor.first_name} {item.doctor.last_name}
                       </h3>
-                      <div className="changed">
+                      <div className="changed comment-text">
                         <p
                           className="comment changed"
                           style={{ color: "#5282FF", textAlign: "right" }}
@@ -508,10 +508,10 @@ const  FavDoctors = () => {
                             color: "#000",
                             backgroundColor: "#F4F4F4",
                             border: "1px solid #EFEFEF",
-                            borderRadius: "15px",
+                            borderRadius: "30px",
                             fontSize: "12px",
-                            padding: "10px 10px",
-                            width: "151px",
+                            padding: "8px 20px",
+                            width: "max-content",
                             textAlign: "center",
                           }}
                         >
@@ -523,10 +523,10 @@ const  FavDoctors = () => {
                             color: "#000",
                             backgroundColor: "#F4F4F4",
                             border: "1px solid #EFEFEF",
-                            borderRadius: "15px",
+                            borderRadius: "30px",
                             fontSize: "12px",
-                            padding: "10px 10px",
-                            width: "124px",
+                            padding: "8px 20px",
+                            width: "max-content",
                             textAlign: "center",
                             display: "flex",
                             alignItems: "center",
@@ -541,8 +541,8 @@ const  FavDoctors = () => {
                       <div>
                         <Button onClick={()=>navigate(`/doctor/${item.doctor.id}`)}
                           style={{
-                            width: "155.37px",
-                            height: "45px",
+                            width: "max-content",
+                            height: "40px",
                             marginBottom: "10px",
                           }}
                           type="primary"
@@ -582,6 +582,7 @@ const  FavDoctors = () => {
                           margin: "0px",
                           paddingTop: "10px",
                         }}
+                        className="hospital-location"
                       >
                         <EnvironmentOutlined
                           style={{ marginRight: "6px", color: "#5282FF" }}
@@ -630,7 +631,7 @@ const  FavDoctors = () => {
                         display: "flex",
                         justifyContent: "space-between",
                       }}>
-                      <div>Соотношение цена/качество</div>
+                      <div className="comment-text">Соотношение цена/качество</div>
                     </div>
                     <div
                       style={{
@@ -645,10 +646,10 @@ const  FavDoctors = () => {
                             color: "#000",
                             backgroundColor: "#F4F4F4",
                             border: "1px solid #EFEFEF",
-                            borderRadius: "15px",
+                            borderRadius: "30px",
                             fontSize: "12px",
-                            padding: "10px 10px",
-                            width: "151px",
+                            padding: "8px 20px",
+                            width: "max-content",
                             textAlign: "center",
                           }}
                         >
@@ -659,10 +660,10 @@ const  FavDoctors = () => {
                             color: "#000",
                             backgroundColor: "#F4F4F4",
                             border: "1px solid #EFEFEF",
-                            borderRadius: "15px",
+                            borderRadius: "30px",
                             fontSize: "12px",
-                            padding: "10px 10px",
-                            width: "124px",
+                            padding: "8px 10px",
+                            width: "max-content",
                             textAlign: "center",
                             display: "flex",
                             alignItems: "center",

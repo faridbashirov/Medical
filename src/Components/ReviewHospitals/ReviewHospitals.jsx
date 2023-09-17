@@ -237,7 +237,7 @@ const ReviewHospitals = () => {
         </div>
       </div>
       <div className="container">
-        <div className="displayGridReviewDr doctorss1">
+        <div className="displayGridReviewDr doctorss1 displaygridrevdoctors">
           <div style={{ height: "320px" }} className="menuNav">
             <ul>
             <li  onClick={()=> navigate("/profile")}
@@ -352,23 +352,23 @@ const ReviewHospitals = () => {
                       <Rate style={{fontSize:"16"}} disabled={true} value={item.hospital?.raiting}/>
                  
               </div>
-                    <p
+                    <p className="comment-average"
                       style={{
                         backgroundColor: "#FFC224",
-                        color: "#000",
-                        width: "29.16px",
-                        height: "21.53px",
+                        color: "#000",padding:"5px 10px",
+                        display:"flex",
+                        alignItems:"center",
+                        justifyContent:"center",
                         borderRadius: "2.5px",
                         textAlign: "center",
-                        margin:"0px"
                       }}
                     >
                       9,9
                     </p>
                   </div>
-                  <div>
+                  <p>
                    {item.text}
-                  </div>
+                  </p>
                   <div className="hospital-footerr"
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >

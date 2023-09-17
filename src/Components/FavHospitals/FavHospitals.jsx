@@ -266,7 +266,7 @@ const FavHospitals = () => {
         </div>
       </div>
       <div className="container">
-        <div className="displayGridReviewDr">
+        <div className="displayGridReviewDr displaygridhospital">
           <div style={{ height: "320px" }} className="menuNav">
             <ul>
             <li  onClick={()=> navigate("/profile")}
@@ -351,7 +351,7 @@ const FavHospitals = () => {
             </ul>
           </div>
 
-          <div className="menuRight">
+          <div className="menuRight" style={{width:"100%"}}>
           <>
           {loading && !liked ?  <div> <FadeLoader
               color="black"
@@ -365,9 +365,9 @@ const FavHospitals = () => {
            
             
           
-            <div>
+            <div style={{width:"100%"}}>
               { data.map((item,index)=>{
-                return  <div   onClick={()=>handleClick(item.id)} className={activeElement ===item.id ? "hospitalcard cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors cardReviewDoctors"} >
+                return  <div   onClick={()=>handleClick(item.id)} className={activeElement ===item.id ? "hospitalcard hospital-card-active cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors cardReviewDoctors hospitalcard"} >
                 <div className="display_grid img-wrapper">
                   <img
                     className={"cardFavHospitals-img"}
@@ -402,7 +402,7 @@ const FavHospitals = () => {
                       
                       <p style={{ margin: "0px", color: "white" }}>Hеплохо</p>
                       
-                      <p
+                      <p className="review-average"
                         style={{
                           backgroundColor: "#FFC224",
                           color: "#000",
@@ -473,7 +473,7 @@ const FavHospitals = () => {
                     }}
                     className="card-buttons"
                   >
-                    <div className="card-button1"
+                    <div className="card-buttonn1"
                       style={{
                         backgroundColor: "#E9ECFF",
                         borderRadius: "5px",
@@ -481,7 +481,7 @@ const FavHospitals = () => {
                         height: "43px",
                       }}
                     >
-                      <p
+                      <p className="card-buttonn1"
                         style={{
                           fontSize: "12px",
                           textAlign: "center",
@@ -492,12 +492,12 @@ const FavHospitals = () => {
                           <Trans i18nKey="hosbooking"></Trans> - 40%
                       </p>
                     </div>
-                    <div className="card-button2"
+                    <div className="card-buttonn2"
                       style={{
-                        backgroundColor: "#E9ECFF",
+                        backgroundColor: "#D8F5DD",
                         borderRadius: "5px",
                         width: "143px",
-                        height: "43px",
+                        height: "40px",
                         paddingLeft: "12px",
                       }}
                     >
@@ -506,14 +506,14 @@ const FavHospitals = () => {
                       </p>
                     </div>
                   </div>
-                  <div
+                  <div className="card-desc-section"
                     style={{
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "flex-end",
                     }}
                   >
-                    <div
+                    <div className="desc-section"
                       style={{
                         backgroundColor: "#FFFF",
                         borderRadius: "5px",
@@ -578,8 +578,8 @@ const FavHospitals = () => {
                     >
                       {item.hospital.name}
                     </h3>
-                    <div style={{ display: "flex", gap: "10px", alignItems:"center" }}>
-                      <p
+                    <div className="rating-section" style={{ display: "flex", gap: "10px", alignItems:"center" }}>
+                      <p className="review-average"
                         style={{
                           backgroundColor: "#FFC224",
                           color: "#000",
@@ -611,33 +611,32 @@ const FavHospitals = () => {
                       alignItems: "center",
                       justifyContent:"space-between"
                     }}
+                    className="card-buttons"
                   >
                     <div
                       style={{
                         backgroundColor: "#E9ECFF",
                         borderRadius: "5px",
                         width: "143px",
-                        height: "43px",
+                        height: "40px",
                       }}
                     >
-                      <p
+                      <p className="card-buttonn1"
                         style={{
                           fontSize: "12px",
                           textAlign: "center",
                           margin: "8px",
-                          paddingLeft: "12px",
                         }}
                       >
                          <Trans i18nKey="hosbooking"></Trans> - 40%
                       </p>
                     </div>
-                    <div
+                    <div className="card-buttonn2"
                       style={{
-                        backgroundColor: "#E9ECFF",
+                        backgroundColor: "#D8F5DD",
                         borderRadius: "5px",
                         width: "143px",
-                        height: "43px",
-                        paddingLeft: "12px",
+                        height: "40px",
                       }}
                     >
                       <p style={{ fontSize: "12px", textAlign: "center" }}>
@@ -652,7 +651,7 @@ const FavHospitals = () => {
                       alignItems: "flex-end",
                     }}
                   >
-                    <div
+                    <div className="card-desc-mobile"
                       style={{
                         backgroundColor: "#FFFF",
                         borderRadius: "5px",

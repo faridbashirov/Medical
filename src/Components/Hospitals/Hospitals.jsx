@@ -463,6 +463,20 @@ const DeleteFromFavorite= async(id)=>{
               ]}
             />
           </div>
+          <div>
+              <p className={"result-text result-mobile"}>
+                <span
+                  style={{
+                    color: "black",
+                    paddingRight: "5px",
+                    marginTop: "10px",
+                  }}
+                >
+                  {name? `"${name}"`: t("found")}
+                </span>
+                {count} {t("variant")}
+              </p>
+            </div>
         </div>
         <div className="container">
         <FilterButtons country={country} />
@@ -486,9 +500,9 @@ const DeleteFromFavorite= async(id)=>{
                       <Trans i18nKey="Services"></Trans>
                 </Button>
               </div>
-          <div className="displayGridReviewDr">
+          <div className="displayGridReviewDr displayGridHospitals">
             <div
-              className="menuNav menuNav-hospitals"
+              className="menuNav menuNav-hospitals hospitals-sidebar"
             >
               <Collapse
                 expandIconPosition="end"
@@ -921,7 +935,7 @@ const DeleteFromFavorite= async(id)=>{
             /> </div> : <div className="menuRight" style={{width:"100%"}}>
                
             <div>
-              <p className={"result-text"}>
+              <p className={"result-text result-desktop"}>
                 <span
                   style={{
                     color: "black",
@@ -964,8 +978,8 @@ const DeleteFromFavorite= async(id)=>{
 
               <div>
                 {hospitals?.map((item,index)=>{
-                  return  <div key={uuid()} className={activeElement ===item.id ? "cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors"} >
-                  <div   className="display_grid img-wrapper">
+                  return  <div key={uuid()} className={activeElement ===item.id ? "hospitals-card  cardReviewDoctors cardReviewDoctors-active" : "hospitals-card cardReviewDoctors"} >
+                  <div   className="display_grid img-wrapper hospital-card-img">
                     <img onClick={()=> navigate(`/hospital/${item.id}`)}
                       className={"cardFavHospitals-img"}
                       id="hospitalsImage"
@@ -1001,7 +1015,6 @@ const DeleteFromFavorite= async(id)=>{
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "flex-start",
-                        paddingTop: "10px",
                       }}
                     >
                       <h3
@@ -1014,7 +1027,7 @@ const DeleteFromFavorite= async(id)=>{
                        {item.name}
                       </h3>
                       <div style={{ display: "flex", gap: "10px" }} className="changed">
-                        <p style={{ margin: "0px",  }} className="changed">Hеплохо</p>
+                        <p style={{ marginTop:"3px"  }} className="changed">Hеплохо</p>
 
                         <p
                           style={{
@@ -1022,11 +1035,14 @@ const DeleteFromFavorite= async(id)=>{
                            
                             width: "29.16px",
                             height: "21.53px",
-                            borderRadius: "2.5px",
+                            borderRadius: "5px",
                             textAlign: "center",
                             margin: "0px",
+                            display:"flex",
+                            alignItems:"center",
+                            justifyContent:"center"
                           }}
-                          className="changed"
+                          className="changed rating-number"
                         >
                           6.0
                         </p>
@@ -1091,17 +1107,19 @@ const DeleteFromFavorite= async(id)=>{
                         style={{
                           backgroundColor: "#E9ECFF",
                           borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
+                          width: "max-content",
+                          height: "40px",
+                          display:"flex",
+                          padding:"0 20px",
+                          alignItems:"center",
+                          "justifyContent":"center"
                         }}
                       >
                         <p
                           style={{
                             color:"black",
                             fontSize: "12px",
-                            textAlign: "center",
-                            margin: "8px",
-                            paddingLeft: "12px",
+                            textAlign: "left",
                           }}
                           
                         >
@@ -1112,13 +1130,16 @@ const DeleteFromFavorite= async(id)=>{
                                - 40%
                         </p>
                       </div>
-                      <div className="card-button2"
+                      <div className="card-button2 percentage"
                         style={{
                           backgroundColor: "#D8F5DD",
                           borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
+                          width: "max-content",
+                          height: "40px",
+                          display:"flex",
+                          padding:"0 20px",
+                          alignItems:"center",
+                          "justifyContent":"center"
                         }}
                       >
                         <p style={{ fontSize: "12px", textAlign: "center" }}>
@@ -1132,13 +1153,14 @@ const DeleteFromFavorite= async(id)=>{
                         justifyContent: "space-between",
                         alignItems: "flex-end",
                       }}
+                      className="card-descc"
                     >
                       <div
                         style={{
                           backgroundColor: "#FFFF",
                           borderRadius: "5px",
                           border: "1px solid #EFEFEF",
-                          width: "384px",
+                          // width: "384px",
                           marginTop: "10px",
                         }}
                       >
@@ -1194,7 +1216,7 @@ const DeleteFromFavorite= async(id)=>{
                       >
                          {item.name}
                       </h3>
-                      <div style={{ display: "flex", gap: "10px", alignItems:"center" }}>
+                      <div className="card-header-inner" style={{ display: "flex", gap: "10px", alignItems:"center" }}>
                         <p
                           style={{
                             backgroundColor: "#FFC224",
@@ -1209,11 +1231,11 @@ const DeleteFromFavorite= async(id)=>{
                           6.0
                         </p>
                         <div>
-                        <Rate style={{fontSize:"16"}} disabled={true} value={item?.raiting}/>
+                        <Rate disabled={true} value={item?.raiting}/>
                         </div>
                         <p style={{ margin: "0px", color: "white" }}>Hеплохо</p>
                         <p
-                          style={{ color: "#FFFF", textAlign: "right" }}
+                          style={{ color: "#FFFF", textAlign: "right",margin:"0px" }}
                         >
                          
                           <Link className="changed" to={`/hospital-reviews/${item.id}`} style={{  }}  href="#">
@@ -1222,39 +1244,46 @@ const DeleteFromFavorite= async(id)=>{
                         </p>
                       </div>
                     </div>
-                    <div
+                    <div className="hospitals-card-buttons"
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        justifyContent:"space-between"
+                        justifyContent:"between"
                       }}
                     >
-                      <div
+                      <div className="hospitals-card-button percentage"
                         style={{
                           backgroundColor: "#E9ECFF",
                           borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
+                          width: "max-content",
+                          padding:"0 20px",
+                          height: "40px",
+                          display:"flex",
+                          alignItems:"center",
+                          "justifyContent":"center"
+                          
                         }}
                       >
                         <p
                           style={{
                             fontSize: "12px",
-                            textAlign: "center",
+                            textAlign: "left",
                             margin: "8px",
-                            paddingLeft: "12px",
                           }}
                         >
                          <Trans i18nKey="hosbooking"></Trans> - 40%
                         </p>
                       </div>
-                      <div
+                      <div className="percentage"
                         style={{
                           backgroundColor: "#D8F5DD",
                           borderRadius: "5px",
-                          width: "143px",
-                          height: "43px",
-                          paddingLeft: "12px",
+                          width: "max-content",
+                          height: "40px",
+                          display:"flex",
+                          padding:"0 20px",
+                          alignItems:"center",
+                          "justifyContent":"center",
                           color: "black",
                         }}
                       >

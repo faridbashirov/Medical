@@ -13,29 +13,18 @@ import arrowLeft from "../../assets/Svg/arrow-left.svg"
 import arrowRight from "../../assets/Svg/arrow-right.svg"
 import { useTranslation } from 'react-i18next';
 import { Navigate, useNavigate } from 'react-router-dom';
+import Slider from "react-slick";
 
-import Carousel from 'react-multi-carousel';
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 3
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1
-  }
-};
 const Detail = ({images,hospital,open}) => {
   
+  const settings = {
+    dots: false,
+    navigate: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
   const {t}=useTranslation()
   const [visibleImages, setVisibleImages] = useState(3);
   const navigate=useNavigate()
@@ -89,7 +78,6 @@ const Detail = ({images,hospital,open}) => {
             <p style={{display: "flex", gap: "10px", alignItems: "center", color: "#5282ff"}}>
               <img src={location} alt="Бейоглу, Стамбул, Турция "/>
               {hospital.location} </p>
-            <p>{t("location")} - <span style={{color: "#5282ff"}}>{t("map2")}</span></p>
           </div>
           <div className={'content__info-header-right'}>
             <div className={'right__share'}>
@@ -102,7 +90,10 @@ const Detail = ({images,hospital,open}) => {
               {t("refund")}
             </button>
           </div>
+          
         </div>
+        <p style={{margin:"0 0 20px 0"}}>{t("location")} - <span style={{color: "#5282ff"}}>{t("map2")}</span></p>
+
         <div className={'hospital-detail_img-box'} >
           {images.slice(0,visibleImages).map((item,index)=>{
             if(index === 1){
@@ -158,13 +149,13 @@ const Detail = ({images,hospital,open}) => {
         </div>
        
         <div  className={'hospital-detail_img-slider'}>
-        <Carousel responsive={responsive}  >
+        <Slider {...settings}>
           {images.map((item,index)=>{
             return     <img src={item.image} alt=""/>
           })}
       
           
-        </Carousel>
+        </Slider>
         </div>
       </div>
     </div>

@@ -35,7 +35,7 @@ const Reviews = ({reviews,id}) => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2.5,
+          slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 1
         }
@@ -43,7 +43,7 @@ const Reviews = ({reviews,id}) => {
       {
         breakpoint: 576,
         settings: {
-          slidesToShow: 1.3,
+          slidesToShow: 1.4,
           slidesToScroll: 1,
           dots:false,
           autoplay: true,
@@ -60,7 +60,7 @@ const Reviews = ({reviews,id}) => {
       <div className="container">
         {reviews.length !== 0  ? <div>  <div className="reviews__header">
           <h4 className="reviews__header-title">{t("hosinfo3")}</h4>
-          <p className="reviews__header-subtitle"><span className={"subtitle__rating"}>9,8</span>Великолепно <span>&#x2022;</span><span>{reviews.length} {t("comments")}</span> <a href="#">{t("allreviews")}</a></p>
+          <p className="reviews__header-subtitle"><span className={"subtitle__rating"}>9,8</span>Великолепно <span>&#x2022;</span><span>{reviews.length} {t("comments")}</span> <a href="#" className='read-btn'>{t("allreviews")}</a></p>
         </div>
         <div className="reviews__carousel">
         <Slider {...settings}>
@@ -80,6 +80,48 @@ const Reviews = ({reviews,id}) => {
             </div>
           </div>
         ))}
+           <div className="reviews__carousel-item" >
+            <div className="reviews__carousel-item-content">
+              <p>ksksksks</p>
+              <a href="#">Читать больше</a>
+            </div>
+            <div className="reviews__carousel-item-footer">
+              <p>
+                <span className="item__footer-icon">H</span>
+                <span className="item__footer-autor">shshsh</span>
+                
+              </p>
+              <span className="item__footer-rating">8,8</span>
+            </div>
+          </div>
+          <div className="reviews__carousel-item" >
+            <div className="reviews__carousel-item-content">
+              <p>ksksksks</p>
+              <a href="#">Читать больше</a>
+            </div>
+            <div className="reviews__carousel-item-footer">
+              <p>
+                <span className="item__footer-icon">H</span>
+                <span className="item__footer-autor">shshsh</span>
+                
+              </p>
+              <span className="item__footer-rating">8,8</span>
+            </div>
+          </div>
+          <div className="reviews__carousel-item">
+            <div className="reviews__carousel-item-content">
+              <p>ksksksks</p>
+              <a href="#">Читать больше</a>
+            </div>
+            <div className="reviews__carousel-item-footer">
+              <p>
+                <span className="item__footer-icon">H</span>
+                <span className="item__footer-autor">shshsh</span>
+                
+              </p>
+              <span className="item__footer-rating">8,8</span>
+            </div>
+          </div>
       </Slider>
         </div>
         <button style={{

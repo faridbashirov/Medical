@@ -48,11 +48,11 @@ console.log(reviews);
 
   return (
     <>
-    {!loading &&  <div style={{background: "#f6f6f6"}}>
+    {!loading &&  <div style={{background: "#f6f6f6"}} className='hospital-detail-container'>
       
     
     <BreadCrumbs/>
-    <div className={'container'}>
+    <div className={'container '}>
       <div className={'detail__info-btns'}>
         {infoButtons.map(item => (
           <button key={item.id} className={'detail__info-btn'}>{t(item.label)}</button>
@@ -69,7 +69,7 @@ console.log(reviews);
       </div>
     </div>
     <InfoContent open={onOpenBookingModal} discount={discount} hospital={hospital}/>
-    <div className="container">
+    <div className="container ">
       <div className={"hospital-detail__hint"}>
         <h4 className={"hospital-detail__hint-title"}>{t("hint")}</h4>
         <p className={"hospital-detail__hint-subtitle"}>{t("hint2")}</p>
