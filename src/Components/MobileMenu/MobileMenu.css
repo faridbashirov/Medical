@@ -28,4 +28,7 @@
     gap: 12px;
     color: white;
 }
+.show{
+    z-index: 1000000000000  !important;
+}
 

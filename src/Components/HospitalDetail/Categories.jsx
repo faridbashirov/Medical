@@ -47,17 +47,17 @@ const Categories = ({services,hospital}) => {
     <div className="hospital-detail__categories">
       <h4 className="categories__title">{t("direction")} - {hospital?.name}</h4>
       <Slider {...settings}>
-        {/* {services.map((service,index) =>{
-         return  <div className={"categories__carousel-item"} style={{width:"100%"}}>
-         <button className={"categories__carousel-item-btn"} style={{marginBottom:"20px"}}>{service.illness.name}</button>
+        {services.map((service,index) =>{
+         return  <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
+         <button className={"categories__carousel-item-btn btn-left"}>{service.illness.name}</button>
          
         
        </div>
-        })} */}
+        })}
        
         <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
           <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
-         {/* <button className={"categories__carousel-item-btn"}>Репродуктология</button> */}
+         
      </div>
         <div className={"categories__carousel-item"} style={{marginBottom:"20px"}}>
           <button className={"categories__carousel-item-btn btn-left"}>Стоматология</button>
