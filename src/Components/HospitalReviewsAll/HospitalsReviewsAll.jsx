@@ -425,7 +425,7 @@ if(!hospital){
                 </span>
                   </div>
                   <div>
-                    <div style={{ display: "flex", justifyContent: "center" }}>
+                    <div className="rating-stars-section" style={{ display: "flex", justifyContent: "center" }}>
                       <img className="rating-stars"
                         style={{ width: "83px", height: "13px" }}
                         src={Iconstars}

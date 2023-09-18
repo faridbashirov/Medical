@@ -497,6 +497,9 @@ display: flex;
     .ant-pagination .ant-pagination-item-active{
         margin-right: 15px !important;
     }
+    .rating-stars-section{
+        justify-content: start !important;
+    }
 }
 @media(min-width:756px){
     .reviews-reacts{
@@ -535,5 +538,8 @@ display: flex;
 @media(min-width:756px){
     .reviews-body-desc{
         margin-bottom: 6% !important;
+    }
+    .ant-rate{
+        font-size: 14px !important;
     }
 }
