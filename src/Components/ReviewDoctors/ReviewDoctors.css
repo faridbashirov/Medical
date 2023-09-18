@@ -85,6 +85,10 @@
     .cardReviewDoctors-main p,.cardReviewDoctors-main .anticon{
         font-size: 10px !important;
     }
+     
+   .ant-rate .ant-rate-star:not(:last-child) {
+    margin-inline-end: 3px !important;
+}
     
 }
 .cardReviewDoctors-active{
@@ -175,7 +179,7 @@
 } */
 @media(max-width:767px){
     .review-doctors-pagination{
-        display: none;
+       
     }
     .menuNav li{
         font-size: 12px !important;

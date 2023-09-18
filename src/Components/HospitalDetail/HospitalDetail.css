@@ -924,6 +924,10 @@ border-radius: 2px;
 }
 
 @media(max-width:756px){
+     
+   .ant-rate .ant-rate-star:not(:last-child) {
+    margin-inline-end: 3px !important;
+}
     .hospital-detail_content .anticon{
         font-size: 11px !important;
     }

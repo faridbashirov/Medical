@@ -297,7 +297,7 @@ const TopClinic = () => {
             <div className="top-clinic__item-heart">
             { user ? (
                        
-                       item.is_favorite ?  <img style={{cursor:"pointer"}}  onClick={()=> DeleteFromFavorite(item.id)}   className='top-clinic__item-heart' src={heart} />  :  <img style={{cursor:"pointer"}}  onClick={()=> AddToFavorite(item.id)}    className='top-clinic__item-heart' src={likeReview} />) : "" }
+                       item.is_favorite ?  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> DeleteFromFavorite(item.id)}   className='top-clinic__item-heart' src={heart} />  :  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> AddToFavorite(item.id)}    className='top-clinic__item-heart' src={heartOutlined} />) : "" }
              
             </div>
           </div>

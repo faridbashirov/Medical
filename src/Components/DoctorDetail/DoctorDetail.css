@@ -159,6 +159,10 @@
     .doc-button1,.doc-button2{
         padding: 5px 10px !important;
     }
+     
+   .ant-rate .ant-rate-star:not(:last-child) {
+    margin-inline-end: 3px !important;
+}
 }
 .doc-button1,.doc-button2{
     border-radius: 30px !important;

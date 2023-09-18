@@ -500,6 +500,10 @@ display: flex;
     .rating-stars-section{
         justify-content: start !important;
     }
+    
+   .ant-rate .ant-rate-star:not(:last-child) {
+        margin-inline-end: 3px !important;
+    }
 }
 @media(min-width:756px){
     .reviews-reacts{

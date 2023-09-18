@@ -234,6 +234,10 @@
    .doctors-card .doctors-more-btn,.doctors-card .doctors-more-btn-active{
         display: none;
     }
+     
+   .ant-rate .ant-rate-star:not(:last-child) {
+    margin-inline-end: 3px !important;
+}
 }
 .ant-pagination .ant-pagination-item-active,.ant-pagination .ant-pagination-item-active a,.ant-pagination .ant-pagination-item,.ant-pagination .ant-pagination-item a {
     border: none !important;

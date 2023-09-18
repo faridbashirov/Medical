@@ -367,7 +367,7 @@ const FavHospitals = () => {
           
             <div style={{width:"100%"}}>
               { data.map((item,index)=>{
-                return  <div   onClick={()=>handleClick(item.id)} className={activeElement ===item.id ? "hospitalcard hospital-card-active cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors cardReviewDoctors hospitalcard"} >
+                return  <div    className={activeElement ===item.id ? "hospitalcard hospital-card-active cardReviewDoctors cardReviewDoctors-active" : "cardReviewDoctors cardReviewDoctors hospitalcard"} >
                 <div className="display_grid img-wrapper">
                   <img
                     className={"cardFavHospitals-img"}
@@ -377,7 +377,7 @@ const FavHospitals = () => {
                   <img id="sponsoredImage" src={Sponsored} />
                   <img onClick={()=> DeleteFromFavorite(item.hospital.id)}   id="likeImageFavHospitals" src={heart} />
                 </div>
-                <div
+                <div onClick={()=>handleClick(item.id)}
                   style={{ width: "769px", paddingLeft: "167px" }}
                   className="card-body hospitalcardbody card-content"
                 >
@@ -552,6 +552,7 @@ const FavHospitals = () => {
                 </div>
                 <div
                   className="card-content-mobile"
+                  onClick={()=>handleClick(item.id)}
                 >
                   <div className="card-header"
                     style={{

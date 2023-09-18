@@ -190,6 +190,10 @@
     .comment-average{
         margin: 0 !important;
     }
+     
+   .ant-rate .ant-rate-star:not(:last-child) {
+    margin-inline-end: 3px !important;
+}
     
 }
 .cardHospitals .card-body{

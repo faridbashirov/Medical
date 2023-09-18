@@ -37,6 +37,10 @@
 
 
 @media (max-width: 756px) {
+     
+   .ant-rate .ant-rate-star:not(:last-child) {
+    margin-inline-end: 3px !important;
+}
     .doc-review-card{
         padding: 10px;
         flex-direction: column;

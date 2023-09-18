@@ -529,7 +529,7 @@ const onChange2 = (e) => {
                 className={"box1-btn"}
                 type="primary"
               >
-                Смотреть еще 
+                {t("seemore")}
               </Button>
             </div>
           </div>
@@ -580,7 +580,7 @@ const onChange2 = (e) => {
             })} className={"box1-btn"}
                 type="primary"
               >
-                Смотреть еще
+                {t("seemore")}
               </Button>
             </div>
           </div>
@@ -597,7 +597,7 @@ const onChange2 = (e) => {
             })} className={"box1-btn"}
                 type="primary"
               >
-                Смотреть еще
+                {t("seemore")}
               </Button>
             </div>
           </div>
@@ -615,7 +615,7 @@ const onChange2 = (e) => {
                 className={"box1-btn"}
                 type="primary"
               >
-                Смотреть еще
+                {t("seemore")}
               </Button>
             </div>
           </div>
@@ -731,7 +731,7 @@ const onChange2 = (e) => {
                 className={"group-18-btn"}
                 type="primary"
               >
-                Смотреть еще
+                  {t("seemore")}
               </Button>
         </div>
       </div>
