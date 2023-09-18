@@ -3,7 +3,7 @@ import DrReviewAll from "../../assets/Images/DrRwAll.png";
 import Iconstars from "../../assets/Svg/starIcon.svg";
 import {EnvironmentOutlined} from "@ant-design/icons";
 import experience from "../../assets/Svg/staj.svg";
-import {Button, Input, Space} from "antd";
+import {Button, Input, Space,Rate} from "antd";
 import DrFB from "../../assets/Svg/DrFB.svg";
 import DrVK from "../../assets/Svg/DrVK.svg";
 import DrLn from "../../assets/Svg/DrLn.svg";
@@ -46,7 +46,7 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
               </div>
               <div style={{marginRight: "auto"}}>
 
-                <img src={Iconstars}/>
+                <Rate disabled={true} value={doctor.raiting}/>
               </div>
               <div className={"doc-card-ratings"}>
                 <p
