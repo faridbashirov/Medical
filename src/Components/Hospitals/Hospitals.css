@@ -15,11 +15,11 @@
 }
 @font-face {
     font-family: "Gilroy";
-    src: url("../../Fonts/gilroy/Gilroy-Medium.ttf");
+    src: url("../../Fonts/gilroy/Gilroy-Medium-AZ_0.ttf");
 }
 @font-face {
     font-family: "Gilroy-semibold";
-    src: url("../../Fonts/gilroy/Gilroy-SemiBold.ttf");
+    src: url("../../Fonts/gilroy/Gilroy-SemiBold-AZ.ttf");
 }
 .buttonsSort {
     justify-content: space-between;

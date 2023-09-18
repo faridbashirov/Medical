@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import {Button} from "antd";
+import {Button,Rate} from "antd";
 import Carousel from 'react-multi-carousel';
 import heart from "../../../assets/Svg/heart-sm.svg"
 import heartOutlined from "../../../assets/Svg/heart-sm-outlined.svg"
@@ -142,26 +142,32 @@ const TopClinic = () => {
         </div>
         <div className="top-clinic__carousel">
         <Slider {...settings}>
-        <div className="top-clinic_item">
-              <div className="top-clinic__item-top">
-                <img src={clinic2} alt="clinic" className="top-clinic__item-img"/>
-                <div className="top-clinic__item-num">50%</div>
-                <div className="top-clinic__item-heart">
-                  <img src={heartOutlined} alt="heart"/>
-                </div>
-              </div>
-              <div className="clinic__item-footer">
-                <div className="clinic__item-footer-subtitle">
-                  <img src={location} alt=""/>
-                  <span>Nişantaşı, İstanbul</span>
-                </div>
-                <h3 className="clinic__item-footer-title">Больница Американ</h3>
-                <div className="clinic__item-footer-stars">
-                  <span>8.4</span>
-                  <img src={stars} alt=""/>
-                </div>
-              </div>
+        {hospitals.map((item,index)=>{
+          return    <div className="top-clinic_item">
+          <div className="top-clinic__item-top">
+            <img src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
+            <div className="top-clinic__item-num">50%</div>
+            <div className="top-clinic__item-heart">
+            { user ? (
+                       
+                       item.is_favorite ?  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> DeleteFromFavorite(item.id)}   className='top-clinic__item-heart' src={heart} />  :  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> AddToFavorite(item.id)}    className='top-clinic__item-heart' src={heartOutlined} />) : "" }
+             
             </div>
+          </div>
+          <div className="clinic__item-footer">
+            <div className="clinic__item-footer-subtitle">
+              <img src={location} alt=""/>
+              <span>{item.location}</span>
+            </div>
+            <h3 className="clinic__item-footer-title">{item.name}</h3>
+            <div className="clinic__item-footer-stars">
+              <span>8.4</span>
+              <Rate disabled={true} value={item?.raiting}/>
+            </div>
+          </div>
+        </div>
+        })}
+     
             <div className="top-clinic_item">
               <div className="top-clinic__item-top">
                 <img src={clinic1} alt="clinic" className="top-clinic__item-img"/>
@@ -302,8 +308,8 @@ const TopClinic = () => {
             </div>
             <h3 className="clinic__item-footer-title">{item.name}</h3>
             <div className="clinic__item-footer-stars">
-              <span>8.4</span>
-              <img src={stars} alt=""/>
+              <span style={{paddingTop:"2px"}}>8.4</span>
+              <Rate  disabled={true} value={item?.raiting}/>
             </div>
           </div>
         </div>

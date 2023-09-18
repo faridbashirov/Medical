@@ -114,7 +114,7 @@ b {
 
 @font-face {
   font-family: "Gilroy";
-  src: url("../../Fonts/gilroy/Gilroy-Medium.ttf");
+  src: url("../../Fonts/gilroy/Gilroy-Medium-AZ_0.ttf");
 }
 
 @font-face {
@@ -123,5 +123,5 @@ b {
 }
 @font-face {
   font-family: "Gilroy-Bold";
-  src: url("../../Fonts/gilroy/Gilroy-SemiBold.ttf");
+  src: url("../../Fonts/gilroy/Gilroy-SemiBold-AZ.ttf");
 }
