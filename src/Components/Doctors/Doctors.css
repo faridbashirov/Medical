@@ -16,8 +16,7 @@
 
 .doctors-more-btn {
     width: 155px;
-    height: 45px;
-    margin-bottom: 10px;
+    height: 40px;
    
     color: #5282FF;
 }
@@ -27,15 +26,14 @@
 }
 .doctors-more-btn-active{
     width: 155px;
-    height: 45px;
-    margin-bottom: 10px;
+    height: 40px;
     /* background-color:  #5282FF; */
     background-color: #FFF !important;
     color: #FFF;
 
 }
 .doctors-more-btn-active span{
-    color: #5282FF;
+    color: #000 !important;
 }
 
 
@@ -84,7 +82,7 @@
 
 .doctors-heart {
     position: absolute;
-    right: 10%;
+    right: 0%;
 }
 
 .doctors-card-body {
@@ -182,4 +180,89 @@
 }
 :where(.css-dev-only-do-not-override-lgxug1).ant-btn-primary{
     color: #fff;
+}
+@media(min-width:756px){
+    .doctors-card .card-ratings p,.doctors-card span{
+        font-size: 14px !important;
+    }
+    .doctors-card .card-ratings .anticon{
+        font-size: 13px !important;
+        margin-left: -5px;
+    }
+    .doctors-card h3{
+        font-size: 24px !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+    .doctors-card-header{
+        margin: 10px 0 !important;
+        align-items: start;
+    }
+    
+}
+
+.doctors-card .comment-count-doc,.doctors-card .hospital-location{
+    color: #5282FF;
+}
+.doctors-card .doctors-card-buttons p{
+    width: max-content !important;
+    padding: 10px 20px !important;border-radius: 30px !important;
+}
+@media(max-width:756px){
+    .doctors-card .hospital-location{
+        margin: 5px 0 !important;
+        font-size: 12px !important;
+    }
+    .doctors-card .doctors-card__ratings .anticon {
+        font-size: 11px !important;
+    }
+    .doctors-card .doctors-card__ratings ul{
+        margin: -5px 5px !important;
+    }
+    .doctors-card .card-ratings p,.doctors-card span{
+        font-size: 12px !important;
+    }
+    
+    .doctors-card h3{
+        font-size: 18px !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+    .comment-count-doc,.rating-desktop{
+        display: none;
+    }
+   .doctors-card .doctors-more-btn,.doctors-card .doctors-more-btn-active{
+        display: none;
+    }
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active a,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item a {
+    border: none !important;
+    width: 30px !important;
+    height: 30px !important;
+    
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item a{
+    display: flex !important;
+    align-items: center !important;
+    color: #000 !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active a{
+    background: #5282FF !important;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #fff !important;
+}
+
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active{
+    background: #5282FF !important;
+    border: none !important;
+    min-width: unset !important;
+    
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item{
+    background: transparent !important;
 }

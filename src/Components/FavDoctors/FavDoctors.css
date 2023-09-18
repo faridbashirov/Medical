@@ -39,7 +39,7 @@
     }
 }
 .doctorss .card-body{
-    width: 90% !important;
+    width: 100% !important;
 }
 
 @media(min-width:1295px) and (max-width:1451px){
@@ -52,13 +52,18 @@
     .doctorss .card-body{
         padding-left: 20px !important;
     }
-    
+/*     
     .cardReviewDoctors a,
     .cardReviewDoctors p,
     .cardReviewDoctors span{
         font-size: 10px !important;
-    }
+    } */
     
+}
+@media(min-width:768px) and (max-width:1199px){
+    .cardFavDoctors .card-body{
+        padding-left: 70px !important;
+    }
 }
 .cardFavDoctors-active{
     background-color: #5282FF !important;
@@ -102,4 +107,91 @@
 }
 .card-body{
     padding-right: 15px;
+}
+@media(min-width:1200px){
+    .favdoctor-position{
+        font-size: 13px !important;
+    }
+    .cardFavDoctors p,.cardFavDoctors a,.cardFavDoctors .comment-text{
+        font-size: 13px !important;
+    }
+    .cardFavDoctors .anticon{
+        font-size: 13px !important;
+    }
+    .cardFavDoctors h3{
+        font-size: 24px !important;
+    }
+}
+
+.cardFavDoctors .rating-sec{
+    margin-left: -10px;
+}
+@media(min-width:1024px) and (max-width:1199px){
+    .favdoctor-position{
+        font-size: 12px !important;
+    }
+    .cardFavDoctors p,.cardFavDoctors a,.comment-text{
+        font-size: 12px !important;
+    }
+    .cardFavDoctors .anticon{
+        font-size: 11px !important;
+    }
+    .cardFavDoctors h3{
+        font-size: 20px !important;
+    }
+}
+@media(max-width:1024px){
+    .favdoctor-position{
+        font-size: 11px !important;
+    }
+    .cardFavDoctors .hospital-location{
+        margin-bottom: 5px !important;
+    }
+    .cardFavDoctors p,.cardFavDoctors a,.comment-text{
+        font-size: 11px !important;
+    }
+    .cardFavDoctors .anticon{
+        font-size: 10px !important;
+    }
+    .cardFavDoctors h3{
+        font-size: 16px !important;
+    }
+}
+@media (min-width: 1024px) and (max-width: 1650px){
+
+.doctorss {
+    /* grid-template-columns: minmax(auto, 2fr) minmax(auto, 1fr); */
+    gap: 10px;
+    grid-template-columns: 35% 65% !important;
+}}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active a,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item a {
+    border: none !important;
+    width: 30px !important;
+    height: 30px !important;
+    
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item a{
+    display: flex !important;
+    align-items: center !important;
+    color: #000 !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active a{
+    background: #5282FF !important;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #fff !important;
+}
+
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active{
+    background: #5282FF !important;
+    border: none !important;
+    min-width: unset !important;
+    
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item{
+    background: transparent !important;
 }

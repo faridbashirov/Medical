@@ -139,6 +139,9 @@
     .booking-modal__date-input{
         width: 100%;
     }
+    .read-btn{
+        display: none !important;
+    }
 }
 .reviews__carousel .slick-slide:first-child{
     margin-left: 0.20% !important;
@@ -148,4 +151,15 @@
 }
 .reviews__carousel .slick-active{
     margin: 0 10px!important;
+}
+@media(max-width:767px){
+    .doc-card p,.doc-card span,.doc-card a{
+        font-size: 12px !important;
+    }
+    .doc-button1,.doc-button2{
+        padding: 5px 10px !important;
+    }
+}
+.doc-button1,.doc-button2{
+    border-radius: 30px !important;
 }

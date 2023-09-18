@@ -243,7 +243,7 @@ const  ReviewDoctors = () => {
       </div>
 
       <div className="container">
-        <div className="displayGridReviewDr doctorss">
+        <div className="displayGridReviewDr doctorss displaygridrevdoctors" style={{paddingBottom:"20px"}}>
           <div style={{ height: "320px" }} className="menuNav">
             <ul>
             <li  onClick={()=> navigate("/profile")}
@@ -355,14 +355,18 @@ const  ReviewDoctors = () => {
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                       <div>
-                      <Rate style={{fontSize:"16"}} disabled={true} value={item.doctor?.raiting}/>
+                      <Rate style={{fontSize:"14"}} disabled={true} value={item.doctor?.raiting}/>
               </div>
-                    <p
+                    <p className="comment-average"
                       style={{
                         backgroundColor: "#FFC224",
                         color: "#000",
-                        width: "29.16px",
-                        height: "21.53px",
+                        // width: "29.16px",
+                        padding:"5px 10px",
+                        display:"flex",
+                        alignItems:"center",
+                        justifyContent:"center",
+                        // height: "21.53px",
                         borderRadius: "2.5px",
                         textAlign: "center",
                       }}
@@ -379,7 +383,7 @@ const  ReviewDoctors = () => {
                     <p
                       className={"card-text changed"}
                     >
-                     {item.text}
+                      {item.text}
                     </p>
                   </div>
                   <div

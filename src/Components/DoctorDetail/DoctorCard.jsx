@@ -41,7 +41,7 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
                     paddingTop: "0px !important",
                   }}
                 >
-                  {/* {doctor.position.name} */}
+                  {doctor.position?.name}
                 </p>
               </div>
               <div style={{marginRight: "auto"}}>
@@ -120,7 +120,7 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
                 }}
               >
                 <div>
-                  <p
+                  <p className='doc-button1'
                     style={{
                       color: "#000",
                       backgroundColor: "#F4F4F4",
@@ -128,14 +128,14 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
                       borderRadius: "15px",
                       fontSize: "12px",
                       padding: "10px 10px",
-                      width: "151px",
+                      width: "max-content",
                       textAlign: "center",
                     }}
                   >
                         {doctor.position?.name}
                   </p>
                  
-                      {doctor.experience ? <> <p
+                      {doctor.experience ? <> <p className='doc-button2'
                     style={{
                       color: "#000",
                       backgroundColor: "#F4F4F4",
@@ -143,7 +143,7 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
                       borderRadius: "15px",
                       fontSize: "12px",
                       padding: "10px 10px",
-                      width: "124px",
+                      width: "max-content",
                       textAlign: "center",
                       display: "flex",
                       alignItems: "center",

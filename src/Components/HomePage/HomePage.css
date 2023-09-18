@@ -94,9 +94,9 @@ ul, li {
     position: absolute;
     height: 100%;
 }
-h3{
+/* h3{
     margin-top: 20px !important;
-}
+} */
 .foreign-title {
     font-size: 38px;
     margin-left: 0;
@@ -551,7 +551,7 @@ h3{
 
 @font-face {
     font-family: "Gilroy";
-    src: url("../../Fonts/gilroy/Gilroy-Regular-AZ_0.ttf");
+    src: url("../../Fonts/gilroy/Gilroy-Medium.ttf");
 }
 
 
@@ -1219,8 +1219,6 @@ h3{
 }
 @media(min-width:992px){
 .activeBtn{
-    font-size: 18px !important;
-    font-weight: 600 !important;
     padding-top: 18px !important;
     padding-bottom: 18px !important;
 }}
@@ -1248,4 +1246,8 @@ h3{
 @media(min-width:1024px){
 .foreign-subtitle{
     font-size: 22px !important;
-}}
+}
+.btn_{
+    font-size: 18px !important;
+}
+}
