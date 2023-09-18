@@ -320,7 +320,7 @@ if(error){
           />
         </div>
         <div
-          className="doc-card"
+          className=" doc-review-card"
         >
           <div className="doc-card-body-wrapper">
             <div className="doc-card-img-wrapper">
@@ -402,7 +402,7 @@ if(error){
                   </h3>
                 </div>
 
-                <p
+                <p className="location-name"
                   style={{
                     color: "#5282FF",
                     fontSize: "14px",
@@ -425,29 +425,29 @@ if(error){
                   }}
                 >
                   <div>
-                    <p
+                    <p className="doc-card-btn"
                       style={{
                         color: "#000",
                         backgroundColor: "#F4F4F4",
                         border: "1px solid #EFEFEF",
-                        borderRadius: "15px",
+                        borderRadius: "30px",
                         fontSize: "12px",
                         padding: "10px 10px",
-                        width: "151px",
+                        width: "max-content",
                         textAlign: "center",
                       }}
                     >
                       Сосудистая хирургия
                     </p>
-                    {data.experience ? <p
+                    {data.experience ? <p className="doc-card-btn"
                       style={{
                         color: "#000",
                         backgroundColor: "#F4F4F4",
                         border: "1px solid #EFEFEF",
-                        borderRadius: "15px",
+                        borderRadius: "30px",
                         fontSize: "12px",
                         padding: "10px 10px",
-                        width: "124px",
+                        width: "max-content",
                         textAlign: "center",
                         display: "flex",
                         alignItems: "center",
@@ -455,7 +455,7 @@ if(error){
                         marginTop:"19px"
                       }}
                     >
-                      <img src={experience} />
+                      <img src={experience} style={{marginTop:"-5px"}}/>
                       {data?.experience} {t("experienceyear")}
                     </p> : "" } 
                     
@@ -534,7 +534,7 @@ if(error){
           data-testid="loader"
         /> </div>: <div> {reviews.map((item,index)=>{
           return <div key={index} className={"hospital-reviews-card"}>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex",alignItems:"start"}}>
             <div className="userIconOrFlag">
               <img src={userIcon} />
               <img className="userFlag" src={userflag} />
@@ -549,20 +549,23 @@ if(error){
               }}
             >
               <div>
-                <p className={'reviews-name'}>
+                <div style={{display:"flex",alignItems:"center"}}>
+                <p className={'reviews-name'} style={{margin:"0"}}>
                  {item.user.first_name}
                 </p>
+                <img
+                className="checkIcon"
+                style={{ paddingTop: "0", marginRight: "8px" }}
+                src={check}
+              />
+              <p className={"reviews-category"} style={{margin:"0"}}>
+                Травмотология
+              </p>
+                </div>
                 <Rate style={{fontSize:"16"}} disabled={true} value={item?.rate}/>
                
               </div>
-              <img
-                className="checkIcon"
-                style={{ paddingTop: "5px", marginRight: "8px" }}
-                src={check}
-              />
-              <p className={"reviews-category"}>
-                Травмотология
-              </p>
+             
             </div>
             <div
               style={{
@@ -573,7 +576,7 @@ if(error){
               }}
             >
               <p className={'reviews-rating'}>Великолепно </p>
-              <div
+              <div className="review-average"
                 style={{
                   backgroundColor: "#FFC224",
                   borderRadius: "3.52262px",
@@ -590,19 +593,22 @@ if(error){
               </div>
             </div>
           </div>
-        <p> {item.text}</p> 
+        <p className="review-content"> {item.text}</p> 
           <div className={"reviews-reacts"}>
             <p style={{ color: "#BCBCBC", marginRight: "auto" }}>
               {item.created_date}
             </p>
+            <div className="review-icons">
             <p style={{ color: "#2A353D", margin: "0px" }}>
               <img className="likeIcon" src={likeIcon} />
-              полезно
+              <span className="likeIcon-desc">полезно</span>
             </p>
             <p style={{ color: "#2A353D", margin: "0px" }}>
               <img className="unlikeIcon" src={unlikeIcon} />
-              Бесполезно
+              <span className="likeIcon-desc">Бесполезно</span>
+              
             </p>
+            </div>
           </div>
         </div>
         })}

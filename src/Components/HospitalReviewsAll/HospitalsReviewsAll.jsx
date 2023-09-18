@@ -426,7 +426,7 @@ if(!hospital){
                   </div>
                   <div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                      <img
+                      <img className="rating-stars"
                         style={{ width: "83px", height: "13px" }}
                         src={Iconstars}
                       />
@@ -495,7 +495,7 @@ if(!hospital){
           data-testid="loader"
         /> </div> :<div> { reviews.map((item,index)=>{
             return <> <div key={index} className={"hospital-reviews-card"}>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex",alignItems:"start" }}>
               <div className="userIconOrFlag">
                 <img className="userIconOrFlag-flag" src={userIcon} />
                 <img className="userFlag" src={userflag} />
@@ -509,7 +509,8 @@ if(!hospital){
                 }}
               >
                 <div>
-                  <p className={'reviews-name'}>
+                <div style={{display:"flex",alignItems:"center"}}>
+                  <p className={'reviews-name'} style={{marginTop:"0"}}>
                     {item.user.first_name}
                   </p>
                   {/* {(()=>{
@@ -523,17 +524,19 @@ if(!hospital){
               }
               return star
               })()} */}
+              <img
+                  className="checkIcon"
+                  src={check}
+                />
+                <p  className={"reviews-category"} style={{margin:"0"}}>
+                  Травмотология
+                </p>
+              </div>
                      <Rate style={{fontSize:"16"}} disabled={true} value={item?.rate}/>
               
                  
                 </div>
-                <img
-                  className="checkIcon"
-                  src={check}
-                />
-                <p  className={"reviews-category"}>
-                  Травмотология
-                </p>
+                
               </div>
               <div
                 style={{
