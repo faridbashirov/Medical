@@ -957,7 +957,7 @@ border-radius: 2px;
 .hospital-detail__reviews{
     padding: 10px 0 !important;
 }
-.hospital-detail-container :where(.css-dev-only-do-not-override-lgxug1).ant-btn.ant-btn-block{
+.hospital-detail-container .ant-btn.ant-btn-block{
     height: 40px !important;
     font-size: 12px !important;
 }

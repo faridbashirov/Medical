@@ -43,7 +43,7 @@
       line-height: 20px;
       font-weight: 500;
     }
-    :where(.css-dev-only-do-not-override-lgxug1).ant-divider-horizontal{
+    .ant-divider-horizontal{
       margin: 10px 0 20px 0;
     }
     .input{
@@ -52,25 +52,25 @@
       border: 1px solid #DEDEDE;
       font-size: 12px;
     }
-    :where(.css-dev-only-do-not-override-lgxug1).ant-btn.ant-btn-lg{
+    .ant-btn.ant-btn-lg{
       font-size: 12px;
       border-radius: 3px;
       margin-bottom: 0;
     }
-    :where(.css-dev-only-do-not-override-1qma303).ant-btn.ant-btn-lg{
+   .ant-btn.ant-btn-lg{
       font-size: 12px;
       border-radius: 3px;
       border: 1px solid #56c661;
       box-shadow: none;
     }
-    :where(.css-dev-only-do-not-override-lgxug1).ant-form-item{
+    .ant-form-item{
       margin-bottom: 10px;
     }
   }
 
  
 
-  :where(.css-dev-only-do-not-override-lgxug1).ant-btn-primary{
+  .ant-btn-primary{
     background-color:#5282FF ;
   }
   /* @media(min-width:1024px){ */

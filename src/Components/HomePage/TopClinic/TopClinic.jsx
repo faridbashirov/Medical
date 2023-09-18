@@ -145,7 +145,7 @@ const TopClinic = () => {
         {hospitals.map((item,index)=>{
           return    <div className="top-clinic_item">
           <div className="top-clinic__item-top">
-            <img src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
+            <img  onClick={()=> navigate(`/hospital/${item.id}`)} src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
             <div className="top-clinic__item-num">50%</div>
             <div className="top-clinic__item-heart">
             { user ? (

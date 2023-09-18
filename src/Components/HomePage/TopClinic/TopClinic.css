@@ -162,6 +162,6 @@
 .top-clinic_item:hover{
     transform: scale(1.05);
 }
-:where(.css-dev-only-do-not-override-lgxug1).ant-rate {
+.ant-rate {
     font-size: 15px !important;
 }

@@ -191,7 +191,7 @@ display: flex;
     align-items: center;
     justify-content: center;
 }
-:where(.css-dev-only-do-not-override-lgxug1).ant-btn-primary:not(:disabled):hover{
+.ant-btn-primary:not(:disabled):hover{
     color: unset !important;
 }
 
@@ -438,7 +438,7 @@ display: flex;
     .hospital-reviews-card .anticon{
         font-size: 7px !important;
     }
-    .hospital-reviews-card :where(.css-dev-only-do-not-override-lgxug1).ant-rate .ant-rate-star:not(:last-child){
+    .hospital-reviews-card .ant-rate .ant-rate-star:not(:last-child){
         margin-inline-end: 3px !important;
     }
     .hospital-reviews-card .review-content{
@@ -449,7 +449,7 @@ display: flex;
         height: 25px !important ;
         margin-right: 10px;
     }
-    .hospital-reviews-card :where(.css-dev-only-do-not-override-lgxug1).ant-rate{
+    .hospital-reviews-card .ant-rate{
         font-size: 5px !important;line-height: 4px !important;
         margin-top: -6px !important;
     }
@@ -486,15 +486,15 @@ display: flex;
         width: 5px !important;
         height: 5px !important;
     }
-    :where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active, :where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active a, :where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item, :where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item a{
+    .ant-pagination .ant-pagination-item,.ant-pagination .ant-pagination-item-active, .ant-pagination .ant-pagination-item-active a, .ant-pagination .ant-pagination-item, .ant-pagination .ant-pagination-item a{
         width: 16px !important;
         height: 16px !important;
         margin: 0 !important;
     }
-    :where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active, :where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active a, :where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item, :where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item a{
+    .ant-pagination .ant-pagination-item-active, .ant-pagination .ant-pagination-item-active a, .ant-pagination .ant-pagination-item, .ant-pagination .ant-pagination-item a{
         font-size: 12px !important;
     }
-    :where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active{
+    .ant-pagination .ant-pagination-item-active{
         margin-right: 15px !important;
     }
 }

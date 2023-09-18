@@ -52,7 +52,7 @@
     .cardReviewDoctors-main .anticon{
         font-size: 13px !important;
     }
-    .cardReviewDoctors-main :where(.css-dev-only-do-not-override-lgxug1).ant-rate .ant-rate-star:not(:last-child){
+    .cardReviewDoctors-main .ant-rate .ant-rate-star:not(:last-child){
         margin-inline-end: 3px !important;
     }
     .cardReviewDoctors-main .card-title{

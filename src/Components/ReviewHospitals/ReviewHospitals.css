@@ -115,20 +115,20 @@
 .hospital-footerr p:nth-child(2){
     margin-left: 10px;
 }
-:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active a,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item a {
+.ant-pagination .ant-pagination-item-active,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active a,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item,:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item a {
     border: none !important;
     width: 30px !important;
     height: 30px !important;
     
 }
-:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item a{
+.ant-pagination .ant-pagination-item a{
     display: flex !important;
     align-items: center !important;
     color: #000 !important;
     justify-content: center !important;
     font-size: 16px !important;
 }
-:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active a{
+.ant-pagination .ant-pagination-item-active a{
     background: #5282FF !important;
     border-radius: 50%;
     display: flex !important;
@@ -137,19 +137,19 @@
     color: #fff !important;
 }
 
-:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item-active{
+.ant-pagination .ant-pagination-item-active{
     background: #5282FF !important;
     border: none !important;
     min-width: unset !important;
     
 }
-:where(.css-dev-only-do-not-override-lgxug1).ant-pagination .ant-pagination-item{
+.ant-pagination .ant-pagination-item{
     background: transparent !important;
 }
-.cardHospitals :where(.css-dev-only-do-not-override-lgxug1).ant-rate{
+.cardHospitals .ant-rate{
     margin-top: -5px !important;
 }
-.cardHospitals :where(.css-dev-only-do-not-override-lgxug1).ant-rate .ant-rate-star:not(:last-child){
+.cardHospitals .ant-rate .ant-rate-star:not(:last-child){
     margin-inline-end: 3px !important;
 }
 @media(min-width:1024px){
