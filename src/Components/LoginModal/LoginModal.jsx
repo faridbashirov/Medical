@@ -133,7 +133,8 @@ const LoginModal = ({openLogin, onCloseLogin,onOpenRegister}) => {
         
          
         </Item>
-         {errors?.username && errors.username.message}
+         
+         {errors?.username && <div style={{color:"red",paddingBottom:"5px"}}>{errors.username.message}</div> }
        
         <Item
           name="password"
@@ -151,8 +152,9 @@ const LoginModal = ({openLogin, onCloseLogin,onOpenRegister}) => {
           />
          
         </Item>
-        {errors?.password && errors.password.message}
-        {errorss && errorss}
+        {errors?.password && <div style={{color:"red",paddingBottom:"5px"}}>{errors.password.message}</div> }
+      
+        {errorss && <div style={{color:"red",paddingBottom:"5px"}}>{errorss}</div>}
         
        
        

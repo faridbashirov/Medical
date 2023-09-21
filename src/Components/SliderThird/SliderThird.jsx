@@ -3,7 +3,7 @@ import Carousel from "react-multi-carousel";
 import CardThird from "../CardThird/CardThird";
 
 import Slider from "react-slick";
-
+import { Link } from "react-router-dom";
 const SliderThird = ({offer}) => {
   const settings = {
     dots: false,
@@ -46,14 +46,14 @@ const SliderThird = ({offer}) => {
     <> <div className="slider-second-desktop-version">
     <Slider {...settings}>
     {offer.map((item,index)=>{
-          return      <CardThird ird key={index} image={item.image}/>
+          return     <Link to={item.link}> <CardThird ird key={index} image={item.image}/></Link>
         })}
         
       </Slider>
     </div>
     <div className="slider-second-mobile-version slider-third"> 
     {offer.map((item,index)=>{
-          return      <CardThird ird key={index} image={item.image}/>
+          return     <Link to={item.link}> <CardThird  key={index} image={item.image}/></Link>
         })}
     </div>
     

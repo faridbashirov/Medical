@@ -6,9 +6,12 @@ import stars from "../../../assets/Svg/starIcon.svg";
 import quote from "../../../assets/Svg/quote.svg";
 import allReviewsFetch from '../../api/allReviews';
 import Slider from "react-slick";
+import { useTranslation } from 'react-i18next';
+import { Rate } from 'antd';
+import { Link } from 'react-router-dom';
 const TabDoctors = () => {
 
-
+  const {t,i18n}=useTranslation()
   const {data,error,doctorreviews}=allReviewsFetch()
   const settings = {
     dots: false,
@@ -60,8 +63,8 @@ const TabDoctors = () => {
                 <div className="reviews-item__author-name">{item.user?.first_name} <br/>{item.user?.last_name} </div>
               </div>
               <div className="reviews-item__rating">
-                <p className={"reviews-item__rating-name"}>Клиника <span>POLYmed</span> </p>
-                <img className={"reviews-item__rating-stars"} src={stars} alt=""/>
+                <p className={"reviews-item__rating-name"}>{t("doctor")}<Link style={{paddingLeft:"3px"}} to={`/doctor/${item.doctor}`}><span>{item?.name}</span></Link></p>
+                <Rate disabled={true} value={item.rate}/>
               </div>
             </div>
             <div className="divider"></div>
@@ -167,8 +170,8 @@ const TabDoctors = () => {
                 <div className="reviews-item__author-name">{item.user?.first_name} <br/>{item.user?.last_name} </div>
               </div>
               <div className="reviews-item__rating">
-                <p className={"reviews-item__rating-name"}>Клиника <span>POLYmed</span> </p>
-                <img className={"reviews-item__rating-stars"} src={stars} alt=""/>
+              <p className={"reviews-item__rating-name"}> {t("doctor")}  <Link to={`/doctor/${item.doctor}`}> <span>{item?.name}</span></Link></p>
+                <Rate disabled={true} value={item.rate}/>
               </div>
             </div>
             <div className="divider"></div>

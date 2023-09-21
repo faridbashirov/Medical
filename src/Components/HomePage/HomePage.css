@@ -1216,12 +1216,20 @@ ul, li {
         
         height: 118px !important;
     }
+   
+
 }
 @media(min-width:992px){
 .activeBtn{
     padding-top: 18px !important;
     padding-bottom: 18px !important;
-}}
+
+}
+.slider-img >img{
+        
+    height: 240px!important;
+}
+}
 @media(min-width:1024px){
     .btn_,.activeBtn{
         padding-top: 20px !important;

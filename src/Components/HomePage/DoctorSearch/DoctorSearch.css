@@ -15,6 +15,7 @@
     align-items: center;
     justify-content: center;
     color: #fff;
+    cursor: pointer;
 }
 .doctor-search_item-desc{
     width: 158px;

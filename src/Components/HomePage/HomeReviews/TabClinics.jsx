@@ -6,12 +6,15 @@ import author from "../../../assets/Images/author.png"
 import quote from "../../../assets/Svg/quote.svg"
 import allReviewsFetch from '../../api/allReviews';
 import Slider from "react-slick";
+import { useTranslation } from 'react-i18next';
+import { Rate } from 'antd';
+import { Link } from 'react-router-dom';
 
 const TabClinics = () => {
 
   const [doctorReviews,setDoctorReviews] =React.useState([])
   const [hospitalReviews,setHospitalReviews] =React.useState([])
-
+  const {t,i18n}=useTranslation()
  
 
   const {data,error,hospitalreviews}=allReviewsFetch()
@@ -74,8 +77,9 @@ const TabClinics = () => {
                 <div className="reviews-item__author-name">{item.user?.first_name} <br/>{item.user?.last_name} </div>
               </div>
               <div className="reviews-item__rating">
-                <p className={"reviews-item__rating-name"}>Клиника <span>POLYmed</span> </p>
-                <img className={"reviews-item__rating-stars"} src={stars} alt=""/>
+                <p className={"reviews-item__rating-name"}>{t("hospital")} <Link to={`/hospital/${item.hospital}`}><span>{item?.name}</span></Link> </p>
+                <Rate disabled={true} value={item.rate}/>
+                {/* <img className={"reviews-item__rating-stars"} src={stars} alt=""/> */}
               </div>
             </div>
             <div className="divider"></div>
@@ -181,8 +185,8 @@ const TabClinics = () => {
                 <div className="reviews-item__author-name">{item.user?.first_name} <br/>{item.user?.last_name} </div>
               </div>
               <div className="reviews-item__rating">
-                <p className={"reviews-item__rating-name"}>Клиника <span>POLYmed</span> </p>
-                <img className={"reviews-item__rating-stars"} src={stars} alt=""/>
+                <p className={"reviews-item__rating-name"}> {t("hospital")}<Link style={{paddingLeft:"2px"}} to={`/hospital/${item.hospital}`}><span>{item?.name}</span></Link></p>
+                <Rate disabled={true} value={item.rate}/>
               </div>
             </div>
             <div className="divider"></div>

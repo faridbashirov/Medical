@@ -5,7 +5,7 @@ import {
   EnvironmentOutlined, CloseOutlined,
 } from "@ant-design/icons";
 import { Button, Dropdown, Space, Input, Row, Col } from "antd";
-
+import { Link } from "react-router-dom";
 import Sliders from "../Slider";
 import SliderSecond from "../SliderSecond/SliderSecond";
 import SliderThird from "../SliderThird/SliderThird";
@@ -644,7 +644,7 @@ const onChange2 = (e) => {
         <div className="grid_2">
           {bestoffer.map((item,index)=>{
             return   <div key={index}>
-            <img src={item.image} />
+          <Link to={item.link}> <img src={item.image}/></Link>
           </div>
           })}
          
@@ -679,7 +679,7 @@ const onChange2 = (e) => {
         <div className="grid_3">
         {likedoffer.filter((item,index)=> index <4 ).map((item,index)=>{
            return <div key={index}>
-           <img  src={item.image} />
+         <Link to={item.link}> <img  src={item.image} /></Link> 
          </div>
           })}
           
@@ -688,7 +688,7 @@ const onChange2 = (e) => {
         <div style={{ paddingTop: "15px" }} className="grid_4">
         {likedoffer.map((item,index)=>{
           return    <div key={index}>
-          <img style={{ width: "615px" }} src={item.image} />
+         <Link to={item.link}> <img style={{ width: "615px" }} src={item.image} /></Link>
         </div>
         })}
        
@@ -703,7 +703,7 @@ const onChange2 = (e) => {
         <div className="grid_3">
           {bestseller.map((item,index)=>{
             return  <div key={index}>
-            <img  src={item.image} />
+           <Link to={item.link}> <img  src={item.image} /></Link>
           </div>
 })}
           
@@ -718,15 +718,15 @@ const onChange2 = (e) => {
           </div> */}
         </div>
       </div>
-      <DiscoundSlider offer={bestoffer} />
+      <DiscoundSlider offer={bestseller} />
 
       <div style={{  }} className="container">
         <div className={"group18-section"}>
 
-          <img className={"group-18"} src={group18} />
+          <img className={"group-18"} src={bestseller[1]?.image} />
           <Button onClick={()=> navigate({
-              pathname: "/hospitals",
-              search: `?type=service&name=${position[7]?.name}`,
+              pathname:bestseller[1]?.link ,
+             
             })}
                 className={"group-18-btn"}
                 type="primary"

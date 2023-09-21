@@ -4,6 +4,8 @@ import group15 from "../../assets/Images/Group15.png";
 import group16 from "../../assets/Images/Group16.png";
 import group17 from "../../assets/Images/Group17.png";
 import uuid from 'react-uuid';
+import { Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 const settings = {
   dots: false,
   infinite: true,
@@ -47,9 +49,9 @@ const DiscountSlider = ({offer}) => {
     <div style={{ paddingTop: "10px" }} className="container discount-slider">
         <Slider {...settings}>
          {offer.map((item,index)=>{
-          return  <div className='slider-img' key={uuid()} style={{marginRight:"10px"}}>
+          return <Link to={item.link}> <div  className='slider-img' key={uuid()} style={{marginRight:"10px"}}>
           <img style={{width:"100%", height:"100%" ,borderRadius:"5%"}} src={item?.image} />
-        </div>
+        </div></Link>
          })}
        
         {/* <div style={{marginRight:"10px"}}>

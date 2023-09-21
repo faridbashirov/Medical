@@ -70,7 +70,7 @@ const DoctorSearch = ({positions}) => {
         <div className="slider-second-desktop-version top-clinic__carousel">
         <Slider {...settings}>
         {positions.map((item,index)=>{
-              return <div key={index} onClick={()=> navigate({
+              return <div style={{cursor:"pointer"}} key={index} onClick={()=> navigate({
                 pathname:"/doctors",
                 search: `?type=doctor&position=${item?.name}`
                 
