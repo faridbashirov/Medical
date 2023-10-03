@@ -70,7 +70,10 @@ ul, li {
 .mobileList {
     display: none;
 }
-
+.trans:hover{
+    transform: scale(1.06);
+    transition: all .4s ease-in-out;
+}
 .group18-section{
     width: 99%;
     height: 235px;
@@ -92,6 +95,8 @@ ul, li {
 .group-18 {
     width: 100%;
     position: absolute;
+    object-fit: cover;
+    border-radius: 10px;
     height: 100%;
 }
 /* h3{

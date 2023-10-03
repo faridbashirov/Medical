@@ -70,11 +70,11 @@ const DoctorSearch = ({positions}) => {
         <div className="slider-second-desktop-version top-clinic__carousel">
         <Slider {...settings}>
         {positions.map((item,index)=>{
-              return <div style={{cursor:"pointer"}} key={index} onClick={()=> navigate({
+              return <div style={{cursor:"pointer"}}  key={index} onClick={()=> navigate({
                 pathname:"/doctors",
                 search: `?type=doctor&position=${item?.name}`
                 
-              })} className="doctor-search_item">
+              })} className="doctor-search_item trans">
               <img src={tooth} alt="tooth"/>
               <p className={"doctor-search_item-desc"}>{item.name}</p>
             </div>

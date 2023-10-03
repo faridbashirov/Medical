@@ -20,7 +20,7 @@ const OurGeography = () => {
   return (
     <section className={"container"}>
       <div className="geography">
-        <div className="geography__header">
+        <div className="geography__header" style={{marginBottom:"4%"}}>
           <h4 className="geography__header-title">{t("ourgeography")}</h4>
           {/* <p className="geography__header-subtitle">Lorem ipsum dolor sit amet consectetur dolor sit amet.</p> */}
         </div>
