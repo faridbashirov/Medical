@@ -49,7 +49,7 @@ const DiscountSlider = ({offer}) => {
     <div style={{ paddingTop: "10px" }} className="container discount-slider">
         <Slider {...settings}>
          {offer.map((item,index)=>{
-          return <Link to={item.link}> <div  className='slider-img' key={uuid()} style={{marginRight:"10px"}}>
+          return <Link  to={item.link}> <div  className='slider-img trans' key={uuid()} style={{marginRight:"10px"}}>
           <img style={{width:"100%", height:"100%" ,borderRadius:"5%"}} src={item?.image} />
         </div></Link>
          })}

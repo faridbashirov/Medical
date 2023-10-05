@@ -371,7 +371,7 @@ const onChange2 = (e) => {
           <Space>
             <Button
             onClick={onToggleClick}
-              className={show ? "btn_ activeBtn " :  "btn_ " }
+              className={show ? "btn_ activeBtn " :  "btn_  " }
               
             >
               {t("Services")}
@@ -480,7 +480,7 @@ const onChange2 = (e) => {
           <p style={{ fontWeight: "600", fontSize: "20px", color: "#000" }}>
             Поиск по:
           </p>
-         <div>
+         <div style={{ marginLeft:"20px"}}>
            <Button
              className={"sortBtn sortActive"}
              type="primary"
@@ -512,7 +512,7 @@ const onChange2 = (e) => {
 
       <div style={{ paddingTop: "40px" }} className="container search-container">
         <div className="grid">
-          <div className="box1">
+          <div className="box1 trans ">
             <div className="box1_2">
               <p className={"box1-text"}>
                {position[0]?.name}
@@ -547,7 +547,7 @@ const onChange2 = (e) => {
               position:"relative",
               paddingLeft:"0"
               
-            }} id="_box2" className="box2">
+            }} id="_box2" className="box2 trans">
             <p style={{position:"absolute",zIndex:"10",bottom:"0px",left:"15px"}}>{item?.name} </p>
             <img src={rectangle} style={{zIndex:"0",position:"absolute",width:"100%",bottom:"0"}} alt="" />
           </div>
@@ -567,7 +567,7 @@ const onChange2 = (e) => {
 
       <div className="container">
         <div style={{ paddingTop: "30px" }} className="grid">
-          <div   className="box1">
+          <div   className="box1 trans ">
             <div className="box1_2">
               <p className={"box1-text"}>
               {position[5]?.name}
@@ -584,7 +584,7 @@ const onChange2 = (e) => {
               </Button>
             </div>
           </div>
-          <div className="box1">
+          <div className="box1 trans trans">
             <div className="box1_2">
               <p className={"box1-text"}>
               {position[6]?.name}
@@ -601,7 +601,7 @@ const onChange2 = (e) => {
               </Button>
             </div>
           </div>
-          <div className="box1">
+          <div className="box1 trans trans">
             <div className="box1_2">
               <p className={"box1-text"}>
               {position[7]?.name}
@@ -630,7 +630,7 @@ const onChange2 = (e) => {
               pathname: "/hospitals",
               search: `?type=service&name=${position[8]?.name}`,
 
-            })} className="bgDoctor" >
+            })} className="bgDoctor trans" >
           <span>{position[8]?.name}</span>
         </div>
       </div>
@@ -643,7 +643,7 @@ const onChange2 = (e) => {
         </p>
         <div className="grid_2">
           {bestoffer.map((item,index)=>{
-            return   <div key={index}>
+            return   <div className="trans" key={index}>
           <Link to={item.link}> <img src={item.image}/></Link>
           </div>
           })}
@@ -678,7 +678,7 @@ const onChange2 = (e) => {
         </p>
         <div className="grid_3">
         {likedoffer.filter((item,index)=> index <4 ).map((item,index)=>{
-           return <div key={index}>
+           return <div className="trans" key={index}>
          <Link to={item.link}> <img  src={item.image} /></Link> 
          </div>
           })}
@@ -687,7 +687,7 @@ const onChange2 = (e) => {
         </div>
         <div style={{ paddingTop: "15px" }} className="grid_4">
         {likedoffer.map((item,index)=>{
-          return    <div key={index}>
+          return    <div className="trans" key={index}>
          <Link to={item.link}> <img style={{ width: "615px" }} src={item.image} /></Link>
         </div>
         })}
@@ -702,7 +702,7 @@ const onChange2 = (e) => {
         </p>
         <div className="grid_3">
           {bestseller.map((item,index)=>{
-            return  <div key={index}>
+            return  <div className="trans" key={index}>
            <Link to={item.link}> <img  src={item.image} /></Link>
           </div>
 })}

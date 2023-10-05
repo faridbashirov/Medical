@@ -249,6 +249,12 @@
 .aboutUs-companies__item img {
     width: auto;
 }
+@media (min-width:825px) and (max-width:1200px){
+    .aboutUs-img{
+        width: 200px !important;
+        height: 100px !important;
+    }
+}
 
 .aboutUs-companies__item:not(:first-child) {
     display: flex;

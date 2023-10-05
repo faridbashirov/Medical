@@ -21,7 +21,7 @@ const Companies = () => {
         <div className="aboutUs-companies__items">
         {data.filter((item,index)=> index <3).map((item,index)=>{
           return  <div className="aboutUs-companies__item">
-          <img height={60} width={200} src={`https://hospitalbackend.efgroup.az/`+item.logo} alt=""/>
+          <img height={60} className='aboutUs-img' width={200} src={`https://hospitalbackend.efgroup.az/`+item.logo} alt=""/>
         </div>
         })}
           
