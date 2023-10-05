@@ -158,6 +158,7 @@
 }
 .top-clinic_item{
     width: 100% !important;
+    cursor: pointer;
 }
 .top-clinic_item:hover{
     transform: scale(1.05);

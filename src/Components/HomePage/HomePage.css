@@ -1207,6 +1207,9 @@ ul, li {
 .top-clinic__header-btns{
     margin-top: -10px !important;
 }
+.trans{
+    cursor: pointer;
+}
 @media(min-width:1024px){
 .ant-tabs-tab{
     font-size: 22px !important;

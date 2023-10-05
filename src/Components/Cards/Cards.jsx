@@ -11,7 +11,7 @@ const Cards = ({ img,title,flag }) => {
   <div  onClick={()=> navigate({
     pathname: "/hospitals",
     search: `?type=clinic&country=${title}`,
-  })} style={{ borderRadius: "12px",background:`url(${img})`,backgroundSize:"cover",backgroundPosition:"center",position:"relative" }} className="card">
+  })} style={{ borderRadius: "12px",background:`url(${img})`,backgroundSize:"cover",backgroundPosition:"center",position:"relative" ,cursor:"pointer"}} className="card">
     {/* <img  src={img} /> */}
     <img src={flag} className="flag-card" style={{position:"absolute",left:"20px",top:"20px"}}/>
     <img src={rectangle} className="shadow-card" style={{width:"100%",position:"absolute",bottom:"0"}}/>
