@@ -18,6 +18,6 @@ export const allFilterSearch = async (type,country,raiting,page,lang) => {
         return resp
     } catch (error) {
         
-        return error.message
+        return []
     }
 }

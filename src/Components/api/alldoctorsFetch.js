@@ -7,6 +7,6 @@ export const alldoctorsFetch = async (page) => {
     
         return resp.data
     } catch (error) {
-       return error.message;
+       return [];
     }
 }

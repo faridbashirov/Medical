@@ -23,13 +23,14 @@ import Slider from "react-slick";
 import uuid from 'react-uuid';
 const TopClinic = () => {
 
-  const {hospitals}=useSelector((state)=>state.hospitals)
+  const {hospitals,error}=useSelector((state)=>state.hospitals);
   const {authToken,user}=useSelector((state)=>state.auth)
   const [add,setAdd]=useState(false)
   console.log(hospitals);
   const {t}=useTranslation()
   const navigate=useNavigate()
   const dispatch=useDispatch()
+  console.log(error,"+++++got");
  
 
   useEffect(()=>{
@@ -142,7 +143,7 @@ const TopClinic = () => {
         </div>
         <div className="top-clinic__carousel">
         <Slider {...settings}>
-        {hospitals.map((item,index)=>{
+        {hospitals?.map((item,index)=>{
           return    <div className="top-clinic_item">
           <div className="top-clinic__item-top">
             <img  onClick={()=> navigate(`/hospital/${item.id}`)} src={item.main_image} alt="clinic" className="top-clinic__item-img"/>

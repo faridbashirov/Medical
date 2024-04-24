@@ -6,6 +6,6 @@ export const hospitalFetch = async () => {
     
         return resp.data
     } catch (error) {
-       return error.message;
+       return [];
     }
 }

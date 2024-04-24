@@ -6,6 +6,6 @@ export const BestoffersFetch = async (lang) => {
     
         return resp.data
     } catch (error) {
-       return error.message;
+       return [];
     }
 }

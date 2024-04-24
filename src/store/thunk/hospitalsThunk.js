@@ -11,10 +11,10 @@ export const fetchHospitals = createAsyncThunk(
        
         const data =  await axiosPrivate.get(`https://hospitalbackend.efgroup.az/${obj === "ru" ? "" : obj+"/"}hospital/hospitals`)
        
-        console.log(data);
+        console.log(data,"gotqehbe");
         return data
       } catch (error) {
-       return  error.message
+       return  thunkAPI.rejectWithValue(error.message)
       }
     }
   )
