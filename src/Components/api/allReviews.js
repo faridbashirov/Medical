@@ -19,7 +19,7 @@ export default function allReviewsFetch(){
                     setLoading(true)
                     const response = await axios.get(`https://hospitalbackend.efgroup.az/main/all_reviews`)
                       
-                    console.log(response.data)
+                   
                    
                     setData(response.data)
                     setHospitalReviews(response.data.hospital)

@@ -30,7 +30,7 @@ const TopClinic = () => {
   const {t}=useTranslation()
   const navigate=useNavigate()
   const dispatch=useDispatch()
-  console.log(error,"+++++got");
+  console.log(error,"+++++");
  
 
   useEffect(()=>{

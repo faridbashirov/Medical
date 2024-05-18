@@ -11,7 +11,7 @@ export default function DoctorDetailFetch(id, lang) {
     const [review, setReview] = useState([])
 
 
-console.log(lang, 'ssssssssssssssssssssssssssssssssssss');
+
 
 
 
