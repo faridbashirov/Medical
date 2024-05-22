@@ -1,0 +1,19 @@
+.discount-slider {
+  position: relative;
+}
+
+.discount-slider .swiper .swiper-button-prev {
+  display: none;
+}
+.discount-slider .swiper .swiper-button-next {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .discount-slider .swiper .swiper-button-prev {
+    display: flex;
+  }
+  .discount-slider .swiper .swiper-button-next {
+    display: flex;
+  }
+}

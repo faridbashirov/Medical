@@ -1,17 +1,14 @@
 import React,{useEffect, useState} from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, A11y,Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import {Button,Rate} from "antd";
-import Carousel from 'react-multi-carousel';
 import heart from "../../../assets/Svg/heart-sm.svg"
 import heartOutlined from "../../../assets/Svg/heart-sm-outlined.svg"
-import clinic1 from "../../../assets/Images/FavoriteHospitals.png"
-import clinic2 from "../../../assets/Images/FavoriteHospitals-2.png"
-import clinic3 from "../../../assets/Images/FavoriteHospitals-3.png"
 import location from "../../../assets/Svg/Location.svg"
-import singleStar from "../../../assets/Svg/SingleStar.svg"
-import stars from "../../../assets/Svg/starIcon.svg"
 import "./TopClinic.css"
-import likeReview from "../../../assets/Svg/reviewLike.svg/"
-
 import { Link } from 'react-router-dom';
 import { useSelector,useDispatch } from "react-redux";
 import { fetchHospitals } from '../../../store/thunk/hospitalsThunk';
@@ -19,7 +16,6 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import { Trans } from "react-i18next";
 import { axiosPrivate } from '../../../api/api';
-import Slider from "react-slick";
 import uuid from 'react-uuid';
 const TopClinic = () => {
 
@@ -36,44 +32,6 @@ const TopClinic = () => {
   useEffect(()=>{
     dispatch(fetchHospitals(localStorage.getItem("lang")))
    },[add])
-
-   const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: false
-        }
-      },
-      {
-        breakpoint: 1023,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          initialSlide: 1
-        }
-      },
-      {
-        breakpoint: 576,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots:false,
-          autoplay: true,
-          speed: 2000,
-          autoplaySpeed: 4000,
-        }
-      }
-    ]
-  };
 
   const AddToFavorite= async(id)=>{
 
@@ -118,9 +76,13 @@ const TopClinic = () => {
     .catch((err) => {
         console.log(err);
     })
-      
-      
   }
+    const swiperRef = React.useRef(null);
+  React.useEffect(() => {
+    if (swiperRef.current) {
+      console.log(swiperRef.current);
+    }
+  }, []);
   return (
       <section className="top-clinic">
     <div className={"container"}>
@@ -142,9 +104,22 @@ const TopClinic = () => {
           </div>
         </div>
         <div className="top-clinic__carousel">
-        <Slider {...settings}>
-        {hospitals?.map((item,index)=>{
-          return    <div className="top-clinic_item">
+          <Swiper
+          modules={[Navigation, A11y,Autoplay]}
+          autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+          stopOnLastSlide: false,
+        }}
+          navigation
+          onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            spaceBetween={20}
+            slidesPerView={4}
+          >
+            {hospitals?.map((item,index)=>{
+          return    <SwiperSlide><div className="top-clinic_item">
           <div className="top-clinic__item-top">
             <img  onClick={()=> navigate(`/hospital/${item.id}`)} src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
             <div className="top-clinic__item-num">50%</div>
@@ -167,127 +142,10 @@ const TopClinic = () => {
             </div>
           </div>
         </div>
+        </SwiperSlide>
         })}
-     
-            <div className="top-clinic_item">
-              <div className="top-clinic__item-top">
-                <img src={clinic1} alt="clinic" className="top-clinic__item-img"/>
-                <div className="top-clinic__item-heart">
-                  <img src={heartOutlined} alt="heart"/>
-                </div>
-              </div>
-              <div className="clinic__item-footer">
-                <div className="clinic__item-footer-subtitle">
-                  <img src={location} alt=""/>
-                  <span>Nişantaşı, İstanbul</span>
-                </div>
-                <h3 className="clinic__item-footer-title">Больница Американ</h3>
-                <div className="clinic__item-footer-stars">
-                  <span>8.4</span>
-                  <img src={stars} alt=""/>
-                </div>
-              </div>
-            </div>
-            <div className="top-clinic_item">
-              <div className="top-clinic__item-top">
-                <img src={clinic3} alt="clinic" className="top-clinic__item-img"/>
-                <div className="top-clinic__item-heart">
-                  <img src={heartOutlined} alt="heart"/>
-                </div>
-              </div>
-              <div className="clinic__item-footer">
-                <div className="clinic__item-footer-subtitle">
-                  <img src={location} alt=""/>
-                  <span>Nişantaşı, İstanbul</span>
-                </div>
-                <h3 className="clinic__item-footer-title">Больница Американ</h3>
-                <div className="clinic__item-footer-stars">
-                  <span>8.4</span>
-                  <img src={stars} alt=""/>
-                </div>
-              </div>
-            </div>
-            <div className="top-clinic_item">
-              <div className="top-clinic__item-top">
-                <img src={clinic1} alt="clinic" className="top-clinic__item-img"/>
-                <div className="top-clinic__item-num">50%</div>
-                <div className="top-clinic__item-heart">
-                  <img src={heart} alt="heart"/>
-                </div>
-              </div>
-              <div className="clinic__item-footer">
-                <div className="clinic__item-footer-subtitle">
-                  <img src={location} alt=""/>
-                  <span>Nişantaşı, İstanbul</span>
-                </div>
-                <h3 className="clinic__item-footer-title">Больница Американ</h3>
-                <div className="clinic__item-footer-stars">
-                  <span>8.4</span>
-                  <img src={stars} alt=""/>
-                </div>
-              </div>
-            </div>
-            <div className="top-clinic_item">
-              <div className="top-clinic__item-top">
-                <img src={clinic2} alt="clinic" className="top-clinic__item-img"/>
-                <div className="top-clinic__item-num">50%</div>
-                <div className="top-clinic__item-heart">
-                  <img src={heartOutlined} alt="heart"/>
-                </div>
-              </div>
-              <div className="clinic__item-footer">
-                <div className="clinic__item-footer-subtitle">
-                  <img src={location} alt=""/>
-                  <span>Nişantaşı, İstanbul</span>
-                </div>
-                <h3 className="clinic__item-footer-title">Больница Американ</h3>
-                <div className="clinic__item-footer-stars">
-                  <span>8.4</span>
-                  <img src={stars} alt=""/>
-                </div>
-              </div>
-            </div>
-            <div className="top-clinic_item">
-              <div className="top-clinic__item-top">
-                <img src={clinic1} alt="clinic" className="top-clinic__item-img"/>
-                <div className="top-clinic__item-heart">
-                  <img src={heartOutlined} alt="heart"/>
-                </div>
-              </div>
-              <div className="clinic__item-footer">
-                <div className="clinic__item-footer-subtitle">
-                  <img src={location} alt=""/>
-                  <span>Nişantaşı, İstanbul</span>
-                </div>
-                <h3 className="clinic__item-footer-title">Больница Американ</h3>
-                <div className="clinic__item-footer-stars">
-                  <span>8.4</span>
-                  <img src={stars} alt=""/>
-                </div>
-              </div>
-            </div>
-            <div className="top-clinic_item">
-              <div className="top-clinic__item-top">
-                <img src={clinic3} alt="clinic" className="top-clinic__item-img"/>
-                <div className="top-clinic__item-heart">
-                  <img src={heartOutlined} alt="heart"/>
-                </div>
-              </div>
-              <div className="clinic__item-footer">
-                <div className="clinic__item-footer-subtitle">
-                  <img src={location} alt=""/>
-                  <span>Nişantaşı, İstanbul</span>
-                </div>
-                <h3 className="clinic__item-footer-title">Больница Американ</h3>
-                <div className="clinic__item-footer-stars">
-                  <span>8.4</span>
-                  <img src={stars} alt=""/>
-                </div>
-              </div>
-            </div>
-            </Slider>
+        </Swiper>
             
-           
         </div>
       <div className="top-clinic__mobile-items">
         {hospitals.map((item,index)=>{

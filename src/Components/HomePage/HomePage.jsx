@@ -774,7 +774,7 @@ const onChange2 = (e) => {
         </Button>
       </div>
 
-      <div className="containerSliderSeconds">
+      <div className="containerSliderSecondsNew">
         
         <SliderSecond position={position} />
         <Button

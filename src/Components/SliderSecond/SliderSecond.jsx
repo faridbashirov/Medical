@@ -1,31 +1,30 @@
 import React from "react";
 import CardsSecond from "../CardsSecond/CardsSecond";
-import Carousel from 'react-multi-carousel';
-import Slider from "react-slick";
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, A11y } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import './SlideSecond.css'
 
 const SliderSecond = ({position}) => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1
-  };
+
+  console.log(position)
   return (
     <>
-      {/* <Carousel responsive={responsive}>
-        
-    
-       
-      </Carousel> */}
       <div className="slider-second-desktop-version">
-      <Slider {...settings}>
-      {position.map((item,index)=>{
-          return     <CardsSecond key={index} p={item.name} p2="-40%" />
+        <Swiper
+        modules={[Navigation, A11y]}
+        navigation
+          spaceBetween={20}
+          slidesPerView={3.3}
+          onSlideChange={() => console.log('slide change')}
+          onSwiper={(swiper) => console.log(swiper)}
+        >
+          {position.map((item,index)=>{
+          return     <SwiperSlide><CardsSecond key={index} p={item.name} p2="-40%" /></SwiperSlide>
         })}
-          
-        </Slider>
+        </Swiper>
       </div>
       <div className="slider-second-mobile-version"> 
       {position.map((item,index)=>{

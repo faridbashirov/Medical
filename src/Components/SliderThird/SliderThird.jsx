@@ -1,55 +1,28 @@
 import React from "react";
-import Carousel from "react-multi-carousel";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, A11y } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import CardThird from "../CardThird/CardThird";
-
-import Slider from "react-slick";
+import './SliderThird.css'
 import { Link } from "react-router-dom";
 const SliderThird = ({offer}) => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: false
-        }
-      },
-      {
-        breakpoint: 1023,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          initialSlide: 1
-        }
-      },
-      {
-        breakpoint: 576,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots:false,
-          autoplay: true,
-          speed: 2000,
-          autoplaySpeed: 4000,
-        }
-      }
-    ]
-  };
+
   return (
-    <> <div className="slider-second-desktop-version">
-    <Slider {...settings}>
-    {offer.map((item,index)=>{
-          return     <Link to={item.link}> <CardThird ird key={index} image={item.image}/></Link>
+    <> <div className="slider-second-desktop-version slider-third-doctor">
+      <Swiper
+          modules={[Navigation, A11y]}
+          navigation
+            spaceBetween={20}
+            slidesPerView={4}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            {offer.map((item,index)=>{
+          return      <SwiperSlide><Link to={item.link}> <CardThird ird key={index} image={item.image}/></Link></SwiperSlide>
         })}
-        
-      </Slider>
+        </Swiper>
     </div>
     <div className="slider-second-mobile-version slider-third"> 
     {offer.map((item,index)=>{

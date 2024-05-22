@@ -1,59 +1,30 @@
 import React from 'react';
 import {Button} from "antd";
 import { Link } from 'react-router-dom';
-import Carousel from 'react-multi-carousel';
 import tooth from "../../../assets/Svg/doctor-search/tooth.svg"
-import surgery from "../../../assets/Svg/doctor-search/plastic-surgery.svg"
-import eye from "../../../assets/Svg/doctor-search/eye.svg"
-import boyrek from "../../../assets/Svg/doctor-search/boyrek.svg"
 import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, A11y,Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import "./DoctorSearch.css"
 
-import Slider from "react-slick";
 
 import { useNavigate } from 'react-router-dom';
 
 const DoctorSearch = ({positions}) => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4.5,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: false
-        }
-      },
-      {
-        breakpoint: 1023,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          initialSlide: 1
-        }
-      },
-      {
-        breakpoint: 576,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots:false,
-          autoplay: true,
-          speed: 2000,
-          autoplaySpeed: 4000,
-        }
-      }
-    ]
-  };
+
   const {t}=useTranslation()
   const navigate=useNavigate()
+  const swiperRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (swiperRef.current) {
+      console.log(swiperRef.current);
+    }
+  }, []);
   
   return (
     <section className="top-clinic">
@@ -67,10 +38,23 @@ const DoctorSearch = ({positions}) => {
             <Link to={"doctors"} ><Button className="top-clinic__header-left d-none" type={"primary"}>{t("doctorsearch4")} </Button></Link>
           </div>
         </div>
-        <div className="slider-second-desktop-version top-clinic__carousel">
-        <Slider {...settings}>
-        {positions.map((item,index)=>{
-              return <div style={{cursor:"pointer"}}  key={index} onClick={()=> navigate({
+        <div className="slider-second-desktop-version top-clinic__carousel doctorcarousel">
+          <Swiper
+          modules={[Navigation, A11y,Autoplay]}
+          autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+          stopOnLastSlide: false,
+        }}
+          navigation
+          onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            spaceBetween={20}
+            slidesPerView={4}
+          >
+            {positions.map((item,index)=>{
+              return <SwiperSlide><div style={{cursor:"pointer"}}  key={index} onClick={()=> navigate({
                 pathname:"/doctors",
                 search: `?type=doctor&position=${item?.name}`
                 
@@ -78,44 +62,43 @@ const DoctorSearch = ({positions}) => {
               <img src={tooth} alt="tooth"/>
               <p className={"doctor-search_item-desc"}>{item.name}</p>
             </div>
+            </SwiperSlide>
             })}
-        
-      </Slider>
-          
-          
-            
-            {/* <div className="doctor-search_item">
-              <img src={surgery} alt="tooth"/>
-              <p className={"doctor-search_item-desc"}>Пластическая
-                Хирургия </p>
-            </div>
-            <div className="doctor-search_item">
-              <img src={eye} alt="tooth"/>
-              <p className={"doctor-search_item-desc"}>офтальмология</p>
-            </div>
-            <div className="doctor-search_item">
-              <img src={boyrek} alt="tooth"/>
-              <p className={"doctor-search_item-desc"}>офтальмология</p>
-            </div>
-            <div className="doctor-search_item">
+            {positions.map((item,index)=>{
+              return <SwiperSlide><div style={{cursor:"pointer"}}  key={index} onClick={()=> navigate({
+                pathname:"/doctors",
+                search: `?type=doctor&position=${item?.name}`
+                
+              })} className="doctor-search_item trans">
               <img src={tooth} alt="tooth"/>
-              <p className={"doctor-search_item-desc"}>стоматология</p>
+              <p className={"doctor-search_item-desc"}>{item.name}</p>
             </div>
-            <div className="doctor-search_item">
-              <img src={surgery} alt="tooth"/>
-              <p className={"doctor-search_item-desc"}>Пластическая
-                Хирургия </p>
+            </SwiperSlide>
+            })}
+            {positions.map((item,index)=>{
+              return <SwiperSlide><div style={{cursor:"pointer"}}  key={index} onClick={()=> navigate({
+                pathname:"/doctors",
+                search: `?type=doctor&position=${item?.name}`
+                
+              })} className="doctor-search_item trans">
+              <img src={tooth} alt="tooth"/>
+              <p className={"doctor-search_item-desc"}>{item.name}</p>
             </div>
-            <div className="doctor-search_item">
-              <img src={eye} alt="tooth"/>
-              <p className={"doctor-search_item-desc"}>офтальмология</p>
+            </SwiperSlide>
+            })}
+            {positions.map((item,index)=>{
+              return <SwiperSlide><div style={{cursor:"pointer"}}  key={index} onClick={()=> navigate({
+                pathname:"/doctors",
+                search: `?type=doctor&position=${item?.name}`
+                
+              })} className="doctor-search_item trans">
+              <img src={tooth} alt="tooth"/>
+              <p className={"doctor-search_item-desc"}>{item.name}</p>
             </div>
-            <div className="doctor-search_item">
-              <img src={boyrek} alt="tooth"/>
-              <p className={"doctor-search_item-desc"}>офтальмология</p>
-            </div> */}
+            </SwiperSlide>
+            })}
+        </Swiper>
         </div>
-       
         <div className="top-clinic__mobile-items">
         {positions.map((item,index)=>{
               return <div className="doctor-search_item">

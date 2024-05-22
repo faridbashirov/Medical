@@ -1,94 +1,61 @@
 import React,{useState} from "react";
 import Cards from "./Cards/Cards";
-import Carousel from "react-multi-carousel";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, A11y,Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import "../Slider.css";
-import BakuPic from "../../src/assets/Images/BakuPic.png";
-import MoskovaPic from "../../src/assets/Images/MoskovaPic.png";
-import 'react-multi-carousel/lib/styles.css';
-import { useNavigate} from "react-router-dom";
-import Slider from "react-slick";
-import {ArrowRightOutlined} from "@ant-design/icons";
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-    className={className} 
-    style={{ ...style, display: "block", background: "green" }}
-    onClick={onClick}
-  />
-   
-  );
-}
 
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "green" }}
-      onClick={onClick}
-    />
-  );
-}
 const Sliders = ({countries}) => {
-  
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  console.log(countries);
-  const settings = {
-    className: "center",
-    infinite: true,
-    slidesToShow: 3,
-    speed: 500,
-    dots:false,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    
-    slidesToScroll: 1,
-      initialSlide: 0,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            infinite: true,
-            dots: false
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2.5,
-            slidesToScroll: 1,
-            initialSlide: 1
-          }
-        },
-        {
-          breakpoint: 576,
-          settings: {
-            slidesToShow: 1.4,
-            slidesToScroll: 1,
-            dots:false,
-            arrows:false,
-            autoplay: true,
-            speed: 2000,
-            autoplaySpeed: 4000,
-          }
-        }
-      ]
-  };
-  
+
   return (
     <>
-
-
-<Slider {...settings}>
-{countries.map((item,index)=>{
-          return     <Cards flag={item.flag} title={item.name} key={index} img={item.image} />
-        })}
-        </Slider>
-       
-
+      <Swiper
+      modules={[Navigation, A11y,Autoplay]}
+          autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+          stopOnLastSlide: false,
+        }}
+        spaceBetween={10}
+        slidesPerView={1.7}
+        initialSlide={1}
+        centeredSlides={true}
+        loop={true}
+        navigation
+        breakpoints={{
+          1024: {
+            slidesPerView: 3,
+          }
+        }}
+          >{countries.length>2 ? (
+          countries.map((item, index) => (
+            <SwiperSlide key={index}>
+              <Cards flag={item.flag} title={item.name} img={item.image} />
+            </SwiperSlide>
+          ))
+         ) : (
+        <>
+          {countries.map((item, index) => (
+            <SwiperSlide key={index}>
+              <Cards flag={item.flag} title={item.name} img={item.image} />
+            </SwiperSlide>
+          ))}
+          {countries.map((item, index) => (
+            <SwiperSlide key={index}>
+              <Cards flag={item.flag} title={item.name} img={item.image} />
+            </SwiperSlide>
+          ))}
+          {countries.map((item, index) => (
+            <SwiperSlide key={index}>
+              <Cards flag={item.flag} title={item.name} img={item.image} />
+            </SwiperSlide>
+          ))}
+        </>
+      )
+         }
+      </Swiper>
     </>
   );
 };

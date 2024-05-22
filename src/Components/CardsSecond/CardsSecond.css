@@ -1,13 +1,12 @@
-.cardSecond{
-    border-radius: 12px !important;
-    background-color:  #FBFBFB !important;
-    border: 1px solid #E0E0E0 !important;
-    width: 96% !important;
-    height: 134px !important;
+.cardSecond {
+  border-radius: 12px !important;
+  background-color: #fbfbfb !important;
+  border: 1px solid #e0e0e0 !important;
+  width: 100%;
+  height: 134px !important;
 }
-@media (max-width: 768px){
-    .cardSecond{
-        width: 200px !important;
-        
-    }
+@media (max-width: 768px) {
+  .cardSecond {
+    width: 200px !important;
+  }
 }
