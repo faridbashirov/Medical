@@ -1,34 +1,38 @@
 import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, A11y } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import uuid from 'react-uuid';
 import { Link } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
 import './DiscoundSlider.css'
  
 const DiscountSlider = ({offer}) => {
+  const swiperTRef = React.useRef(null);
+  
+  React.useEffect(() => {
+    swiperTRef.current.addEventListener('progress', (e) => {
+      const [swiper, progress] = e.detail;
+      console.log(progress);
+    });
+
+    swiperTRef.current.addEventListener('slidechange', (e) => {
+      console.log('slide changed');
+    });
+  }, []);
   return (
     <div style={{ paddingTop: "10px" }} className="container discount-slider">
-        <Swiper
-          modules={[Navigation, A11y]}
-          navigation
-            spaceBetween={20}
-            slidesPerView={2}
-            breakpoints={{
-          1024: {
-            slidesPerView: 4,
-          }
-        }}
-          >
+      <swiper-container 
+        navigation-next-el=".swiper-button-next"
+  navigation-prev-el=".swiper-button-prev"
+    slides-per-view={2} rewind={true} spaceBetween={20} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+        ref={swiperTRef}
+        breakpoints="{&quot;1024&quot;:{&quot;slidesPerView&quot;:4}}"
+            >
             {offer.map((item,index)=>{
-          return  <SwiperSlide><Link  to={item.link}> <div  className='slider-img trans' key={uuid()} style={{marginRight:"10px"}}>
+          return  <swiper-slide><Link  to={item.link}> <div  className='slider-img trans' key={uuid()} style={{marginRight:"10px"}}>
           <img style={{width:"100%", height:"100%" ,borderRadius:"5%"}} src={item?.image} />
-        </div></Link></SwiperSlide>
+        </div></Link></swiper-slide>
          })}
-        </Swiper>
+        </swiper-container>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
     </div>
   );
 };

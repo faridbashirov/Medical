@@ -7,6 +7,8 @@ import { store } from "./store/store";
 import { Provider } from "react-redux";
 import { ConfigProvider } from "antd";
 import ScrollToTop from "./Components/scrollToTop";
+
+
 ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Provider store={store}>

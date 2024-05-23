@@ -1,30 +1,36 @@
 import React from "react";
 import CardsSecond from "../CardsSecond/CardsSecond";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, A11y } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import './SlideSecond.css'
 
 const SliderSecond = ({position}) => {
 
-  console.log(position)
+  const swiperTRef = React.useRef(null);
+  
+  React.useEffect(() => {
+    swiperTRef.current.addEventListener('progress', (e) => {
+      const [swiper, progress] = e.detail;
+      console.log(progress);
+    });
+
+    swiperTRef.current.addEventListener('slidechange', (e) => {
+      console.log('slide changed');
+    });
+  }, []);
   return (
     <>
       <div className="slider-second-desktop-version">
-        <Swiper
-        modules={[Navigation, A11y]}
-        navigation
-          spaceBetween={20}
-          slidesPerView={3.3}
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}
-        >
-          {position.map((item,index)=>{
-          return     <SwiperSlide><CardsSecond key={index} p={item.name} p2="-40%" /></SwiperSlide>
+         <swiper-container 
+        navigation-next-el=".swiper-button-next"
+  navigation-prev-el=".swiper-button-prev"
+    slides-per-view={3.3} spaceBetween={20} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+        ref={swiperTRef}
+            >
+            {position.map((item,index)=>{
+          return     <swiper-slide><CardsSecond key={index} p={item.name} p2="-40%" /></swiper-slide>
         })}
-        </Swiper>
+        </swiper-container>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
       <div className="slider-second-mobile-version"> 
       {position.map((item,index)=>{

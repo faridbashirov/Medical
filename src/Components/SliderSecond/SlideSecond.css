@@ -9,16 +9,14 @@
   width: 90%;
   margin: 0 auto;
 }
-.swiper {
-  position: initial;
-}
-.swiper-slide {
-  margin-right: 0;
-}
-.swiper-wrapper {
-  padding: 20px 0;
-}
 
+swiper-slide {
+  position: relative;
+  z-index: 1000;
+}
+swiper-container {
+  position: inherit;
+}
 .swiper-button-prev,
 .swiper-button-next,
 .swiper-button-prev .swiper-button-disabled {
@@ -51,4 +49,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  swiper-container {
+    padding: 0px 10px;
+  }
 }

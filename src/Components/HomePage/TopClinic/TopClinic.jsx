@@ -1,9 +1,4 @@
 import React,{useEffect, useState} from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, A11y,Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import {Button,Rate} from "antd";
 import heart from "../../../assets/Svg/heart-sm.svg"
 import heartOutlined from "../../../assets/Svg/heart-sm-outlined.svg"
@@ -18,7 +13,18 @@ import { Trans } from "react-i18next";
 import { axiosPrivate } from '../../../api/api';
 import uuid from 'react-uuid';
 const TopClinic = () => {
+  const swiperNelRef = React.useRef(null);
+  
+  React.useEffect(() => {
+    swiperNelRef.current.addEventListener('progress', (e) => {
+      const [swiper, progress] = e.detail;
+      console.log(progress);
+    });
 
+    swiperNelRef.current.addEventListener('slidechange', (e) => {
+      console.log('slide changed');
+    });
+  }, []);
   const {hospitals,error}=useSelector((state)=>state.hospitals);
   const {authToken,user}=useSelector((state)=>state.auth)
   const [add,setAdd]=useState(false)
@@ -77,12 +83,7 @@ const TopClinic = () => {
         console.log(err);
     })
   }
-    const swiperRef = React.useRef(null);
-  React.useEffect(() => {
-    if (swiperRef.current) {
-      console.log(swiperRef.current);
-    }
-  }, []);
+
   return (
       <section className="top-clinic">
     <div className={"container"}>
@@ -94,32 +95,20 @@ const TopClinic = () => {
             <Button className={"right-btn-primary"} type={"primary"}>топ 30</Button>
               <Button className={"right-btn-link"} type={"link"}><span>&#x2022;</span>топ 10</Button>
               <Button className={"right-btn-link"} type={"link"}><span>&#x2022;</span>топ 5</Button>
-            
-          
-              
-             
             </div>
             <Link to={"hospitals"}><Button className="top-clinic__header-left d-none" type={"primary"}>Посмотреть клиники </Button></Link> 
         
           </div>
         </div>
         <div className="top-clinic__carousel">
-          <Swiper
-          modules={[Navigation, A11y,Autoplay]}
-          autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-          stopOnLastSlide: false,
-        }}
-          navigation
-          onSwiper={(swiper) => {
-              swiperRef.current = swiper;
-            }}
-            spaceBetween={20}
-            slidesPerView={4}
-          >
+            <swiper-container 
+        navigation-next-el=".swiper-button-next"
+  navigation-prev-el=".swiper-button-prev"
+    slides-per-view={4} rewind={true} spaceBetween={20} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+        ref={swiperNelRef}
+            >
             {hospitals?.map((item,index)=>{
-          return    <SwiperSlide><div className="top-clinic_item">
+          return    <swiper-slide><div className="top-clinic_item">
           <div className="top-clinic__item-top">
             <img  onClick={()=> navigate(`/hospital/${item.id}`)} src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
             <div className="top-clinic__item-num">50%</div>
@@ -142,37 +131,14 @@ const TopClinic = () => {
             </div>
           </div>
         </div>
-        </SwiperSlide>
+        </swiper-slide>
         })}
-        </Swiper>
-            
+        </swiper-container>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
         </div>
       <div className="top-clinic__mobile-items">
-        {hospitals.map((item,index)=>{
-          return    <div key={uuid()} className="top-clinic_item">
-          <div className="top-clinic__item-top">
-            <img  onClick={()=> navigate(`/hospital/${item.id}`)} src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
-            <div className="top-clinic__item-num">50%</div>
-            <div className="top-clinic__item-heart">
-            { user ? (
-                       
-                       item.is_favorite ?  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> DeleteFromFavorite(item.id)}   className='top-clinic__item-heart' src={heart} />  :  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> AddToFavorite(item.id)}    className='top-clinic__item-heart' src={heartOutlined} />) : "" }
-             
-            </div>
-          </div>
-          <div className="clinic__item-footer">
-            <div className="clinic__item-footer-subtitle">
-              <img src={location} alt=""/>
-              <span>{item.location}</span>
-            </div>
-            <h3 className="clinic__item-footer-title">{item.name}</h3>
-            <div className="clinic__item-footer-stars">
-              <span style={{paddingTop:"2px"}}>8.4</span>
-              <Rate  disabled={true} value={item?.raiting}/>
-            </div>
-          </div>
-        </div>
-        })}
+        
      
         {/* <div className="top-clinic_item">
           <div className="top-clinic__item-top">

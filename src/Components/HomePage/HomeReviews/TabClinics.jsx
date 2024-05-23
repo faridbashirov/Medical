@@ -1,15 +1,8 @@
 import React from 'react';
-import stars from "../../../assets/Svg/starIcon.svg"
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, A11y } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import "./HomeReviews.css"
 import author from "../../../assets/Images/author.png"
 import quote from "../../../assets/Svg/quote.svg"
 import allReviewsFetch from '../../api/allReviews';
-import Slider from "react-slick";
 import { useTranslation } from 'react-i18next';
 import { Rate } from 'antd';
 import { Link } from 'react-router-dom';
@@ -26,20 +19,29 @@ const TabClinics = () => {
   const onChange = (key) => {
     console.log(key);
   };
+   const swiperJRef = React.useRef(null);
+  
+  React.useEffect(() => {
+    swiperJRef.current.addEventListener('progress', (e) => {
+      const [swiper, progress] = e.detail;
+      console.log(progress);
+    });
 
+    swiperJRef.current.addEventListener('slidechange', (e) => {
+      console.log('slide changed');
+    });
+  }, []);
   return (
     <>
       <div className={"home-reviews__items"}>
-        <Swiper
-          modules={[Navigation, A11y]}
-          navigation
-            spaceBetween={20}
-            slidesPerView={2}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
-          >
-              {hospitalreviews.map((item,index)=>{
-            return <SwiperSlide><div key={index} className="home-reviews__item">
+        <swiper-container 
+        navigation-next-el=".swiper-button-next"
+  navigation-prev-el=".swiper-button-prev"
+    slides-per-view={2} rewind={true} spaceBetween={20} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+        ref={swiperJRef}
+            >
+            {hospitalreviews.map((item,index)=>{
+            return <swiper-slide><div key={index} className="home-reviews__item">
             <div className="reviews-item__header">
               <div className="reviews-item__author">
                 <img src={author} alt={""} className="reviews-item__author-img"/>
@@ -59,11 +61,12 @@ const TabClinics = () => {
               </div>
             </div>
           </div>
-          </SwiperSlide>
+          </swiper-slide>
           })
           }
-        </Swiper>
-
+        </swiper-container>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
       <div className="home-reviews__items-mobile">
       {hospitalreviews.map((item,index)=>{

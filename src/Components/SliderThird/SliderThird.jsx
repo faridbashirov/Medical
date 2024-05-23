@@ -1,28 +1,34 @@
 import React from "react";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, A11y } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import CardThird from "../CardThird/CardThird";
 import './SliderThird.css'
 import { Link } from "react-router-dom";
 const SliderThird = ({offer}) => {
+   const swiperFRef = React.useRef(null);
+  
+  React.useEffect(() => {
+    swiperFRef.current.addEventListener('progress', (e) => {
+      const [swiper, progress] = e.detail;
+      console.log(progress);
+    });
 
+    swiperFRef.current.addEventListener('slidechange', (e) => {
+      console.log('slide changed');
+    });
+  }, []);
   return (
     <> <div className="slider-second-desktop-version slider-third-doctor">
-      <Swiper
-          modules={[Navigation, A11y]}
-          navigation
-            spaceBetween={20}
-            slidesPerView={4}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
-          >
-            {offer.map((item,index)=>{
-          return      <SwiperSlide><Link to={item.link}> <CardThird ird key={index} image={item.image}/></Link></SwiperSlide>
+       <swiper-container 
+        navigation-next-el=".swiper-button-next"
+  navigation-prev-el=".swiper-button-prev"
+    slides-per-view={4} rewind={true} spaceBetween={20} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+        ref={swiperFRef}
+            >
+              {offer.map((item,index)=>{
+          return      <swiper-slide><Link to={item.link}> <CardThird ird key={index} image={item.image}/></Link></swiper-slide>
         })}
-        </Swiper>
+        </swiper-container>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
     </div>
     <div className="slider-second-mobile-version slider-third"> 
     {offer.map((item,index)=>{

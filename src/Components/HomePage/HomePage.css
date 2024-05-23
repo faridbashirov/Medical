@@ -5,12 +5,6 @@
 .countryy {
   position: relative;
 }
-.countryy .swiper .swiper-button-prev {
-  display: none;
-}
-.countryy .swiper .swiper-button-next {
-  display: none;
-}
 ul,
 li {
   list-style: none;
@@ -1221,11 +1215,5 @@ li {
   .countryy {
     width: 85%;
     margin: 0 auto;
-  }
-  .countryy .swiper .swiper-button-prev {
-    display: flex;
-  }
-  .countryy .swiper .swiper-button-next {
-    display: flex;
   }
 }

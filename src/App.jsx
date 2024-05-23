@@ -16,7 +16,6 @@ import PrivacyPolicy from './Components/PrivacyPolicy/PrivacyPolicy'
 import ContactUs from "./Components/ContactUs/ContactUs";
 import Slider from "./Components/Slider";
 import HospitalDetail from "./Components/HospitalDetail";
-
 import DoctorDetail from "./Components/DoctorDetail/index.js";
 import Header from "./Components/Header/Header";
 import AboutUs from "./Components/AboutUs/index.js";
@@ -27,8 +26,12 @@ import { fetchHospitals } from "./store/thunk/hospitalsThunk";
 import { authToken } from "./store/reducers/userReducer";
 import { tokenRefresh } from "./store/thunk/tokenRefresh";
 import i18next from "i18next";
+import { register } from 'swiper/element/bundle';
+import { Navigation } from "swiper/modules";
+register();
 
 const App = () => {
+  
   const [showMenu, setShowMenu] = useState(false)
   const {authToken} = useSelector((state) => state.auth)
   // const dispatch=useDispatch()

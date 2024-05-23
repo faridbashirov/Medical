@@ -1,3 +1,13 @@
-.slick-track {
-  width: 100%;
+.slider-center .swiper-button-prev,
+.slider-center .swiper-button-next {
+  display: none;
+}
+.slider-center swiper-slide {
+  padding: 10px;
+}
+@media (min-width: 1024px) {
+  .slider-center .swiper-button-prev,
+  .slider-center .swiper-button-next {
+    display: flex;
+  }
 }

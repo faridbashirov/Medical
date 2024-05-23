@@ -76,8 +76,12 @@
   width: 100%;
 }
 
-@media (width:1024px) {
+@media (width: 1024px) {
   .top-clinic__header-btns {
     align-items: flex-end;
   }
+}
+
+#my-prev-button {
+  color: black;
 }

@@ -29,6 +29,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from "react-i18next";
 import { MenuOutlined } from "@ant-design/icons";
 import {CloseOutlined } from "@ant-design/icons";
+import './Header.css'
 const items = [
   {
     label: (
@@ -356,7 +357,7 @@ const Header = ({handleMenu,showMenu,setShowMenu}) =>{
                 </li>
               </ul>
             </div>
-            <div style={{display:"flex",gap:"2px"}} className={"mobile-menu"}>
+            <div className={"mobile-menu"}>
              {user ? <LogoutOutlined  onClick={()=> logout()} className="white userİconMobileMenu"/> :  
                 <img className="userİconMobileMenu" onClick={onOpenLogin} src={userIcon} alt=""/>
               }
