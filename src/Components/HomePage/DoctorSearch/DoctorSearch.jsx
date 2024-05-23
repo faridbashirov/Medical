@@ -39,7 +39,7 @@ const DoctorSearch = ({positions}) => {
         <swiper-container 
         navigation-next-el=".swiper-button-next"
   navigation-prev-el=".swiper-button-prev"
-    slides-per-view={4} rewind={true} spaceBetween={20} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+    slides-per-view={4} rewind={true} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
         ref={swiperElRef}
             >
             {positions.map((item,index)=>{

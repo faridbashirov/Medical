@@ -21,7 +21,7 @@ const DiscountSlider = ({offer}) => {
       <swiper-container 
         navigation-next-el=".swiper-button-next"
   navigation-prev-el=".swiper-button-prev"
-    slides-per-view={2} rewind={true} spaceBetween={20} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+    slides-per-view={2} rewind={true} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
         ref={swiperTRef}
         breakpoints="{&quot;1024&quot;:{&quot;slidesPerView&quot;:4}}"
             >

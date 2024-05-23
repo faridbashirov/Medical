@@ -51,10 +51,9 @@ const Sliders = ({countries}) => {
       <swiper-container 
         navigation-next-el=".swiper-button-next"
         navigation-prev-el=".swiper-button-prev"
-        slides-per-view={1.7} rewind={true} spaceBetween={60} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+        slides-per-view={1.7} rewind={true} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
         ref={swiperRef}
         breakpoints="{&quot;1024&quot;:{&quot;slidesPerView&quot;:3}}"
-        loop={true}
         centered-slides={true}
       >
           {countries.map((item, index) => (

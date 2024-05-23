@@ -12,6 +12,7 @@
 
 swiper-slide {
   position: relative;
+  padding: 10px 0;
   z-index: 1000;
 }
 swiper-container {
