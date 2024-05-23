@@ -251,7 +251,6 @@ const HomePage = ({}) => {
   const [type,setType]=useState("")
   const [location,setLocation] = useState("")
   
-  console.log(popularSearchs,"++++++");
   const navigate = useNavigate();
   
   const searchForm = (e) =>{
@@ -335,12 +334,7 @@ const HomePage = ({}) => {
       fetchData();
     }, [i18next.language]);
   
-  
-  
-  
-  
-  
-  
+    console.log("salam position",position)
   
  const onChange = (e) => {
   
@@ -355,9 +349,6 @@ const onChange2 = (e) => {
 
   return (
     <>
-      
-
-
       <div id="bgHome">
         <div className="container heroTitle">
           <p className="fontMed">
@@ -447,30 +438,6 @@ const onChange2 = (e) => {
                    )    )  : null
                 
                   )   )} 
-            {/* {popularSearchs.map((item,index)=>{
-              if(item.name == search.type){
-                //  item.category.map((d,index)=>{
-                  return <Button style={{ backgroundColor: "#F4F4F4" }} type="text">
-                   {item.name}
-                  </Button>
-                // })   
-              }
-            })} */}
-            {/* <Button style={{ backgroundColor: "#F4F4F4" }} type="text">
-              Клиники сети Медикал Парк
-            </Button>
-            <Button style={{ backgroundColor: "#F4F4F4" }} type="text">
-              Больница Американ
-            </Button>
-            <Button style={{ backgroundColor: "#F4F4F4" }} type="text">
-              Клиники сети Аджибадем
-            </Button>
-            <Button style={{ backgroundColor: "#F4F4F4" }} type="text">
-              Университетская клиник Бируни
-            </Button>
-            <Button style={{ backgroundColor: "#F4F4F4" }} type="text">
-              Университетская больница Коч
-            </Button> */}
           </div>
         </div>
       </div>
@@ -751,8 +718,7 @@ const onChange2 = (e) => {
 
       </div>
 
-      <div
-        className="container container-foreign"
+      <div className="container container-foreign"
         style={{
           display: "flex",
           justifyContent: "space-between",

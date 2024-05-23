@@ -2,7 +2,9 @@ import React from 'react';
 import uuid from 'react-uuid';
 import { Link } from 'react-router-dom';
 import './DiscoundSlider.css'
- 
+import { Skeleton } from 'antd';
+ import useFetch from '../../Hooks/useFetch'
+
 const DiscountSlider = ({offer}) => {
   const swiperTRef = React.useRef(null);
   

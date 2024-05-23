@@ -1,7 +1,5 @@
 import React,{useState} from "react";
 import Cards from "./Cards/Cards";
-import{ Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, A11y,Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -24,36 +22,13 @@ const Sliders = ({countries}) => {
   return (
     <>
       <div className="slider-center">
-        <Swiper
-      modules={[Navigation, A11y,Autoplay]}
-          autoplay={{
-          delay: 2000,
-          disableOnInteraction: false,
-          stopOnLastSlide: false,
-        }}
-        spaceBetween={10}
-        slidesPerView={1.7}
-        initialSlide={1}
-        centeredSlides={true}
-        loop={true}
-        navigation
-        onSwiper={(swiper) => {
-              swiperRef.current = swiper;
-            }}
-        breakpoints={{
-          1024: {
-            slidesPerView: 3,
-            centeredSlides: true,
-          }
-        }}
-          >
-      </Swiper>
       <swiper-container 
         navigation-next-el=".swiper-button-next"
         navigation-prev-el=".swiper-button-prev"
-        slides-per-view={1.7} rewind={true} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+        slides-per-view={1.7} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
         ref={swiperRef}
-        breakpoints="{&quot;1024&quot;:{&quot;slidesPerView&quot;:3}}"
+        rewind={true}
+        breakpoints="{&quot;1024&quot;:{&quot;slidesPerView&quot;:3,&quot;centeredSlides&quot;:false}}"
         centered-slides={true}
       >
           {countries.map((item, index) => (

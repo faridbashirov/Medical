@@ -11,8 +11,6 @@ import allReviewsFetch from '../../api/allReviews';
 
 
 
-
-
 const HomeReviews = () => {
   const {t}=useTranslation()
   const items = [
@@ -27,7 +25,6 @@ const HomeReviews = () => {
       children: <TabDoctors />,
     },
   ];
- 
  
   const onChange = (children) => {
   }
