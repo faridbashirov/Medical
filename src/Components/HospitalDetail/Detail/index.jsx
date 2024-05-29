@@ -8,11 +8,10 @@ import detailImg1 from "../../../assets/Images/hospital-detail/hospital-detail-1
 import arrowLeft from "../../../assets/Svg/arrow-left.svg"
 import arrowRight from "../../../assets/Svg/arrow-right.svg"
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Slider from "react-slick";
 
 const Detail = ({images,hospital,open}) => {
-  
   const settings = {
     dots: false,
     navigate: true,

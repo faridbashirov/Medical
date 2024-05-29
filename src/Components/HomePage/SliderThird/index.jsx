@@ -4,12 +4,40 @@ import './SliderThird.css'
 import { Link } from "react-router-dom";
 import useLanguageFetch from "../../../Hooks/useLanguageFetch";
 import { useTranslation } from "react-i18next";
+import { Skeleton } from "antd";
 const SliderThird = () => {
   const {t}=useTranslation()
   const { data, loading, error } = useLanguageFetch('main/best_offer',localStorage.getItem("lang"));
   if (loading) {
-        return  <>
-        <div>Loading....</div>
+        return  <> 
+                  <div className="container container-foreign">
+                    <h3 className={"foreign-title"}>
+                      {t("specialoffer")}
+                    </h3>
+                    <p className={"foreign-subtitle"}>
+                    {t("specialoffer2")}
+                    </p>
+                  </div>
+                  <div className="containerSliderSecond countriess">
+                    <div className="slider-second-desktop-version slider-third-doctor">
+                      <swiper-container 
+                        navigation-next-el=".swiper-button-next"
+                        navigation-prev-el=".swiper-button-prev"
+                        slides-per-view={4} rewind={true} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+                      >
+                        {[...Array(4)].map((_, index) => (
+                            <swiper-slide><Skeleton.Image active style={{height: '100%', width: '100%'}}/></swiper-slide>
+                      ))}
+                      </swiper-container>
+                      <div class="swiper-button-prev"></div>
+                      <div class="swiper-button-next"></div>
+                  </div>
+                  <div className="slider-second-mobile-version slider-third"> 
+                  {[...Array(2)].map((_, index) => (
+                            <Skeleton.Image active style={{height: '100%', width: '100%'}}/>
+                      ))}
+                  </div>
+                  </div>
                 </>
     }
   if (error) {

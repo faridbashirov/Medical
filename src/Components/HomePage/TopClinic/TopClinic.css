@@ -162,7 +162,7 @@
 }
 
 .top-clinic_item:hover {
-  transform: scale(1.05);
+  transform: scale(1);
 }
 .ant-rate {
   font-size: 15px !important;

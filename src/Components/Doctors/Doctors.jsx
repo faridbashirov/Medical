@@ -610,7 +610,7 @@ const Doctors = () => {
                           justifyContent: "center",
                         }}
                       >
-                        9.0
+                        {item?.raiting>=0 ? item?.raiting.toFixed(1) : 0 }
                       </p>
                     </div>
                   </div>
@@ -661,7 +661,7 @@ const Doctors = () => {
                       {item.hospital?.name}
                     </p>
                     <div className={"doctors-card__ratings "}>
-                      <p className={"doctors-card__ratings-num changed"}>9.0</p>
+                      <p className={"doctors-card__ratings-num changed"}>{item?.raiting>=0 ? item?.raiting.toFixed(1) : 0 }</p>
                       <div>
                       <Rate style={{fontSize:"16"}} disabled={true} value={item?.raiting}/>
                        

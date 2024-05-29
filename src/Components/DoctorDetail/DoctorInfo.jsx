@@ -48,7 +48,7 @@ const DoctorInfo = ({doctor}) => {
               <span className={"study-type-mobile"}>{item.types}</span>
               <span className={"study-address-mobile"}>{item.place_of_study}</span>
             </p>
-            <p className={"study-country-mobile line"}>{item.location}</p>
+            <p className={"study-country-mobile line-large"}>{item.location}</p>
             <p className={"study-date-mobile"}>{item.year_range} </p>
           </div>
         }) : doctor?.doctor_workexperience?.map((item,index)=>{
@@ -57,7 +57,7 @@ const DoctorInfo = ({doctor}) => {
               <span className={"study-type-mobile"}>{item.types}</span>
               <span className={"study-address-mobile"}>{item.place_of_work}</span>
             </p>
-            <p className={"study-country-mobile line"}>{item.location}</p>
+            <p className={"study-country-mobile line-large"}>{item.location}</p>
             <p className={"study-date-mobile"}>{item.year_range} </p>
           </div> })}
         

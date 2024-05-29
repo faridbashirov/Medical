@@ -1,9 +1,7 @@
 import React from 'react';
-import DrReviewAll from "../../assets/Images/DrRwAll.png";
-import Iconstars from "../../assets/Svg/starIcon.svg";
 import {EnvironmentOutlined} from "@ant-design/icons";
 import experience from "../../assets/Svg/staj.svg";
-import {Button, Input, Space,Rate} from "antd";
+import {Button, Rate} from "antd";
 import DrFB from "../../assets/Svg/DrFB.svg";
 import DrVK from "../../assets/Svg/DrVK.svg";
 import DrLn from "../../assets/Svg/DrLn.svg";
@@ -73,7 +71,7 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
                     justifyContent: "center",
                   }}
                 >
-                  9.0
+                  {doctor?.raiting>=0 ? doctor?.raiting.toFixed(1) : 0 }
                 </p>
               </div>
             </div>

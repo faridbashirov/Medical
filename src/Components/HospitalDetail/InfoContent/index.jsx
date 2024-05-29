@@ -4,7 +4,6 @@ import infoIcon from '../../../assets/Svg/info-green.svg'
 import { useTranslation } from 'react-i18next';
 
 const InfoContent = ({hospital,discount,open}) => {
-  console.log(hospital)
  const {t}=useTranslation()
    return (
     <div className={"hospital__info-content container"}>
@@ -18,7 +17,7 @@ const InfoContent = ({hospital,discount,open}) => {
           {/* {hospital.description} */}
         </div>
       </div>
-      <div className={"info__content-right"}>
+      {hospital?.description ? <div className={"info__content-right"}>
           <div className={"info__content-right--benefit"}>
             <h4 className={"info__content-right--benefit-title"}>{t("benefit")}</h4>
             <p className={"info__content-right--benefit-subtitle"}>идемьно подходит </p>
@@ -38,7 +37,7 @@ const InfoContent = ({hospital,discount,open}) => {
               {t("maininformation")}</h4>
             <p className={"info__content-right--info-desc"}> {t("maininformation2")} </p>
           </div>
-      </div>
+      </div> : <></>}
     </div>
   );
 };

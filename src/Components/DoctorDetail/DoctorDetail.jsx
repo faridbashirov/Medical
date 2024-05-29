@@ -14,15 +14,8 @@ import i18next from 'i18next';
 const DoctorDetail = () => {
   const [lang, setLang] = useState(i18next.language)
   const [openBooking, setOpenBooking] = useState(false)
-
-  console.log('renderrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
   const {id}=useParams()
-
   const {data,error,loading,review}=DoctorDetailFetch(id,i18next.language)
-
-  console.log(localStorage.getItem("lang"));
-  console.log(lang,' aaaaaaaaaaaaaaaaaaaa')
-
   
   i18next.on('languageChanged', () => {
     setLang(i18next.language)
