@@ -1,0 +1,40 @@
+.likethis {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  height: 150px;
+}
+.likethisSkeleton {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr 1fr;
+  height: 100px;
+}
+.likethisSkeletonbig {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  height: 204px;
+}
+
+@media (min-width: 1024px) {
+  .likethis {
+    grid-template-columns: 1fr 1fr;
+    height: 377px;
+  }
+  .likethisSkeletonbig {
+    grid-template-columns: 1fr 1fr;
+    height: 400px;
+  }
+  .likethisSkeleton {
+    grid-template-columns: 1fr 1fr;
+    height: 377px;
+  }
+  .likethis .ant-skeleton-image {
+    width: 48%;
+    height: auto;
+  }
+  .likethisbig {
+    grid-template-columns: 1fr;
+  }
+}

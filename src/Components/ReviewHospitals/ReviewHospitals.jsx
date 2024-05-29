@@ -26,9 +26,7 @@ import vk from "../../assets/Images/vk.png";
 import Hospitals from "../../assets/Images/Hospitals.png";
 import { FadeLoader } from "react-spinners";
 import { ArrowRightOutlined,StarFilled } from "@ant-design/icons";
-
 import "../ReviewHospitals/ReviewHospitals.css";
-import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import FilterButtons from "../FilterButtons/index.js";
 import profileHospitalReviews from "../api/profileHospitalReviews";

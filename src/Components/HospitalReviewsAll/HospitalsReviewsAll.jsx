@@ -1,37 +1,24 @@
 import React from "react";
-import { Dropdown, Button, Space, Breadcrumb, Pagination,Rate } from "antd";
+import { Button, Breadcrumb, Pagination,Rate } from "antd";
 
-import { ArrowRightOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import { EnvironmentOutlined } from "@ant-design/icons";
 import { FadeLoader } from "react-spinners";
-import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
 import POU from "../../assets/Svg/GroupPound.svg";
-import RUB from "../../assets/Svg/rub.svg";
 import azFlag from "../../assets/Svg/azFlag.svg";
 import trFlag from "../../assets/Svg/trFlag.svg";
 import absFlag from "../../assets/Svg/absFlag.svg";
 import Iconstars from "../../assets/Svg/starIcon.svg";
 import SingleStar from "../../assets/Svg/singleStar.svg";
-import likeReview from "../../assets/Svg/reviewLike.svg";
-import newRed from "../../assets/Svg/newred.svg";
 import userIcon from "../../assets/Svg/userIcon.svg";
 import userflag from "../../assets/Svg/userFlag.svg";
 import check from "../../assets/Svg/check.svg";
 import likeIcon from "../../assets/Svg/likeIcon.svg";
 import unlikeIcon from "../../assets/Svg/unLikeIcon.svg";
-
-import russianFlag from "../../assets/Images/russianFlagIcon.png";
-import question from "../../assets/Images/question.png";
-import heart from "../../assets/Images/heart.png";
-import facebook from "../../assets/Images/facebook.png";
-import instagram from "../../assets/Images/instagram.png";
-import vk from "../../assets/Images/vk.png";
-import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
 import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "../HospitalReviewsAll/HospitalsReviewsAll.css";
-import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import { hospitalReviewsFetch } from "../api/hospitalReviews";
 import DetailFetch from "../api/hospitalDetailFetch";
@@ -299,14 +286,6 @@ if(!hospital){
 }
     
 
-     
-
-
-
-
-
-
-  
 
 
   return (
@@ -351,10 +330,7 @@ if(!hospital){
                 className={"featured-img"}
                 id="hospitalReviewImage"
                 src={ hospital && hospital?.main_image}
-                
               />
-        
-
             </div>
             <div className={"featured-body"}>
               <div className={"featured-body-title-wrapper"}>

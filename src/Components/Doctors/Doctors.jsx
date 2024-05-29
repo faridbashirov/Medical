@@ -1,23 +1,16 @@
-import React,{useState,useEffect,CSSProperties,useRef} from "react";
-
+import React,{useState,useEffect,useRef} from "react";
+import Filter from '../Filter';
 import {
-  Dropdown,
   Button,
-  Space,
   Breadcrumb,
   Pagination,
   Collapse,
-  Checkbox,
   Rate
 } from "antd";
-import ClipLoader from "react-spinners/ClipLoader";
 import { FadeLoader } from "react-spinners";
-
-import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
 import POU from "../../assets/Svg/GroupPound.svg";
-import RUB from "../../assets/Svg/rub.svg";
 import azFlag from "../../assets/Svg/azFlag.svg";
 import trFlag from "../../assets/Svg/trFlag.svg";
 import absFlag from "../../assets/Svg/absFlag.svg";
@@ -38,7 +31,6 @@ import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { ArrowRightOutlined, EnvironmentOutlined, StarFilled} from "@ant-design/icons";
 import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
 import Sponsored from "../../assets/Svg/sponsored.svg";
-import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import PageLoginBox from "../PageLoginBox/index.js";
 import FilterButtons from "../FilterButtons/index.js";
@@ -241,15 +233,12 @@ const Doctors = () => {
   const [count,setCount] = useState(0)
   const {user,authToken}=useSelector(state=> state.auth)
   const [activeElement, setActiveElement] = useState(0);
-  console.log(doctors);
-  // console.log(ref.current);
 
    searchParams.set("type",checkedValue)
    const handleClick = (elementId) => {
     setActiveElement(elementId);
    
   };
-
 
  
    const AddToFavorite= async(id)=>{
@@ -369,12 +358,8 @@ const Doctors = () => {
     setSelectedCountryValue(searchParams.get("country")? searchParams.get("country").split(","):[])
     setSelectedRaitingValue(searchParams.get("raiting")? searchParams.get("raiting").split(","):[])
     console.log(name);
-
     setLoading(true)
     const getHospitals = async () => {
-      
-
-
       const data = await (searchParams.has("country")|| searchParams.has("raiting") 
       ? allFilterSearch(
         checkedValue || "doctor",
@@ -391,7 +376,7 @@ const Doctors = () => {
           searchParams.get("page") || 0,
           i18next.language
         ));
-     
+        console.log('doctor:', data)
           setDoctors(data.results);
           setCount(data.count)
           setLoading(false)
@@ -411,11 +396,7 @@ const Doctors = () => {
   useEffect(()=>{
     const getCountries=async()=>{
       const data= await allCountriesFetch(localStorage.getItem("lang"))
-
       setCountry(data)
-
-
-
     }
     getCountries()
 
@@ -486,312 +467,7 @@ const Doctors = () => {
                 </Button>
               </div>
         <div className="displayGridReviewDr">
-          <div className="menuNav menuNav-hospitals">
-            <Collapse
-              expandIconPosition="end"
-              bordered={false}
-              style={{
-                borderRadius: "0px",
-                border: "1px solid #F0F0F0",
-                backgroundColor: "#FBFBFB",
-              }}
-              accordion
-            >
-              <Panel
-                style={{ backgroundColor: "#FBFBFB", color: "#084BC2" }}
-                header={
-                  <span
-                    style={{
-                      color: "#084BC2",
-                      fontSize: "18px",
-                      fontWeight: 500,
-                      fontFamily: "Inter",
-                      fontStyle: "normal",
-                    }}
-                  >
-                   {t("search")}
-                  </span>
-                }
-                key="1"
-              >
-               
-                <hr style={{ border: "1px solid #F0F0F0" }} />
-                <Checkbox.Group style={{display:"block"}} value={selectedCountryValue} onChange={CountryChange}>
-                {country.map((item,index)=>{
-                    return <> <Checkbox value={item.name} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {item.name}
-                    </p>
-                  </Checkbox>
-                  <br />
-                  </>
-                  
-                   })}
-                  
-                  </Checkbox.Group>
-                <hr style={{ border: "1px solid #F0F0F0" }} />
-                <Checkbox  checked={checkedValue === 'doctor'}
-        onChange={handleCheckboxChange}
-        className={checkedValue === 'doctor' ? 'selected' : ''} value={"doctor"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                     {t("Doctors")}
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox checked={checkedValue === 'clinic'}
-        onChange={handleCheckboxChange}
-        className={checkedValue === 'clinic' ? 'selected' : ''} value={"clinic"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                       {t("Clinics")}
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox checked={checkedValue === 'service'}
-        onChange={handleCheckboxChange}
-        className={checkedValue === 'service' ? 'selected' : ''} value={"service"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                       {t("Services")}
-                    </p>
-                  </Checkbox>
-                  <br />
-                <br />
-              </Panel>
-            </Collapse>
-           
-            <Collapse
-              expandIconPosition="end"
-              bordered={false}
-              style={{
-                borderRadius: "0px",
-                border: "1px solid #F0F0F0",
-                backgroundColor: "#FBFBFB",
-              }}
-              accordion
-            >
-              <Panel
-                style={{ backgroundColor: "#FBFBFB" }}
-                header={
-                  <span
-                    style={{
-                      color: "#084BC2",
-                      fontSize: "18px",
-                      fontWeight: 400,
-                      fontFamily: "Inter",
-                      fontStyle: "normal",
-                    }}
-                  >
-                         {t("stars")}
-                  </span>
-                }
-                key="1"
-              >
-                 <Checkbox.Group style={{display:"block"}} value={selectedRaitingValue} onChange={raitingChange}>
-                  <Checkbox value={"1"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      1 звезды
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox value={"2"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                         2 звезды
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox value={"3"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                       3 звезды
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox value={"4"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                       4 звезды
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox value={"5"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                       5 звезды
-                    </p>
-                  </Checkbox>
-                  </Checkbox.Group>
-                <br />
-              </Panel>
-            </Collapse>
-            <Collapse
-              expandIconPosition="end"
-              bordered={false}
-              style={{
-                borderRadius: "0px",
-                border: "1px solid #F0F0F0",
-                backgroundColor: "#FBFBFB",
-              }}
-              accordion
-            >
-              <Panel
-                style={{ backgroundColor: "#FBFBFB" }}
-                header={
-                  <span
-                    style={{
-                      color: "#084BC2",
-                      fontSize: "18px",
-                      fontWeight: 500,
-                      fontFamily: "Inter",
-                      fontStyle: "normal",
-                    }}
-                  >
-                    Специльные предложения
-                  </span>
-                }
-                key="1"
-              >
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Все предложения
-                  </p>
-                </Checkbox>
-                <br />
-              </Panel>
-            </Collapse>
-            <Collapse
-              expandIconPosition="end"
-              bordered={false}
-              style={{
-                borderRadius: "0px",
-                border: "1px solid #F0F0F0",
-                backgroundColor: "#FBFBFB",
-              }}
-              accordion
-            >
-              <Panel
-                style={{ backgroundColor: "#FBFBFB" }}
-                header={
-                  <span
-                    style={{
-                      color: "#084BC2",
-                      fontSize: "18px",
-                      fontWeight: 500,
-                      fontFamily: "Inter",
-                      fontStyle: "normal",
-                    }}
-                  >
-                    Оценка по отзывам
-                  </span>
-                }
-                key="1"
-              >
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Превосходно 9+
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Очень хорошо 8+
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Хороошо 7+
-                  </p>
-                </Checkbox>
-                <br />
-                <Checkbox onChange={onChange}>
-                  <p
-                    style={{
-                      margin: "6px 0",
-                      color: "#000",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Достаточно хорошо 6+
-                  </p>
-                </Checkbox>
-                <br />
-              </Panel>
-            </Collapse>
-          </div>
+          <Filter handleCheckboxChange={handleCheckboxChange} country={country} t={t} selectedCountryValue={selectedCountryValue} CountryChange={CountryChange} checkedValue={checkedValue} selectedRaitingValue={selectedRaitingValue} raitingChange={raitingChange}/>
           <>{loading & !liked ?  <div> <FadeLoader
           color="black"
           className={"loading"}

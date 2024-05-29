@@ -1,8 +1,7 @@
 import React from 'react';
 import "./AboutUs.css"
-import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
-import BreadCrumbs from "../HospitalDetail/BreadCrumbs.jsx";
+import BreadCrumbs from "../BreadCrumbs";
 import WelcomeSection from "./WelcomeSection.jsx";
 import Stats from "./Stats.jsx";
 import Discount from "./Discount.jsx";

@@ -54,17 +54,22 @@ const DoctorReviews = ({reviews,id}) => {
     ]
   };
   return (
-    <section className="hospital-detail__reviews">
+    <>{
+      reviews.length>0 ? <section className="hospital-detail__reviews">
       <div className="container">
         {reviews?.length !== 0  ? <>  <div className="reviews__header">
           <h4 className="reviews__header-title">{t("hosinfo3")}</h4>
           <p className="reviews__header-subtitle"><span className={"subtitle__rating"}>9,8</span>Великолепно <span>&#x2022;</span><span>{reviews.length} {t("comments")}</span> <a href="#" className='read-btn'>{t("allreviews")}</a></p>
         </div>
         <div className="reviews__carousel">
-        <Slider {...settings}>
-            {reviews.map((item,index)=>{
+          <swiper-container 
+                      navigation-next-el=".swiper-button-next"
+                navigation-prev-el=".swiper-button-prev"
+                  slides-per-view={1} rewind={true} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false} breakpoints="{&quot;1024&quot;:{&quot;slidesPerView&quot;:3}}"
+                          >
+                            {reviews.map((item,index)=>{
             
-              return   <div key={index} className="reviews__carousel-item">
+              return  <swiper-slide><div key={index} className="reviews__carousel-item">
               <div className="reviews__carousel-item-content">
                 <p>{item.text}</p>
                 <a href="#">Читат больше</a>
@@ -76,10 +81,11 @@ const DoctorReviews = ({reviews,id}) => {
                 <span className="item__footer-rating">8,8</span>
               </div>
             </div>
+            </swiper-slide>
             })}
-           
-            
-          </Slider>
+          </swiper-container>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
         </div>
         <button style={{
         marginTop:"10px",
@@ -95,6 +101,8 @@ const DoctorReviews = ({reviews,id}) => {
      
       </div>
     </section>
+    : <></>
+    }</>
   );
 };
 

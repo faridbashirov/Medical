@@ -1,9 +1,7 @@
-import React, {useEffect, useState,useRef} from "react";
-
+import React, {useEffect, useState} from "react";
+import Filter from '../Filter'
 import {
-  Dropdown,
   Button,
-  Space,
   Breadcrumb,
   Pagination,
   Collapse,
@@ -11,55 +9,32 @@ import {
   Rate
 } from "antd";
 import uuid from "react-uuid";
-import SingleStar from "../../assets/Svg/singleStar.svg";
 import { FadeLoader } from "react-spinners";
-import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
 import POU from "../../assets/Svg/GroupPound.svg";
-import RUB from "../../assets/Svg/rub.svg";
 import azFlag from "../../assets/Svg/azFlag.svg";
 import trFlag from "../../assets/Svg/trFlag.svg";
 import absFlag from "../../assets/Svg/absFlag.svg";
 import likeReview from "../../assets/Svg/reviewLike.svg";
 import Sponsored from "../../assets/Svg/sponsored.svg";
-import russianFlag from "../../assets/Images/russianFlagIcon.png";
-import question from "../../assets/Images/question.png";
 import heart from "../../assets/Images/heart.png";
-import facebook from "../../assets/Images/facebook.png";
-import instagram from "../../assets/Images/instagram.png";
-import vk from "../../assets/Images/vk.png";
-import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowRightOutlined, EnvironmentOutlined, FilterFilled,StarFilled   } from "@ant-design/icons";
+import {  EnvironmentOutlined } from "@ant-design/icons";
 import { axiosPrivate } from "../../api/api";
 import "../FavHospitals/FavHospitals.css";
 import "./Hospitals.css"
-import Iconstars from "../../assets/Svg/starIcon.svg";
-import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
-import LoginModal from "../LoginModal/index.js";
-import RegisterModal from "../RegisterModal/index.js";
-import PageLoginBox from "../PageLoginBox/index.js";
 import FilterButtons from "../FilterButtons/index.js";
-import { useParams } from "react-router-dom";
-import Search from "antd/es/transfer/search";
 import { mainFilterSearch } from "../api/mainFilterFetch";
-import { allhospitalFetch } from "../api/allhospitalsFetch";
-import { useLocation } from "react-router-dom";
 import { allFilterSearch } from "../api/allFilterSearch";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { Trans } from "react-i18next";
 import { allCountriesFetch } from "../api/allCountries";
 import i18next from "i18next";
 
-import favoritesFetch from "../api/favoriteHospitalsFetch";
-
 const { Panel } = Collapse;
-
-
 
 const items = [
   {
@@ -238,8 +213,7 @@ const  Hospitals = () => {
   const [liked,setLiked] = useState(false)
   const [activeElement, setActiveElement] = useState(0);
   const [loading, setLoading] = useState(false)
-  console.log(hospitals);
-  
+  console.log("hospitals:",hospitals)
   const handleClick = (elementId) => {
     setActiveElement(elementId);
    
@@ -248,10 +222,6 @@ const  Hospitals = () => {
   
   searchParams.set("type",checkedValue)
 
-
-
-
-    
 const AddToFavorite= async(id)=>{
   setLiked(true)
 
@@ -362,7 +332,6 @@ const DeleteFromFavorite= async(id)=>{
         const newSearch = `?${searchParams.toString()}`;
         navigate({ search: newSearch });
       }
-
      
     };
     useEffect(() => {
@@ -412,9 +381,6 @@ const DeleteFromFavorite= async(id)=>{
         const data= await allCountriesFetch(localStorage.getItem("lang"))
 
         setCountry(data)
-
-
-
       }
       getCountries()
 
@@ -428,8 +394,6 @@ const DeleteFromFavorite= async(id)=>{
 
   return (
     <>
-      {/* <Header/> */}
-
       <div className="hospitalbg" style={{ backgroundColor: "#F4F4F4" }}>
         <div style={{ paddingTop: "30px",paddingBottom:"20px" }} className="container">
           <div className={"breadcrumbs"}>
@@ -501,428 +465,7 @@ const DeleteFromFavorite= async(id)=>{
                 </Button>
               </div>
           <div className="displayGridReviewDr displayGridHospitals">
-            <div
-              className="menuNav menuNav-hospitals hospitals-sidebar"
-            >
-              <Collapse
-                expandIconPosition="end"
-                bordered={false}
-                style={{
-                  borderRadius: "0px",
-                  border: "1px solid #F0F0F0",
-                  backgroundColor: "#FBFBFB",
-                }}
-                accordion
-              >
-                <Panel
-                  style={{ backgroundColor: "#FBFBFB", color: "#084BC2" }}
-                  header={
-                    <span
-                      style={{
-                        color: "#084BC2",
-                        fontSize: "18px",
-                        fontWeight: 500,
-                        fontFamily: "Inter",
-                        fontStyle: "normal",
-                      }}
-                    >
-                      {t("search")}
-                    </span>
-                  }
-                  key="1"
-                >
-                  <p style={{ margin: "0px", color: "#000", fontSize: "15px" }}>
-                    {t("search2")}
-                  </p>
-                  <hr style={{ border: "1px solid #F0F0F0" }} />
-                  <Checkbox.Group style={{display:"block"}} value={selectedCountryValue} onChange={ CountryChange}>
-                   {country.map((item,index)=>{
-                    return <> <Checkbox value={item.name} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {item.name}
-                    </p>
-                  </Checkbox>
-                  <br />
-                  </>
-                  
-                   })}
-                    
-                  {/* <Checkbox value={"Turkey"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Турция
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox value={"Russia"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Pоссия
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox value={"Azerbaijan"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Aзербайджан
-                    </p>
-                  </Checkbox> */}
-                  </Checkbox.Group>
-                  <hr style={{ border: "1px solid #F0F0F0" }} />
-                
-             
-                  <Checkbox  checked={checkedValue === 'doctor'}
-        onChange={handleCheckboxChange}
-        className={checkedValue === 'doctor' ? 'selected' : ''} value={"doctor"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                     {t('Doctors')}
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox checked={checkedValue === 'clinic'}
-        onChange={handleCheckboxChange}
-        className={checkedValue === 'clinic' ? 'selected' : ''} value={"clinic"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {t('Clinics')}
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox checked={checkedValue === 'service'}
-        onChange={handleCheckboxChange}
-        className={checkedValue === 'service' ? 'selected' : ''} value={"service"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {t('Services')}
-                    </p>
-                  </Checkbox>
-                  <br />
-                 
-                
-                
-                  <br />
-                </Panel>
-              </Collapse>
-              <Collapse
-                expandIconPosition="end"
-                bordered={false}
-                style={{
-                  borderRadius: "0px",
-                  border: "1px solid #F0F0F0",
-                  backgroundColor: "#FBFBFB",
-                  marginTop: "10px",
-                }}
-                accordion
-              >
-                <Panel
-                  style={{ backgroundColor: "#FBFBFB" }}
-                  header={
-                    <span
-                      style={{
-                        color: "#084BC2",
-                        fontSize: "18px",
-                        fontWeight: 500,
-                        fontFamily: "Inter",
-                        fontStyle: "normal",
-                      }}
-                    >
-                      Все фильтры
-                    </span>
-                  }
-                  key="1"
-                >
-                  <p
-                    style={{
-                      margin: "0px",
-                      color: "#084BC2",
-                      fontSize: "18px",
-                      fontWeight: 500,
-                      fontFamily: "Inter",
-                      fontStyle: "normal",
-                    }}
-                  >
-                    Ваш бюджет
-                  </p>
-                  <hr style={{ border: "1px solid #F0F0F0" }} />
-                  <Checkbox>
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Минимальный $
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox  >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Средний $$
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Высокий $$$
-                    </p>
-                  </Checkbox>
-                </Panel>
-              </Collapse>
-              <Collapse
-                expandIconPosition="end"
-                bordered={false}
-                style={{
-                  borderRadius: "0px",
-                  border: "1px solid #F0F0F0",
-                  backgroundColor: "#FBFBFB",
-                }}
-                accordion
-              >
-               
-              </Collapse>
-              <Collapse
-                expandIconPosition="end"
-                bordered={false}
-                style={{
-                  borderRadius: "0px",
-                  border: "1px solid #F0F0F0",
-                  backgroundColor: "#FBFBFB",
-                }}
-                accordion
-              >
-                <Panel
-                  style={{ backgroundColor: "#FBFBFB" }}
-                  header={
-                    <span
-                      style={{
-                        color: "#084BC2",
-                        fontSize: "18px",
-                        fontWeight: 400,
-                        fontFamily: "Inter",
-                        fontStyle: "normal",
-                      }}
-                    >
-                      {t("stars")}
-                    </span>
-                  }
-                  key="1"
-                >
-                    <Checkbox.Group style={{display:"block"}} value={selectedRaitingValue} onChange={raitingChange}>
-                  <Checkbox value={"1"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      1 звезды
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox value={"2"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                         2 звезды
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox value={"3"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                       3 звезды
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox value={"4"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                       4 звезды
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox value={"5"} >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                       5 звезды
-                    </p>
-                  </Checkbox>
-                  </Checkbox.Group>
-                
-                  <br />
-                </Panel>
-              </Collapse>
-              <Collapse
-                expandIconPosition="end"
-                bordered={false}
-                style={{
-                  borderRadius: "0px",
-                  border: "1px solid #F0F0F0",
-                  backgroundColor: "#FBFBFB",
-                }}
-                accordion
-              >
-               
-              </Collapse>
-              <Collapse
-                expandIconPosition="end"
-                bordered={false}
-                style={{
-                  borderRadius: "0px",
-                  border: "1px solid #F0F0F0",
-                  backgroundColor: "#FBFBFB",
-                }}
-                accordion
-              >
-                <Panel
-                  style={{ backgroundColor: "#FBFBFB" }}
-                  header={
-                    <span
-                      style={{
-                        color: "#084BC2",
-                        fontSize: "18px",
-                        fontWeight: 500,
-                        fontFamily: "Inter",
-                        fontStyle: "normal",
-                      }}
-                    >
-                      Оценка по отзывам
-                    </span>
-                  }
-                  key="1"
-                >
-                  <Checkbox >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Превосходно 9+
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Очень хорошо 8+
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Хороошо 7+
-                    </p>
-                  </Checkbox>
-                  <br />
-                  <Checkbox >
-                    <p
-                      style={{
-                        margin: "6px 0",
-                        color: "#000",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Достаточно хорошо 6+
-                    </p>
-                  </Checkbox>
-                  <br />
-                </Panel>
-              </Collapse>
-              <div style={{ paddingTop: "10px" }} className="mapEmbed">
-                <iframe
-                  style={{ border: "none" }}
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17439.59682519633!2d49.97557041806164!3d40.39300414904405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x403063737e96e061%3A0x5b925e8db0b28d35!2sBaku%20Medical%20Plaza!5e0!3m2!1sen!2saz!4v1682591396345!5m2!1sen!2saz"
-                  width="325"
-                  height="179"
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </div>
-            </div>
+            <Filter handleCheckboxChange={handleCheckboxChange} country={country} location={true} t={t} selectedCountryValue={selectedCountryValue} CountryChange={CountryChange} checkedValue={checkedValue} selectedRaitingValue={selectedRaitingValue} raitingChange={raitingChange}/>
             <>{
               loading && !liked ?  <div> <FadeLoader
               color="black"
@@ -991,20 +534,6 @@ const DeleteFromFavorite= async(id)=>{
                        { user ? (
                        
                        item.is_favorite ?  <img   onClick={()=> DeleteFromFavorite(item.id)}  id="likeImageFavHospitals" src={heart} />  :  <img onClick={()=> AddToFavorite(item.id)}   id="likeImageFavHospitals" src={likeReview} />) : "" }
-
-                      
-                        
-                         
-
-                        
-                       
-
-                        
-                      
-                      
-                    
-                   
-               
                   </div>
                   <div  onClick={()=>handleClick(item.id)}
                     style={{ width: "769px", paddingLeft: "110px" }}
@@ -1044,7 +573,7 @@ const DeleteFromFavorite= async(id)=>{
                           }}
                           className="changed rating-number"
                         >
-                          6.0
+                          {item.raiting.toFixed(1)}
                         </p>
                       </div>
                     </div>
@@ -1172,7 +701,7 @@ const DeleteFromFavorite= async(id)=>{
                             lineHeight: "18px",
                           }}
                         >
-                         <Trans i18nKey="hoslistbooking3"></Trans>
+                          {item.short_description ? item.short_description : <Trans i18nKey="hoslistbooking3"></Trans>}
                         </p>
                       </div>
                       <div>
@@ -1228,7 +757,7 @@ const DeleteFromFavorite= async(id)=>{
                             margin: "0px",
                           }}
                         >
-                          6.0
+                          {item?.raiting.toFixed(1)}
                         </p>
                         <div>
                         <Rate disabled={true} value={item?.raiting}/>
@@ -1324,8 +853,6 @@ const DeleteFromFavorite= async(id)=>{
                   </div>
                 </div>
                 })}
-               
-               
                 <div className={'hospitals-pagination'}>
                 {<>
                 {count?  <Pagination

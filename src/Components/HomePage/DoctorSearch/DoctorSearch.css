@@ -10,12 +10,37 @@
   height: 228px;
   background: #5282ff;
   border-radius: 19px;
-  display: flex !important;
-  flex-direction: column !important;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   align-items: center;
   justify-content: center;
   color: #fff;
   cursor: pointer;
+}
+
+.doctor-search_item img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+.doctor-search_itemSkeleton {
+  width: 100%;
+  height: 228px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ant-skeleton.ant-skeleton-element .ant-skeleton-image .ant-skeleton-image-svg {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+}
+
+.ant-skeleton.ant-skeleton-element .ant-skeleton-image {
+  border-radius: 20px;
+  padding: 60px;
 }
 .doctor-search_item-desc {
   width: 158px;

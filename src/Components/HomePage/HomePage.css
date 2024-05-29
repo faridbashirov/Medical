@@ -579,9 +579,6 @@ li {
 .footerIcons-header {
   display: none;
 }
-.mobile-menu {
-  display: none;
-}
 
 @media (max-width: 1024px) {
   #ulList {
@@ -721,9 +718,6 @@ li {
   }
   .dropdownBefore {
     display: none;
-  }
-  .mobile-menu {
-    display: block;
   }
 }
 
@@ -960,7 +954,7 @@ li {
   object-fit: cover;
 }
 .cardSecond {
-  width: 90% !important;
+  width: 100%;
   margin-bottom: 20px;
 }
 .cardThird {
@@ -1116,7 +1110,7 @@ li {
 .slider-second-mobile-version .cardSecond {
   flex-direction: column !important;
   align-items: start !important;
-  padding-left: 20px;
+  padding-left: 10px;
   height: 111px !important;
 }
 .clinic__item-footer-stars {

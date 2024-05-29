@@ -1,14 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .overflowHidden {
   overflow-y: hidden !important;
 }
 
-.userİconMobileMenu {
-  display: none;
-}
 @media (max-width: 1024px) {
-  .userİconMobileMenu {
-    display: flex;
-    margin-right: 15px; /* Display the button on mobile devices */
+  .show {
+    right: 0 !important;
+    overflow-x: visible !important;
+    height: calc(102vh - 105px);
   }
 }
 @media (max-width: 768px) {
@@ -88,4 +91,8 @@
 }
 .react-multiple-carousel__arrow {
   background: #efefef;
+}
+
+.menu {
+  top: 95px;
 }

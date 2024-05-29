@@ -1,6 +1,5 @@
-import React,{useState,useEffect} from "react";
-import MobileLogin from "./Components/MobileLogin/MobileLogin";
-import HomePage from "./Components/HomePage/HomePage";
+import Header from "./Components/Header";
+import HomePage from "./Components/HomePage";
 import Profile from "./Components/Profile/Profile";
 import { Routes,Route } from "react-router-dom";
 import ReviewDoctors from "./Components/ReviewDoctors/ReviewDoctors";
@@ -14,26 +13,16 @@ import DoctorsReviewsAll from "./Components/DoctorsReviewsAll/DoctorsReviewsAll"
 import FAQ from "./Components/FAQ/FAQ";
 import PrivacyPolicy from './Components/PrivacyPolicy/PrivacyPolicy'
 import ContactUs from "./Components/ContactUs/ContactUs";
-import Slider from "./Components/Slider";
 import HospitalDetail from "./Components/HospitalDetail";
 import DoctorDetail from "./Components/DoctorDetail/index.js";
-import Header from "./Components/Header/Header";
 import AboutUs from "./Components/AboutUs/index.js";
 import PrivateRoute from "./Components/utils/PrivateRoute";
 import './main.css'
-import { useSelector,useDispatch } from "react-redux";
-import { fetchHospitals } from "./store/thunk/hospitalsThunk";
-import { authToken } from "./store/reducers/userReducer";
-import { tokenRefresh } from "./store/thunk/tokenRefresh";
-import i18next from "i18next";
 import { register } from 'swiper/element/bundle';
-import { Navigation } from "swiper/modules";
 register();
 
 const App = () => {
   
-  const [showMenu, setShowMenu] = useState(false)
-  const {authToken} = useSelector((state) => state.auth)
   // const dispatch=useDispatch()
   // console.log(authToken?.refresh);
   // useEffect(()=>{
@@ -56,18 +45,10 @@ const App = () => {
 
   // },[authToken])
  
-
- 
-  const handleMenu = () =>{
-    setShowMenu(!showMenu)
-  }
-  
-  
   return (
     <>
    
-    <main className={`${showMenu && 'overflowHidden'} `}>
-       {/* <MobileLogin />  */}
+    {/* <main className={`${showMenu && 'overflowHidden'} `}>
        <Routes>
          <Route element={<Header setShowMenu={setShowMenu}  handleMenu={handleMenu} showMenu={showMenu}/>}>
            <Route  path="/" element={<HomePage handleMenu={handleMenu} showMenu={showMenu} setShowMenu={setShowMenu}/>}/>
@@ -92,9 +73,28 @@ const App = () => {
     <Route path="*" element={ < AboutUs/> }/>
     </Route>
     </Routes>
-
-      {/* <Slider/> */}
-    </main>
+    </main> */}
+    <Header/>
+     <Routes>
+      <Route element={<PrivateRoute/>}/>
+      <Route  path="/" element={<HomePage/>}/>
+      <Route path="profile" element={ <Profile/>}/>
+      <Route path="profile/doctor-reviews" element={<ReviewDoctors/>}/>
+      <Route path="profile/hospital-reviews" element={ <ReviewHospitals/>}/>
+      <Route path="profile/fav-doctors" element={ <FavDoctors/>}/>
+      <Route path="profile/fav-hospitals" element={<FavHospitals />}/>
+      <Route path="/hospital-reviews/:id" element={<HospitalsReviewsAll/>}/>
+      <Route path="/hospitals" element={<Hospitals/>}/>
+      <Route path="/doctors" element={<Doctors/>}/>
+      <Route path="/hospital/:id" element={<HospitalDetail/>}/>
+      <Route path="/doctor/:id" element={<DoctorDetail/>}/>
+      <Route path="/doctor-reviews/:id" element={<DoctorsReviewsAll/>}/>
+      <Route path="/faq" element={ <FAQ/>}/>
+      <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+      <Route path="/about-us" element={ < AboutUs/> }/>
+      <Route path="/contact-us" element={ <ContactUs/>}/>
+      <Route path="*" element={<HomePage/>}/>
+    </Routes>
      </>
   );
 };

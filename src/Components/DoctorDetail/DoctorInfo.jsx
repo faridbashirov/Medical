@@ -25,18 +25,18 @@ const DoctorInfo = ({doctor}) => {
         </div>
         <div className="doctor-info__content">
           { active ? doctor?.doctor_education?.map((item,index)=>{
-            return <div key={index} className="doctor-info__content-item">
-            <span className={"study-type"}>{item.types}</span>
-            <span className={"study-address"}>{item.place_of_study}</span>
-            <span className={"study-country"}>{item.location}</span>
-            <span className={"study-date"}>{item.year_range}</span>
+            return <div key={index} className="doctor-info__content-item-grid">
+            <span className={"study-type-grid"}>{item.types}</span>
+            <span className={"study-address-grid"}>{item.place_of_study}</span>
+            <span className={"study-country-grid"}>{item.location}</span>
+            <span className={"study-date-grid"}>{item.year_range}</span>
           </div>
           }) : doctor?.doctor_workexperience?.map((item,index)=>{
-            return <div key={index} className="doctor-info__content-item">
-            <span className={"study-type"}>{item.types}</span>
-            <span className={"study-address"}>{item.place_of_work}</span>
-            <span className={"study-country"}>{item.location}</span>
-            <span className={"study-date"}>{item.year_range}</span>
+            return <div key={index} className="doctor-info__content-item-grid">
+            <span className={"study-type-grid"}>{item.types}</span>
+            <span className={"study-address-grid"}>{item.place_of_work}</span>
+            <span className={"study-country-grid"}>{item.location}</span>
+            <span className={"study-date-grid"}>{item.year_range}</span>
           </div> })}
           
         

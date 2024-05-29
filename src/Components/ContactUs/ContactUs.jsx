@@ -14,30 +14,22 @@ import Vector from "../../assets/Images/Vector.svg";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
 import POU from "../../assets/Svg/GroupPound.svg";
-import RUB from "../../assets/Svg/rub.svg";
 import azFlag from "../../assets/Svg/azFlag.svg";
 import trFlag from "../../assets/Svg/trFlag.svg";
 import absFlag from "../../assets/Svg/absFlag.svg";
-import mailIcon from "../../assets/Svg/mailIcon.svg";
-
-import russianFlag from "../../assets/Images/russianFlagIcon.png";
-import question from "../../assets/Images/question.png";
-import heart from "../../assets/Images/heart.png";
 import facebook from "../../assets/Images/facebook.png";
 import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
-
-import { ArrowRightOutlined } from "@ant-design/icons";
 import { useForm } from "react-hook-form";
 import "../ContactUs/ContactUs.css";
 import { contactFetch } from "../api/contactFetch";
-import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ContactInfoFetch from "../api/getContactInfo";
 import { ToastContainer,toast  } from "react-toastify";
+import newMap from "../../assets/Images/GoogleMapTA 3.png";
 
 const items = [
   {
@@ -484,7 +476,7 @@ const ContactUs = () => {
         <div style={{ width: "100%", height: "409px",backgroundColor:"#FBFBFB",padding:"40px",marginBottom:"20px" }}>
           <iframe
             style={{ border: "none" }}
-            src={data1.map_url}
+            src={newMap}
             width="100%"
             height="323"
             allowFullScreen=""

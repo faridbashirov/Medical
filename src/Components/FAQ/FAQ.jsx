@@ -17,9 +17,7 @@ import facebook from "../../assets/Images/facebook.png";
 import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import "./FAQ.css"
-
 import { ArrowRightOutlined} from "@ant-design/icons";
-import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import faqFetch from "../api/Faqfetch";
 import ContactInfoFetch from "../api/getContactInfo";

@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import BreadCrumbs from './BreadCrumbs.jsx';
 import "./DoctorDetail.css"
-
 import DoctorCard from "./DoctorCard.jsx";
 import DoctorBookingModal from "./DoctorBookingModal.jsx";
 import DoctorInfo from "./DoctorInfo.jsx";
-import FilterButtons from "../FilterButtons/index.js";
 import DoctorDetailFetch from '../api/doctorDetail.js';
 import { useParams } from 'react-router-dom';
 import DoctorReviews from './Doctoreviews.jsx';

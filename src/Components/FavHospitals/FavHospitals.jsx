@@ -26,11 +26,8 @@ import facebook from "../../assets/Images/facebook.png";
 import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
-
 import { ArrowRightOutlined, EnvironmentOutlined,StarFilled } from "@ant-design/icons";
-
 import "../FavHospitals/FavHospitals.css";
-import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import FilterButtons from "../FilterButtons/index.js";
 import { Link, useNavigate } from "react-router-dom";

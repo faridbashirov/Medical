@@ -19,7 +19,6 @@ import vk from "../../assets/Images/vk.png";
 import "./PrivacyPolicy.css"
 import privacyFetch from "../api/privacyFetch";
 import { ArrowRightOutlined} from "@ant-design/icons";
-import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import { useRef } from "react";
 import i18next from "i18next";

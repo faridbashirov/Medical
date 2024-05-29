@@ -24,11 +24,8 @@ import facebook from "../../assets/Images/facebook.png";
 import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import reviewDoctor from "../../assets/Images/reviewDoctor.png";
-
 import { ArrowRightOutlined,StarFilled } from "@ant-design/icons";
-
 import "../ReviewDoctors/ReviewDoctors.css";
-import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import FilterButtons from "../FilterButtons/index.js";
 import { useSelector } from "react-redux";

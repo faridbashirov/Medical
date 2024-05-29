@@ -41,7 +41,6 @@ import {
 } from "antd";
 
 import { ArrowRightOutlined } from "@ant-design/icons";
-import Header from "../Header/index.js";
 import Footer from "../Footer/index.js";
 import { useTranslation } from "react-i18next";
 

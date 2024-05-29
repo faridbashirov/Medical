@@ -4,3 +4,21 @@
   align-items: center;
   gap: 15px;
 }
+.textMed {
+  padding-bottom: 10px;
+}
+
+.header {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+@media (min-width: 1025px) {
+  .mobile-menu {
+    display: none;
+  }
+  .userİconMobileMenu {
+    display: none;
+  }
+}
