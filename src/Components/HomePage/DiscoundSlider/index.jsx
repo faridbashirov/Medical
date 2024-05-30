@@ -40,7 +40,7 @@ const DiscountSlider = () => {
                       breakpoints="{&quot;1024&quot;:{&quot;slidesPerView&quot;:4}}"
                           >
                           {data.map((item,index)=>{
-                        return  <swiper-slide><Link  to={item.link}> <div  className='slider-img trans' key={uuid()} style={{marginRight:"10px"}}>
+                        return  <swiper-slide><Link  to={item.link}> <div  className='slider-img trans' key={uuid()}>
                         <img style={{width:"100%", height:"100%" ,borderRadius:"5%"}} src={item?.image} />
                       </div></Link></swiper-slide>
                       })}

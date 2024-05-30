@@ -19,7 +19,7 @@ const HomePage = () => {
       <Search/>
       <CategoryArea/>
       <BestOffers/>
-      <YouWillLikeThis/>
+      {/* <YouWillLikeThis/> */}
       <DiscoundSlider/>
       <Sliders/>
       <SliderSecond/>

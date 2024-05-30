@@ -2,6 +2,12 @@
   position: relative;
 }
 
+.discount-slider swiper-container {
+  padding: 0px;
+}
+.diccount-slider .slider-img .trans {
+  margin-right: 0px;
+}
 .discount-slider .swiper-button-prev {
   display: none;
 }
