@@ -1,0 +1,9 @@
+.deals-title {
+  padding-top: 14.44px;
+}
+
+@media (min-width: 1024px) {
+  .deals-title {
+    padding-top: 54px;
+  }
+}

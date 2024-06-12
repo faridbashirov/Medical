@@ -31,7 +31,6 @@ import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { ArrowRightOutlined, EnvironmentOutlined, StarFilled} from "@ant-design/icons";
 import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
 import Sponsored from "../../assets/Svg/sponsored.svg";
-import Footer from "../Footer/index.js";
 import PageLoginBox from "../PageLoginBox/index.js";
 import FilterButtons from "../FilterButtons/index.js";
 import { mainFilterSearch } from "../api/mainFilterFetch";
@@ -44,6 +43,7 @@ import { useTranslation } from "react-i18next";
 import { allCountriesFetch } from "../api/allCountries";
 import { Trans } from "react-i18next";
 import i18next from "i18next";
+import { Helmet } from "react-helmet";
 const { Panel } = Collapse;
 
 
@@ -406,6 +406,11 @@ const Doctors = () => {
 
 
   return (
+    <>
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>112MED.ru | Официальный сайт | Клиники, врачи, онлайн-сервис по поиску и бронированию медицинских услуг, выгодные цены </title>
+    </Helmet>
     <div style={{ backgroundColor: "#F4F4F4" }}>
       
 
@@ -762,9 +767,8 @@ const Doctors = () => {
           </>
         </div>
       </div>
-
-      <Footer/>
     </div>
+    </>
   );
 };
 

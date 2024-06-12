@@ -1,0 +1,12 @@
+.footer-textMed {
+  font-weight: 500;
+  color: white;
+  font-size: 20px;
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .footer-textMed {
+    font-size: 30px;
+  }
+}

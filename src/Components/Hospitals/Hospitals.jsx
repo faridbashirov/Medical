@@ -24,7 +24,6 @@ import {  EnvironmentOutlined } from "@ant-design/icons";
 import { axiosPrivate } from "../../api/api";
 import "../FavHospitals/FavHospitals.css";
 import "./Hospitals.css"
-import Footer from "../Footer/index.js";
 import FilterButtons from "../FilterButtons/index.js";
 import { mainFilterSearch } from "../api/mainFilterFetch";
 import { allFilterSearch } from "../api/allFilterSearch";
@@ -33,6 +32,7 @@ import { useTranslation } from "react-i18next";
 import { Trans } from "react-i18next";
 import { allCountriesFetch } from "../api/allCountries";
 import i18next from "i18next";
+import { Helmet } from "react-helmet";
 
 const { Panel } = Collapse;
 
@@ -394,6 +394,10 @@ const DeleteFromFavorite= async(id)=>{
 
   return (
     <>
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>112MED.ru | Официальный сайт | Клиники, врачи, онлайн-сервис по поиску и бронированию медицинских услуг, выгодные цены </title>
+    </Helmet>
       <div className="hospitalbg" style={{ backgroundColor: "#F4F4F4" }}>
         <div style={{ paddingTop: "30px",paddingBottom:"20px" }} className="container">
           <div className={"breadcrumbs"}>
@@ -880,8 +884,6 @@ const DeleteFromFavorite= async(id)=>{
        
         </div>
       </div>
-      <Footer/>
-      
     </>
   );
 };

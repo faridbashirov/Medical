@@ -41,7 +41,6 @@ import {
 } from "antd";
 
 import { ArrowRightOutlined } from "@ant-design/icons";
-import Footer from "../Footer/index.js";
 import { useTranslation } from "react-i18next";
 
 
@@ -408,7 +407,6 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <Footer/>
     </>
   );
 };

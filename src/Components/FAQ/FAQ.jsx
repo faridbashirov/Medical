@@ -18,12 +18,12 @@ import instagram from "../../assets/Images/instagram.png";
 import vk from "../../assets/Images/vk.png";
 import "./FAQ.css"
 import { ArrowRightOutlined} from "@ant-design/icons";
-import Footer from "../Footer/index.js";
 import faqFetch from "../api/Faqfetch";
 import ContactInfoFetch from "../api/getContactInfo";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import faqContentFetch from "../api/FaqContentfetch";
+import { Helmet } from "react-helmet";
 const { Panel } = Collapse;
 
 const items = [
@@ -202,6 +202,11 @@ const FAQ = () => {
   //   setReload(!reload)
   // },[])
   return (
+    <>
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>112MED.ru | Официальный сайт | Клиники, врачи, онлайн-сервис по поиску и бронированию медицинских услуг, выгодные цены </title>
+    </Helmet>
     <div style={{ backgroundColor: "#F4F4F4" }}>
     
       <div style={{ paddingTop: "30px" }} className="container">
@@ -295,9 +300,8 @@ const FAQ = () => {
           </div>
         </div>
       </div>
-
-      <Footer/>
     </div>
+    </>
   );
 };
 

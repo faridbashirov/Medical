@@ -2,7 +2,6 @@ import Sliders from "./Slider";
 import SliderSecond from "./SliderSecond";
 import SliderThird from "./SliderThird";
 import "../HomePage/HomePage.css";
-import Footer from "../Footer/index.js";
 import DiscoundSlider from "./DiscoundSlider";
 import TopClinic from "./TopClinic";
 import DoctorSearch from "./DoctorSearch";
@@ -11,11 +10,16 @@ import YouWillLikeThis from "./YouWillLikeThis";
 import BestOffers from "./BestOffers";
 import Search from "./Search";
 import CategoryArea from "./CategoryArea";
+import {Helmet} from "react-helmet";
 
 const HomePage = () => {
   
   return (
     <>
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>112MED.ru | Официальный сайт | Клиники, врачи, онлайн-сервис по поиску и бронированию медицинских услуг, выгодные цены </title>
+    </Helmet>
       <Search/>
       <CategoryArea/>
       <BestOffers/>
@@ -27,7 +31,6 @@ const HomePage = () => {
       <TopClinic/>
       <DoctorSearch/>
       <HomeReviews/>
-      <Footer/>
     </>
   );
 };

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './HospitalDetail.css'
-import Footer from "../Footer/index.js";
 import BreadCrumbs from "../BreadCrumbs";
 import {infoButtons} from "./data.js";
 import Detail from "./Detail";
@@ -17,6 +16,7 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import HospitalBookingModal from './HospitalBookingModal';
+import { Helmet } from 'react-helmet';
 const HospitalDetail = () => {
   const {t}=useTranslation()
   const [openBooking, setOpenBooking] = useState(false)
@@ -32,7 +32,7 @@ const onCloseBookingModal = () => {
 }
 
 const {hospital,services,advantages,discount,questions,reviews,images,loading,error}=DetailFetch(id,i18next.language)
-console.log(reviews);
+console.log(hospital);
   if(error){
     return <div>Errorr</div>
   }
@@ -40,16 +40,14 @@ console.log(reviews);
     return <div>Loading .... </div>
   }
 
-  console.log(hospital);
-
-
-
-
   return (
     <>
     {!loading &&  <div style={{background: "#f6f6f6"}} className='hospital-detail-container'>
       
-    
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>{hospital.name}</title>
+    </Helmet>
     <BreadCrumbs/>
     <div className={'container '}>
       <div className={'detail__info-btns'}>
@@ -84,7 +82,6 @@ console.log(reviews);
     <GetService hospital={hospital}/>
     <PaySection/>
     <HospitalBookingModal  openBooking={openBooking} onCloseBookingModal={onCloseBookingModal}/>
-    <Footer/>
   </div>}
   </>
    

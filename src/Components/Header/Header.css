@@ -4,21 +4,49 @@
   align-items: center;
   gap: 15px;
 }
-.textMed {
-  padding-bottom: 10px;
+.language-dropdown,
+.currency-dropdown {
+  position: relative;
 }
-
+.language-dropdown .ant-dropdown {
+  left: -24px !important;
+}
+.currency-dropdown .ant-dropdown {
+  left: -7px !important;
+}
+.ant-btn {
+  padding: 0;
+}
+.contact-header {
+  display: none;
+}
+.dFlex:hover .contact-header {
+  display: block;
+}
+.site-name {
+  display: flex;
+}
+.textMed {
+  font-weight: 500;
+  color: white;
+  font-size: 25px;
+}
 .header {
   height: 10vh;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
 }
-@media (min-width: 1025px) {
+@media (min-width: 1024px) {
   .mobile-menu {
     display: none;
   }
   .userİconMobileMenu {
     display: none;
+  }
+  .textMed {
+    font-weight: 800;
+    font-size: 45px;
   }
 }

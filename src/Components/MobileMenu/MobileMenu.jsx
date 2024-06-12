@@ -10,7 +10,7 @@ import userIcon from "../../assets/Svg/userlogin.svg"
 
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => {
+const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,currency}) => {
   const {t,i18n}=useTranslation()
   const navigate=useNavigate()
   console.log(showMenu)
@@ -19,12 +19,12 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
       <div style={{width:"100%"}}>
         <div className={"divider"}></div>
         <ul className={"menuList"}>
-          <div className={"menuListItem"} style={{ marginLeft:'-15px'}}>
-            <li style={{ paddingBottom: "15px" }}>
-              <Dropdown menu={menuProps}>
+          <div className={"menuListItem"}>
+            <li>
+              <Dropdown getPopupContainer={trigger => trigger.parentNode}  menu={menuProps}>
                 <Button type="text">
                   <Space>
-                    <img id="rubl" src={RUB} />
+                    {currency?.icon}
                     <span
                       style={{
                         fontFamily: "Gilroy",
@@ -33,21 +33,18 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
                         color: "white",
                       }}
                     >
-                        RUB
+                        {currency?.label?.props?.children}
                       </span>
                   </Space>
                 </Button>
               </Dropdown>
             </li>
-            <li style={{ paddingBottom: "15px" }}>
-                  <Dropdown   menu={menuPropsFlag}>
-                    <Button type="text">
+            <li>
+              <Dropdown getPopupContainer={trigger => trigger.parentNode}  menu={menuPropsFlag}>
+                <Button type="text">
                       <Space>
                         {active.icon}
-                        
-
-                        
-                        <span
+                        {/* <span
                           style={{  
                             fontFamily: "Gilroy",
                             fontSize: "14px",
@@ -56,11 +53,11 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
                           }}
                         >
                         {active.label.props.children}
-                        </span> 
+                        </span>  */}
                       </Space>
                     </Button>
                   </Dropdown>
-                </li>
+            </li>
           </div>
           <li style={{
             cursor:"pointer"
@@ -94,7 +91,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu}) => 
             <li><img  src={instagram} /></li>
           </div>
 
-          <div style={{ paddingLeft: "30px" }}>
+          <div>
             <Button
             onClick={()=> {navigate("contact-us");setShowMenu(!showMenu)}}
               style={{

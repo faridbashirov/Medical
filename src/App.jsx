@@ -19,6 +19,7 @@ import AboutUs from "./Components/AboutUs/index.js";
 import PrivateRoute from "./Components/utils/PrivateRoute";
 import './main.css'
 import { register } from 'swiper/element/bundle';
+import Footer from "./Components/Footer";
 register();
 
 const App = () => {
@@ -95,6 +96,7 @@ const App = () => {
       <Route path="/contact-us" element={ <ContactUs/>}/>
       <Route path="*" element={<HomePage/>}/>
     </Routes>
+    <Footer/>
      </>
   );
 };

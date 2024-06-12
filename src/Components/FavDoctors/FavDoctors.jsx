@@ -28,7 +28,6 @@ import vk from "../../assets/Images/vk.png";
 import reviewDoctor from "../../assets/Images/reviewDoctor.png";
 import { ArrowRightOutlined, EnvironmentOutlined,StarFilled } from "@ant-design/icons";
 import "../FavDoctors/FavDoctors.css";
-import Footer from "../Footer/index.js";
 import FilterButtons from "../FilterButtons/index.js";
 import { useSearchParams } from "react-router-dom";
 import favoritesDoctorsFetch from "../api/FavoriteDoctorsFetch";
@@ -37,6 +36,7 @@ import { useSelector } from "react-redux";
 import { axiosPrivate } from "../../api/api";
 import { useTranslation } from "react-i18next";
 import { FadeLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 
 const items = [
   {
@@ -235,7 +235,10 @@ const  FavDoctors = () => {
 
   return (
     <>
-    
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>112MED.ru | Официальный сайт | Клиники, врачи, онлайн-сервис по поиску и бронированию медицинских услуг, выгодные цены </title>
+    </Helmet>
       
 
       <div style={{ paddingTop: "30px" }} className="container">
@@ -697,8 +700,6 @@ const  FavDoctors = () => {
           </div>
         </div>
       </div>
-
-      <Footer/>
     </>
   );
 };

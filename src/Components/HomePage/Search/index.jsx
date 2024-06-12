@@ -88,7 +88,7 @@ const Search = () => {
                   <div className="container heroTitle">
                     <p className="fontMed">
                     <Trans i18nKey="booking">
-                      </Trans>
+                    </Trans>
                     </p>
                     <p className="text">{t("world")}</p>
                   </div>

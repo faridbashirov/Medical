@@ -42,7 +42,6 @@ import {
 } from "antd";
 import dayjs from "dayjs";
 import { ArrowRightOutlined } from "@ant-design/icons";
-import Footer from "../Footer/index.js";
 
 const handleMenuClick = (e) => {
   console.log("click", e);

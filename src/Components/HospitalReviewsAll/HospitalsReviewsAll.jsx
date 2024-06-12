@@ -19,7 +19,6 @@ import unlikeIcon from "../../assets/Svg/unLikeIcon.svg";
 import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "../HospitalReviewsAll/HospitalsReviewsAll.css";
-import Footer from "../Footer/index.js";
 import { hospitalReviewsFetch } from "../api/hospitalReviews";
 import DetailFetch from "../api/hospitalDetailFetch";
 import ReviewModal from "./ReviewModal";
@@ -28,6 +27,7 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { axiosPrivate } from "../../api/api";
 import i18next from "i18next";
+import { Helmet } from "react-helmet";
 
 const items = [
   {
@@ -289,6 +289,11 @@ if(!hospital){
 
 
   return (
+    <>
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>112MED.ru | Официальный сайт | Клиники, врачи, онлайн-сервис по поиску и бронированию медицинских услуг, выгодные цены </title>
+    </Helmet>
     <div style={{ backgroundColor: "#F4F4F4" }}>
       
 
@@ -700,12 +705,9 @@ if(!hospital){
         </div> */}
 
       </div>
-
-     
-  
-      <Footer/>
       <ReviewModal add={add} setAdd={setAdd} id={id} openReview={openReview} onCloseReview={onCloseReview}/>
     </div>
+    </>
   );
 };
 

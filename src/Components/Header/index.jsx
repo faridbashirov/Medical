@@ -1,12 +1,9 @@
 import React,{useEffect, useState} from "react";
 import {Link} from 'react-router-dom'
 import { LogoutOutlined } from "@ant-design/icons";
-import Vector from "../../assets/Images/Vector.svg";
 import {Button, Dropdown, Space} from "antd";
-import RUB from "../../assets/Svg/rub.svg";
 import russianFlag from "../../assets/Images/russianFlagIcon.png";
 import question from "../../assets/Images/question.png";
-import {ArrowRightOutlined} from "@ant-design/icons";
 import USD from "../../assets/Svg/usdIcon.svg";
 import EUO from "../../assets/Svg/GroupEuro.svg";
 import POU from "../../assets/Svg/GroupPound.svg";
@@ -27,75 +24,10 @@ import { useTranslation } from "react-i18next";
 import { MenuOutlined } from "@ant-design/icons";
 import {CloseOutlined } from "@ant-design/icons";
 import './Header.css'
-const items = [
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        USD
-      </span>
-    ),
-    key: "1",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={USD}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        EUR
-      </span>
-    ),
-    key: "2",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={EUO}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        {" "}
-        GBP
-      </span>
-    ),
-    key: "3",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={POU}
-      />
-    ),
-  },
-];
+import useLanguageFetch from "../../Hooks/useLanguageFetch";
+if (!localStorage.getItem("lang")) {
+  localStorage.setItem("lang", "ru");
+}
 
 const itemsFlag = [
   {
@@ -105,8 +37,7 @@ const itemsFlag = [
           fontFamily: "Gilroy",
           fontSize: "16px",
           fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
+          color: "black"
         }}
       >
         AZ
@@ -115,7 +46,7 @@ const itemsFlag = [
     key: "1",
     icon: (
       <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
+        style={{ width: "30px", objectFit: "cover" }}
         src={azFlag}
       />
     ),
@@ -127,8 +58,7 @@ const itemsFlag = [
           fontFamily: "Gilroy",
           fontSize: "16px",
           fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
+          color: "black"
         }}
       >
         RU
@@ -137,7 +67,7 @@ const itemsFlag = [
     key: "2",
     icon: (
       <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
+        style={{ width: "30px", objectFit: "cover" }}
         src={russianFlag}
       />
     ),
@@ -150,8 +80,7 @@ const itemsFlag = [
           fontFamily: "Gilroy",
           fontSize: "16px",
           fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
+          color: "black"
         }}
       >
         
@@ -161,52 +90,74 @@ const itemsFlag = [
     key: "4 ",
     icon: (
       <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
+        style={{ width: "30px", objectFit: "cover" }}
         src={absFlag}
       />
     ),
   },
 ];
 
-const handleMenuClick = (e) => {
-  console.log("click", e);
-};
-
-const handleMenuFlagClick = (e) => {
-  console.log("click", e);
-  console.log(itemsFlag.find(item => item.key === e.key).label.props.children)
-  localStorage.setItem("lang",itemsFlag.find(item => item.key === e.key).label.props.children.toLowerCase())
-  i18n.changeLanguage(localStorage.getItem("lang"))
-  
-
-};
-
-const menuProps = {
-  items,
-  onClick: handleMenuClick,
-};
-
-const menuPropsFlag = {
-  items: itemsFlag,
-  onClick: handleMenuFlagClick,
-  
-};
-
 const Header = () =>{
   const [showMenu, setShowMenu] = useState(false)
+  const { data } = useLanguageFetch('main/currencies',localStorage.getItem("lang"));
+  const [itemsCurrency,setItemsCurrency] = useState([])
   const handleMenu = () =>{
     setShowMenu(!showMenu)
   }
   if(!localStorage.getItem("lang")){
     localStorage.setItem("lang","ru")
   }
+  if(!localStorage.getItem("currency")){
+    localStorage.setItem("currency","RUB")
+  }
   useEffect(() => {
+  if(data){
+    const itemsCurrencyNew = Object.keys(data).map((item, index) => ({
+        label: (
+          <span
+            style={{
+              fontFamily: "Gilroy",
+              fontSize: "16px",
+              fontWeight: "600",
+              color: "black",
+            }}
+          >
+            {item}
+          </span>
+        ),
+        key: index.toString(),
+        icon: (
+          <span
+            style={{
+              fontFamily: "Gilroy",
+              fontSize: "14px",
+              fontWeight: "600",
+              color: "black",
+              width: '30px',
+              height: '30px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              border: '1,5px solid #F6F6F6',
+              borderRadius: '50%',
+              backgroundColor: '#F6F6F6',
+            }}
+          >
+            {data[item].symbol}
+          </span>
+        )
+      }));
+    setItemsCurrency(itemsCurrencyNew)
+    const defaultCurrency = itemsCurrencyNew.find(item => item.label.props.children.toString().toUpperCase() === localStorage.getItem("currency").toUpperCase()) || itemsCurrencyNew[0];
+    setCurrency(defaultCurrency);
+  }
   if (showMenu) {
     document.body.classList.add('overflowHidden');
   } else {
     document.body.classList.remove('overflowHidden');
   }
-}, [showMenu]);
+}, [showMenu,data]);
  
   const handleMenuFlagClick = (e) => {
     console.log("click", e);
@@ -214,28 +165,31 @@ const Header = () =>{
     localStorage.setItem("lang",itemsFlag.find(item => item.key === e.key).label.props.children.toLowerCase())
     setActive(itemsFlag.find(item => item.key === e.key))
     i18n.changeLanguage(itemsFlag.find(item => item.key === e.key).label.props.children.toLowerCase())
-    
-    
-  
   };
+  
+  const handleMenuClick = (e) => {
+  const selectedCurrency = itemsCurrency.find(item => item.key === e.key);
+    localStorage.setItem("currency", selectedCurrency.label.props.children.toString().toUpperCase());
+    setCurrency(selectedCurrency);
+};
   const menuPropsFlag = {
     items: itemsFlag,
     onClick: handleMenuFlagClick,
-    
   };
-
+  const menuProps = {
+    items: itemsCurrency,
+    onClick: handleMenuClick,
+  };
+  
   const {t,i18n}=useTranslation()
 
   const [openLogin, setOpenLogin] = useState(false)
   const [openRegister, setOpenRegister] = useState(false)
-  const [lang,setLang]=useState(localStorage.getItem("lang"))
- 
+   const [currency, setCurrency] = useState({});
   const [active,setActive] = useState(itemsFlag.find( item => item.label.props.children === localStorage.getItem("lang").toUpperCase()))
   const navigate=useNavigate()
-  console.log(lang);
   const {user, errors}=useSelector((state)=> state.auth)
   const {authToken}=useSelector((state)=> state.auth)
-
   const state=useSelector((state)=>state.auth)
   console.log(state)
  
@@ -249,11 +203,7 @@ const Header = () =>{
  const logout =()=>{
     dispatch(logoutuser())
     displayLogoutNotification()
-
-
-
  }
- 
  
   const onOpenLogin = () => {
     setOpenLogin(true)
@@ -279,22 +229,18 @@ const Header = () =>{
       <header >
         <div id="bg">
           <div className="container header">
-          <Link to="/">  <div>
-              <img  className="navbar-logo" src={Vector} />
+          <Link to="/">  
+            <div className="site-name">
+              <h1 className="textMed">112MED.COM</h1>
             </div>
             </Link>
-            <div className="mR">
-              <h1 className="textMed">112 Med</h1>
-              <p className="medMarket">{t("Medical marketplace")}</p>
-            </div>
             <div className="dropdownBefore">
               <ul className="ul" id="ulList">
-                <li style={{ paddingBottom: "15px" }}>
-                  <Dropdown 
-                       menu={menuProps}>
+                <li className="currency-dropdown">
+                  <Dropdown style={{display:"flex"}} getPopupContainer={trigger => trigger.parentNode} menu={menuProps}>
                     <Button type="text">
-                      <Space>
-                        <img id="rubl" src={RUB} />
+                      <Space style={{display:"flex"}}>
+                        {currency?.icon}
                         <span
                           style={{
                             fontFamily: "Gilroy",
@@ -303,21 +249,18 @@ const Header = () =>{
                             color: "white",
                           }}
                         >
-                          RUB
+                          {currency?.label?.props?.children}
                         </span>
                       </Space>
                     </Button>
                   </Dropdown>
                 </li>
-                <li style={{ paddingBottom: "15px"}}>
-                  <Dropdown style={{display:"flex"}}  menu={menuPropsFlag}>
+                <li className="language-dropdown">
+                  <Dropdown style={{display:"flex"}} getPopupContainer={trigger => trigger.parentNode}  menu={menuPropsFlag}>
                     <Button type="text">
-                      <Space>
-                        {active.icon}
-                        
-
-                        
-                        <span
+                      <Space style={{display:"flex"}}>
+                        {active?.icon}
+                        {/* <span
                           style={{  
                             fontFamily: "Gilroy",
                             fontSize: "17.5px",
@@ -326,27 +269,27 @@ const Header = () =>{
                           }}
                         >
                         {active.label.props.children}
-                        </span> 
+                        </span>  */}
                       </Space>
                     </Button>
                   </Dropdown>
                 </li>
-                <li onClick={()=> navigate("contact-us")}  style={{ paddingBottom: "15px",cursor:"pointer" }} className="dFlex">
+                <li onClick={()=> navigate("contact-us")}  style={{ cursor:"pointer" }} className="dFlex">
                   <div className="question">
                     <img src={question} />
                   </div>
-                  <div>
+                  <div className="contact-header">
                     <p style={{color:"white"}}>{t("contact")} </p>
                   </div>
                 </li>
-                {user ?<li  onClick={()=>navigate("/profile")} style={{ paddingBottom: "15px",cursor:"pointer" }}>
+                {user ?<li  onClick={()=>navigate("/profile")} style={{ cursor:"pointer" }}>
                   <img   src={userIcon} />
                 </li>:""}
-                <li style={{ paddingBottom: "15px" }}>
+                <li>
                  {user ? <Button
                     className="button"
                     type="primary"
-                    icon={<ArrowRightOutlined className="Arrow" />}
+                    // icon={<ArrowRightOutlined className="Arrow" />}
                    
                     onClick={()=> logout()}
                   >
@@ -354,7 +297,7 @@ const Header = () =>{
                   </Button> : <Button
                     className="button"
                     type="primary"
-                    icon={<ArrowRightOutlined className="Arrow" />}
+                    // icon={<ArrowRightOutlined className="Arrow" />}
                     
                     onClick={onOpenLogin}
                   >
@@ -376,7 +319,7 @@ const Header = () =>{
       </header>
       <LoginModal openLogin={openLogin} onCloseLogin={onCloseLogin} onOpenRegister={onOpenRegister}/>
       <RegisterModal openRegister={openRegister} onCloseRegister={onCloseRegister}/>
-      <MobileMenu setShowMenu={setShowMenu}  active={active} menuProps={menuProps} menuPropsFlag={menuPropsFlag} showMenu={showMenu} handleMenu={handleMenu}/>
+      <MobileMenu setShowMenu={setShowMenu} currency={currency} active={active} menuProps={menuProps} menuPropsFlag={menuPropsFlag} showMenu={showMenu} handleMenu={handleMenu}/>
      <Outlet/></div>
      </>
     )

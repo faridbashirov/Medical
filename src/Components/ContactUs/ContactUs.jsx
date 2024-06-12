@@ -23,13 +23,13 @@ import vk from "../../assets/Images/vk.png";
 import { useForm } from "react-hook-form";
 import "../ContactUs/ContactUs.css";
 import { contactFetch } from "../api/contactFetch";
-import Footer from "../Footer/index.js";
 import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ContactInfoFetch from "../api/getContactInfo";
 import { ToastContainer,toast  } from "react-toastify";
 import newMap from "../../assets/Images/GoogleMapTA 3.png";
+import { Helmet } from "react-helmet";
 
 const items = [
   {
@@ -283,7 +283,10 @@ const ContactUs = () => {
   };
   return (
     <>
-    
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>112MED.ru | Официальный сайт | Клиники, врачи, онлайн-сервис по поиску и бронированию медицинских услуг, выгодные цены </title>
+    </Helmet>
      
     <div style={{ backgroundColor: "#F4F4F4" }}>
       
@@ -485,8 +488,6 @@ const ContactUs = () => {
           ></iframe>
         </div>
       </div>
-
-      <Footer/>
     </div>
 
     </>

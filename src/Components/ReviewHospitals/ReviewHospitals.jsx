@@ -27,13 +27,13 @@ import Hospitals from "../../assets/Images/Hospitals.png";
 import { FadeLoader } from "react-spinners";
 import { ArrowRightOutlined,StarFilled } from "@ant-design/icons";
 import "../ReviewHospitals/ReviewHospitals.css";
-import Footer from "../Footer/index.js";
 import FilterButtons from "../FilterButtons/index.js";
 import profileHospitalReviews from "../api/profileHospitalReviews";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet";
 const items = [
   {
     label: (
@@ -205,8 +205,10 @@ const ReviewHospitals = () => {
 
   return (
     <>
-     
-
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>112MED.ru | Официальный сайт | Клиники, врачи, онлайн-сервис по поиску и бронированию медицинских услуг, выгодные цены </title>
+    </Helmet>
       <div style={{ paddingTop: "30px" }} className="container">
         <div style={{ borderBottom: "1px solid #E7E7E7", padding: "20px 0" }}>
           <Breadcrumb
@@ -402,8 +404,6 @@ const ReviewHospitals = () => {
           </div>
         </div>
       </div>
-
-      <Footer/>
     </>
   );
 };

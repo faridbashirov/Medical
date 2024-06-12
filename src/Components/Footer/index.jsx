@@ -6,8 +6,9 @@ import {Button} from "antd";
 import footerArrow from "../../assets/Svg/footer-arrow.svg"
 import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SocialsFetch from '../api/socialsFetch';
+import './Footer.css'
 const Footer = () => {
 
   const navigate=useNavigate();
@@ -18,15 +19,7 @@ const Footer = () => {
       <div className="container footer-wrapper">
         <div className="rowGrid">
           <div id="textFooterid" className={"textFooterid"} style={{display:"flex"}}>
-            <ul style={{ listStyle: "none" }} className={"footer-med"}>
-              <li className={"footer-title"}
-              >
-                112 Med
-              </li>
-              <li className={"footer-subtitle"} >
-               <Trans i18nKey="footer"></Trans>
-              </li>
-            </ul>
+            <Link><h1 className="footer-textMed">112MED.COM</h1></Link>
           </div>
           <div>
             <ul style={{ listStyle: "none" }} >

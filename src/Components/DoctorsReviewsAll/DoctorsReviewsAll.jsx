@@ -28,10 +28,10 @@ import { doctorReviewsFetch } from "../api/doctorReviews";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ReviewModal from "./ReviewModal";
-import Footer from "../Footer/index.js";
 import { useTranslation } from 'react-i18next';
 import i18next from "i18next";
 import DoctorBookingModal from "../DoctorDetail/DoctorBookingModal";
+import { Helmet } from "react-helmet";
 
 const items = [
   {
@@ -271,6 +271,10 @@ if(error){
   return (
 
     <> 
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>112MED.ru | Официальный сайт | Клиники, врачи, онлайн-сервис по поиску и бронированию медицинских услуг, выгодные цены </title>
+    </Helmet>
      {
        
        <div style={{ backgroundColor: "#F4F4F4" }}>
@@ -627,8 +631,6 @@ if(error){
     
       
       <ReviewModal add={add} setAdd={Setadd} id={id} openReview={openReview} onCloseReview={onCloseReview}/>
-
-      <Footer/>
       <DoctorBookingModal openBooking={openBooking} onCloseBookingModal={onCloseBookingModal}/>
     </div>
     }</>

@@ -28,7 +28,6 @@ import vk from "../../assets/Images/vk.png";
 import FavoriteHospitals from "../../assets/Images/FavoriteHospitals.png";
 import { ArrowRightOutlined, EnvironmentOutlined,StarFilled } from "@ant-design/icons";
 import "../FavHospitals/FavHospitals.css";
-import Footer from "../Footer/index.js";
 import FilterButtons from "../FilterButtons/index.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -38,6 +37,7 @@ import I18nextBrowserLanguageDetector from "i18next-browser-languagedetector";
 import { useTranslation } from "react-i18next";
 import { FadeLoader } from "react-spinners";
 import { Trans } from "react-i18next";
+import { Helmet } from "react-helmet";
 
 const items = [
   {
@@ -233,7 +233,10 @@ const FavHospitals = () => {
 
   return (
     <>
-      
+      <Helmet>
+      <meta charSet="utf-8" />
+      <title>112MED.ru | Официальный сайт | Клиники, врачи, онлайн-сервис по поиску и бронированию медицинских услуг, выгодные цены </title>
+    </Helmet>
 
       <div style={{ paddingTop: "30px" }} className="container">
         <div className={'breadcrumbs'}>
@@ -1299,8 +1302,6 @@ const FavHospitals = () => {
           
         </div>
       </div>
-
-      <Footer/>
     </>
   );
 };
