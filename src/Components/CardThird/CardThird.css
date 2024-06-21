@@ -1,8 +1,8 @@
-.cardThird{
-    background-color: #E4E4E4 !important;
-    border-radius: 12px !important;
-    width: 90%;
-    height: 285px;
-    color: #E4E4E4 !important;
-    margin-bottom: 20px;
+.cardThird {
+  background-color: #e4e4e4 !important;
+  border-radius: 12px !important;
+  width: 100% !important;
+  height: 285px;
+  color: #e4e4e4 !important;
+  margin-bottom: 20px;
 }

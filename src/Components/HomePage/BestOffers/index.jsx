@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import useLanguageFetch from '../../../Hooks/useLanguageFetch';
 import { useTranslation } from 'react-i18next';
 import './BestOffers.css'
+import CardBannerTypeOne from '../../CardBanner/CardBannerTypeOne';
 const BestOffers = () => {
   const {t}=useTranslation()
   const { data, loading, error } = useLanguageFetch('main/best_offer',localStorage.getItem("lang"));
@@ -17,20 +18,18 @@ const BestOffers = () => {
   return (
     <section>
           {data ? (
-                <>
+                <section className='bestOffer'>
                   <div className="container">
-                    <p className={"deals-title"}>
+                    <p className={"bestOffer-title"}>
                         {t("offer")}
                     </p>
-                    <div className="grid_2">
+                    <div className="bestOffer-box">
                       {data.map((item,index)=>{
-                        return   <div className="trans" key={index}>
-                      <Link to={item.link}> <img src={item.image}/></Link>
-                      </div>
+                        return   <Link to={item.link} key={index}><CardBannerTypeOne image={item.image} title={item.title}/></Link>
                       })}
                     </div>
                   </div>
-                </>
+                </section>
             ) : (
                 <div></div>
             )}

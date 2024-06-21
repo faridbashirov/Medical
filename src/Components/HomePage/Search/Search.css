@@ -1,6 +1,194 @@
+.searchInputArea {
+  background-color: white;
+  padding: 16px;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px 5px 0px 0px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.search-data-area {
+  display: none;
+}
+#marginBTN {
+  padding-top: 70px;
+}
+.inputSearchLocation,
+.inputSearchName {
+  height: 32px;
+}
+#inputSearch,
+#inputEnviroment {
+  padding-left: 10px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13.2px;
+}
+
+.inputNewBtn {
+  height: 32px;
+  width: 100%;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13.2px;
+}
+.search-sort-buttons-space {
+  gap: 12px !important;
+}
+.sortBtn {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.56px;
+  text-align: left;
+  color: #000000;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+.sortBtn div {
+  display: none;
+}
+.sortActive {
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
+  background: #5282ff;
+  color: #ffffff;
+  border: 1px solid #5282ff;
+  border-radius: 5.72px;
+  font-family: "Inter";
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14.52px;
+  text-align: center;
+  padding: 5px 13px;
+}
+.sortActive:hover {
+  color: black;
+}
+.search-sort-buttons {
+  padding-top: 75px;
+}
+.search-sort-buttons-title {
+  padding-bottom: 13px;
+  font-family: "Inter";
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14.52px;
+}
+.searchInputAreaRow {
+  width: 100%;
+}
+.searchInputSection {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.searchBar {
+  position: absolute;
+  top: -175px;
+}
+.heroTitle {
+  color: white;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 33.96px;
+  text-align: center;
+}
+.searchTitle {
+  padding: 13px 0 120px 0;
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+}
+
 @media (min-width: 1024px) {
+  .search-data-area {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 23px;
+    gap: 20px;
+  }
+  .search-data-area div {
+    background: #f4f4f4;
+    padding: 7px 11px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #f4f4f4;
+  }
+  .search-data-loading-div {
+    width: 70px;
+    height: 33px;
+  }
+  .search-data-area span {
+    font-size: 13.99px;
+    font-weight: 500;
+    line-height: 16.97px;
+    text-align: center;
+  }
+  .inputNewBtnCol {
+    height: 50px;
+  }
+  #inputSearch,
+  #inputEnviroment,
+  .inputNewBtn {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.6px;
+  }
+  .search-sort-buttons-space {
+    gap: 30px !important;
+  }
+  .sortBtn {
+    font-size: 20px;
+    line-height: 24.26px;
+  }
+  .sortActive {
+    padding: 20px 24px;
+    font-size: 20px;
+    line-height: 24.2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .search-sort-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    padding-top: 100px;
+  }
+  .search-sort-buttons-title {
+    font-size: 20px;
+    line-height: 24.2px;
+    padding-bottom: 0;
+  }
+  .searchInputArea {
+    padding: 30px;
+  }
   .inputBtn span {
     font-weight: 500;
     font-size: 20px;
+  }
+  .inputNewBtn,
+  .inputSearchLocation,
+  .inputSearchName {
+    height: 50px !important;
+  }
+  .heroTitle {
+    font-weight: 600;
+    font-size: 50px;
+    line-height: 80px;
+    text-align: left;
+  }
+  .searchTitle {
+    padding: 10px 0 180px 0;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 30.52px;
+    text-align: left;
+  }
+  #marginBTN {
+    padding-left: 30px;
   }
 }

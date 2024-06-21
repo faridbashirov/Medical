@@ -28,7 +28,7 @@ const HomeReviews = () => {
     <section className={"home-review"}>
       <div className="container">
         <h3 className="home-reviews__title">{t("comments")}</h3>
-        <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+        <Tabs className='review__tabs' defaultActiveKey="1" items={items} onChange={onChange} />
        
       </div>
     </section>

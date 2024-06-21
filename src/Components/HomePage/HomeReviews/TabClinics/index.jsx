@@ -15,7 +15,7 @@ const TabClinics = () => {
                             <swiper-container 
                             navigation-next-el=".swiper-button-next"
                       navigation-prev-el=".swiper-button-prev"
-                        slides-per-view={2} rewind={true} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+                        slides-per-view={2} rewind={true} space-between={28} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
                                 >
                               {
                                 [1, 2].map((_, index) => (
@@ -51,7 +51,7 @@ const TabClinics = () => {
                     <swiper-container 
                     navigation-next-el=".swiper-button-next"
               navigation-prev-el=".swiper-button-prev"
-                slides-per-view={2} rewind={true} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+                slides-per-view={2} rewind={true} space-between={28} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
                         >
                         {data?.hospital.map((item,index)=>{
                         return <swiper-slide><div key={index} className="home-reviews__item">

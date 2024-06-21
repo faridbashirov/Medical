@@ -1,12 +1,12 @@
 import React from 'react';
 import uuid from 'react-uuid';
 import { Link, useNavigate } from 'react-router-dom';
-import './DiscoundSlider.css'
+import './BestSeller.css'
 import { Button } from 'antd';
 import useLanguageFetch from '../../../Hooks/useLanguageFetch';
 import { useTranslation } from 'react-i18next';
 
-const DiscountSlider = () => {
+const BestSeller = () => {
   const {t}=useTranslation()
   const navigate = useNavigate();
   const { data, loading, error } = useLanguageFetch('main/best_seller',localStorage.getItem("lang"));
@@ -20,9 +20,9 @@ const DiscountSlider = () => {
     return (
         <div>
             {data ? (
-                <>
+                <section className='bestSeller'>
                   <div className="container">
-                    <p className={"deals-title"}>
+                    <p className={"bestSeller-title"}>
                       {t("bestseller")}
                     </p>
                     <div className="grid_3">
@@ -61,7 +61,7 @@ const DiscountSlider = () => {
                       </Button>
                     </div>
                   </div>
-                </>
+                </section>
             ) : (
                 <div></div>
             )}
@@ -69,4 +69,4 @@ const DiscountSlider = () => {
     );
 };
 
-export default DiscountSlider;
+export default BestSeller;

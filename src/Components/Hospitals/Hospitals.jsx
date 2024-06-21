@@ -4,18 +4,10 @@ import {
   Button,
   Breadcrumb,
   Pagination,
-  Collapse,
-  Checkbox,
   Rate
 } from "antd";
 import uuid from "react-uuid";
 import { FadeLoader } from "react-spinners";
-import USD from "../../assets/Svg/usdIcon.svg";
-import EUO from "../../assets/Svg/GroupEuro.svg";
-import POU from "../../assets/Svg/GroupPound.svg";
-import azFlag from "../../assets/Svg/azFlag.svg";
-import trFlag from "../../assets/Svg/trFlag.svg";
-import absFlag from "../../assets/Svg/absFlag.svg";
 import likeReview from "../../assets/Svg/reviewLike.svg";
 import Sponsored from "../../assets/Svg/sponsored.svg";
 import heart from "../../assets/Images/heart.png";
@@ -33,166 +25,6 @@ import { Trans } from "react-i18next";
 import { allCountriesFetch } from "../api/allCountries";
 import i18next from "i18next";
 import { Helmet } from "react-helmet";
-
-const { Panel } = Collapse;
-
-const items = [
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        USD
-      </span>
-    ),
-    key: "1",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={USD}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        EUR
-      </span>
-    ),
-    key: "2",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={EUO}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        {" "}
-        GBP
-      </span>
-    ),
-    key: "3",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={POU}
-      />
-    ),
-  },
-];
-
-const itemsFlag = [
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        AZ
-      </span>
-    ),
-    key: "1",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={azFlag}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        TR
-      </span>
-    ),
-    key: "2",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={trFlag}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        {" "}
-        EN
-      </span>
-    ),
-    key: "3",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={absFlag}
-      />
-    ),
-  },
-];
-
-const handleMenuClick = (e) => {
-  console.log("click", e);
-};
-
-const handleMenuFlagClick = (e) => {
-  console.log("click", e);
-};
-
-const menuProps = {
-  items,
-  onClick: handleMenuClick,
-};
-
-const menuPropsFlag = {
-  items: itemsFlag,
-  onClick: handleMenuFlagClick,
-};
 
 const  Hospitals = () => {
 
@@ -385,10 +217,6 @@ const DeleteFromFavorite= async(id)=>{
       getCountries()
 
     },[i18next.language])
-
- 
-     
-      
 
 
 

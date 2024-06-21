@@ -1,15 +1,16 @@
 import React from "react";
 import CardThird from "../../CardThird/CardThird";
-import './SliderThird.css'
+import './SpecialOffers.css'
 import { Link } from "react-router-dom";
+import CardBannerTypeOne from '../../CardBanner/CardBannerTypeOne';
 import useLanguageFetch from "../../../Hooks/useLanguageFetch";
 import { useTranslation } from "react-i18next";
 import { Skeleton } from "antd";
-const SliderThird = () => {
+const SpecialOffers = () => {
   const {t}=useTranslation()
   const { data, loading, error } = useLanguageFetch('main/best_offer',localStorage.getItem("lang"));
   if (loading) {
-        return  <> 
+        return  <section className="special-offers">
                   <div className="container container-foreign">
                     <h3 className={"foreign-title"}>
                       {t("specialoffer")}
@@ -38,7 +39,7 @@ const SliderThird = () => {
                       ))}
                   </div>
                   </div>
-                </>
+                </section>
     }
   if (error) {
     return console.log("BestOffers:",error)
@@ -46,7 +47,7 @@ const SliderThird = () => {
   return (
     <div>
           {data ? (
-                <> 
+                <section className="special-offers"> 
                   <div className="container container-foreign">
                     <h3 className={"foreign-title"}>
                       {t("specialoffer")}
@@ -63,8 +64,8 @@ const SliderThird = () => {
                         slides-per-view={4} rewind={true} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
                       >
                         {data.map((item,index)=>{
-                          return      <swiper-slide><Link to={item.link}> <CardThird ird key={index} image={item.image}/></Link></swiper-slide>
-                        })}
+                        return   <swiper-slide><Link to={item.link} key={index}><CardBannerTypeOne image={item.image} title={item.title}/></Link></swiper-slide>
+                      })}
                       </swiper-container>
                       <div class="swiper-button-prev"></div>
                       <div class="swiper-button-next"></div>
@@ -75,7 +76,7 @@ const SliderThird = () => {
                       })}
                   </div>
                   </div>
-                </>
+                </section>
             ) : (
                 <div></div>
             )}
@@ -83,4 +84,4 @@ const SliderThird = () => {
     );
 };
 
-export default SliderThird;
+export default SpecialOffers;

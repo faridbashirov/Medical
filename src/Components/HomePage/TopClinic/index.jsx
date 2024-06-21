@@ -34,27 +34,6 @@ const TopClinic = () => {
     .catch((err) => {
         console.log(err);
     })
-   
-      
-    // fetch(`https://hospitalbackend.efgroup.az/card/add_favorite/${id}`, {
-    //   method: 'POST',
-    //    headers: {
-    //     'Content-type': 'application/json',
-    //     "Authorization":`Bearer ${authToken.access}`
-    //   },
-    // })
-    //    .then((response) => response.json())
-    //    .then((data) => {
-    //       console.log(data);
-    //       setAdd(!add)
-         
-         
-          
-    //    })
-    //    .catch((err) => {
-    //       console.log(err.message);
-    //    });
-       
       
   }
   const DeleteFromFavorite= async(id)=>{
@@ -71,28 +50,23 @@ const TopClinic = () => {
 
   return (
       <section className="top-clinic">
-    <div className={"container"}>
-        <div className="top-clinic__header" >
+        <div className={"container"}>
           <h3 className="top-clinic__header-title"><Trans i18nKey="tophospitals"></Trans></h3>
-
-          <div className="top-clinic__header-btns" >
+          {/* <div className="top-clinic__header-btns" >
             <div className="top-clinic__header-right-btns">
-            <Button className={"right-btn-primary"} type={"primary"}>топ 30</Button>
-              <Button className={"right-btn-link"} type={"link"}><span>&#x2022;</span>топ 10</Button>
-              <Button className={"right-btn-link"} type={"link"}><span>&#x2022;</span>топ 5</Button>
+              <Button className={"top-button__active"} type={"primary"}>{t("tophospitals2")} 30</Button>
+              <Button className={"top-button__passive"} type={"link"}>{t("tophospitals2")} 10</Button>
+              <Button className={"top-button__passive"} type={"link"}>{t("tophospitals2")} 5</Button>
             </div>
-            <Link to={"hospitals"}><Button className="top-clinic__header-left d-none" type={"primary"}>Посмотреть клиники </Button></Link> 
-        
-          </div>
-        </div>
-        <div className="top-clinic__carousel">
-            <swiper-container 
-        navigation-next-el=".swiper-button-next"
-  navigation-prev-el=".swiper-button-prev"
-    slides-per-view={4} spaceBetween={10} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
-            >
-            {hospitals?.map((item,index)=>{
-              return    <swiper-slide><div className="top-clinic_item">
+          </div> */}
+            <div className="top-clinic__carousel">
+                <swiper-container 
+            navigation-next-el=".swiper-button-next"
+      navigation-prev-el=".swiper-button-prev"
+        slides-per-view={4} space-between={23} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+                >
+                {hospitals.map((item,index)=>{
+              return    <swiper-slide><div key={uuid()} className="top-clinic_item">
               <div className="top-clinic__item-top">
                 <img  onClick={()=> navigate(`/hospital/${item.id}`)} src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
                 <div className="top-clinic__item-num">50%</div>
@@ -103,62 +77,54 @@ const TopClinic = () => {
                 
                 </div>
               </div>
-              <div className="clinic__item-footer">
-                <div className="clinic__item-footer-subtitle">
-                  <img src={location} alt=""/>
+              <div className="top-clinic__item-footer">
+                <div className="top-clinic__item-footer-subtitle">
+                  <div className='top-clinic__location'><img src={location} alt=""/></div>
                   <span>{item.location}</span>
                 </div>
-                <h3 className="clinic__item-footer-title">{item.name}</h3>
-                <div className="clinic__item-footer-stars">
-                  <span style={{marginTop:"3px"}}>{item?.raiting ? item?.raiting.toFixed(1) : 0}</span>
-                  <Rate disabled={true} value={item?.raiting}/>
+                <h3 className="top-clinic__item-footer-title">{item.name}</h3>
+                <div className="top-clinic__item-footer-stars">
+                  <span>{item?.raiting ? item?.raiting.toFixed(1) : 0}</span>
+                  <Rate className='top-clinic-stars' disabled={true} value={item?.raiting}/>
+                </div>
+              </div>
+            </div></swiper-slide>
+            })}
+            </swiper-container>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            </div>
+          <div className="top-clinic__mobile-items">
+            {hospitals.map((item,index)=>{
+              return    <div key={uuid()} className="top-clinic_item">
+              <div className="top-clinic__item-top">
+                <img  onClick={()=> navigate(`/hospital/${item.id}`)} src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
+                <div className="top-clinic__item-num">50%</div>
+                <div className="top-clinic__item-heart">
+                { user ? (
+                          
+                          item.is_favorite ?  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> DeleteFromFavorite(item.id)}   className='top-clinic__item-heart' src={heart} />  :  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> AddToFavorite(item.id)}    className='top-clinic__item-heart' src={heartOutlined} />) : "" }
+                
+                </div>
+              </div>
+              <div className="top-clinic__item-footer">
+                <div className="top-clinic__item-footer-subtitle">
+                  <div className='top-clinic__location'><img src={location} alt=""/></div>
+                  <span>{item.location}</span>
+                </div>
+                <h3 className="top-clinic__item-footer-title">{item.name}</h3>
+                <div className="top-clinic__item-footer-stars">
+                  <span>{item?.raiting ? item?.raiting.toFixed(1) : 0}</span>
+                  <Rate className='top-clinic-stars' disabled={true} value={item?.raiting}/>
                 </div>
               </div>
             </div>
-            </swiper-slide>
             })}
-        </swiper-container>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-        </div>
-      {/* <div className="top-clinic__mobile-items">
-        <Button onClick={()=> navigate({
-      pathname: "/hospitals",
-      search: `?type=clinic`,
-    })} className="top-clinic__header-left d-mobile-block" type={"primary"}>{t("tophospitals2")} </Button>
-      </div> */}
-      <div className="top-clinic__mobile-items">
-        {hospitals.map((item,index)=>{
-          return    <div key={uuid()} className="top-clinic_item">
-          <div className="top-clinic__item-top">
-            <img  onClick={()=> navigate(`/hospital/${item.id}`)} src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
-            <div className="top-clinic__item-num">50%</div>
-            <div className="top-clinic__item-heart">
-            { user ? (
-                       
-                       item.is_favorite ?  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> DeleteFromFavorite(item.id)}   className='top-clinic__item-heart' src={heart} />  :  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> AddToFavorite(item.id)}    className='top-clinic__item-heart' src={heartOutlined} />) : "" }
-             
-            </div>
           </div>
-          <div className="clinic__item-footer">
-            <div className="clinic__item-footer-subtitle">
-              <img src={location} alt=""/>
-              <span>{item.location}</span>
-            </div>
-            <h3 className="clinic__item-footer-title">{item.name}</h3>
-            <div className="clinic__item-footer-stars">
-              <span style={{marginTop:"2px"}}>{item?.raiting ? item?.raiting.toFixed(1) : 0}</span>
-              <Rate  disabled={true} value={item?.raiting}/>
-            </div>
+          <div className='top-clinic__button_container'>
+            <Link to={"hospitals"}><Button className="top-clinic__button" type={"primary"}>{t("tophospitalbutton")}</Button></Link> 
           </div>
         </div>
-        })}
-        <Button onClick={()=> navigate({
-      pathname: "/hospitals",
-      search: `?type=clinic`,
-    })} className="top-clinic__header-left d-mobile-block" type={"primary"}>{t("tophospitals2")} </Button>
-      </div>
-    </div>
       </section>
   );
 };

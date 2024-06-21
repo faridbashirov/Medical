@@ -1,0 +1,260 @@
+.categoryArea {
+  padding-top: 75px;
+  background: #fcfcfc;
+  width: 100%;
+}
+
+.banner-medium,
+.banner-small,
+.banner-large {
+  cursor: pointer; /* Remove quotes from "pointer" */
+}
+
+.doctor-position-banner {
+  display: grid;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.banner-medium-smalls {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.banner-mediums {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.banner-medium {
+  width: 100%;
+  height: 129px;
+  background: #ffffff;
+  border: 0.37px solid #d0d0d0;
+  border-radius: 5px;
+  display: flex;
+}
+
+.banner-medium-left {
+  padding: 14px 0 16px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background-color: transparent;
+  width: 40%;
+}
+
+.banner-medium-right {
+  width: 60%;
+}
+
+.banner-medium-right img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.banner-medium-title {
+  font-family: "Inter";
+  font-size: 14.42px;
+  font-weight: 700;
+  line-height: 15.94px;
+  text-transform: capitalize;
+}
+
+.banner-medium-button {
+  font-family: "Inter";
+  font-size: 8.98px;
+  font-weight: 700;
+  line-height: 9.98px;
+  color: #ffffff;
+  width: 90px;
+  height: 24px;
+  border-radius: 2.5px;
+}
+
+.banner-smalls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.banner-small {
+  height: 128px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.banner-small::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(82, 130, 255, 0) 0%, #5282ff 100%);
+  z-index: 2;
+}
+
+.banner-small-title {
+  font-family: "Inter";
+  position: relative;
+  align-self: flex-end;
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  z-index: 2;
+  color: #ffffff;
+  padding: 0 0 3px 14.6px;
+  width: 75%;
+}
+
+.banner-small img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.banner-big {
+  height: 95px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.banner-big::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(82, 130, 255, 0) 0%, #5282ff 100%);
+  z-index: 2;
+}
+
+.banner-big-title {
+  padding: 14px 0 16px 16px;
+  font-family: "Inter";
+  position: relative;
+  align-self: flex-end;
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  z-index: 3;
+  color: #ffffff;
+  padding: 0 0 3px 14.6px;
+  width: 75%;
+}
+.banner-big img {
+  object-position: 0 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+@media (min-width: 1024px) {
+  .categoryArea {
+    padding-top: 180px;
+    background: white;
+  }
+  .doctor-position-banner {
+    gap: 32px 24px;
+  }
+  .banner-medium-smalls {
+    grid-template-columns: 1fr 2fr;
+    gap: 24px;
+  }
+  .banner-mediums {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+  }
+  .banner-medium {
+    height: 380px;
+    position: relative;
+  }
+  .banner-medium-title {
+    font-size: 33px;
+    line-height: 36.48px;
+  }
+  .banner-medium-button {
+    height: 40px;
+    width: 200px;
+    border-radius: 5px;
+    font-size: 19.5px;
+    line-height: 21.67px;
+  }
+  .banner-smalls {
+    gap: 24px 24px;
+  }
+  .banner-small {
+    height: 178px;
+    border-radius: 12px;
+  }
+  .banner-small img {
+    border-radius: 12px;
+  }
+  .banner-small-title {
+    width: 90%;
+    font-size: 26px;
+    line-height: 20px;
+    margin-bottom: 25px;
+  }
+  .banner-medium-left {
+    padding: 25px;
+    width: 100%;
+    background-color: transparent;
+    position: relative;
+    z-index: 1;
+  }
+  .banner-medium-right {
+    height: 75%;
+    width: 65%;
+    right: 0;
+    bottom: 0;
+    align-self: flex-end;
+    position: absolute;
+    z-index: 0;
+    padding: 0;
+  }
+  .banner-medium-right img {
+    object-fit: cover;
+    object-position: 10% 80%;
+  }
+  .banner-big {
+    height: 178px;
+    border-radius: 12px;
+  }
+  .banner-big-title {
+    font-size: 30px;
+    line-height: 20px;
+    padding: 0 0 30px 37px;
+  }
+  .banner-big img {
+    border-radius: 12px;
+  }
+}

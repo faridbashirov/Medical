@@ -3,16 +3,16 @@ import Cards from "../../Cards/Cards";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import "./Slider.css";
+import "./Country.css";
 import useLanguageFetch from "../../../Hooks/useLanguageFetch";
 import { useTranslation } from "react-i18next";
 import { Skeleton } from "antd";
 
-const Sliders = () => {
+const Country = () => {
   const {t}=useTranslation()
   const { data, loading, error } = useLanguageFetch('main/countries',localStorage.getItem("lang"));
   if (loading) {
-        return  <>
+        return  <section className="country-section">
                   <div className="container container-foreign">
                     <h3 className={"foreign-title"} >
                       {t("cheaphospital")}
@@ -39,20 +39,20 @@ const Sliders = () => {
                       <div class="swiper-button-next"></div>
                     </div>
                   </div>
-                </>
+                </section>
     }
     if (error) {
         return console.log("Slider:",error)
     }
     return (
-        <div>
+        <section>
             {data ? (
-                <>
+                <section className="country-section">
                   <div className="container container-foreign">
-                    <h3 className={"foreign-title"} >
+                    <h3 className={"country-title"} >
                       {t("cheaphospital")}
                     </h3>
-                    <p className={"foreign-subtitle"}>
+                    <p className={"country-subtitle"}>
                       {t("cheaphospital2")}
                     </p>
                   </div>
@@ -76,12 +76,12 @@ const Sliders = () => {
                       <div class="swiper-button-next"></div>
                     </div>
                   </div>
-                </>
+                </section>
             ) : (
                 <div></div>
             )}
-        </div>
+        </section>
     );
 };
 
-export default Sliders;
+export default Country;

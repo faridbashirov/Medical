@@ -1,12 +1,52 @@
-.doctor-search__header-subtitle {
-  font-family: "Gilroy";
-  font-weight: 500;
-  font-size: 22px;
-  line-height: 27px;
+.doctor-search__header-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
 }
-
+.doctor-search__header-subtitle {
+  margin: 8px 0 30px 0;
+  width: 75%;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+}
+.doctor-search__mobile-items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.doctor-search__container {
+  width: 94%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.doctor-search__button_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 32px 0 28px 0;
+}
+.clinic__item-footer {
+  margin-left: 5px;
+}
+.doctor-search__button {
+  border-radius: 5.72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  font-size: 12.3px;
+  font-weight: 500;
+  line-height: 14.91px;
+  text-align: center;
+}
 .doctor-search_item {
-  width: 96%;
+  width: 100%;
   height: 228px;
   background: #5282ff;
   border-radius: 19px;
@@ -18,7 +58,6 @@
   color: #fff;
   cursor: pointer;
 }
-
 .doctor-search_item img {
   width: 60px;
   height: 60px;
@@ -50,60 +89,85 @@
   line-height: 26px;
   text-align: center;
 }
-.doctor-search__desc {
-  font-family: "Gilroy";
+.doctor-search__desc_first {
+  font-size: 12.45px;
   font-weight: 400;
-  margin-top: 20px;
-  font-size: 28px;
-  line-height: 34px;
+  line-height: 14.94px;
+  padding: 0px 0 6px 0;
+  text-align: center;
 }
-.doctor-search__desc span {
-  text-transform: uppercase;
+.doctor-search__desc_second {
+  font-size: 16.21px;
+  font-weight: 500;
+  line-height: 19.66px;
+  padding-bottom: 20px;
+  text-align: center;
 }
-.doctor-search__desc p {
-  margin: 0;
-}
-
-@media (max-width: 756px) {
-  .doctor-search-footer {
-    margin-top: 3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .doctor-search__desc {
-    font-size: 12px;
-    line-height: 15px;
-    margin-top: 28px;
-    text-align: center;
-  }
-  .doctor-search__desc p:last-child {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    margin-top: 6px;
-  }
-  .doctor-search__desc p:last-child span {
-    color: #5282ff;
-  }
-  .doctor-search__header-subtitle {
-    font-size: 14px;
-    line-height: 17px;
-    width: 219px;
-  }
-  .doctor-search_item-desc {
-    font-size: 18px;
-    line-height: 26px;
-  }
-}
-
 .doctorcarousel {
   width: 100%;
 }
 
-@media (width: 1024px) {
-  .top-clinic__header-btns {
-    align-items: flex-end;
+@media (min-width: 1024px) {
+  .doctor-search .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .doctor-search .container .doctor-search__header-title {
+    order: 0;
+    width: 100%;
+    font-size: 32px;
+    line-height: 46.55px;
+    margin: 38px 0 8px 0;
+  }
+  .doctor-search .container .doctor-search__header-subtitle {
+    order: 1;
+    width: 70%;
+    margin: 0;
+    align-self: flex-end;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 26.69px;
+  }
+  .doctor-search .container .doctor-search__button_container {
+    order: 2;
+    width: 20%;
+    margin: 0;
+    align-self: flex-start;
+    justify-content: flex-end;
+  }
+  .doctor-search .container .doctorcarousel {
+    order: 3;
+    width: 100%;
+    margin: 38px 0 0px 0;
+  }
+  .doctor-search .container .doctor-search__desc_first {
+    order: 4;
+    width: 100%;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 33.6px;
+    padding: 26px 0 2px 0;
+    text-align: left;
+  }
+  .doctor-search .container .doctor-search__desc_second {
+    order: 5;
+    width: 100%;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 33.6px;
+    padding-bottom: 50px;
+    text-align: left;
+  }
+  .doctor-search__mobile-items {
+    display: none;
+  }
+  .doctor-search__button {
+    min-width: 240px;
+    border-radius: 5px;
+    font-size: 20px;
+    line-height: 24.26px;
+    padding: 20px 24px;
   }
 }
 

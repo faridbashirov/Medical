@@ -1,11 +1,12 @@
 import React from 'react'
 import "./CategoryArea.css"
-import rectangle from "../../../assets/Images/Rectangle-103.png"
 import hospitaldetail from "../../../assets/Images/hospital-detail/hospital-detail-1.jpg"
 import useLanguageFetch from '../../../Hooks/useLanguageFetch';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import plastic from '../../../assets/Images/plastic surgeon.png';
+
 const CategoryArea = () => {
     const {t}=useTranslation()
     const navigate = useNavigate();
@@ -18,10 +19,10 @@ const CategoryArea = () => {
         return console.log("CategoryArea:",error)
     }
     return (
-        <div>
+        <section className='categoryArea'>
             {data ? (
                 <>
-                    <div style={{ paddingTop: "40px" }} className="container search-container">
+                    {/* <div className="container search-container">
                         <div className="grid">
                         <div className="box1 trans ">
                             <div className="box1_2">
@@ -58,7 +59,7 @@ const CategoryArea = () => {
                             
                             }} id="_box2" className="box2 trans">
                             <p style={{position:"absolute",zIndex:"10",bottom:"0px",left:"15px"}}>{item?.name} </p>
-                            <img src={rectangle} style={{zIndex:"0",position:"absolute",width:"100%",bottom:"0"}} alt="" />
+                            <img src={item?.image} style={{zIndex:"0",position:"absolute",width:"100%",height: "100%",objectFit: 'cover',bottom:"0"}} alt="" />
                         </div>
                         })}
                         </div>
@@ -130,12 +131,103 @@ const CategoryArea = () => {
                             })} className="bgDoctor trans" >
                         <span>{data[8]?.name}</span>
                         </div>
+                    </div> */}
+                    <div className="container search-container">
+                        <div className='doctor-position-banner'>
+                            <div className='banner-medium-smalls'>
+                                <div className='banner-medium'>
+                                    <div className='banner-medium-left'>
+                                        <p className='banner-medium-title'>{data[1]?.name}</p>
+                                        <Button onClick={()=> navigate({
+                                        pathname: "/hospitals",
+                                        search: `?type=service&name=${data[1]?.name}`,
+                                        })}
+                                        className='banner-medium-button'
+                                            type="primary"
+                                        >
+                                            {t("seemore")}
+                                        </Button>
+                                    </div>
+                                    <div className='banner-medium-right'>
+                                        <img src={plastic} alt="" />
+                                    </div>
+                                </div>
+                                <div className='banner-smalls'>
+                                    {data.filter((item,index)=> index <4).map((item,index)=>{
+                                        return  <div key={index} className='banner-small' onClick={()=> navigate({
+                                        pathname: "/hospitals",
+                                        search: `?type=service&name=${item?.name}`,
+                                        })}>
+                                        <p className='banner-small-title'>{item?.name}</p>
+                                        <img src={item?.image} alt="" />
+                                    </div>
+                                    })}
+                                </div>
+                            </div>
+                            <div className='banner-mediums'>
+                                <div className='banner-medium'>
+                                    <div className='banner-medium-left'>
+                                        <p className='banner-medium-title'>{data[1]?.name}</p>
+                                        <Button onClick={()=> navigate({
+                                        pathname: "/hospitals",
+                                        search: `?type=service&name=${data[1]?.name}`,
+                                        })}
+                                        className='banner-medium-button'
+                                            type="primary"
+                                        >
+                                            {t("seemore")}
+                                        </Button>
+                                    </div>
+                                    <div className='banner-medium-right'>
+                                        <img src={plastic} alt="" />
+                                    </div>
+                                </div>
+                                <div className='banner-medium'>
+                                    <div className='banner-medium-left'>
+                                        <p className='banner-medium-title'>{data[1]?.name}</p>
+                                        <Button onClick={()=> navigate({
+                                        pathname: "/hospitals",
+                                        search: `?type=service&name=${data[1]?.name}`,
+                                        })}
+                                        className='banner-medium-button'
+                                            type="primary"
+                                        >
+                                            {t("seemore")}
+                                        </Button>
+                                    </div>
+                                    <div className='banner-medium-right'>
+                                        <img src={plastic} alt="" />
+                                    </div>
+                                </div>
+                                <div className='banner-medium'>
+                                    <div className='banner-medium-left'>
+                                        <p className='banner-medium-title'>{data[1]?.name}</p>
+                                        <Button onClick={()=> navigate({
+                                        pathname: "/hospitals",
+                                        search: `?type=service&name=${data[1]?.name}`,
+                                        })}
+                                        className='banner-medium-button'
+                                            type="primary"
+                                        >
+                                            {t("seemore")}
+                                        </Button>
+                                    </div>
+                                    <div className='banner-medium-right'>
+                                        <img src={plastic} alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='banner-big'>
+                                <p className='banner-big-title'>{data[1]?.name}</p>
+                                <img src={data[1]?.image} alt="" />
+                            </div>
+                        </div>
                     </div>
                 </>
             ) : (
                 <div></div>
             )}
-        </div>
+        </section>
     );
 }
 

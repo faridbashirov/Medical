@@ -1,7 +1,13 @@
 .discount-slider {
   position: relative;
 }
-
+.bestSeller-title {
+  padding: 14.44px 0 16px 0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14.52px;
+  text-transform: capitalize;
+}
 .discount-slider swiper-container {
   padding: 0px;
 }
@@ -21,5 +27,10 @@
   }
   .discount-slider .swiper-button-next {
     display: flex;
+  }
+  .bestSeller-title {
+    padding-top: 54px;
+    font-size: 32px;
+    line-height: 46.55px;
   }
 }

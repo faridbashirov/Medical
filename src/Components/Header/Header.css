@@ -4,6 +4,39 @@
   align-items: center;
   gap: 15px;
 }
+.currency {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1.5px solid #f6f6f6;
+  border-radius: 50%;
+  background-color: #f6f6f6;
+}
+.currency-card {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+.currency-card span {
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+}
+.currency span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 16.98px;
+  color: black;
+  text-align: center;
+  align-self: center;
+  padding: 0;
+  margin: 0;
+}
 .language-dropdown,
 .currency-dropdown {
   position: relative;
@@ -29,7 +62,7 @@
 .textMed {
   font-weight: 500;
   color: white;
-  font-size: 25px;
+  font-size: 18px;
 }
 .header {
   height: 10vh;
@@ -47,6 +80,20 @@
   }
   .textMed {
     font-weight: 800;
-    font-size: 45px;
+    font-size: 26px;
+  }
+
+  .button-header {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24.26px;
+    padding: 17px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff !important;
+    color: #5282ff !important;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
   }
 }

@@ -1,11 +1,103 @@
-.top-clinic {
-  background-color: #f8f8f8;
-  padding: 40px 0;
+.top-clinic__carousel {
+  display: none;
+}
+.top-clinic__mobile-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+.top-clinic__item-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 16px 0 0 12px;
+}
+.top-clinic__item-footer-subtitle img {
+  width: 11px;
+  height: 11px;
+}
+.top-clinic__item-footer-subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+}
+.top-clinic__item-footer-subtitle span {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+  color: #828282;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.top-clinic__item-footer-title {
+  padding: 5px 0 10px 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.41px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.top-clinic__item-footer-stars {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+}
+.top-clinic__location {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.top-clinic__item-footer-stars span {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+}
+.top-clinic-stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.top-clinic__button {
+  border-radius: 5.72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  font-size: 12.3px;
+  font-weight: 500;
+  line-height: 14.91px;
+}
+.top-button__active,
+.top-button__passive {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.98px;
+  border-radius: 2.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.top-button__active {
+  padding: 6px 16px;
+}
+.top-button__passive {
+  color: black;
+}
+.d-mobile-block {
+  display: block;
 }
 .top-clinic__header-title {
-  font-size: 38px;
-  line-height: 47px;
-  margin: 0 0 25px 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+  margin: 22px 0 18px 0;
 }
 .top-clinic__header-btns {
   display: flex;
@@ -15,37 +107,20 @@
 .top-clinic__header-right-btns {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
-.right-btn-primary {
-  background-color: #5282ff;
-  font-size: 20px;
-  height: 48px;
-  font-family: "Inter";
-  line-height: 24px;
-  text-transform: capitalize;
-}
-.right-btn-link {
-  font-family: "Gilroy";
-  font-size: 20px;
-  line-height: 24px;
-  color: #000000;
-  display: flex;
-  align-items: center;
-  text-transform: capitalize;
-  gap: 5px;
-}
-.top-clinic__header-left {
-  background-color: #5282ff;
-  height: 57px;
-  font-family: "Gilroy";
-  font-size: 20px;
-  line-height: 24px;
-}
+
 .top-clinic__item-top {
   border-radius: 10px;
-  width: 96%;
+  width: 100%;
   height: 345px;
   position: relative;
+}
+.top-clinic__button_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 45px 0 30px 0;
 }
 @media (max-width: 768px) {
   .top-clinic__item-top {
@@ -78,7 +153,7 @@
   bottom: -13px;
   border-left: 24px solid transparent;
   border-right: 24px solid transparent;
-  border-top: 14px solid #f00;
+  border-top: 14px solid #fa1323;
 }
 .top-clinic__item-heart {
   position: absolute;
@@ -112,57 +187,19 @@
   font-size: 22px;
   line-height: 27px;
   text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .clinic__item-footer-stars {
   display: flex;
   gap: 10px;
 }
-.top-clinic__mobile-items {
-  display: none;
-}
-.d-mobile-block {
-  display: none;
-}
 
-@media (max-width: 756px) {
-  /* .top-clinic__header-title{
-        font-size: 18px;
-        line-height: 22px;
-    } */
-  .right-btn-primary {
-    height: 32px;
-    font-size: 14px;
-    line-height: 17px;
-  }
-  .right-btn-link {
-    font-size: 14px;
-    line-height: 17px;
-  }
-  .top-clinic__carousel {
-    display: none;
-  }
-  .top-clinic__mobile-items {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
-  }
-  .d-mobile-block {
-    display: block;
-  }
-  .top-clinic__header-left {
-    font-size: 14px;
-    line-height: 17px;
-    height: 35px;
-  }
-}
 .top-clinic_item {
-  width: 100% !important;
+  width: 94%;
   cursor: pointer;
-}
-
-.top-clinic_item:hover {
-  transform: scale(1);
+  margin: auto;
 }
 .ant-rate {
   font-size: 15px !important;
@@ -170,4 +207,105 @@
 
 .top-clinic__carousel {
   position: relative;
+}
+
+@media (min-width: 1024px) {
+  .top-clinic {
+    background-color: #f8f8f8;
+    padding-bottom: 53px;
+  }
+  .top-clinic__carousel {
+    display: block;
+  }
+  .top-clinic .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .top-clinic .container .top-clinic__header-title {
+    margin: 22px 0 0 0;
+    width: 80%;
+    order: 0;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 46.55px;
+  }
+  /* .top-clinic .container .top-clinic__header-btns {
+    width: 75%;
+    order: 1;
+  } */
+  .top-clinic .container .top-clinic__button_container {
+    width: 20%;
+    order: 1;
+    align-self: flex-end;
+    justify-content: flex-end;
+    margin: 0;
+  }
+  .top-clinic .container .top-clinic__carousel {
+    width: 100%;
+    order: 2;
+    margin-top: 50px;
+  }
+  .top-clinic__button {
+    min-width: 240px;
+    border-radius: 5px;
+    font-size: 20px;
+    line-height: 24.26px;
+    padding: 20px 24px;
+  }
+  .top-clinic__mobile-items {
+    display: none;
+  }
+  .top-button__active,
+  .top-button__passive {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24.2px;
+    border-radius: 5px;
+  }
+  .top-button__active {
+    padding: 20px 24px;
+  }
+  .top-clinic_item {
+    width: 100%;
+  }
+  .top-clinic__item-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 17px 0 0 7px;
+  }
+  .top-clinic__item-footer-subtitle img {
+    width: 15px;
+    height: 15px;
+  }
+  .top-clinic__item-footer-subtitle {
+    gap: 12px;
+  }
+  .top-clinic__item-footer-subtitle span {
+    font-size: 17px;
+    line-height: 21px;
+  }
+  .top-clinic__item-footer-title {
+    padding: 8px 0 12px 0;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: left;
+    width: 100%;
+  }
+  .top-clinic__item-footer-stars {
+    gap: 12px;
+  }
+  .top-clinic__item-footer-stars span {
+    font-size: 17px;
+    line-height: 21px;
+  }
+  .top-clinic-stars svg {
+    width: 17px;
+    height: 17px;
+  }
+  .top-clinic__location {
+    padding-bottom: 1px;
+  }
 }

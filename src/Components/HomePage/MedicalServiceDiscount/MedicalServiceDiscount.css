@@ -1,22 +1,16 @@
 .slider-second-desktop-version {
   height: 110%;
-  width: 85%;
+  width: var(--desktop);
   margin: 0 auto;
   position: relative;
   z-index: 1;
 }
 .slider-second-mobile-version {
-  width: 90%;
+  width: var(--mobile);
   margin: 0 auto;
-}
-.containerSliderSecondsNew {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 swiper-slide {
   position: relative;
-  padding: 10px 0;
   z-index: 1000;
 }
 swiper-container {
@@ -58,7 +52,4 @@ swiper-container {
 }
 
 @media (min-width: 1024px) {
-  swiper-container {
-    padding: 0px 10px;
-  }
 }

@@ -15,107 +15,103 @@
   padding-top: 30px;
 }
 
-.userForm{
-    border: 1px solid #ebebeb;
-    border-radius: 5px !important;
-    padding: 40px;
+.userForm {
+  border: 1px solid #ebebeb;
+  border-radius: 5px !important;
+  padding: 40px;
 }
 
 .menuNav > ul > li:hover {
   background-color: #f2f5ff;
   border-radius: 5px !important;
 }
-.menuNav>ul{
-    padding-left: 0 !important;
+.menuNav > ul {
+  padding-left: 0 !important;
 }
-
 
 .inputName {
   background-color: #f9f9f9 !important;
   border: 1px solid #e0e0e0 !important;
- border-radius: 0 !important;
- padding: 10px 15px;
+  border-radius: 0 !important;
+  padding: 10px 15px;
 }
-.lastInputName{
-    background-color: #f9f9f9 !important;
-    border: 1px solid #e0e0e0 !important;
-   border-radius: 0 !important;
-   padding: 10px 15px;
+.lastInputName {
+  background-color: #f9f9f9 !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 0 !important;
+  padding: 10px 15px;
 }
 
-.emailInput{
-    background-color: #f9f9f9 !important;
-    border: 1px solid #e0e0e0 !important;
-   border-radius: 0 !important;
-   padding: 10px 15px;
+.emailInput {
+  background-color: #f9f9f9 !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 0 !important;
+  padding: 10px 15px;
 }
-.passwordInput{
-    background-color: #f9f9f9 !important;
-    border: 1px solid #e0e0e0 !important;
-   border-radius: 0 !important;
-   padding: 10px 15px;
+.passwordInput {
+  background-color: #f9f9f9 !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 0 !important;
+  padding: 10px 15px;
 }
-.datePicker{
-    background-color: #f9f9f9 !important;
-    border: 1px solid #e0e0e0 !important;
-   border-radius: 0 !important;
-   padding: 10px 15px;
-   width: 100%;
+.datePicker {
+  background-color: #f9f9f9 !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 0 !important;
+  padding: 10px 15px;
+  width: 100%;
 }
 .phone-select .ant-select-selector {
-    height: 44px !important; /* Set the desired height */
-    line-height: 40px; /* Set the same value as height for vertical alignment */
+  height: 44px !important; /* Set the desired height */
+  line-height: 40px; /* Set the same value as height for vertical alignment */
 }
 @media (max-width: 756px) {
-    
-
 }
-@media(max-width:991px){
-    .displayGrid {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 30px;
-    }
-    .container{
-        width: 90% !important;
-    }
-    
-    .userForm{
-        grid-row:1;
-        padding: 10px;
-    }
-    .menuNav {
-        grid-row:2;
-    }
-}
-
-@media(min-width:1295px) and (max-width:1451px){
-    .displayGrid{
-        /* grid-template-columns: minmax(auto, 2fr) minmax(auto, 1fr); */
-        gap: 0px;
-        grid-template-columns: 35% 65% !important;
-    }
-}
-.displayGrid .card-body{
+@media (max-width: 991px) {
+  .displayGrid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+  }
+  .container {
     width: 90% !important;
+  }
+
+  .userForm {
+    grid-row: 1;
+    padding: 10px;
+  }
+  .menuNav {
+    grid-row: 2;
+  }
 }
-@media(min-width:1025px) and (max-width:1294px){
-    .displayGrid{
-        /* grid-template-columns: minmax(auto, 2fr) minmax(auto, 1fr); */
-        gap: 0px;
-        grid-template-columns: 35% 65% !important;
-    }
-    .displayGrid .card-body{
-        padding-left: 100px !important;
-    }
-    
-    /* .cardReviewDoctors a,
+
+@media (min-width: 1295px) and (max-width: 1451px) {
+  .displayGrid {
+    /* grid-template-columns: minmax(auto, 2fr) minmax(auto, 1fr); */
+    gap: 0px;
+    grid-template-columns: 35% 65% !important;
+  }
+}
+.displayGrid .card-body {
+  width: 90% !important;
+}
+@media (min-width: 1025px) and (max-width: 1294px) {
+  .displayGrid {
+    /* grid-template-columns: minmax(auto, 2fr) minmax(auto, 1fr); */
+    gap: 0px;
+    grid-template-columns: 35% 65% !important;
+  }
+  .displayGrid .card-body {
+    padding-left: 100px !important;
+  }
+
+  /* .cardReviewDoctors a,
     .cardReviewDoctors p,
     .cardReviewDoctors span{
         font-size: 10px !important;
     } */
-    
 }
 
-.ant-tabs-tab-btn{
-    font-size: 15px !important;
+.ant-tabs-tab-btn {
+  font-size: 15px;
 }

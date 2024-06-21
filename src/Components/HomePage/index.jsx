@@ -1,8 +1,8 @@
-import Sliders from "./Slider";
-import SliderSecond from "./SliderSecond";
-import SliderThird from "./SliderThird";
+import Country from "./Country";
+import MedicalServiceDiscount from "./MedicalServiceDiscount";
+import SpecialOffers from "./SpecialOffers";
 import "../HomePage/HomePage.css";
-import DiscoundSlider from "./DiscoundSlider";
+import BestSeller from "./BestSeller";
 import TopClinic from "./TopClinic";
 import DoctorSearch from "./DoctorSearch";
 import HomeReviews from "./HomeReviews";
@@ -24,10 +24,10 @@ const HomePage = () => {
       <CategoryArea/>
       <BestOffers/>
       {/* <YouWillLikeThis/> */}
-      <DiscoundSlider/>
-      <Sliders/>
-      <SliderSecond/>
-      <SliderThird/>
+      <BestSeller/>
+      <Country/>
+      <MedicalServiceDiscount/>
+      <SpecialOffers/>
       <TopClinic/>
       <DoctorSearch/>
       <HomeReviews/>

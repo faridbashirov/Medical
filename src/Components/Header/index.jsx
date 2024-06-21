@@ -4,9 +4,6 @@ import { LogoutOutlined } from "@ant-design/icons";
 import {Button, Dropdown, Space} from "antd";
 import russianFlag from "../../assets/Images/russianFlagIcon.png";
 import question from "../../assets/Images/question.png";
-import USD from "../../assets/Svg/usdIcon.svg";
-import EUO from "../../assets/Svg/GroupEuro.svg";
-import POU from "../../assets/Svg/GroupPound.svg";
 import azFlag from "../../assets/Svg/azFlag.svg";
 import absFlag from "../../assets/Svg/absFlag.svg";
 import LoginModal from "../LoginModal/LoginModal";
@@ -114,38 +111,25 @@ const Header = () =>{
   if(data){
     const itemsCurrencyNew = Object.keys(data).map((item, index) => ({
         label: (
-          <span
-            style={{
-              fontFamily: "Gilroy",
-              fontSize: "16px",
-              fontWeight: "600",
-              color: "black",
-            }}
-          >
-            {item}
-          </span>
+          <div className="currency-card">
+            <span>
+              {item}
+            </span>
+            <span>
+              {data[item].rate.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}
+            </span>
+          </div>
         ),
         key: index.toString(),
         icon: (
-          <span
-            style={{
-              fontFamily: "Gilroy",
-              fontSize: "14px",
-              fontWeight: "600",
-              color: "black",
-              width: '30px',
-              height: '30px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center',
-              border: '1,5px solid #F6F6F6',
-              borderRadius: '50%',
-              backgroundColor: '#F6F6F6',
-            }}
-          >
+          <div className="currency">
+            <span>
             {data[item].symbol}
           </span>
+          </div>
         )
       }));
     setItemsCurrency(itemsCurrencyNew)
@@ -169,7 +153,7 @@ const Header = () =>{
   
   const handleMenuClick = (e) => {
   const selectedCurrency = itemsCurrency.find(item => item.key === e.key);
-    localStorage.setItem("currency", selectedCurrency.label.props.children.toString().toUpperCase());
+    localStorage.setItem("currency", selectedCurrency.label.props.children[0].toString().toUpperCase());
     setCurrency(selectedCurrency);
 };
   const menuPropsFlag = {
@@ -249,8 +233,18 @@ const Header = () =>{
                             color: "white",
                           }}
                         >
-                          {currency?.label?.props?.children}
+                          {currency?.label?.props?.children[0]}
                         </span>
+                        {currency?.label && <span
+                          style={{
+                            fontFamily: "Gilroy",
+                            fontSize: "17.5px",
+                            fontWeight: "500",
+                            color: "white",
+                          }}
+                        >
+                          ({currency?.label?.props?.children[1]})
+                        </span>}
                       </Space>
                     </Button>
                   </Dropdown>
@@ -258,7 +252,7 @@ const Header = () =>{
                 <li className="language-dropdown">
                   <Dropdown style={{display:"flex"}} getPopupContainer={trigger => trigger.parentNode}  menu={menuPropsFlag}>
                     <Button type="text">
-                      <Space style={{display:"flex"}}>
+                      <Space className="currency-space">
                         {active?.icon}
                         {/* <span
                           style={{  
@@ -287,7 +281,7 @@ const Header = () =>{
                 </li>:""}
                 <li>
                  {user ? <Button
-                    className="button"
+                    className="button-header"
                     type="primary"
                     // icon={<ArrowRightOutlined className="Arrow" />}
                    
@@ -295,7 +289,7 @@ const Header = () =>{
                   >
                     {t("logout")}
                   </Button> : <Button
-                    className="button"
+                    className="button-header"
                     type="primary"
                     // icon={<ArrowRightOutlined className="Arrow" />}
                     
