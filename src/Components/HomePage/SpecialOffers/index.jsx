@@ -2,7 +2,7 @@ import React from "react";
 import CardThird from "../../CardThird/CardThird";
 import './SpecialOffers.css'
 import { Link } from "react-router-dom";
-import CardBannerTypeOne from '../../CardBanner/CardBannerTypeOne';
+import Small from '../../CardBanner/Small';
 import useLanguageFetch from "../../../Hooks/useLanguageFetch";
 import { useTranslation } from "react-i18next";
 import { Skeleton } from "antd";
@@ -64,7 +64,7 @@ const SpecialOffers = () => {
                         slides-per-view={4} rewind={true} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
                       >
                         {data.map((item,index)=>{
-                        return   <swiper-slide><Link to={item.link} key={index}><CardBannerTypeOne image={item.image} title={item.title}/></Link></swiper-slide>
+                        return   <swiper-slide><Link to={item.link} key={index}><Small image={item.image} title={item.title}/></Link></swiper-slide>
                       })}
                       </swiper-container>
                       <div class="swiper-button-prev"></div>

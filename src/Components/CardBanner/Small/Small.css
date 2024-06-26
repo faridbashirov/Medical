@@ -1,0 +1,348 @@
+/* TypeOne */
+.TypeOne {
+  height: 152.64px;
+  position: relative;
+  z-index: 1;
+  border-radius: 5px;
+  background-color: #5282ff;
+}
+.TypeOne .small-box {
+  min-height: 35%;
+  min-width: 35%;
+  border-radius: 50%;
+  background-color: #ff0000;
+  position: absolute;
+  z-index: 20;
+  bottom: 10%;
+  left: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #ffffff;
+}
+.TypeOne .small-description {
+  display: none;
+}
+.TypeOne .small-box-description {
+  padding: 11px 11px 0 11px;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 8.68px;
+  font-weight: 500;
+  line-height: 10.53px;
+  text-align: left;
+}
+.TypeOne .small-percantage {
+  font-size: 19.77px;
+  font-weight: 600;
+  line-height: 24.22px;
+  text-transform: capitalize;
+  padding: 0 11px 11px 11px;
+  text-align: center;
+}
+.TypeOne .small-title {
+  position: relative;
+  z-index: 3;
+  text-transform: capitalize;
+  padding: 13px 14px;
+  color: white;
+  background-color: transparent;
+  font-family: "Inter";
+  font-size: 14.14px;
+  font-weight: 700;
+  line-height: 15.63px;
+}
+.TypeOne .small-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 80% 10%;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.TypeOne .small-background-box {
+  background-color: white;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  z-index: 2;
+  width: 75%;
+  height: 75%;
+  border-radius: 100% 0 0 0;
+}
+/* TypeTwo */
+.TypeTwo {
+  height: 152.64px;
+  position: relative;
+  z-index: 1;
+  border-radius: 5px;
+  background-color: #ffc224;
+}
+.TypeTwo .small-box {
+  display: none;
+}
+.TypeTwo .small-description {
+  display: none;
+}
+.TypeTwo .small-background-box {
+  background-color: white;
+  position: absolute;
+  top: 30%;
+  right: 30%;
+  z-index: 2;
+  width: 75%;
+  height: 75%;
+  border-radius: 0 100% 0 0;
+}
+.TypeTwo .small-title {
+  position: relative;
+  z-index: 3;
+  text-transform: capitalize;
+  padding: 11px 20px;
+  width: 100%;
+  text-align: center;
+  color: #000000;
+  background-color: transparent;
+  font-family: "Inter";
+  font-size: 13.65px;
+  font-weight: 700;
+  line-height: 18.4px;
+}
+.TypeTwo .small-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 80% 15px;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+/* TypeThree */
+.TypeThree {
+  height: 152.64px;
+  position: relative;
+  z-index: 1;
+  border-radius: 5px;
+  background: #41c2de;
+}
+.TypeThree .small-box {
+  border-radius: 50%;
+  background-color: #ffc224;
+  min-height: 35%;
+  min-width: 35%;
+  position: absolute;
+  z-index: 20;
+  top: 8%;
+  left: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #ffffff;
+}
+.TypeThree .small-box-description {
+  padding: 11px 11px 0 11px;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 8.47px;
+  font-weight: 500;
+  line-height: 10.27px;
+  color: #000000;
+}
+.TypeThree .small-percantage {
+  color: #000000;
+  font-size: 12.94px;
+  font-weight: 600;
+  line-height: 15.85px;
+  text-align: center;
+  text-transform: capitalize;
+  padding: 0 11px 11px 11px;
+}
+.TypeThree .small-title-area {
+  position: absolute;
+  bottom: 8%;
+  z-index: 3;
+  text-transform: capitalize;
+  padding: 0 14px;
+  color: white;
+  background-color: transparent;
+  font-family: "Inter";
+}
+.TypeThree .small-description {
+  font-size: 8.02px;
+  font-weight: 700;
+  line-height: 10.82px;
+}
+.TypeThree .small-title {
+  font-size: 16.07px;
+  font-weight: 700;
+  line-height: 21.66px;
+}
+.TypeThree .small-image {
+  width: 70%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 10%;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+}
+.TypeThree .small-background-box {
+  display: none;
+}
+
+/* TypeFour */
+.TypeFour {
+  height: 152.64px;
+  position: relative;
+  z-index: 1;
+  border-radius: 5px;
+}
+.TypeFour .small-description {
+  display: none;
+}
+.TypeFour .small-box {
+  padding: 11px 6px;
+  border-radius: 50%;
+  background-color: transparent;
+  position: absolute;
+  z-index: 20;
+  top: 40%;
+  left: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #000000;
+}
+.TypeFour .small-box-description {
+  font-size: 10.93px;
+  font-weight: 600;
+  line-height: 13.39px;
+  text-transform: capitalize;
+}
+.TypeFour .small-percantage {
+  font-size: 23.42px;
+  font-weight: 600;
+  line-height: 28.69px;
+  text-transform: capitalize;
+}
+.TypeFour .small-title {
+  width: 100%;
+  padding: 7px 10px;
+  color: white;
+  text-transform: capitalize;
+  background-color: #56c661;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16.07px;
+  font-weight: 600;
+  line-height: 19.68px;
+  text-align: center;
+  border-radius: 5px 5px 0 0;
+}
+.TypeFour .small-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 30% 20px;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.TypeFour .small-background-box {
+  display: none;
+}
+.TypeFour .small-title-area {
+  position: relative;
+  z-index: 3;
+}
+
+@media (min-width: 1024px) {
+  .TypeOne,
+  .TypeTwo,
+  .TypeThree,
+  .TypeFour {
+    height: 285px;
+  }
+  /* TypeOne */
+  .TypeOne .small-box {
+    padding: 0;
+  }
+  .TypeOne .small-box-description {
+    font-size: 16.27px;
+    line-height: 19.73px;
+    padding: 18px 16px 0 16px;
+  }
+  .TypeOne .small-percantage {
+    font-size: 37.04px;
+    line-height: 45.37px;
+    padding: 0 16px 18px 16px;
+  }
+  .TypeOne .small-title {
+    padding: 26px 24px;
+    font-size: 26.48px;
+    line-height: 29.27px;
+  }
+  .TypeOne .small-image {
+    object-position: initial;
+  }
+  .TypeTwo .small-title {
+    font-size: 25.57px;
+    line-height: 34.47px;
+  }
+
+  /* TypeThree */
+  .TypeThree .small-box-description {
+    font-size: 15.81px;
+    line-height: 19.18px;
+  }
+  .TypeThree .small-percantage {
+    font-size: 24.15px;
+    line-height: 29.59px;
+  }
+  .TypeThree .small-title-area {
+    padding: 0 21px;
+  }
+  .TypeThree .small-description {
+    font-size: 14.98px;
+    line-height: 20.19px;
+  }
+  .TypeThree .small-title {
+    font-size: 30px;
+    line-height: 40.44px;
+  }
+  /* TypeFour */
+  .TypeFour .small-title {
+    font-size: 24px;
+    line-height: 26.75px;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 10px;
+  }
+  .TypeFour .small-image {
+    border-radius: 10px;
+  }
+  .TypeFour .small-box {
+    padding: 16px 12px;
+  }
+  .TypeFour .small-box-description {
+    font-size: 20.41px;
+    line-height: 25px;
+  }
+  .TypeFour .small-percantage {
+    font-size: 43.73px;
+    line-height: 53.57px;
+  }
+}

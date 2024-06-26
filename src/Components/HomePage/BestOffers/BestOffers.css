@@ -10,15 +10,11 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 10.68px;
 }
-.slider-second-desktop-version
-  swiper-slide:nth-child(odd)
-  .CardBannerTypeOne-title {
+.slider-second-desktop-version swiper-slide:nth-child(odd) .small-title {
   background: #56c661;
 }
 
-.slider-second-desktop-version
-  swiper-slide:nth-child(even)
-  .CardBannerTypeOne-title {
+.slider-second-desktop-version swiper-slide:nth-child(even) .small-title {
   background: #ffc224;
 }
 @media (min-width: 1024px) {
@@ -28,7 +24,7 @@
     line-height: 46.55px;
   }
   .bestOffer-box {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(4, minmax(150px, 1fr));
     gap: 32px 20px;
   }
 }
