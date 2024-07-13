@@ -5,17 +5,23 @@ import './BestSeller.css'
 import { Button } from 'antd';
 import useLanguageFetch from '../../../Hooks/useLanguageFetch';
 import { useTranslation } from 'react-i18next';
-
+import typeOneImage from '../../../CardBanner/eac6ab1446 2-1.png'
+import typeTwoImage from '../../../CardBanner/a7fbac63bb 1.png'
+import typeThreeImage from '../../../CardBanner/def241ffe1 2.png'
+import typeFourImage from '../../../CardBanner/Rectangle 318.png'
+import ExtraLarge from '../../CardBanner/ExtraLarge';
+import Large from '../../CardBanner/Large';
+import Medium from '../../CardBanner/Medium';
+import SmallLong from '../../CardBanner/SmallLong';
 const BestSeller = () => {
   const {t}=useTranslation()
   const navigate = useNavigate();
   const { data, loading, error } = useLanguageFetch('main/best_seller',localStorage.getItem("lang"));
     if (loading) {
-        return  <>
-                </>
+        return  <></>
     }
     if (error) {
-        return console.log("DiscoundSlider:",error)
+        return console.log(error)
     }
     return (
         <div>
@@ -25,41 +31,49 @@ const BestSeller = () => {
                     <p className={"bestSeller-title"}>
                       {t("bestseller")}
                     </p>
-                    <div className="grid_3">
-                      {data.map((item,index)=>{
-                        return  <div className="trans" key={index}>
-                      <Link to={item.link}> <img  src={item.image} /></Link>
-                    </div>})}
+                  <div className='best-sellers-container'>
+                    <div className='small-longes-container'>
+                      {data?.map((item, index) => {
+                        if (item?.first_section) {
+                          return <SmallLong key={index} title={item?.title} image={item?.image}/>;
+                        }
+                        return null;
+                      })}
                     </div>
-                  </div>
-                  <div style={{ paddingTop: "10px" }} className="container discount-slider">
+                    <div className='larges-container'>
+                      {data?.map((item, index) => {
+                        if (item?.second_section) {
+                          return <Large key={index} title={item?.title} image={item?.image}/>;
+                        }
+                        return null;
+                      })}
+                    </div>
+                    <div className="mediums-container">
                     <swiper-container 
                       navigation-next-el=".swiper-button-next"
-                navigation-prev-el=".swiper-button-prev"
-                  slides-per-view={2} rewind={true} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
-                      breakpoints="{&quot;1024&quot;:{&quot;slidesPerView&quot;:4}}"
-                          >
-                          {data.map((item,index)=>{
-                        return  <swiper-slide><Link  to={item.link}> <div  className='slider-img trans' key={uuid()}>
-                        <img style={{width:"100%", height:"100%" ,borderRadius:"5%"}} src={item?.image} />
-                      </div></Link></swiper-slide>
+                      navigation-prev-el=".swiper-button-prev"
+                      slides-per-view={2} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+                      rewind={true}
+                      breakpoints="{&quot;1024&quot;:{&quot;slidesPerView&quot;:3,&quot;centeredSlides&quot;:false}}"
+                      centered-slides={false}
+                    >
+                      {data?.map((item, index) => {
+                        if (item?.three_section) {
+                          return <swiper-slide><Medium key={index} image={item?.image}/></swiper-slide>;
+                        }
+                        return null;
                       })}
-                      </swiper-container>
-                      <div class="swiper-button-prev"></div>
-                      <div class="swiper-button-next"></div>
-                  </div>
-                  <div className="container">
-                    <div className={"group18-section"}>
-                      <img className={"group-18"} src={data[1]?.image} />
-                      <Button onClick={()=> navigate({
-                          pathname:data[1]?.link ,
-                        })}
-                            className={"group-18-btn"}
-                            type="primary"
-                          >
-                              {t("seemore")}
-                      </Button>
+                    </swiper-container>
                     </div>
+                    <div className='extra-larges-container'>
+                      {data?.map((item, index) => {
+                        if (item?.four_section) {
+                          return <ExtraLarge key={index} image={item?.image}/>;
+                        }
+                        return null;
+                      })}
+                    </div>
+                  </div>
                   </div>
                 </section>
             ) : (

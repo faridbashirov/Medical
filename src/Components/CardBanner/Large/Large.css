@@ -1,0 +1,164 @@
+.large {
+  height: 125.47px;
+  position: relative;
+  z-index: 1;
+  border-radius: 5.02px;
+  width: 100%;
+  overflow: hidden;
+}
+.largeTypeOne .large-title-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 45%;
+  height: 100%;
+  margin-left: 24px;
+}
+.largeTypeOne .large-button {
+  border-radius: 4.6px;
+  padding: 4px 10px 2px 10px;
+  width: 103px;
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+}
+.largeTypeOne {
+  background: #5282ff;
+}
+.largeTypeTwo {
+  background: #ffc224;
+}
+.largeTypeOne .large-image-box {
+  z-index: 0;
+  position: absolute;
+  right: 0;
+  height: 100%;
+}
+.largeTypeOne .large-image {
+  height: 100%;
+  object-position: 20% 60%;
+  bottom: 0;
+}
+.largeTypeTwo .large-image-box {
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+}
+.largeTypeTwo .large-image {
+  height: 100%;
+  position: absolute;
+  object-position: 20% 60%;
+  bottom: 0;
+}
+.large .large-box {
+  border-radius: 50%;
+  background-color: transparent;
+  position: absolute;
+  z-index: 20;
+  bottom: 25%;
+  left: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #ffffff;
+}
+.largeTypeOne .large-box-description,
+.largeTypeOne .large-percantage {
+  display: none;
+}
+.largeTypeTwo .large-box-description {
+  text-align: center;
+  text-transform: capitalize;
+  color: #000000;
+  font-size: 15.93px;
+  font-weight: 600;
+  line-height: 19.52px;
+}
+.largeTypeTwo .large-percantage {
+  color: #000000;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 34.14px;
+  font-weight: 600;
+  line-height: 41.83px;
+}
+.largeTypeOne .title {
+  font-size: 18.15px;
+  font-weight: 600;
+  line-height: 22.24px;
+  color: white;
+}
+.largeTypeTwo .title {
+  display: none;
+}
+.largeTypeTwo .large-button {
+  border-radius: 4.6px;
+  padding: 4px 10px 2px 10px;
+  position: absolute;
+  right: 5%;
+  bottom: 35%;
+  min-width: 93px;
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+}
+
+.large .large-button span {
+  font-family: "Inter";
+  font-size: 10.45px;
+  font-weight: 500;
+  line-height: 11.61px;
+}
+
+@media (min-width: 1024px) {
+  .large {
+    height: 235px;
+    border-radius: 10px;
+  }
+  .largeTypeOne .large-title-button {
+    gap: 32px;
+  }
+  .large .large-box {
+    min-width: 30%;
+    min-height: 30%;
+    left: 1%;
+    bottom: 20%;
+  }
+  .largeTypeOne .title {
+    font-size: 34px;
+    line-height: 41.65px;
+  }
+  .largeTypeTwo .large-percantage {
+    font-size: 77.11px;
+    line-height: 94.46px;
+  }
+  .largeTypeTwo .large-box-description {
+    font-size: 35.98px;
+    line-height: 44.08px;
+  }
+  .largeTypeTwo .large-button {
+    border-radius: 10px;
+    padding: 3px 6px;
+    position: absolute;
+    right: 5%;
+    bottom: 40%;
+    min-width: 170px;
+    height: 50px;
+  }
+  .largeTypeOne .large-button {
+    border-radius: 10px;
+    padding: 3px 6px;
+    width: 190px;
+    height: 50px;
+  }
+  .large .large-button span {
+    font-size: 19.5px;
+    line-height: 21.67px;
+  }
+}

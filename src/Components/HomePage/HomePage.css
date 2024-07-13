@@ -348,7 +348,7 @@ li {
   background-color: #5282ff !important;
 }
 .footer-wrapper {
-  padding-top: 100px;
+  padding-top: 50px;
 }
 
 .rowGrid {
@@ -373,8 +373,7 @@ li {
   justify-content: flex-end;
   gap: 30px;
   align-items: center;
-  height: 10vh;
-  padding: 100px 0;
+  padding: 40px 0;
 }
 .pad-wrapper {
   padding-left: 30px;
@@ -447,7 +446,6 @@ li {
   color: #fff;
 }
 
-
 .foreign-btn-lg {
   color: #5282ff;
   width: 281px;
@@ -463,7 +461,6 @@ li {
   height: 51px;
   font-size: 14px;
   font-weight: 700;
-  display: none;
 }
 .footerIcons-header {
   display: none;
@@ -920,7 +917,7 @@ li {
   height: 111px !important;
 }
 .slider-second-mobile-version {
-  row-gap: 30px;
+  row-gap: 15px;
   column-gap: 15px;
   margin-bottom: 20px;
 }

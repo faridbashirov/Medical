@@ -1,4 +1,11 @@
 @font-face {
+  font-family: "Merriweather";
+  src: url("./Fonts/TypoGraphica/IBMPlexSansHebrew-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
   font-family: "Gilroy";
   src: url("./Fonts/gilroy/Gilroy-Thin.ttf") format("truetype");
   font-weight: 100;

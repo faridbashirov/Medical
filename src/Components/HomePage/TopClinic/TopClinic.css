@@ -115,6 +115,7 @@
   width: 100%;
   height: 345px;
   position: relative;
+  overflow: hidden;
 }
 .top-clinic__button_container {
   display: flex;
@@ -129,9 +130,10 @@
 }
 .top-clinic__item-img {
   border-radius: 10px;
-
-  width: 100%;
+  object-fit: cover;
   height: 100%;
+  width: 100%;
+  object-position: 0 0;
 }
 .top-clinic__item-num {
   position: absolute;
@@ -212,7 +214,7 @@
 @media (min-width: 1024px) {
   .top-clinic {
     background-color: #f8f8f8;
-    padding-bottom: 53px;
+    padding-bottom: 30px;
   }
   .top-clinic__carousel {
     display: block;
@@ -244,7 +246,7 @@
   .top-clinic .container .top-clinic__carousel {
     width: 100%;
     order: 2;
-    margin-top: 50px;
+    margin-top: 30px;
   }
   .top-clinic__button {
     min-width: 240px;

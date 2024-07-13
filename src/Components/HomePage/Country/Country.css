@@ -1,6 +1,7 @@
 .country-section {
   background: #f8f8f8;
   margin: 13px 0 24px 0;
+  padding-bottom: 20px;
 }
 .slider-center .swiper-button-prev,
 .slider-center .swiper-button-next {
@@ -21,7 +22,7 @@
 @media (min-width: 1024px) {
   .country-section {
     background: white;
-    margin: 0px 0 42.5px 0;
+    margin: 0px 0 10px 0;
   }
   .country-section swiper-slide:hover {
     /* transform: scale(1.03); */
@@ -32,13 +33,13 @@
     font-size: 32px;
     font-weight: 600;
     line-height: 46.55px;
-    padding: 47px 0 12px 0;
+    padding: 25px 0 4px 0;
   }
   .country-subtitle {
     font-size: 22px;
     font-weight: 500;
     line-height: 26.69px;
-    padding-bottom: 55px;
+    padding-bottom: 25px;
   }
   .slider-center .swiper-button-prev,
   .slider-center .swiper-button-next {

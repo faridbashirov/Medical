@@ -60,9 +60,11 @@
   display: flex;
 }
 .textMed {
+  font-family: "Merriweather";
   font-weight: 700;
   color: white;
   font-size: 18px;
+  font-weight: 20px;
 }
 .header {
   height: 10vh;
@@ -79,7 +81,6 @@
     display: none;
   }
   .textMed {
-    font-weight: 700;
     font-size: 26px;
   }
 

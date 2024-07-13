@@ -1,0 +1,79 @@
+.medium {
+  height: 99px;
+  position: relative;
+  z-index: 1;
+  border-radius: 5.02px;
+}
+.medium .medium-box {
+  min-height: 45%;
+  min-width: 33%;
+  border-radius: 5.02px;
+  position: absolute;
+  z-index: 20;
+  top: 10%;
+  left: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #ffffff;
+}
+.medium .medium-box-description {
+  padding: 11px 11px 0 11px;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 8.68px;
+  font-weight: 500;
+  line-height: 10.53px;
+  text-align: left;
+}
+.medium .medium-percantage {
+  font-size: 19.77px;
+  font-weight: 600;
+  line-height: 24.22px;
+  text-transform: capitalize;
+  padding: 0 11px 11px 11px;
+  text-align: center;
+}
+
+.medium .medium-image {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+}
+.medium .medium-background-box {
+  background-color: white;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  z-index: 2;
+  width: 75%;
+  height: 75%;
+  border-radius: 100% 0 0 0;
+}
+
+@media (min-width: 1024px) {
+  .medium {
+    height: 235px;
+    border-radius: 10px;
+  }
+  .medium .medium-box {
+    padding: 0;
+    border-radius: 10px;
+  }
+  .medium .medium-box-description {
+    padding: 18px 16px 0 16px;
+    font-size: 20.41px;
+    line-height: 25px;
+  }
+  .medium .medium-percantage {
+    padding: 0 16px 18px 16px;
+    font-size: 43.73px;
+    line-height: 53.57px;
+  }
+}

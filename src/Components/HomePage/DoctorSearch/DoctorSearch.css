@@ -82,7 +82,6 @@
   padding: 60px;
 }
 .doctor-search_item-desc {
-  width: 158px;
   font-family: "Inter";
   font-weight: 600;
   font-size: 22px;
@@ -118,7 +117,7 @@
     width: 100%;
     font-size: 32px;
     line-height: 46.55px;
-    margin: 38px 0 8px 0;
+    margin: 20px 0 4px 0;
   }
   .doctor-search .container .doctor-search__header-subtitle {
     order: 1;
@@ -139,7 +138,7 @@
   .doctor-search .container .doctorcarousel {
     order: 3;
     width: 100%;
-    margin: 38px 0 0px 0;
+    margin: 25px 0 0px 0;
   }
   .doctor-search .container .doctor-search__desc_first {
     order: 4;
@@ -147,7 +146,7 @@
     font-size: 28px;
     font-weight: 400;
     line-height: 33.6px;
-    padding: 26px 0 2px 0;
+    padding: 20px 0 2px 0;
     text-align: left;
   }
   .doctor-search .container .doctor-search__desc_second {
@@ -156,7 +155,7 @@
     font-size: 28px;
     font-weight: 400;
     line-height: 33.6px;
-    padding-bottom: 50px;
+    padding-bottom: 25px;
     text-align: left;
   }
   .doctor-search__mobile-items {

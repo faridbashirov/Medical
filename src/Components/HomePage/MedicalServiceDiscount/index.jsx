@@ -19,12 +19,12 @@ const MedicalServiceDiscount = () => {
         <div>
             {data ? (
                 <section className="medicalServiceDiscount">
-                  <div className="container container-foreign">
+                  <div className="medicalServiceDiscount-container">
                     <h3 className={"foreign-title"}>
                         <Trans i18nKey="discount">
                         </Trans>
                       </h3>
-                    <p className={"foreign-subtitle"}>{t("discount2")}</p>
+                    <p className={"medical-service-subtitle"}>{t("discount2")}</p>
                   </div>
                   <div className="slider-second-desktop-version">
                     <swiper-container 
@@ -38,18 +38,20 @@ const MedicalServiceDiscount = () => {
                     </swiper-container>
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-button-next"></div>
-                    </div>
-                    <div className="slider-second-mobile-version"> 
-                  {data.map((item,index)=>{
-                        if (index <4) return     <CardsSecond key={index} p={item.name} p2="-40%" />
+                  </div>
+                  <div className="slider-second-mobile-version"> 
+                    {data.map((item,index)=>{
+                      if (index <4) return     <CardsSecond key={index} p={item.name} p2="-40%" />
                     })}
                   </div>
-                  <Button
-                      className={"foreign-btn-sm"}
-                      type={"primary"}
-                    >
-                      Посмотреть категории
-                  </Button>
+                  <div className="medical-service__button_container">
+                    <Button
+                        className={"medical-service__button"}
+                      >
+                        Посмотреть категории
+                    </Button>
+                  </div>
+                  
                 </section>
             ) : (
                 <div></div>

@@ -1,13 +1,49 @@
+.medicalServiceDiscount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--mobile);
+  margin: 0 auto;
+}
+.medicalServiceDiscount-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.medical-service__button_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0 15px 0;
+}
+.medical-service__button {
+  order: 1;
+  border-radius: 5.72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  font-size: 12.3px;
+  font-weight: 500;
+  line-height: 14.91px;
+  background-color: #1677ff;
+  color: #fff;
+}
+.medical-service-subtitle {
+  margin: 4px 0 23px 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+  width: 75%;
+}
 .slider-second-desktop-version {
   height: 110%;
-  width: var(--desktop);
-  margin: 0 auto;
+  width: 100%;
   position: relative;
   z-index: 1;
 }
 .slider-second-mobile-version {
-  width: var(--mobile);
-  margin: 0 auto;
+  width: 100%;
 }
 swiper-slide {
   position: relative;
@@ -52,4 +88,44 @@ swiper-container {
 }
 
 @media (min-width: 1024px) {
+  .medicalServiceDiscount {
+    width: var(--desktop);
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .medical-service-subtitle {
+    margin: 11px 0 0 0;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 26.69px;
+  }
+  .medicalServiceDiscount-container {
+    order: 0;
+    width: 80%;
+  }
+  .slider-second-mobile-version {
+    order: 3;
+  }
+  .slider-second-desktop-version {
+    order: 2;
+    margin-top: 25px;
+  }
+  .medical-service__button_container {
+    width: 20%;
+    order: 1;
+    align-self: flex-end;
+    justify-content: flex-end;
+    margin: 0;
+  }
+  .medical-service__button {
+    min-width: 240px;
+    border-radius: 5px;
+    font-size: 20px;
+    line-height: 24.26px;
+    padding: 20px 24px;
+    border-color: #5282ff;
+    background-color: white;
+    color: #5282ff;
+  }
 }

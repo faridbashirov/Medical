@@ -28,7 +28,7 @@ const BestOffers = () => {
                         {t("offer")}
                     </p>
                     <div className="bestOffer-box">
-                      <div className='TypeOne'>
+                      {/* <div className='TypeOne'>
                         <div className='small-title-area'>
                           <div className='small-title'>Пластическая Хирургия</div>
                         </div>
@@ -74,7 +74,7 @@ const BestOffers = () => {
                           <p className='small-percantage'>30%</p>
                         </div>
                         <img className='small-image' src={typeFourImage} alt="" />
-                      </div>
+                      </div> */}
                       {data.map((item,index)=>{
                         return   <Link to={item.link} key={index}><Small image={item.image} title={item.title}/></Link>
                       })}

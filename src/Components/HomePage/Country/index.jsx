@@ -45,8 +45,7 @@ const Country = () => {
         return console.log("Slider:",error)
     }
     return (
-        <section>
-            {data ? (
+            data ? (
                 <section className="country-section">
                   <div className="container container-foreign">
                     <h3 className={"country-title"} >
@@ -79,8 +78,7 @@ const Country = () => {
                 </section>
             ) : (
                 <div></div>
-            )}
-        </section>
+            )
     );
 };
 

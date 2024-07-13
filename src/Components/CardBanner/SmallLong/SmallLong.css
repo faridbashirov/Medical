@@ -1,0 +1,101 @@
+.small-long {
+  height: 199.14px;
+  position: relative;
+  z-index: 1;
+  border-radius: 5.02px;
+  background-color: #da3434;
+  overflow: hidden;
+}
+.small-long .small-title-area {
+  position: absolute;
+  bottom: 0;
+}
+.small-long .small-long-box {
+  min-width: 47.52px;
+  min-height: 47.52px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  position: absolute;
+  z-index: 20;
+  top: 10%;
+  left: 6%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #000000;
+}
+
+.small-long .small-long-box-description {
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 8.68px;
+  font-weight: 500;
+  line-height: 10.53px;
+  text-align: left;
+}
+.small-long .small-long-percantage {
+  font-size: 19.77px;
+  font-weight: 600;
+  line-height: 24.22px;
+  text-transform: capitalize;
+  text-align: center;
+}
+.small-long .small-long-title {
+  position: relative;
+  z-index: 15;
+  text-transform: capitalize;
+  padding: 13px 14px;
+  color: white;
+  background-color: transparent;
+  font-family: "Inter";
+  font-size: 16.02px;
+  font-weight: 700;
+  line-height: 21.59px;
+}
+.small-long .small-long-image {
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 7%;
+  z-index: 12;
+}
+.small-long .small-long-background-box {
+  background-color: white;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  z-index: 2;
+  width: 75%;
+  height: 75%;
+  border-radius: 100% 0 0 0;
+}
+
+@media (min-width: 1024px) {
+  .small-long {
+    height: 373px;
+    border-radius: 10px;
+  }
+  .small-long .small-long-box {
+    left: 5%;
+    min-width: 90px;
+    min-height: 90px;
+    padding: 0;
+  }
+  .small-long .small-long-box-description {
+    font-size: 16.27px;
+    line-height: 19.73px;
+    padding: 18px 16px 0 16px;
+  }
+  .small-long .small-long-percantage {
+    font-size: 37.04px;
+    line-height: 45.37px;
+    padding: 0 16px 18px 16px;
+  }
+  .small-long .small-long-title {
+    padding: 26px 24px;
+    font-size: 30px;
+    line-height: 40.44px;
+  }
+}

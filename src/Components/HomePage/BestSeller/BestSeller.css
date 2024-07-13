@@ -1,3 +1,88 @@
+.best-sellers-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 11.53px;
+}
+.mediums-container-new .swiper-button-prev,
+.mediums-container-new .swiper-button-next {
+  display: none;
+}
+.extra-larges-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 11.53px;
+}
+.mediums-container {
+  overflow: hidden;
+  width: 100%;
+}
+.small-longes-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 11.53px;
+}
+.mediums-container swiper-slide:nth-child(3n) {
+  background: #45ffe9;
+}
+.mediums-container swiper-slide:nth-child(3n) .medium-box,
+.mediums-container swiper-slide:nth-child(3n + 1) .medium-box {
+  background: #5282ff;
+}
+.mediums-container swiper-slide:nth-child(3n + 1) {
+  background: #bed62a;
+}
+.mediums-container swiper-slide:nth-child(3n + 2) {
+  background: #d6682a;
+}
+.mediums-container swiper-slide {
+  border-radius: 5.02px;
+}
+.mediums-container swiper-slide:nth-child(3n + 2) .medium-box {
+  background: #d6b02a;
+}
+.small-longes-container .small-long:nth-child(7n) {
+  background: #ffc224;
+}
+.small-longes-container .small-long:nth-child(7n + 1) {
+  background: #da3434;
+}
+.small-longes-container .small-long:nth-child(7n + 2) {
+  background: #41c2de;
+}
+.small-longes-container .small-long:nth-child(7n + 2) .small-long-box {
+  background: #ffc224;
+}
+.small-longes-container .small-long:nth-child(7n + 3) {
+  background: #bf4de8;
+}
+.small-longes-container .small-long:nth-child(7n + 3) .small-long-box {
+  background: #492683;
+  color: white;
+}
+.small-longes-container .small-long:nth-child(7n + 4) {
+  background: #4fd7b6;
+}
+.small-longes-container .small-long:nth-child(7n + 4) .small-long-box {
+  background: #ffc224;
+}
+.small-longes-container .small-long:nth-child(7n + 5) {
+  background: #5282ff;
+}
+.small-longes-container .small-long:nth-child(7n + 5) .small-long-box {
+  background: #ff0000;
+  color: white;
+}
+.small-longes-container .small-long:nth-child(7n + 6) {
+  background: #084bc2;
+}
+.small-longes-container .small-long:nth-child(7n + 6) .small-long-box {
+  background: #ffc224;
+}
+.larges-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 11.53px;
+}
 .discount-slider {
   position: relative;
 }
@@ -22,6 +107,22 @@
 }
 
 @media (min-width: 1024px) {
+  .bestSeller {
+    gap: 18px;
+  }
+  .extra-larges-container {
+    gap: 18px;
+  }
+  .small-longes-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .mediums-container swiper-slide {
+    border-radius: 10px;
+  }
+  .larges-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
   .discount-slider .swiper-button-prev {
     display: flex;
   }
@@ -29,7 +130,7 @@
     display: flex;
   }
   .bestSeller-title {
-    padding-top: 54px;
+    padding-top: 30px;
     font-size: 32px;
     line-height: 46.55px;
   }
