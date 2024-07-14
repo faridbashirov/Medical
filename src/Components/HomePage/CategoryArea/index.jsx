@@ -2,7 +2,7 @@ import React from 'react'
 import "./CategoryArea.css"
 import hospitaldetail from "../../../assets/Images/hospital-detail/hospital-detail-1.jpg"
 import useLanguageFetch from '../../../Hooks/useLanguageFetch';
-import { Button } from 'antd';
+import { Button, Skeleton } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import plastic from '../../../assets/Images/plastic surgeon.png';
@@ -12,8 +12,30 @@ const CategoryArea = () => {
     const navigate = useNavigate();
     const { data, loading, error } = useLanguageFetch('account/all_positions',localStorage.getItem("lang"));
     if (loading) {
-        return  <>
-                </>
+        return  <section className='categoryArea'>
+            <div className="container search-container">
+                        <div className='doctor-position-banner'>
+                            <div className='banner-medium-smalls'>
+                                <div className='banner-medium'>
+                                    <Skeleton.Image active style={{height: '100%', width: '100%'}}/>
+                                </div>
+                                <div className='banner-smalls'>
+                                    {[...Array(4)].map((_, index) => (
+                                    <div className='banner-small'></div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className='banner-mediums'>
+                                {[...Array(3)].map((_, index) => (
+                            <div className='banner-medium'>
+                                <Skeleton.Image active style={{height: '100%', width: '100%'}}/>
+                            </div>
+                      ))}
+                            </div>
+                            <div className='banner-big'></div>
+                        </div>
+                    </div>
+                </section>
     }
     if (error) {
         return console.log("CategoryArea:",error)

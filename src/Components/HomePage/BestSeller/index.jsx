@@ -2,7 +2,7 @@ import React from 'react';
 import uuid from 'react-uuid';
 import { Link, useNavigate } from 'react-router-dom';
 import './BestSeller.css'
-import { Button } from 'antd';
+import { Button, Skeleton } from 'antd';
 import useLanguageFetch from '../../../Hooks/useLanguageFetch';
 import { useTranslation } from 'react-i18next';
 import typeOneImage from '../../../CardBanner/eac6ab1446 2-1.png'
@@ -18,14 +18,41 @@ const BestSeller = () => {
   const navigate = useNavigate();
   const { data, loading, error } = useLanguageFetch('main/best_seller',localStorage.getItem("lang"));
     if (loading) {
-        return  <></>
+        return  <section className='bestSeller'>
+                  <div className="container">
+                    <p className={"bestSeller-title"}>
+                      {t("bestseller")}
+                    </p>
+                  <div className='best-sellers-container'>
+                    <div className='small-longes-container'>
+                      <Skeleton.Image active style={{height: '100%', width: '100%'}}/>
+                      <Skeleton.Image active style={{height: '100%', width: '100%'}}/>
+                      <Skeleton.Image active style={{height: '100%', width: '100%'}}/>
+                      <Skeleton.Image active style={{height: '100%', width: '100%'}}/>
+                    </div>
+                    <div className="mediums-container">
+                    <swiper-container 
+                      navigation-next-el=".swiper-button-next"
+                      navigation-prev-el=".swiper-button-prev"
+                      slides-per-view={2} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
+                      rewind={true}
+                      breakpoints="{&quot;1024&quot;:{&quot;slidesPerView&quot;:3,&quot;centeredSlides&quot;:false}}"
+                      centered-slides={false}
+                    >
+                      {[...Array(4)].map((_, index) => (
+                            <swiper-slide><Skeleton.Image active style={{height: '100%', width: '100%'}}/></swiper-slide>
+                      ))}
+                    </swiper-container>
+                    </div>
+                  </div>
+                  </div>
+                </section>
     }
     if (error) {
         return console.log(error)
     }
     return (
-        <div>
-            {data ? (
+        data ? (
                 <section className='bestSeller'>
                   <div className="container">
                     <p className={"bestSeller-title"}>
@@ -78,8 +105,7 @@ const BestSeller = () => {
                 </section>
             ) : (
                 <div></div>
-            )}
-        </div>
+            )
     );
 };
 

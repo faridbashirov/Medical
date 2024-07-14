@@ -3,6 +3,10 @@
   font-weight: 500;
   line-height: 14.56px;
 }
+.reviews-item__content {
+  display: grid;
+  grid-template-rows: 4fr 1fr;
+}
 .review__tabs .ant-tabs-tab .ant-tabs-tab-btn {
   color: #b9b9b9;
 }

@@ -6,22 +6,31 @@ import typeOneImage from '../../../CardBanner/eac6ab1446 2-1.png'
 import typeTwoImage from '../../../CardBanner/a7fbac63bb 1.png'
 import typeThreeImage from '../../../CardBanner/def241ffe1 2.png'
 import typeFourImage from '../../../CardBanner/Rectangle 318.png'
+import { Skeleton } from "antd";
 import './BestOffers.css'
 import Small from '../../CardBanner/Small';
 const BestOffers = () => {
   const {t}=useTranslation()
   const { data, loading, error } = useLanguageFetch('main/best_offer',localStorage.getItem("lang"));
   if (loading) {
-        return  <>
-                 <section>Loading....</section>
-                </>
+        return  <section className='bestOffer'>
+                  <div className="container">
+                    <p className={"bestOffer-title"}>
+                        {t("offer")}
+                    </p>
+                    <div className="bestOffer-box">
+                      {[...Array(4)].map((_, index) => (
+                            <Skeleton.Image active style={{height: '100%', width: '100%'}}/>
+                      ))}
+                    </div>
+                  </div>
+                </section>
     }
   if (error) {
     return console.log("BestOffers:",error)
   }
   return (
-    <section>
-          {data ? (
+          data ? (
                 <section className='bestOffer'>
                   <div className="container">
                     <p className={"bestOffer-title"}>
@@ -83,8 +92,7 @@ const BestOffers = () => {
                 </section>
             ) : (
                 <div></div>
-            )}
-    </section>
+            )
     );
 }
 
