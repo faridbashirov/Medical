@@ -6,6 +6,13 @@
 }
 
 @font-face {
+  font-family: "Alfa-Slab-One";
+  src: url("./Fonts/Alfa-Slab-One/AlfaSlabOne-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
   font-family: "Gilroy";
   src: url("./Fonts/gilroy/Gilroy-Thin.ttf") format("truetype");
   font-weight: 100;

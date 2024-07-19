@@ -41,6 +41,15 @@
 .currency-dropdown {
   position: relative;
 }
+.language-dropdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.language-dropdown .ant-space-item img {
+  width: 32px;
+  height: 32px;
+}
 .language-dropdown .ant-dropdown {
   left: -24px !important;
 }
@@ -60,11 +69,16 @@
   display: flex;
 }
 .textMed {
-  font-family: "Merriweather";
-  font-weight: 700;
-  color: white;
-  font-size: 18px;
+  font-family: "Alfa-Slab-One";
+  font-weight: 400;
+  font-size: 16px;
   font-weight: 20px;
+  letter-spacing: 1px;
+  color: #5282ff;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid white;
+  padding: 0 10px;
 }
 .header {
   height: 10vh;
@@ -81,7 +95,8 @@
     display: none;
   }
   .textMed {
-    font-size: 26px;
+    font-size: 22px;
+    font-weight: 400;
   }
 
   .button-header {

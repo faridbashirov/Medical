@@ -2,10 +2,10 @@ import React,{useEffect, useState} from "react";
 import {Link} from 'react-router-dom'
 import { LogoutOutlined } from "@ant-design/icons";
 import {Button, Dropdown, Space} from "antd";
-import russianFlag from "../../assets/Images/russianFlagIcon.png";
+import russianFlag from "../../assets/Svg/flags/RUS.svg";
 import question from "../../assets/Images/question.png";
-import azFlag from "../../assets/Svg/azFlag.svg";
-import absFlag from "../../assets/Svg/absFlag.svg";
+import azFlag from "../../assets/Svg/flags/AZE.svg";
+import absFlag from "../../assets/Svg/flags/USA.svg";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import userIcon from "../../assets/Svg/userlogin.svg"
@@ -43,7 +43,7 @@ const itemsFlag = [
     key: "1",
     icon: (
       <img
-        style={{ width: "30px", objectFit: "cover" }}
+        style={{ width: "32px", objectFit: "cover" }}
         src={azFlag}
       />
     ),
@@ -64,7 +64,7 @@ const itemsFlag = [
     key: "2",
     icon: (
       <img
-        style={{ width: "30px", objectFit: "cover" }}
+        style={{ width: "32px", objectFit: "cover" }}
         src={russianFlag}
       />
     ),
@@ -87,7 +87,7 @@ const itemsFlag = [
     key: "4 ",
     icon: (
       <img
-        style={{ width: "30px", objectFit: "cover" }}
+        style={{ width: "32px", objectFit: "cover" }}
         src={absFlag}
       />
     ),
