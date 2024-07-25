@@ -33,7 +33,7 @@ const MedicalServiceDiscount = () => {
                 slides-per-view={3.3} space-between={30} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
                         >
                         {data.map((item,index)=>{
-                      return     <swiper-slide><CardsSecond key={index} p={item.name} p2="-40%" /></swiper-slide>
+                      return     <swiper-slide><CardsSecond key={index} position={item.name} discount="-40%" /></swiper-slide>
                     })}
                     </swiper-container>
                     <div class="swiper-button-prev"></div>
@@ -41,7 +41,7 @@ const MedicalServiceDiscount = () => {
                   </div>
                   <div className="slider-second-mobile-version"> 
                     {data.map((item,index)=>{
-                      if (index <4) return     <CardsSecond key={index} p={item.name} p2="-40%" />
+                      if (index <4) return     <CardsSecond key={index} position={item.name} discount="-40%" />
                     })}
                   </div>
                   <div className="medical-service__button_container">

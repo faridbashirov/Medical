@@ -219,6 +219,9 @@
   .top-clinic__carousel {
     display: block;
   }
+  .top-clinic__item-img {
+    object-fit: fill;
+  }
   .top-clinic .container {
     display: flex;
     flex-wrap: wrap;

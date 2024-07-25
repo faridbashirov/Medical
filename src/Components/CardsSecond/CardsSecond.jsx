@@ -2,10 +2,10 @@ import React from "react";
 import "../CardsSecond/CardsSecond.css";
 
 
-const CardsSecond = ({ p,p2 }) => (
-  <div style={{display:"flex",alignItems:"center",justifyContent:"space-around"}} className="cardSecond trans">
-    <p style={{fontSize:"26px",fontWeight:"600"}}>{p}</p>
-    <p style={{fontSize:"20px",color:"#5282FF"}}>{p2}</p>
+const CardsSecond = ({ position,discount }) => (
+  <div className="cardSecond trans">
+    <p className="cardsSecond-position">{position}</p>
+    <p className="cardsSecond-discount">{discount}</p>
   </div>
 );
 
