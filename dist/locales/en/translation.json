@@ -8,6 +8,7 @@
   "Clinics":"Clinics",
     "Doctors":"Doctors",
     "Services":"Services",
+    "Countries": "Countries",
     "contact":"Contact with us",
     "Medical marketplace":"Medical marketplace",
     "searchinfo":"Procedure, disease, clinic, doctor",
@@ -167,7 +168,9 @@
     "nocomments":"There aren't any comments yet.",
     "seemore":"See more",
     "hospital":"Hospital",
-    "doctor":"Doctor"
+    "doctor":"Doctor",
+    "ouradvantages": "Our advantages",
+    "aboutus": "About Us"
 
     
     

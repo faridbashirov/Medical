@@ -8,6 +8,7 @@
     "Clinics":"Xəstəxanalar",
     "Doctors":"Həkimlər",
     "Services":"Xidmətlər",
+    "Countries": "Ölkələr",
     "contact":"Bizimlə əlaqə",
     "Medical marketplace":"Medical marketplace",
     "searchinfo":"Prosedur, xəstəlik, klinika, həkim",
@@ -166,7 +167,9 @@
     "nocomments":"Hələ heç bir şərh yoxdur.",
     "seemore":"Daha çox",
     "hospital":"Xəstəxana",
-    "doctor":"Həkim"
+    "doctor":"Həkim",
+    "ouradvantages": "Bizim üstünlüklərimiz",
+    "aboutus": "Haqqımızda"
 
 
 

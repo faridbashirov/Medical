@@ -8,6 +8,7 @@
     "Clinics":"Клиники",
     "Doctors":"Врачи",
     "Services":"Услуги",
+    "Countries": "Страны",
     "contact":"Связаться с нами",
     "Medical marketplace":"Медицинский маркетплейс",
     "searchinfo":"Процедура, заболевание, клинка, врач",
@@ -166,5 +167,7 @@
     "nocomments":"Комментариев пока нет.",
     "seemore":"Смотреть еще",
     "hospital":"Больница",
-    "doctor":"Врач"
+    "doctor":"Врач",
+    "ouradvantages": "Наши преимущества",
+    "aboutus": "О Нас"
 }

@@ -2,13 +2,9 @@ import React from 'react';
 import uuid from 'react-uuid';
 import { Link, useNavigate } from 'react-router-dom';
 import './BestSeller.css'
-import { Button, Skeleton } from 'antd';
+import { Skeleton } from 'antd';
 import useLanguageFetch from '../../../Hooks/useLanguageFetch';
 import { useTranslation } from 'react-i18next';
-import typeOneImage from '../../../CardBanner/eac6ab1446 2-1.png'
-import typeTwoImage from '../../../CardBanner/a7fbac63bb 1.png'
-import typeThreeImage from '../../../CardBanner/def241ffe1 2.png'
-import typeFourImage from '../../../CardBanner/Rectangle 318.png'
 import ExtraLarge from '../../CardBanner/ExtraLarge';
 import Large from '../../CardBanner/Large';
 import Medium from '../../CardBanner/Medium';

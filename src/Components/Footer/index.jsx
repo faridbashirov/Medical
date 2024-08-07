@@ -1,7 +1,7 @@
 import React from 'react';
-import facebook from "../../assets/Images/facebook.png";
-import vk from "../../assets/Images/vk.png";
-import instagram from "../../assets/Images/instagram.png";
+import facebook from "../../assets/Svg/facebook.svg";
+import vk from "../../assets/Svg/Vkontakte.svg";
+import instagram from "../../assets/Svg/Instagram.svg";
 import {Button} from "antd";
 import footerArrow from "../../assets/Svg/footer-arrow.svg"
 import { useTranslation } from 'react-i18next';

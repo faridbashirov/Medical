@@ -345,7 +345,8 @@
   text-decoration: none;
 }
 :root {
-  --desktop: 80%;
+  --big-desktop: 1100px;
+  --desktop: 85%;
   --mobile: 90%;
 }
 .overflowHidden {
@@ -372,10 +373,6 @@
     align-items: center;
     justify-content: center;
     font-size: 15px !important;
-  }
-  .footerIcons img {
-    width: 18px;
-    height: 18px;
   }
   .copyright {
     font-size: 12px;

@@ -10,8 +10,17 @@
   font-family: "Alfa-Slab-One";
 }
 
+.footer-social {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
 @media (min-width: 1024px) {
   .footer-textMed {
     font-size: 22px;
+  }
+  .footer-social {
+    width: 49px;
+    height: 49px;
   }
 }

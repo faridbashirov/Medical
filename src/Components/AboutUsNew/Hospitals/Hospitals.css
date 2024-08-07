@@ -1,0 +1,60 @@
+.sponsored-hospitals {
+  padding: 20px 0 40px 0;
+}
+.sponsored-hospitals-container {
+  width: var(--mobile);
+  margin: 0 auto;
+}
+.sponsored-hospitals .title h4 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17.15px;
+  text-align: center;
+}
+.sponsored-hospitals .title h5 {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  color: #2a353d;
+  padding: 2px 0 5px 0;
+}
+.sponsored-hospitals-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+}
+.sponsored-hospitals-list img {
+  object-fit: cover;
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .sponsored-hospitals {
+    padding: 45px 0 90px 0;
+  }
+  .sponsored-hospitals-container {
+    width: var(--desktop);
+  }
+  .sponsored-hospitals-list-box {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .sponsored-hospitals-list {
+    column-gap: 150px;
+    row-gap: 80px;
+  }
+  .sponsored-hospitals .title h4 {
+    font-size: 33px;
+    line-height: 36.48px;
+  }
+  .sponsored-hospitals .title h5 {
+    font-size: 20px;
+    line-height: 36.48px;
+    padding: 6px 0 67px 0;
+  }
+}
+@media (min-width: 1440px) {
+  .sponsored-hospitals-container {
+    width: var(--big-desktop);
+  }
+}

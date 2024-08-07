@@ -129,3 +129,8 @@ swiper-container {
     color: #5282ff;
   }
 }
+@media (min-width: 1440px) {
+  .medicalServiceDiscount {
+    width: var(--big-desktop);
+  }
+}

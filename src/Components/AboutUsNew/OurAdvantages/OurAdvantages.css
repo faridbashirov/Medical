@@ -1,0 +1,105 @@
+.our-advantages-container {
+  width: var(--mobile);
+  margin: 0 auto;
+}
+.our-advantages-container .title h4 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 15px;
+  text-align: center;
+  padding-bottom: 15px;
+}
+.our-advantages {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+.our-advantages .our-advantage:nth-child(1) div {
+  background-color: #5282ff;
+}
+.our-advantages .our-advantage:nth-child(2) div {
+  background-color: #faffde;
+}
+.our-advantages .our-advantage:nth-child(3) div {
+  background-color: #deffe9;
+}
+.our-advantages .our-advantage:nth-child(4) div {
+  background-color: #ffdeea;
+}
+.our-advantage:hover {
+  scale: 1.04;
+}
+.our-advantage:hover h6 {
+  color: #5282ff;
+}
+.our-advantage div {
+  height: 79px;
+  width: 100%;
+  border-radius: 5px;
+}
+.our-advantage h6 {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 9.62px;
+  text-align: center;
+}
+.our-advantage h6 {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 9.62px;
+  text-align: center;
+  padding: 12px 0 5px 0;
+}
+.our-advantage p {
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 10.54px;
+  text-align: center;
+  color: #8b8888;
+}
+.our-advantage div p {
+  font-size: 26.36px;
+  font-weight: 600;
+  line-height: 9.62px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #000000;
+}
+@media (min-width: 1024px) {
+  .our-advantages-container {
+    width: var(--desktop);
+  }
+  .our-advantages-container .title h4 {
+    font-size: 33px;
+    line-height: 36.48px;
+    padding-bottom: 34px;
+  }
+  .our-advantages {
+    gap: 30px;
+  }
+  .our-advantage div {
+    height: 300px;
+    border-radius: 20px;
+  }
+  .our-advantage h6 {
+    font-size: 33px;
+    line-height: 36.48px;
+    padding: 47px 0 0px 0;
+  }
+  .our-advantage p {
+    font-size: 20px;
+    line-height: 40px;
+  }
+  .our-advantage div p {
+    font-size: 100px;
+    line-height: 36.48px;
+  }
+}
+@media (min-width: 1440px) {
+  .our-advantages-container {
+    width: var(--big-desktop);
+  }
+}

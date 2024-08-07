@@ -10,12 +10,12 @@ import Hospitals from "./Components/Hospitals/Hospitals";
 import Doctors from "./Components/Doctors/Doctors";
 import HospitalsReviewsAll from './Components/HospitalReviewsAll/HospitalsReviewsAll'
 import DoctorsReviewsAll from "./Components/DoctorsReviewsAll/DoctorsReviewsAll";
-import FAQ from "./Components/FAQ/FAQ";
+import FAQ from "./Components/FAQ";
 import PrivacyPolicy from './Components/PrivacyPolicy/PrivacyPolicy'
 import ContactUs from "./Components/ContactUs/ContactUs";
 import HospitalDetail from "./Components/HospitalDetail";
 import DoctorDetail from "./Components/DoctorDetail/index.js";
-import AboutUs from "./Components/AboutUs/index.js";
+import AboutUs from "./Components/AboutUsNew";
 import PrivateRoute from "./Components/utils/PrivateRoute";
 import './main.css'
 import { register } from 'swiper/element/bundle';

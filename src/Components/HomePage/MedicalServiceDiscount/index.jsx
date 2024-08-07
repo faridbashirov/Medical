@@ -16,8 +16,7 @@ const MedicalServiceDiscount = () => {
         return console.log("CategoryArea:",error)
     }
     return (
-        <div>
-            {data ? (
+            data ? (
                 <section className="medicalServiceDiscount">
                   <div className="medicalServiceDiscount-container">
                     <h3 className={"foreign-title"}>
@@ -55,8 +54,7 @@ const MedicalServiceDiscount = () => {
                 </section>
             ) : (
                 <div></div>
-            )}
-        </div>
+            )
     );
 };
 
