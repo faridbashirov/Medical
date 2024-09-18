@@ -58,7 +58,7 @@
     "bron3":"Pulsuz rezervasiya",
     "bron4":"Rezervasiya etmək",
     "variant":"nəticə",
-    "hosbooking":"Rezervasyon zamanı <br/> saytda",
+    "hosbooking":"Rezervasyon zamanı saytda - {{percantage}}%",
     "hoslistbooking2":"Klinikada",
     "hoslistbooking3":"Klinikadan ucuz <br/> Sabit qiymətə indi bron edin, sonra ödəyin İlkin ödənişsiz PULSUZ ləğv. Klinika müqavilə bağlayıb və şərtlərə əməl etməyə borcludur",
     "hoslistbooking4":"Xidmətlərə baxın",

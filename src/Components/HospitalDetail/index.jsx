@@ -4,8 +4,7 @@ import BreadCrumbs from "../BreadCrumbs";
 import {infoButtons} from "./data.js";
 import Detail from "./Detail";
 import infoIcon from "../../assets/Svg/ambulans.svg"
-import InfoContent from "./InfoContent";
-import Categories from "./Categories";
+import HospitalInfoContent from "./HospitalInfoContent";
 import Reviews from "./Reviews";
 import Questions from "./Questions";
 import QualityRating from "./QualityRating";
@@ -17,11 +16,11 @@ import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import HospitalBookingModal from './HospitalBookingModal';
 import { Helmet } from 'react-helmet';
+import HospitalDetailHint from './HospitalDetailHint/index.jsx';
+import HospitalDirections from './HospitalDirections/index.jsx';
 const HospitalDetail = () => {
   const {t}=useTranslation()
   const [openBooking, setOpenBooking] = useState(false)
-  
-
  const {id}=useParams()
  const onOpenBookingModal = () => {
   console.log('1')
@@ -43,13 +42,20 @@ console.log(hospital);
   return (
     <>
     {!loading &&  <div style={{background: "#f6f6f6"}} className='hospital-detail-container'>
-      
     <Helmet>
       <meta charSet="utf-8" />
       <title>{hospital.name}</title>
     </Helmet>
-    <BreadCrumbs/>
-    <div className={'container '}>
+    <div className={'container hospital-detail-container'}>
+      <BreadCrumbs pageItems={[{
+              title: t("home"),
+              href: "/",
+            },
+            {
+              title: t("Clinics"),
+              href: "/hospitals"
+            }
+          ]}/>
       <div className={'detail__info-btns'}>
         {infoButtons.map(item => (
           <button key={item.id} className={'detail__info-btn'}>{t(item.label)}</button>
@@ -66,16 +72,9 @@ console.log(hospital);
       </div> :
       <></>}
     </div>
-    <InfoContent open={onOpenBookingModal} discount={discount} hospital={hospital}/>
-    <div className="container ">
-      <div className={"hospital-detail__hint"}>
-        <h4 className={"hospital-detail__hint-title"}>{t("hint")}</h4>
-        <p className={"hospital-detail__hint-subtitle"}>{t("hint2")}</p>
-      </div>
-    </div>
-    <div className={"container"}>
-      <Categories hospital={hospital}  services={services}/>
-    </div>
+    <HospitalInfoContent open={onOpenBookingModal} discount={discount} hospital={hospital}/>
+    <HospitalDetailHint t={t}/>
+    <HospitalDirections services={services} hospital={hospital}/>
     <Reviews id={id} reviews={reviews}/>
     <Questions questions={questions}/>
     <QualityRating  hospital={hospital}  />

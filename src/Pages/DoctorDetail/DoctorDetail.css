@@ -1,0 +1,79 @@
+.doctor-detail-section {
+  background-color: #f2f2f2;
+  padding: 22px 0;
+}
+
+.booking-input {
+  padding: 0.8rem;
+  background: #fff;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+}
+.ant-select-selector {
+  background-color: transparent !important;
+}
+
+.booking-modal__time-input {
+  width: 48%;
+  margin-right: 2%;
+  padding: 0.8rem;
+}
+.booking-modal__date-input {
+  width: 48%;
+  padding: 0.8rem;
+}
+
+@media (max-width: 825px) {
+  .booking-modal__date-inputs {
+    display: flex;
+    flex-direction: column;
+  }
+  .booking-modal__time-input {
+    width: 100%;
+    margin-bottom: 2%;
+  }
+  .booking-modal__date-input {
+    width: 100%;
+  }
+  .read-btn {
+    display: none !important;
+  }
+}
+.reviews__carousel .slick-slide:first-child {
+  margin-left: 0.2% !important;
+}
+.reviews__carousel .reviews__carousel-item {
+  width: 96% !important;
+}
+.reviews__carousel .slick-active {
+  margin: 0 10px !important;
+}
+@media (max-width: 767px) {
+  .doc-card p,
+  .doc-card span,
+  .doc-card a {
+    font-size: 12px !important;
+  }
+  .doc-button1,
+  .doc-button2 {
+    padding: 5px 10px !important;
+  }
+}
+.doc-button1,
+.doc-button2 {
+  border-radius: 30px !important;
+}
+
+@media (min-width: 1024px) {
+  .doctor-detail-section {
+    padding: 40px 0 56px 0;
+  }
+
+  .doc-card-body-wrapper {
+    background-color: white;
+    padding: 37px;
+  }
+  .socialIconDr {
+    transform: initial;
+  }
+}

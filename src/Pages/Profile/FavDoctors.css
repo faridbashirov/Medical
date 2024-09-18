@@ -1,0 +1,204 @@
+.fav-doctors-main {
+  background-color: #f4f4f4;
+  padding: 26px 0 23px 0;
+}
+.comment {
+  margin: 10px 0px 0px 0px !important;
+}
+
+.fav-card-mob {
+  display: none;
+}
+
+.cardFavDoctors {
+  display: flex;
+  height: 226px;
+  margin: 0 0 12px;
+
+  border: 1px solid #efefef;
+  background-color: #fafafa;
+}
+#favDoctorImage {
+  margin-top: 10px;
+  width: 194px;
+  height: 194px;
+}
+.doctor-fav {
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  width: 194px !important;
+  height: auto !important;
+  padding-left: 13px;
+}
+.fav-card-mob.card-body {
+  padding-left: 20px !important;
+}
+@media (min-width: 1295px) and (max-width: 1451px) {
+  .doctorss {
+    /* grid-template-columns: minmax(auto, 2fr) minmax(auto, 1fr); */
+    gap: 0px;
+    grid-template-columns: 35% 65% !important;
+  }
+}
+.doctorss .card-body {
+  width: 100% !important;
+}
+
+@media (min-width: 1295px) and (max-width: 1451px) {
+  .doctorss {
+    /* grid-template-columns: minmax(auto, 2fr) minmax(auto, 1fr); */
+    gap: 0px;
+    grid-template-columns: 35% 65% !important;
+  }
+
+  .doctorss .card-body {
+    padding-left: 20px !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  .cardFavDoctors .card-body {
+    padding-left: 70px !important;
+  }
+}
+.cardFavDoctors-active {
+  background-color: #5282ff !important;
+  padding-left: 20px;
+  border-radius: 10px;
+}
+.cardFavDoctors-active .changed {
+  color: #fff !important;
+}
+@media (max-width: 756px) {
+  .cardReviewDoctors {
+    flex-direction: column;
+  }
+  .cardFavDoctors {
+    flex-direction: column;
+    height: auto;
+  }
+  .fav-card-body {
+    display: none;
+  }
+
+  .fav-card-mob {
+    display: block;
+    margin-top: 19px;
+  }
+  #favDoctorImage {
+    margin-top: 10px;
+    width: 80vw;
+    height: 280px !important;
+    object-fit: cover;
+    height: auto;
+  }
+  .doctorFav {
+    margin-right: 40%;
+  }
+}
+#favDoctorImage {
+  object-fit: cover;
+  border-radius: 10px;
+}
+.card-body {
+  padding-right: 15px;
+}
+@media (min-width: 1200px) {
+  .favdoctor-position {
+    font-size: 13px !important;
+  }
+  .cardFavDoctors p,
+  .cardFavDoctors a,
+  .cardFavDoctors .comment-text {
+    font-size: 13px !important;
+  }
+  .cardFavDoctors .anticon {
+    font-size: 13px !important;
+  }
+  .cardFavDoctors h3 {
+    font-size: 24px !important;
+  }
+}
+
+.cardFavDoctors .rating-sec {
+  margin-left: -10px;
+}
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .favdoctor-position {
+    font-size: 12px !important;
+  }
+  .cardFavDoctors p,
+  .cardFavDoctors a,
+  .comment-text {
+    font-size: 12px !important;
+  }
+  .cardFavDoctors .anticon {
+    font-size: 11px !important;
+  }
+  .cardFavDoctors h3 {
+    font-size: 20px !important;
+  }
+}
+@media (max-width: 1024px) {
+  .favdoctor-position {
+    font-size: 11px !important;
+  }
+  .cardFavDoctors .hospital-location {
+    margin-bottom: 5px !important;
+  }
+  .cardFavDoctors p,
+  .cardFavDoctors a,
+  .comment-text {
+    font-size: 11px !important;
+  }
+  .cardFavDoctors .anticon {
+    font-size: 10px !important;
+  }
+  .cardFavDoctors h3 {
+    font-size: 16px !important;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1650px) {
+  .doctorss {
+    /* grid-template-columns: minmax(auto, 2fr) minmax(auto, 1fr); */
+    gap: 10px;
+    grid-template-columns: 35% 65% !important;
+  }
+}
+.ant-pagination .ant-pagination-item-active,
+.ant-pagination .ant-pagination-item-active a,
+.ant-pagination .ant-pagination-item,
+.ant-pagination .ant-pagination-item a {
+  border: none !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+.ant-pagination .ant-pagination-item a {
+  display: flex !important;
+  align-items: center !important;
+  color: #000 !important;
+  justify-content: center !important;
+  font-size: 16px !important;
+}
+.ant-pagination .ant-pagination-item-active a {
+  background: #5282ff !important;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #fff !important;
+}
+
+.ant-pagination .ant-pagination-item-active {
+  background: #5282ff !important;
+  border: none !important;
+  min-width: unset !important;
+}
+.ant-pagination .ant-pagination-item {
+  background: transparent !important;
+}
+
+@media (min-width: 1024px) {
+  .fav-doctors-main {
+    padding: 40px 0 80px 0;
+  }
+}

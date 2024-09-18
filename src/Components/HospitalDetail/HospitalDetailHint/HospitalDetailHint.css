@@ -1,0 +1,53 @@
+.hospital-detail-hint-section {
+  background-color: #f6f6f6;
+  padding: 8px 0 15px 0;
+}
+.hospital-detail-hint-container {
+  width: var(--mobile);
+  margin: 0 auto;
+  background-color: #5282ff;
+  border-radius: 5px;
+  min-height: 235px;
+  padding: 18px 22px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.hospital-detail-hint-container h4 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+}
+.hospital-detail-hint-container p {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+}
+@media (min-width: 1024px) {
+  .hospital-detail-hint-section {
+    padding: 35px 0 29px 0;
+  }
+  .hospital-detail-hint-container {
+    width: var(--desktop);
+    min-height: 168px;
+    border-radius: 10px;
+    padding: 40px 82px 34px 82px;
+    gap: 10px;
+  }
+  .hospital-detail-hint-container h4 {
+    font-size: 26px;
+    line-height: 28px;
+    width: 90%;
+  }
+  .hospital-detail-hint-container p {
+    width: 90%;
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+@media (min-width: 1440px) {
+  .hospital-detail-hint-container {
+    width: var(--big-desktop);
+  }
+}

@@ -1,0 +1,392 @@
+.doctors-card-new {
+  background-color: #ffffff;
+  color: #000000;
+  min-height: 448px;
+  width: 100%;
+  border-radius: 10px;
+}
+.doctors-card-new-sponsor {
+  background-color: #5282ff;
+  color: #ffffff;
+}
+.doctors-card-new-container {
+  padding: 19px 19px 24px 19px;
+}
+.doctors-card-new-profile-photo-area {
+  position: relative;
+}
+.doctors-card-new-profile-photo {
+  height: 209px;
+  width: 100%;
+  object-fit: cover;
+  object-position: 0 10%;
+  border-radius: 8.6px;
+}
+.doctors-card-new-profile-heart {
+  background-color: #ffffff;
+  width: 34.51px;
+  height: 33.98px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 11.33px;
+  right: 14.64px;
+}
+.doctors-card-new-profile-heart img {
+  height: 12.86px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.doctors-card-new-profile-sponsor {
+  position: absolute;
+  top: 16px;
+  left: 11px;
+  background-color: #ffc224;
+  color: #000000;
+  border-radius: 5px;
+  padding: 6.49px 11.36px;
+  font-size: 9.74px;
+  font-weight: 500;
+  line-height: 11.81px;
+  width: max-content;
+  text-transform: capitalize;
+}
+
+.doctors-card-new-profile-detail-header-area {
+  display: flex;
+  flex-wrap: wrap;
+}
+.doctors-card-new-profile-detail-area h6 {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  padding: 10px 0 5px 0;
+  text-transform: capitalize;
+  width: 100%;
+}
+.doctor-card-new-profile-name-and-work {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: auto;
+}
+.doctors-card-new-profile-detail-area h3 {
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.41px;
+  width: 100%;
+}
+.doctors-card-new-profile-detail-hospital {
+  width: 100%;
+  display: flex;
+  padding: 4px 0 10px 0;
+}
+.doctors-card-new-profile-detail-hospital-icon {
+  display: none;
+}
+.doctors-card-new-profile-detail-hospital p {
+  color: #5282ff;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+.doctors-card-new-sponsor .doctors-card-new-profile-detail-hospital p {
+  color: #ffffff;
+}
+.doctors-card-new-profile-detail-raitings {
+  display: flex;
+  height: 27px;
+}
+.doctors-card-new-profile-detail-raiting {
+  border-radius: 4.41px;
+  background-color: #5282ff;
+  color: #ffffff;
+  padding: 5px 7px;
+  font-size: 12.35px;
+  font-weight: 400;
+}
+.doctors-card-new-sponsor .doctors-card-new-profile-detail-raiting {
+  background-color: #ffc224;
+  color: #000000;
+}
+.doctors-card-new-profile-detail-stars {
+  display: flex;
+  align-items: center;
+  padding-inline: 9px;
+}
+.doctors-card-new-profile-detail-raiting-name {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  text-transform: capitalize;
+  padding-right: 7px;
+}
+.doctors-card-new-profile-detail-stars .ant-rate {
+  display: flex;
+  gap: 3.85px;
+}
+.doctors-card-new-profile-detail-stars .anticon-star {
+  display: flex;
+  align-items: center;
+}
+.doctors-card-new-profile-detail-stars .anticon-star svg {
+  width: 10px;
+  height: 10px;
+}
+.doctors-card-new-profile-detail-stars .ant-rate-star-zero svg {
+  color: #c2c2c2;
+}
+.doctors-card-new-profile-detail-stars .ant-rate {
+  font-size: 8px !important;
+  display: flex;
+  align-items: center;
+}
+.doctors-card-new-profile-detail-reviews {
+  display: flex;
+  align-items: center;
+}
+.doctors-card-new-profile-detail-reviews a {
+  text-transform: capitalize;
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  color: #5282ff;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+}
+.doctors-card-new-sponsor .doctors-card-new-profile-detail-reviews a {
+  color: #ffffff;
+}
+.doctors-card-new-profile-detail-reviews p {
+  display: none;
+}
+.doctors-card-new-profile-left-buttons {
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 100%;
+}
+.doctors-card-new-profile-left-button {
+  font-size: 12px;
+  font-weight: 400;
+  padding: 8px 14px;
+  background-color: #f4f4f4;
+  border: 1px solid #f4f4f4;
+  border-radius: 50px;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  width: max-content;
+}
+.doctors-card-new-profile-right-buttons {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .doctors-card-new {
+    min-height: 226px;
+    border-radius: 15px;
+  }
+  .doctors-card-new-container {
+    padding: 20px 16px;
+    display: flex;
+    gap: 30px;
+  }
+  .doctors-card-new-profile-photo {
+    height: 194px;
+    width: 194px;
+    border-radius: 6.51px;
+  }
+  .doctors-card-new-profile-heart {
+    width: 27.71px;
+    height: 27.71px;
+    top: 10.2px;
+    right: 14.17px;
+    padding-right: 0.8px;
+  }
+  .doctors-card-new-profile-heart img {
+    height: 13px;
+  }
+  .doctors-card-new-profile-sponsor {
+    top: 12px;
+    left: 11px;
+    border-radius: 33.77px;
+    padding: 5.4px 9.46px;
+    font-size: 8.11px;
+    font-weight: 400;
+    line-height: 9.73px;
+  }
+  .doctors-card-new-profile-detail-area {
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+  }
+  .doctors-card-new-profile-detail-header-area {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    width: 100%;
+  }
+  .doctors-card-new-profile-detail-area h6 {
+    display: flex;
+    align-items: center;
+    order: 1;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    padding: 0;
+    width: auto;
+    height: 27px;
+  }
+  .doctor-card-new-profile-name-and-work {
+    order: 3;
+    width: 59%;
+    justify-content: space-between;
+    height: 76%;
+  }
+  .doctors-card-new-profile-detail-area h3 {
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 21px;
+  }
+  .doctors-card-new-profile-detail-hospital {
+    width: 100%;
+    gap: 7px;
+    align-items: center;
+    align-self: flex-end;
+  }
+  .doctors-card-new-profile-detail-hospital-icon {
+    display: block;
+    width: 13.07px;
+    object-fit: cover;
+  }
+  .doctors-card-new-profile-detail-hospital p {
+    font-size: 14px;
+    text-align: left;
+    text-transform: capitalize;
+  }
+  .doctors-card-new-profile-detail-raitings {
+    order: 2;
+    width: auto;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+  }
+  .doctors-card-new-profile-detail-raiting {
+    font-size: 12.35px;
+    order: 3;
+    justify-content: flex-end;
+    height: 27px;
+  }
+  .doctors-card-new-profile-detail-stars {
+    display: flex;
+    align-items: center;
+    padding-inline: 0;
+    order: 1;
+    padding-left: 14px;
+  }
+  .doctors-card-new-profile-detail-stars .ant-rate {
+    display: flex;
+    gap: 4.73px;
+  }
+  .doctors-card-new-profile-detail-raiting-name {
+    width: auto;
+    order: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    text-transform: capitalize;
+    flex-grow: 1;
+  }
+  .doctors-card-new-profile-detail-stars .anticon-star {
+    display: flex;
+    align-items: center;
+  }
+  .doctors-card-new-profile-detail-stars .anticon-star svg {
+    width: 14px;
+    height: 14px;
+  }
+  .doctors-card-new-profile-detail-stars .ant-rate {
+    font-size: 14px !important;
+    display: flex;
+    align-items: center;
+  }
+  .doctors-card-new-profile-detail-reviews {
+    order: 3;
+    width: 41%;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .doctors-card-new-profile-detail-reviews p {
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: right;
+  }
+  .doctors-card-new-sponsor .doctors-card-new-profile-detail-reviews p {
+    color: #ffffff;
+  }
+  .doctors-card-new-profile-detail-reviews a {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+  .doctors-card-new-sponsor .doctors-card-new-profile-detail-reviews a {
+    color: #ffffff;
+  }
+  .doctors-card-new-profile-buttons {
+    order: 6;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .doctors-card-new-profile-left-buttons {
+    padding-top: 0;
+    width: auto;
+  }
+  .doctors-card-new-profile-left-button {
+    padding: 8.5px 14px;
+    gap: 10px;
+  }
+  .doctors-card-new-sponsor .doctors-card-new-profile-left-button {
+    background-color: #ffffff;
+  }
+  .doctors-card-new-profile-right-buttons {
+    display: flex;
+    align-items: flex-end;
+  }
+  .doctors-card-new-profile-right-button {
+    padding: 11px 13px 12px 13px;
+    width: max-content;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    border-radius: 5px;
+    height: 40px;
+    color: #ffffff;
+    background-color: #5282ff;
+    border: 1px solid #5282ff;
+    outline: none;
+    cursor: pointer;
+  }
+  .doctors-card-new-sponsor .doctors-card-new-profile-right-button {
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    outline: none;
+    color: #5282ff;
+  }
+}

@@ -1,0 +1,291 @@
+.doctor-card-container {
+  width: var(--mobile);
+  margin: 0 auto;
+  padding-bottom: 8px;
+}
+.doctor-card {
+  background-color: #ffffff;
+  min-height: 226px;
+  width: 100%;
+  padding: 11px 13px;
+}
+.doctor-card-third-area {
+  display: none;
+}
+.doctor-card-buttons-desktop {
+  display: none;
+}
+.doctor-card-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.doctor-card-buttons button {
+  width: 100%;
+  height: 30px;
+  border: 0.8px solid #5282ff;
+  color: #5282ff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.56px;
+  text-align: center;
+  text-transform: capitalize;
+  background-color: transparent;
+  cursor: pointer;
+}
+.doctor-card-buttons button:nth-of-type(1) {
+  background-color: #5282ff;
+  color: #ffffff;
+}
+.doctor-card-profile {
+  display: flex;
+  gap: 13px;
+  padding-bottom: 16px;
+}
+.doctor-card-profile-photo {
+  position: relative;
+}
+.doctor-card-profile-photo img {
+  height: 123px;
+  width: 120px;
+  object-fit: cover;
+  object-position: 0% 10%;
+}
+.doctor-card-profile-photo-raiting {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  color: #ffffff;
+  font-size: 9.06px;
+  font-weight: 400;
+  line-height: 10.87px;
+  text-align: right;
+  border-radius: 3.24px;
+  padding: 3.9px 5.44px 3.21px 4.56px;
+  background-color: #5282ff;
+  width: max-content;
+}
+.doctor-card-profile-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0 3px 0;
+}
+.doctor-card-social {
+  display: none;
+}
+.doctor-card-profile-title h5 {
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 9.6px;
+  text-align: left;
+  text-transform: capitalize;
+  color: #666666;
+  align-self: flex-end;
+}
+.doctor-card-profile-title .anticon-star {
+  display: flex;
+  align-items: center;
+}
+.doctor-card-profile-title .anticon-star svg {
+  width: 10px;
+  height: 10px;
+}
+.doctor-card-profile-title .ant-rate {
+  font-size: 8px !important;
+  display: flex;
+  align-items: center;
+}
+.doctor-card-raiting-area {
+  display: none;
+}
+.doctor-card-profile-details h1 {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.56px;
+  text-align: left;
+  text-transform: capitalize;
+  color: #000000;
+  width: 90%;
+}
+
+.doctor-card-profile-hospital {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 5px 0 3px 0;
+}
+.doctor-card-profile-hospital img {
+  height: 8px;
+  object-fit: cover;
+}
+.doctor-card-profile-hospital h6 {
+  align-self: center;
+  font-size: 8px;
+  font-weight: 400;
+  color: #5282ff;
+}
+.doctor-card-profile-position {
+  text-transform: capitalize;
+}
+.doctor-card-profile-position,
+.doctor-card-profile-experience {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  font-size: 7.74px;
+  font-weight: 400;
+  text-align: left;
+  color: #000000;
+  padding: 3.02px 5.29px 3.02px 5.29px;
+  border-radius: 2.15px;
+  background-color: #f4f4f4;
+  width: max-content;
+  margin-top: 6px;
+}
+.doctor-card-profile-experience img {
+  width: 6px;
+  object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+  .doctor-card-container {
+    width: var(--desktop);
+    padding: 33px 0;
+  }
+  .doctor-card {
+    min-height: 369px;
+    display: flex;
+    padding: 32px 34px;
+    justify-content: space-between;
+    background-color: #fbfbfb;
+  }
+  .doctor-card-profile {
+    gap: 45px;
+    width: 100%;
+    padding-bottom: 0;
+  }
+  .doctor-card-buttons {
+    display: none;
+  }
+  .doctor-card-buttons-area {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .doctor-card-buttons-desktop {
+    display: flex;
+    gap: 20px;
+    padding-top: 23px;
+  }
+  .doctor-card-buttons-desktop button {
+    width: max-content;
+    border: 1px solid #5282ff;
+    border-radius: 5.56px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.6px;
+    text-align: center;
+    padding: 13.5px 15.5px;
+    background-color: #ffffff;
+    text-transform: capitalize;
+    cursor: pointer;
+  }
+  .doctor-card-buttons-desktop button:nth-child(1) {
+    background-color: #5282ff;
+    color: #ffffff;
+  }
+  .doctor-card-social {
+    display: flex;
+    gap: 15px;
+    background-color: #f0f0f0;
+    height: 48px;
+    padding: 10px 16px;
+  }
+  .doctor-card-profile-photo img {
+    height: 295px;
+    width: 303.86px;
+  }
+  .doctor-card-profile-photo-raiting {
+    display: none;
+  }
+  .doctor-card-profile-title-area {
+    display: flex;
+    justify-content: space-between;
+  }
+  .doctor-card-profile-title {
+    gap: 15px;
+    padding: 10px 0 7px 0;
+  }
+  .doctor-card-profile-title h5 {
+    font-size: 18px;
+    line-height: 21.6px;
+  }
+  .doctor-card-profile-title .anticon-star svg {
+    width: 17px;
+    height: 17px;
+  }
+  .doctor-card-profile-title .ant-rate {
+    font-size: 18px !important;
+  }
+  .doctor-card-raiting-area {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .doctor-card-raiting-area h6 {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.6px;
+    color: #000000;
+    text-transform: capitalize;
+  }
+  .doctor-card-raiting {
+    font-size: 19.2px;
+    font-weight: 400;
+    line-height: 23.04px;
+    color: #ffffff;
+    background-color: #5282ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 47px;
+    height: 39px;
+    border-radius: 6.86px;
+  }
+  .doctor-card-profile-details {
+    width: 100%;
+  }
+  .doctor-card-profile-details h1 {
+    width: 100%;
+    font-size: 30px;
+    line-height: 36.39px;
+  }
+  .doctor-card-profile-hospital {
+    gap: 12px;
+    padding: 7px 0 8px 0;
+  }
+  .doctor-card-profile-hospital img {
+    height: 16px;
+  }
+  .doctor-card-profile-hospital h6 {
+    font-size: 18px;
+  }
+  .doctor-card-profile-position,
+  .doctor-card-profile-experience {
+    gap: 10px;
+    font-size: 16px;
+    padding: 8px 14px;
+    border-radius: 50px;
+    margin-top: 15px;
+  }
+  .doctor-card-profile-experience img {
+    width: 13px;
+  }
+}
+@media (min-width: 1440px) {
+  .doctor-card-container {
+    width: var(--big-desktop);
+  }
+}

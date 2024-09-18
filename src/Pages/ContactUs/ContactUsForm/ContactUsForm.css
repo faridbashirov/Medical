@@ -1,0 +1,151 @@
+.contact-us-form {
+  width: 100%;
+  min-height: 441px;
+  border-radius: 2px;
+  border: 0.5px solid #ebebeb;
+  padding: 17px 18px;
+  background-color: #ffffff;
+}
+.write-us {
+  text-transform: capitalize;
+  color: #5282ff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 13.16px;
+}
+.contact-us-form-description {
+  padding: 4px 0 12px 0;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 13.34px;
+  color: #5f5f5f;
+  width: 70%;
+}
+.contact-us-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  border-top: 0.5px solid #e2e2e2;
+  padding-top: 11px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.form-group-name {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+  text-transform: capitalize;
+  overflow: hidden;
+}
+.form-group-name .form-group {
+  width: 100%;
+}
+
+.form-group label {
+  color: #868686;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 15.45px;
+}
+.form-group input {
+  color: #3f3f3f;
+  background-color: #f9f9f9;
+  padding: 7px 10px 5px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 15.45px;
+  letter-spacing: 0.02em;
+  border: 0.48px solid #ebebeb;
+  outline: 0.48px solid #ebebeb;
+}
+.form-group textarea {
+  height: 158px;
+  color: #3f3f3f;
+  background-color: #f9f9f9;
+  padding: 7px 10px 5px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 15.45px;
+  letter-spacing: 0.02em;
+  border: 0.48px solid #ebebeb;
+  outline: 0.48px solid #ebebeb;
+  resize: none;
+}
+.form-group-button {
+  height: 30px;
+  padding: 7px 10px;
+  border-radius: 2.5px;
+  background-color: #5282ff;
+  border: 0.48px solid #5282ff;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14.7px;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .contact-us-form {
+    min-height: 622px;
+    width: 54%;
+    border-radius: 5px;
+    border: 1px solid #ebebeb;
+    padding: 34px 31px;
+  }
+  .write-us {
+    font-size: 20px;
+    line-height: 32px;
+  }
+  .contact-us-form-description {
+    padding: 4px 0 15px 0;
+    font-size: 16px;
+    line-height: 19.41px;
+  }
+  .contact-us-form form {
+    gap: 18px;
+    border-top: 1px solid #e7e7e7;
+    padding-top: 17px;
+  }
+  .form-group {
+    gap: 5px;
+  }
+  .form-group-name {
+    gap: 16px;
+  }
+  .form-group label {
+    color: #010101;
+    font-size: 16px;
+    line-height: 32px;
+  }
+  .form-group input {
+    color: #828282;
+    padding: 9px 18px 5px 18px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 32px;
+    border: 1px solid #ebebeb;
+    outline: 1px solid #ebebeb;
+  }
+  .form-group textarea {
+    height: 156px;
+    color: #828282;
+    padding: 9px 18px 5px 18px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 32px;
+    border: 1px solid #ebebeb;
+    outline: 1px solid #ebebeb;
+  }
+  .form-group-button {
+    height: 61px;
+    padding: 18px;
+    border-radius: 5px;
+    font-size: 20px;
+    line-height: 24.5px;
+  }
+}

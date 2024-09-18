@@ -1,0 +1,33 @@
+.contact-us {
+  background-color: #f4f4f4;
+  padding: 24px 0 21px 0;
+}
+.contact-us-container {
+  margin: 0 auto;
+  width: var(--mobile);
+}
+
+.contact-us-area {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 21px;
+}
+@media (min-width: 1024px) {
+  .contact-us {
+    padding: 40px 0 32px 0;
+  }
+  .contact-us-container {
+    width: var(--desktop);
+  }
+  .contact-us-area {
+    gap: 28px;
+    flex-direction: row;
+    padding: 32px 0;
+  }
+}
+@media (min-width: 1440px) {
+  .contact-us-container {
+    width: var(--big-desktop);
+  }
+}

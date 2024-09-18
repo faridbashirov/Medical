@@ -1,0 +1,104 @@
+.doctors-main {
+  padding: 26px 0 23px 0;
+  background-color: #f4f4f4;
+}
+.doctors-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 0 36px 0;
+}
+.result-text {
+  color: #5282ff;
+  font-size: 20px;
+}
+
+.card-body-doctors {
+  padding-left: 80px !important;
+}
+
+.doctors-more-btn {
+  width: 155px;
+  height: 40px;
+
+  color: #5282ff;
+}
+
+.doctors-more-btn span {
+  color: #fff;
+}
+.doctors-more-btn-active {
+  width: 155px;
+  height: 40px;
+  /* background-color:  #5282FF; */
+  background-color: #fff !important;
+  color: #fff;
+}
+.doctors-more-btn-active span {
+  color: #000 !important;
+}
+
+.display_grid-doctors {
+  display: grid;
+}
+.white {
+  color: #fff;
+}
+
+.loading {
+  display: inherit;
+  position: relative;
+  font-size: 0px;
+  top: 20px;
+  left: 50% !important;
+  width: 60px;
+  height: 60px;
+}
+:where(.css-dev-only-do-not-override-lgxug1).ant-btn-primary {
+  color: #fff;
+}
+
+.ant-pagination .ant-pagination-item-active,
+.ant-pagination .ant-pagination-item-active a,
+.ant-pagination .ant-pagination-item,
+.ant-pagination .ant-pagination-item a {
+  border: none !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+.ant-pagination .ant-pagination-item a {
+  display: flex !important;
+  align-items: center !important;
+  color: #000 !important;
+  justify-content: center !important;
+  font-size: 16px !important;
+}
+.ant-pagination .ant-pagination-item-active a {
+  background: #5282ff !important;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #fff !important;
+}
+
+.ant-pagination .ant-pagination-item-active {
+  background: #5282ff !important;
+  border: none !important;
+  min-width: unset !important;
+}
+.ant-pagination .ant-pagination-item {
+  background: transparent !important;
+}
+
+@media (min-width: 1024px) {
+  .doctors-main {
+    padding: 40px 0 80px 0;
+  }
+  .doctors-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+    padding: 18px 0 52px 0;
+  }
+}

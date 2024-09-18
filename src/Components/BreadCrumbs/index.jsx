@@ -1,36 +1,17 @@
 import React from 'react';
 import {Breadcrumb} from "antd";
-import { useTranslation } from 'react-i18next';
+import arrow from '../../assets/Svg/Arrow 6.svg'
+import './BreadCrumbs.css'
 
-const BreadCrumbs = () => {
-  const {t}=useTranslation()
+const BreadCrumbs = ({pageItems}) => {
   return (
-    <div style={{ paddingTop: "30px" }} className="container">
-      <div className={"breadcrumbs"}>
+    <div>
+      <div className={"bread-crumbs"}>
         <Breadcrumb
           separator={
-            <span
-              style={{
-                color: "#5282FF",
-                paddingLeft: "5px",
-                paddingRight: "10px",
-              }}
-            >
-                {" "}
-              {">"}{" "}
-              </span>
+            <img src={arrow} alt="" />
           }
-          items={[
-            {
-              title: t("home"),
-              href: "/",
-            },
-            {
-              title: t("Clinics"),
-              href: "/hospitals"
-            },
-            
-          ]}
+          items={pageItems}
         />
       </div>
     </div>

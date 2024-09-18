@@ -10,10 +10,8 @@ export default function favoritesDoctorsFetch(page){
     const [loading,setLoading] = useState(true)
     const [count,setCount] = useState("")
     const [add,setAdd] = useState(false)
-
     useEffect(() => {
         (
-            
             async function(){
                 setLoading(true)
                 if(page){
@@ -23,8 +21,6 @@ export default function favoritesDoctorsFetch(page){
                         setCount(res.count)
                         const newarr=res.map(item => item.doctor.id)
                         setFilterdata(newarr)
-                     
-                        console.log("++++++");
                     })
                     .catch((err) => {
                         setError(err);
@@ -51,10 +47,6 @@ export default function favoritesDoctorsFetch(page){
                         setLoading(false);
                     });
                 }
-                
-
-                
-            
             }
         )()
     }, [add,page])

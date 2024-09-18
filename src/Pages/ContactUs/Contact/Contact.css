@@ -1,0 +1,78 @@
+.Contact-footer {
+  background-color: #5282ff;
+  padding: 17px 28px;
+  border-radius: 2px;
+}
+.red-contact {
+  background-color: red;
+}
+.Contact-footer h5 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.41px;
+  text-align: left;
+  color: white;
+  text-transform: capitalize;
+  padding-bottom: 7px;
+  border-bottom: 1px solid #ffffff;
+}
+.Contact-contact-sosial {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+.Contact-contact-us {
+  display: flex;
+  flex-direction: column;
+}
+.Contact-contact-us h6 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 25px;
+  text-align: left;
+  color: white;
+}
+
+.Contact-sosial-icons {
+  display: flex;
+  align-self: flex-end;
+}
+.Contact-sosial-icons img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+  .Contact-footer {
+    padding: 33px 38px;
+    border-radius: 10px;
+    width: 32%;
+    height: 349px;
+  }
+  .Contact-footer h5 {
+    font-size: 24px;
+    line-height: 29.11px;
+    padding-bottom: 16px;
+  }
+  .Contact-contact-sosial {
+    flex-direction: column;
+    gap: 0;
+  }
+  .Contact-contact-us {
+    padding: 47px 0;
+  }
+  .Contact-contact-us h6 {
+    font-size: 20px;
+    line-height: 40px;
+  }
+
+  .Contact-sosial-icons {
+    align-self: inherit;
+    margin-left: -15px;
+  }
+  .Contact-sosial-icons img {
+    width: 49px;
+    height: 49px;
+  }
+}

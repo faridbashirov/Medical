@@ -1,0 +1,473 @@
+.hospital-card-new {
+  background-color: #ffffff;
+  color: #000000;
+  min-height: 504px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #fafafa;
+}
+.hospital-card-new-profile-left-buttons-header {
+  display: grid;
+  gap: 8.39px;
+  grid-template-columns: 1fr 1fr;
+}
+.hospital-card-new-sponsor {
+  background-color: #5282ff;
+  color: #ffffff;
+}
+.hospital-card-new-container {
+  padding: 19px 19px 24px 19px;
+}
+.hospital-card-new-profile-photo-area {
+  position: relative;
+}
+.hospital-card-new-profile-photo {
+  height: 209px;
+  width: 100%;
+  object-fit: cover;
+  object-position: 0 10%;
+  border-radius: 8.6px;
+}
+.hospital-card-new-profile-heart {
+  background-color: #ffffff;
+  width: 34.51px;
+  height: 33.98px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 11.33px;
+  right: 14.64px;
+}
+.hospital-card-new-profile-heart img {
+  height: 12.86px;
+  object-fit: cover;
+}
+.hospital-card-new-profile-sponsor {
+  position: absolute;
+  top: 16px;
+  left: 11px;
+  background-color: #ffc224;
+  color: #000000;
+  border-radius: 5px;
+  padding: 6.49px 11.36px;
+  font-size: 9.74px;
+  font-weight: 500;
+  line-height: 11.81px;
+  width: max-content;
+  text-transform: capitalize;
+}
+
+.hospital-card-new-profile-detail-header-area {
+  display: flex;
+  flex-wrap: wrap;
+}
+.hospital-card-new-profile-detail-footer-area {
+  display: flex;
+}
+.hospital-card-new-profile-detail-area h6 {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  padding: 10px 0 5px 0;
+  text-transform: capitalize;
+  width: 100%;
+}
+.hospital-card-new-profile-name-and-work {
+  display: flex;
+  flex-direction: column;
+  gap: auto;
+  width: 100%;
+}
+.hospital-card-new-profile-detail-area h3 {
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.41px;
+  padding-bottom: 8px;
+}
+.hospital-card-new-profile-detail-hospital {
+  width: 100%;
+  display: flex;
+  padding: 19px 0 7px 0;
+}
+.hospital-card-new-profile-detail-hospital-icon {
+  display: none;
+}
+.hospital-card-new-profile-detail-hospital p {
+  color: #000000;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+.hospital-card-new-sponsor .hospital-card-new-profile-detail-hospital p {
+  color: #ffffff;
+}
+.hospital-card-new-profile-detail-raitings {
+  display: flex;
+  height: 27px;
+}
+.hospital-card-new-profile-detail-raiting {
+  border-radius: 4.41px;
+  background-color: #5282ff;
+  color: #ffffff;
+  padding: 5px 7px;
+  font-size: 12.35px;
+  font-weight: 400;
+}
+.hospital-card-new-sponsor .hospital-card-new-profile-detail-raiting {
+  background-color: #ffc224;
+  color: #000000;
+}
+.hospital-card-new-profile-detail-stars {
+  display: flex;
+  align-items: center;
+  padding-inline: 9px;
+}
+.hospital-card-new-profile-detail-raiting-name {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  text-transform: capitalize;
+  padding-right: 7px;
+}
+.hospital-card-new-profile-detail-stars .ant-rate {
+  display: flex;
+  gap: 3.85px;
+}
+.hospital-card-new-profile-detail-stars .anticon-star {
+  display: flex;
+  align-items: center;
+}
+.hospital-card-new-profile-detail-stars .anticon-star svg {
+  width: 12px;
+  height: 12px;
+}
+.hospital-card-new-profile-detail-stars .ant-rate-star-zero svg {
+  color: #c2c2c2;
+}
+.hospital-card-new-profile-detail-stars .ant-rate {
+  font-size: 8px !important;
+  display: flex;
+  align-items: center;
+}
+.hospital-card-new-profile-detail-reviews {
+  display: flex;
+  align-items: center;
+  display: none;
+}
+.hospital-card-new-profile-detail-reviews a {
+  text-transform: capitalize;
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  color: #000000;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+}
+.hospital-card-new-sponsor .hospital-card-new-profile-detail-reviews a {
+  color: #ffffff;
+}
+.hospital-card-new-profile-detail-reviews p {
+  display: none;
+}
+.hospital-card-new-profile-left-buttons {
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 100%;
+}
+.hospital-card-new-profile-left-button {
+  font-size: 12px;
+  font-weight: 400;
+  padding: 8px 14px;
+  background-color: #f4f4f4;
+  border: 1px solid #f4f4f4;
+  border-radius: 50px;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  width: max-content;
+}
+.hospital-card-new-profile-right-buttons {
+  display: none;
+}
+
+.hospital-card-percantage {
+  background-color: #e9ecff;
+  border-radius: 4.46px;
+  min-height: 38.34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 15px;
+}
+.hospital-card-percantage p {
+  font-size: 10.7px;
+  font-weight: 400;
+  line-height: 12.84px;
+  text-align: left;
+}
+
+.hospital-card-percantage-second {
+  background-color: #d8f5dd;
+  min-height: 38.34px;
+  border-radius: 4.46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hospital-card-percantage-second p {
+  font-size: 10.7px;
+  font-weight: 400;
+  line-height: 12.84px;
+  text-align: left;
+}
+.hospital-card-new-profile-left-buttons-description {
+  border: 0.69px solid #efefef;
+  border-radius: 3.46px;
+  background-color: white;
+  height: 99px;
+  text-align: justify;
+  padding: 10.19px 13.39px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hospital-card-new-profile-left-buttons-description::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .hospital-card-new {
+    min-height: 226px;
+    border-radius: 15px;
+  }
+  .hospital-card-new-container {
+    padding: 20px 16px;
+    display: flex;
+    gap: 30px;
+  }
+  .hospital-card-new-profile-photo {
+    height: 194px;
+    width: 194px;
+    border-radius: 6.51px;
+    object-fit: fill;
+  }
+  .hospital-card-new-profile-heart {
+    width: 27.71px;
+    height: 27.71px;
+    top: 10.2px;
+    right: 14.17px;
+    padding-right: 0.8px;
+  }
+  .hospital-card-new-profile-heart img {
+    height: 13px;
+  }
+  .hospital-card-new-profile-sponsor {
+    top: 12px;
+    left: 11px;
+    border-radius: 33.77px;
+    padding: 5.4px 9.46px;
+    font-size: 8.11px;
+    font-weight: 400;
+    line-height: 9.73px;
+  }
+  .hospital-card-new-profile-detail-area {
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+  }
+  .hospital-card-new-profile-detail-header-area {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+  .hospital-card-new-profile-detail-area h6 {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    padding: 0;
+    width: auto;
+    height: 27px;
+  }
+  .hospital-card-new-profile-name-and-work {
+    width: auto;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    height: auto;
+  }
+  .hospital-card-new-profile-detail-area h3 {
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 21px;
+  }
+  .hospital-card-new-profile-detail-footer-area {
+    flex-direction: column;
+    gap: 7.29px;
+  }
+  .hospital-card-new-profile-detail-hospital {
+    width: 100%;
+    gap: 7px;
+    align-items: center;
+    align-self: flex-end;
+    padding: 0;
+  }
+  .hospital-card-new-profile-detail-hospital-icon {
+    display: block;
+    width: 13.07px;
+    object-fit: cover;
+  }
+  .hospital-card-new-profile-detail-hospital p {
+    font-size: 14px;
+    text-align: left;
+    text-transform: capitalize;
+  }
+  .hospital-card-new-profile-detail-raitings {
+    width: auto;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6.69px;
+  }
+  .hospital-card-new-profile-detail-raiting {
+    font-size: 12.35px;
+    justify-content: flex-end;
+    height: 27px;
+  }
+  .hospital-card-new-profile-detail-stars {
+    display: none;
+  }
+  .hospital-card-new-profile-detail-raiting-name {
+    width: auto;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    text-transform: capitalize;
+    padding-right: 0px;
+  }
+  .hospital-card-new-profile-detail-stars .anticon-star {
+    display: flex;
+    align-items: center;
+  }
+  .hospital-card-new-profile-detail-stars .anticon-star svg {
+    width: 14px;
+    height: 14px;
+  }
+  .hospital-card-new-profile-detail-stars .ant-rate {
+    font-size: 14px !important;
+    display: flex;
+    align-items: center;
+  }
+  .hospital-card-new-profile-detail-reviews {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .hospital-card-new-profile-detail-reviews p {
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: right;
+  }
+  .hospital-card-new-sponsor .hospital-card-new-profile-detail-reviews p {
+    color: #ffffff;
+  }
+  .hospital-card-new-profile-detail-reviews a {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+  .hospital-card-new-sponsor .hospital-card-new-profile-detail-reviews a {
+    color: #ffffff;
+  }
+  .hospital-card-new-profile-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .hospital-card-new-profile-left-buttons {
+    padding-top: 14px;
+    width: 64%;
+  }
+  .hospital-card-new-profile-left-button {
+    padding: 8.5px 14px;
+    gap: 10px;
+  }
+  .hospital-card-new-sponsor .hospital-card-new-profile-left-button {
+    background-color: #ffffff;
+  }
+  .hospital-card-new-profile-right-buttons {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 34%;
+  }
+  .hospital-card-new-profile-right-button {
+    padding: 11px 13px 12px 13px;
+    width: auto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    border-radius: 5px;
+    min-height: 40px;
+    color: #ffffff;
+    background-color: #5282ff;
+    border: 1px solid #5282ff;
+    outline: none;
+    cursor: pointer;
+  }
+  .hospital-card-new-sponsor .hospital-card-new-profile-right-button {
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    outline: none;
+    color: #5282ff;
+  }
+  .hospital-card-percantage {
+    background-color: #e9ecff;
+    border-radius: 4.46px;
+    min-height: 38.34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 15px;
+  }
+  .hospital-card-percantage p {
+    font-size: 10.7px;
+    font-weight: 400;
+    line-height: 12.84px;
+    text-align: left;
+  }
+
+  .hospital-card-percantage-second {
+    background-color: #d8f5dd;
+    min-height: 38.34px;
+    border-radius: 4.46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hospital-card-percantage-second p {
+    font-size: 10.7px;
+    font-weight: 400;
+    line-height: 12.84px;
+    text-align: left;
+  }
+  .hospital-card-new-profile-left-buttons-description {
+    height: 91px;
+    padding: 10px 12px;
+  }
+  .hospital-card-new-profile-left-buttons-description p {
+    font-size: 12px;
+    line-height: 17px;
+  }
+}

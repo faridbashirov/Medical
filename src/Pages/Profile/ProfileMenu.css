@@ -1,0 +1,27 @@
+.profile-menu {
+  background-color: white;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+.profile-menu li {
+  list-style: none;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #2a353d;
+  cursor: pointer;
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr 10fr;
+}
+.profile-menu .activeLi {
+  background-color: #f2f5ff;
+}
+
+@media (min-width: 1024px) {
+  .profile-menu li {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+}

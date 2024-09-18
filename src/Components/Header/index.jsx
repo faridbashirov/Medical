@@ -144,8 +144,6 @@ const Header = () =>{
 }, [showMenu,data]);
  
   const handleMenuFlagClick = (e) => {
-    console.log("click", e);
-    console.log(itemsFlag.find(item => item.key === e.key).label.props.children)
     localStorage.setItem("lang",itemsFlag.find(item => item.key === e.key).label.props.children.toLowerCase())
     setActive(itemsFlag.find(item => item.key === e.key))
     i18n.changeLanguage(itemsFlag.find(item => item.key === e.key).label.props.children.toLowerCase())
@@ -175,7 +173,6 @@ const Header = () =>{
   const {user, errors}=useSelector((state)=> state.auth)
   const {authToken}=useSelector((state)=> state.auth)
   const state=useSelector((state)=>state.auth)
-  console.log(state)
  
   const displayLogoutNotification = () => {
    

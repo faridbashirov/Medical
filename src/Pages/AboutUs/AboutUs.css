@@ -1,0 +1,17 @@
+.about-us-breadcrumb {
+  width: var(--mobile);
+  margin: 0 auto;
+}
+@media (min-width: 1024px) {
+  .about-us {
+    padding-top: 40px;
+  }
+  .about-us-breadcrumb {
+    width: var(--desktop);
+  }
+}
+@media (min-width: 1440px) {
+  .about-us-breadcrumb {
+    width: var(--big-desktop);
+  }
+}

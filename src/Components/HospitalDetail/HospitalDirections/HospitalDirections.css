@@ -1,0 +1,33 @@
+.hospital-directions-section {
+  background-color: #f6f6f6;
+}
+.hospital-directions-section-container {
+  width: var(--mobile);
+  margin: 0 auto;
+  padding: 15px 0 14px 0;
+}
+.hospital-directions-section-container h4 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 38px;
+  text-align: justify;
+  padding-bottom: 9px;
+}
+.hospital-directions-swiper {
+  position: relative;
+}
+@media (min-width: 1024px) {
+  .hospital-directions-section-container {
+    width: var(--desktop);
+    padding: 29px 0;
+  }
+  .hospital-directions-section-container h4 {
+    font-size: 38px;
+    padding-bottom: 30px;
+  }
+}
+@media (min-width: 1440px) {
+  .hospital-directions-section-container {
+    width: var(--big-desktop);
+  }
+}

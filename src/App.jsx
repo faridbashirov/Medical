@@ -1,22 +1,18 @@
 import Header from "./Components/Header";
 import HomePage from "./Components/HomePage";
-import Profile from "./Components/Profile/Profile";
+import Profile from "./Pages/Profile";
 import { Routes,Route } from "react-router-dom";
-import ReviewDoctors from "./Components/ReviewDoctors/ReviewDoctors";
-import FavDoctors from "./Components/FavDoctors/FavDoctors";
-import ReviewHospitals from "./Components/ReviewHospitals/ReviewHospitals";
-import FavHospitals from "./Components/FavHospitals/FavHospitals";
-import Hospitals from "./Components/Hospitals/Hospitals";
-import Doctors from "./Components/Doctors/Doctors";
+import Hospitals from "./Pages/Hospitals";
 import HospitalsReviewsAll from './Components/HospitalReviewsAll/HospitalsReviewsAll'
-import DoctorsReviewsAll from "./Components/DoctorsReviewsAll/DoctorsReviewsAll";
-import FAQ from "./Components/FAQ";
-import PrivacyPolicy from './Components/PrivacyPolicy/PrivacyPolicy'
-import ContactUs from "./Components/ContactUs/ContactUs";
 import HospitalDetail from "./Components/HospitalDetail";
-import DoctorDetail from "./Components/DoctorDetail/index.js";
-import AboutUs from "./Components/AboutUsNew";
 import PrivateRoute from "./Components/utils/PrivateRoute";
+import Doctors from "./Pages/Doctors";
+import DoctorsReviewsAll from "./Pages/DoctorsReviewsAll/DoctorsReviewsAll";
+import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy'
+import DoctorDetail from "./Pages/DoctorDetail";
+import FAQ from "./Pages/FAQ";
+import ContactUs from "./Pages/ContactUs";
+import AboutUs from "./Pages/AboutUs";
 import './main.css'
 import { register } from 'swiper/element/bundle';
 import Footer from "./Components/Footer";
@@ -80,14 +76,10 @@ const App = () => {
       <Route element={<PrivateRoute/>}/>
       <Route  path="/" element={<HomePage/>}/>
       <Route path="profile" element={ <Profile/>}/>
-      <Route path="profile/doctor-reviews" element={<ReviewDoctors/>}/>
-      <Route path="profile/hospital-reviews" element={ <ReviewHospitals/>}/>
-      <Route path="profile/fav-doctors" element={ <FavDoctors/>}/>
-      <Route path="profile/fav-hospitals" element={<FavHospitals />}/>
       <Route path="/hospital-reviews/:id" element={<HospitalsReviewsAll/>}/>
       <Route path="/hospitals" element={<Hospitals/>}/>
-      <Route path="/doctors" element={<Doctors/>}/>
       <Route path="/hospital/:id" element={<HospitalDetail/>}/>
+      <Route path="/doctors" element={<Doctors/>}/>
       <Route path="/doctor/:id" element={<DoctorDetail/>}/>
       <Route path="/doctor-reviews/:id" element={<DoctorsReviewsAll/>}/>
       <Route path="/faq" element={ <FAQ/>}/>

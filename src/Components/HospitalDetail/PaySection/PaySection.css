@@ -1,0 +1,54 @@
+.pay-section {
+  background-color: #f6f6f6;
+}
+.pay-section-container {
+  width: var(--mobile);
+  margin: 0 auto;
+  padding: 10px 0 18px 0;
+}
+
+.pay-section-title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.41px;
+  color: #000000;
+  width: 60%;
+}
+.pay-section-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16.81px;
+  align-items: center;
+  padding-top: 20px;
+}
+.pay-section-item {
+  width: 43.89px;
+}
+.pay-section-item img {
+  width: 100%;
+  object-fit: cover;
+}
+@media (min-width: 1024px) {
+  .pay-section-container {
+    width: var(--desktop);
+    padding: 23px 0;
+  }
+  .pay-section-title {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 26.69px;
+    width: 100%;
+  }
+  .pay-section-items {
+    gap: 33.02px;
+    padding-top: 31.08px;
+  }
+  .pay-section-item {
+    width: 86.23px;
+  }
+}
+@media (min-width: 1440px) {
+  .pay-section-container {
+    width: var(--big-desktop);
+  }
+}

@@ -1,0 +1,25 @@
+.bread-crumbs {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .bread-crumbs {
+    width: 100%;
+    display: block;
+    padding-bottom: 23px;
+    border-bottom: 1px solid #cfcfcf;
+  }
+  .bread-crumbs .ant-breadcrumb-link {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.6px;
+    color: #5f5f5f;
+    text-transform: capitalize;
+  }
+  .bread-crumbs .ant-breadcrumb li:last-child .ant-breadcrumb-link {
+    color: #5282ff;
+  }
+  .bread-crumbs img {
+    padding-inline: 12px;
+  }
+}

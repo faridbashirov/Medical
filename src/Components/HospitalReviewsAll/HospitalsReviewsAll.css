@@ -1,549 +1,542 @@
 .singleStarIcon {
-    transform: translate(2px, -35px);
+  transform: translate(2px, -35px);
 }
 
 .HospitalReviewsDisplayGrid {
-    display: grid;
-    /*grid-template-columns: repeat(12, 1fr);*/
-    /*grid-template-rows: repeat(12, 1fr);*/
-    height: 210px;
-    width: 30%;
+  display: grid;
+
+  height: 210px;
+  width: 30%;
 }
 
 #hospitalReviewImage {
-    grid-column: 1/13;
-    grid-row: 1/13;
+  grid-column: 1/13;
+  grid-row: 1/13;
 }
 
 #hospitalReviewLike {
-    grid-column: 11/12;
-    grid-row: 2/3;
-    width: 42px;
-    height: 42px;
+  grid-column: 11/12;
+  grid-row: 2/3;
+  width: 42px;
+  height: 42px;
 }
 
 #hospitalNewRed {
-    grid-column: 1/3;
-    grid-row: 2/3;
+  grid-column: 1/3;
+  grid-row: 2/3;
 }
 
 .userFlag {
-    transform: translate(-12px, -2px);
-}
-
-.userIconOrFlag {
-    /* transform: translate(3px, 16px); */
+  transform: translate(-12px, -2px);
 }
 
 .checkIcon {
-    margin: 0 10px;
+  margin: 0 10px;
 }
 
 .likeIcon {
-    transform: translate(-12px, 4px);
+  transform: translate(-12px, 4px);
 }
 
 .unlikeIcon {
-    transform: translate(-12px, 6px);
+  transform: translate(-12px, 6px);
 }
 
 .featured-hospital {
-    background-color: #5282FF;
-    border: 1px solid #FFF;
-    border-radius: 15px;
-    display: flex;
-    margin-top: 40px;
+  background-color: #5282ff;
+  border: 1px solid #fff;
+  border-radius: 15px;
+  display: flex;
+  margin-top: 40px;
 }
-.featured-hospital-inner{
-    display: flex;
-    gap: 20px;
-    padding: 20px 50px 20px 20px;
-    align-items: center;
-    width: 100%;
+.featured-hospital-inner {
+  display: flex;
+  gap: 20px;
+  padding: 20px 50px 20px 20px;
+  align-items: center;
+  width: 100%;
 }
 
 .featured-body {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
 }
 
-
 .featured-img {
-    height: 210px;
-    width: 100%;
-    border-radius: 7px;
-    object-fit: cover;
+  height: 210px;
+  width: 100%;
+  border-radius: 7px;
+  object-fit: cover;
 }
 
 .featured-location {
-    color: #FFF;
-    font-size: 14px;
-    margin-bottom: 30px;
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 30px;
 }
 
 .rating-wrapper {
-    background-color: #FCFCFC;
-    border-radius: 10px;
-    width: 165px;
-    height: 165px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding-top: 10px;
+  background-color: #fcfcfc;
+  border-radius: 10px;
+  width: 165px;
+  height: 165px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 10px;
 }
 
 .rating-inner {
-    background-color: #5282FF;
-    border-radius: 5px;
-    width: 143px;
-    height: 82px;
+  background-color: #5282ff;
+  border-radius: 5px;
+  width: 143px;
+  height: 82px;
 }
 
 .rating-nums {
-    display: flex;
-    justify-content: center;
-    align-items: baseline
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
 }
 
 .rating-nums-lg {
-    font-size: 75px;
-    color: #FFF;
-    font-weight: 700;
+  font-size: 75px;
+  color: #fff;
+  font-weight: 700;
 }
 
 .rating-nums-slash {
-    font-size: 35px;
-    color: #FFF;
-    font-weight: 700;
+  font-size: 35px;
+  color: #fff;
+  font-weight: 700;
 }
 
 .rating-nums-sm {
-    font-size: 35px;
-    color: #FFF;
-    font-weight: 700;
+  font-size: 35px;
+  color: #fff;
+  font-weight: 700;
 }
-.ratings-text{
-    color: #000;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
+.ratings-text {
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
 }
-.featured-btns-mobile{
-    display: none;
-    padding: 5px;
+.featured-btns-mobile {
+  display: none;
+  padding: 5px;
 }
-.button-1{
-    background-color: #FFF;
-    border-radius: 5px;
-    color: #000;
-    height: 44px;
-    font-size: 18px;
-    margin-top: 10px;
+.button-1 {
+  background-color: #fff;
+  border-radius: 5px;
+  color: #000;
+  height: 44px;
+  font-size: 18px;
+  margin-top: 10px;
 }
-.button-2{
-    background-color: #fff !important;
-    border-radius: 0;
-    color: #5282FF;
-    height: 44px;
-    font-size: 18px;
-    margin-top: 10px;
-    border: 1px solid #5282FF;
+.button-2 {
+  background-color: #fff !important;
+  border-radius: 0;
+  color: #5282ff;
+  height: 44px;
+  font-size: 18px;
+  margin-top: 10px;
+  border: 1px solid #5282ff;
 }
-.hospital-reviews-card{
-    background-color: #fff;
-    border: 1px solid #fff;
-    border-radius: 15px;
-    width: 100%;
-    padding: 20px;
-    margin-top: 20px;
+.hospital-reviews-card {
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 15px;
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;
 }
 
-.reviews-name{
-    color: #0032A0;
-    font-size: 19px;
-    margin-bottom: 0px;
+.reviews-name {
+  color: #0032a0;
+  font-size: 19px;
+  margin-bottom: 0px;
 }
-.reviews-category{
-font-size: 14px;
-    color: #BCBCBC;
+.reviews-category {
+  font-size: 14px;
+  color: #bcbcbc;
 }
-.reviews-rating{
-color: #5F5F5F;
-    font-size: 16px;
+.reviews-rating {
+  color: #5f5f5f;
+  font-size: 16px;
 }
-.reviews-reacts{
-display: flex;
-    gap: 25px;
+.reviews-reacts {
+  display: flex;
+  gap: 25px;
 }
-.reviews-stars{
-    width: 20px;
+.reviews-stars {
+  width: 20px;
+  height: 11px;
+}
+.reviews__rating-num {
+  background-color: #ffc224;
+  border-radius: 4px;
+  color: #000;
+  width: 40px;
+  height: 31px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ant-btn-primary:not(:disabled):hover {
+  color: unset !important;
+}
+
+.featured-body-title {
+  color: #fff;
+  font-size: 33px;
+  margin: 10px 0;
+  font-weight: 700;
+}
+.featured-body-title-wrapper {
+  padding-top: 20px;
+}
+
+.featured-location-icon {
+  margin-right: 6px;
+  color: #fff;
+}
+.featured__ratings {
+  display: none;
+}
+.featured-btn-review {
+  background-color: #fff !important;
+  border-radius: 5px;
+  color: #000;
+  height: 44px;
+  width: 175px;
+  font-size: 18px;
+  margin-right: 15px;
+  margin-top: 10px;
+}
+
+@media (max-width: 756px) {
+  .featured-hospital {
+    flex-direction: column;
+    background: #fbfbfb;
+    border-radius: 0;
+  }
+  .featured-hospital-inner {
+    gap: 10px;
+    padding: 10px;
+  }
+  .featured-body {
+    width: 55%;
+    flex-direction: column;
+  }
+
+  .HospitalReviewsDisplayGrid {
+    width: 45%;
+    height: auto;
+  }
+  .featured-img {
+    height: 160px;
+  }
+
+  .featured-btns {
+    display: none;
+  }
+
+  .featured-location {
+    margin-bottom: 10px;
+  }
+  .featured-btn-review {
+    background-color: #5282ff !important;
+  }
+  .featured-btn-review span {
+    color: #fff !important;
+  }
+
+  .rating-wrapper {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #ececec;
+  }
+  .rating-inner {
+    background-color: transparent;
+    border-radius: 5px;
+    width: 100%;
+    height: auto;
+    display: flex;
+  }
+  .rating-nums {
+    background-color: #5282ff;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    align-items: center !important;
+  }
+  .rating-nums-lg {
+    font-size: 22px;
+    color: #fff;
+    font-weight: 700;
+  }
+  .singleStarIcon {
+    transform: translate(2px, -15px);
+  }
+  .rating-nums-slash {
+    font-size: 11px;
+    margin-bottom: -6px;
+    margin-right: 3px;
+  }
+  .rating-nums-sm {
+    font-size: 12px;
+    margin-bottom: -10px;
+  }
+  .ratings-text {
+    font-size: 10px;
+    text-align: left;
+  }
+  .featured-btns-mobile {
+    display: block;
+    width: 100%;
+  }
+  .featured-btns-mobile button {
+    width: 98%;
+    margin: 5px auto;
+  }
+  .userIconOrFlag {
+    display: flex;
+  }
+  .reviews-name {
+    font-size: 12px;
+  }
+  .reviews-category {
+    font-size: 7px;
+  }
+  .reviews-rating {
+    display: none;
+  }
+  .rating-stars {
+    width: 31px !important;
+    height: 5px !important;
+    justify-content: start !important;
+  }
+  .featured-btns-mobile button {
+    font-size: 13px !important;
+  }
+  .reviews-body-title {
+    font-size: 12px;
+    padding: 10px 0;
+  }
+
+  .reviews-body-desc {
+    font-size: 12px;
+    margin-bottom: 10%;
+  }
+  .reviews-reacts {
+    font-size: 12px;
+  }
+  .hospital-reviews-card {
+    padding: 15px;
+  }
+  .userIconOrFlag-flag {
+    width: 24px;
+    height: 24px;
+  }
+  .userFlag {
+    width: 10px;
+    height: 10px;
+    transform: translate(-10px, 15px);
+  }
+  .reviews-name {
+    font-size: 10px;
+  }
+  .reviews-stars {
+    width: 35px;
+    height: 6px;
+  }
+  .checkIcon {
+    width: 10px;
+    height: 10px;
+    transform: unset;
+    padding: 0;
+    margin: 0 7px;
+  }
+  .reviews__rating-num {
+    width: 22px;
+    height: 16px;
+    font-size: 10px;
+  }
+  .likeIcon-desc {
+    display: none;
+  }
+  .reviews-reacts {
+    gap: 7px;
+  }
+  .likeIcon,
+  .unlikeIcon {
+    width: 13px;
     height: 11px;
+  }
+  #hospitalNewRed {
+    width: 50px;
+    height: 17px;
+  }
+  #hospitalReviewLike {
+    width: 22px;
+    height: 22px;
+    margin-top: -5px;
+  }
+  .featured-body-title {
+    font-size: 14px;
+    color: #000000;
+    margin-top: 0;
+  }
+  .featured-body-title-wrapper {
+    padding-top: 0;
+    margin: 0;
+  }
+  .featured-body-stars-lg {
+    display: none;
+  }
+  .featured-location {
+    color: #5282ff;
+  }
+  .featured-location-icon {
+    margin-right: 0;
+    display: none;
+  }
+  .featured__ratings {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  .button-1 {
+    border-radius: 0;
+    background: #5282ff;
+    color: #fff;
+  }
+  .button-2 {
+    border-radius: 0;
+  }
 }
-.reviews__rating-num{
-    background-color: #FFC224;
-    border-radius: 4px;
-    color: #000;
-    width: 40px;
-    height: 31px;
+
+@media (max-width: 756px) {
+  .hospital-reviews-card .anticon {
+    font-size: 7px !important;
+  }
+  .hospital-reviews-card .ant-rate .ant-rate-star:not(:last-child) {
+    margin-inline-end: 3px !important;
+  }
+  .hospital-reviews-card .review-content {
+    font-size: 8px !important;
+  }
+  .userIconOrFlag {
+    width: 24px !important;
+    height: 25px !important ;
+    margin-right: 10px;
+  }
+  .hospital-reviews-card .ant-rate {
+    font-size: 5px !important;
+    line-height: 4px !important;
+    margin-top: -6px !important;
+  }
+  .hospital-reviews-card .review-average {
+    width: max-content !important;
+    height: unset !important;
+    padding: 2px 4px !important;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 10px !important;
+  }
+  .reviews-reacts {
+    width: 95%;
+  }
+  .review-icons p:last-child {
+    margin-left: 10px !important;
+  }
+  .reviews-reacts p:first-child {
+    font-size: 8px !important;
+    line-height: 5px !important;
+  }
+  .hospital-reviews-card .review-content {
+    margin-bottom: 10% !important;
+  }
+  .featured__ratings img {
+    width: 53px !important;
+    height: 9px !important;
+  }
+  .featured-body-title-wrapper {
+    width: 100% !important;
+  }
+  .singleStarIcon {
+    width: 5px !important;
+    height: 5px !important;
+  }
+  .ant-pagination .ant-pagination-item,
+  .ant-pagination .ant-pagination-item-active,
+  .ant-pagination .ant-pagination-item-active a,
+  .ant-pagination .ant-pagination-item,
+  .ant-pagination .ant-pagination-item a {
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 !important;
+  }
+  .ant-pagination .ant-pagination-item-active,
+  .ant-pagination .ant-pagination-item-active a,
+  .ant-pagination .ant-pagination-item,
+  .ant-pagination .ant-pagination-item a {
+    font-size: 12px !important;
+  }
+  .ant-pagination .ant-pagination-item-active {
+    margin-right: 15px !important;
+  }
+  .rating-stars-section {
+    justify-content: start !important;
+  }
 }
-.ant-btn-primary:not(:disabled):hover{
-    color: unset !important;
-}
-
-.featured-body-title{
-   color: #fff;
-    font-size: 33px;
-    margin: 10px 0;
-    font-weight: 700;
-}
-.featured-body-title-wrapper{
-    padding-top: 20px;
-}
-
-.featured-location-icon{
-    margin-right: 6px;
-    color: #fff;
-}
-.featured__ratings{
-    display: none;
-}
-.featured-btn-review{
-    background-color: #fff !important;
-    border-radius: 5px;
-    color: #000;
-    height: 44px;
-    width: 175px;
-    font-size: 18px;
-    margin-right: 15px;
-    margin-top: 10px;
-}
-
-
-
-@media (max-width: 756px) {
-    .featured-hospital{
-        flex-direction: column;
-        background: #FBFBFB;
-        border-radius: 0;
-    }
-    .featured-hospital-inner {
-        gap: 10px;
-        padding: 10px;
-    }
-    .featured-body {
-        width: 55%;
-        flex-direction: column;
-    }
-
-    .HospitalReviewsDisplayGrid {
-        width: 45%;
-        height: auto;
-    }
-    .featured-img{
-        height: 160px;
-    }
-
-    .featured-btns {
-        display: none;
-    }
-
-    .featured-location {
-        margin-bottom: 10px;
-    }
-    .featured-btn-review{
-        background-color: #5282FF !important;
-    }
-    .featured-btn-review span{
-        color: #fff !important;
-    }
-
-    .rating-wrapper {
-        width: 100%;
-        height: auto;
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 10px;
-        margin-top: 10px;
-        background-color: #ECECEC;
-    }
-    .rating-inner {
-        background-color: transparent;
-        border-radius: 5px;
-        width: 100%;
-        height: auto;
-        display: flex;
-    }
-    .rating-nums {
-        background-color: #5282FF;
-        padding: 10px;
-        margin-right: 10px;
-        border-radius: 5px;
-        align-items: center !important;
-    }
-    .rating-nums-lg {
-        font-size: 22px;
-        color: #FFF;
-        font-weight: 700;
-    }
-    .singleStarIcon {
-        transform: translate(2px, -15px);
-    }
-    .rating-nums-slash{
-        font-size: 11px;
-        margin-bottom: -6px;
-        margin-right: 3px;
-    }
-    .rating-nums-sm {
-        font-size: 12px;
-        margin-bottom: -10px;
-    }
-    .ratings-text{
-        font-size: 10px;
-        text-align: left;
-    }
-    .featured-btns-mobile{
-        display: block;
-        width: 100%;
-    }
-    .featured-btns-mobile button{
-        width: 98%;
-        margin: 5px auto;
-    }
-    .userIconOrFlag{
-        display: flex;
-    }
-    .reviews-name{
-        font-size: 12px;
-    }
-    .reviews-category{
-        font-size: 7px;
-    }
-    .reviews-rating{
-        display: none;
-    }
-    .rating-stars{
-        width: 31px !important;
-        height: 5px !important;
-        justify-content: start !important;
-    }
-    .featured-btns-mobile button{
-        font-size: 13px !important;
-    }
-    .reviews-body-title {
-        font-size: 12px;
-        padding: 10px 0;
-    }
-
-    .reviews-body-desc{
-        font-size: 12px;
-        margin-bottom: 10%;
-    }
-    .reviews-reacts{
-        font-size: 12px;
-    }
-    .hospital-reviews-card{
-        padding: 15px;
-    }
-    .userIconOrFlag-flag{
-        width: 24px;
-        height: 24px;
-    }
-    .userFlag{
-        width: 10px;
-        height: 10px;
-        transform: translate(-10px, 15px);
-    }
-    .reviews-name{
-        font-size: 10px;
-    }
-    .reviews-stars{
-        width: 35px;
-        height: 6px;
-    }
-    .checkIcon{
-        width: 10px;
-        height: 10px;
-        transform: unset;
-        padding: 0;
-        margin: 0 7px;
-    }
-    .reviews__rating-num{
-        width: 22px;
-        height: 16px;
-        font-size: 10px;
-    }
-    .likeIcon-desc{
-        display: none;
-    }
-    .reviews-reacts{
-        gap: 7px;
-    }
-    .likeIcon, .unlikeIcon{
-        width: 13px;
-        height: 11px;
-    }
-    #hospitalNewRed{
-        width: 50px;
-        height: 17px;
-    }
-    #hospitalReviewLike{
-        width: 22px;
-        height: 22px;
-        margin-top: -5px;
-    }
-    .featured-body-title{
-        font-size: 14px;
-        color: #000000;
-        margin-top: 0;
-    }
-    .featured-body-title-wrapper{
-        padding-top: 0;
-        margin: 0;
-    }
-    .featured-body-stars-lg{
-        display: none;
-    }
-    .featured-location{
-        color: #5282FF;
-    }
-    .featured-location-icon{
-        margin-right: 0;
-        display: none;
-    }
-    .featured__ratings{
-        display: flex;
-        gap: 5px;
-        margin-top: 10px;
-    }
-    .button-1{
-        border-radius: 0;
-        background: #5282FF;
-        color: #fff;
-    }
-    .button-2{
-        border-radius: 0;
-    }
-
-
-
+@media (min-width: 756px) {
+  .reviews-reacts {
+    width: 96%;
+  }
+  .review-icons p:last-child {
+    margin-left: 20px !important;
+  }
+  .hospital-reviews-card .review-content {
+    margin-bottom: 5% !important;
+  }
 }
 
-@media(max-width:756px){
-    .hospital-reviews-card .anticon{
-        font-size: 7px !important;
-    }
-    .hospital-reviews-card .ant-rate .ant-rate-star:not(:last-child){
-        margin-inline-end: 3px !important;
-    }
-    .hospital-reviews-card .review-content{
-        font-size: 8px !important;
-    }
-    .userIconOrFlag{
-        width: 24px !important;
-        height: 25px !important ;
-        margin-right: 10px;
-    }
-    .hospital-reviews-card .ant-rate{
-        font-size: 5px !important;line-height: 4px !important;
-        margin-top: -6px !important;
-    }
-   .hospital-reviews-card .review-average{
-        width: max-content !important;
-        height: unset !important;
-        padding: 2px 4px  !important;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 10px !important;
-    }
-    .reviews-reacts{
-        width: 95%;
-    }
-    .review-icons p:last-child{
-        margin-left:10px !important;
-    }
-    .reviews-reacts p:first-child{
-        font-size: 8px !important;
-        line-height: 5px !important;
-    }
-    .hospital-reviews-card .review-content{
-        margin-bottom: 10% !important;
-    }
-    .featured__ratings img{
-        width: 53px !important;
-        height: 9px !important;
-    }
-    .featured-body-title-wrapper{
-        width: 100% !important;
-    }
-    .singleStarIcon{
-        width: 5px !important;
-        height: 5px !important;
-    }
-    .ant-pagination .ant-pagination-item,.ant-pagination .ant-pagination-item-active, .ant-pagination .ant-pagination-item-active a, .ant-pagination .ant-pagination-item, .ant-pagination .ant-pagination-item a{
-        width: 16px !important;
-        height: 16px !important;
-        margin: 0 !important;
-    }
-    .ant-pagination .ant-pagination-item-active, .ant-pagination .ant-pagination-item-active a, .ant-pagination .ant-pagination-item, .ant-pagination .ant-pagination-item a{
-        font-size: 12px !important;
-    }
-    .ant-pagination .ant-pagination-item-active{
-        margin-right: 15px !important;
-    }
-    .rating-stars-section{
-        justify-content: start !important;
-    }
-    
-   .ant-rate .ant-rate-star:not(:last-child) {
-        margin-inline-end: 3px !important;
-    }
-}
-@media(min-width:756px){
-    .reviews-reacts{
-        width: 96%;
-    }
-    .review-icons p:last-child{
-        margin-left:20px !important;
-    }
-    .hospital-reviews-card .review-content{
-        margin-bottom: 5% !important;
-    }
-}
-
-.review-icons{
-    display: flex;
-    align-items: center;
+.review-icons {
+  display: flex;
+  align-items: center;
 }
 
 .hospital-reviews-card {
-    position: relative;
+  position: relative;
 }
-.reviews-reacts{
-    position: absolute;
-    
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    bottom: 10px;
-    
+.reviews-reacts {
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  bottom: 10px;
 }
-@media(min-width:756px) and (max-width:1023px){
-    .likeIcon-desc{
-        font-size: 14px !important;
-    }
+@media (min-width: 756px) and (max-width: 1023px) {
+  .likeIcon-desc {
+    font-size: 14px !important;
+  }
 }
-@media(min-width:756px){
-    .reviews-body-desc{
-        margin-bottom: 6% !important;
-    }
-    .ant-rate{
-        font-size: 14px !important;
-    }
+@media (min-width: 756px) {
+  .reviews-body-desc {
+    margin-bottom: 6% !important;
+  }
+  .ant-rate {
+    font-size: 14px !important;
+  }
 }

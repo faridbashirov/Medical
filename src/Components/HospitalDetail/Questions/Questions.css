@@ -1,0 +1,219 @@
+.hospital-detail-questions-section {
+  background-color: #f6f6f6;
+}
+.hospital-detail-questions-container {
+  width: var(--mobile);
+  margin: 0 auto;
+  padding: 10px 0;
+}
+.hospital-detail-questions-header {
+  padding-bottom: 16px;
+}
+.hospital-detail-questions-header h4 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 38px;
+  text-align: justify;
+}
+.hospital-detail-questions-header p {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  text-align: justify;
+}
+.detail-questions-items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.detail-questions-item {
+  min-height: 220px;
+  width: 100%;
+  border-radius: 5.36px;
+  border: 0.54px solid #d1d1d1;
+  background-color: #ffffff;
+  padding: 15.6px 17.83px 13px 17.83px;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+}
+.detail-question {
+  min-height: 70.4px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6.18px;
+}
+.detail-question-line {
+  border-bottom: 0.54px dashed #c2c2c2;
+}
+.detail-question-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.detail-question-header-author {
+  display: flex;
+  align-items: center;
+  color: #808d9a;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: justify;
+}
+.detail-question-header-author .detail-question-header-profile {
+  height: 20.22px;
+  object-fit: cover;
+  margin-right: 6.6px;
+}
+.detail-question-header-author .detail-question-header-profile-verify {
+  height: 7.8px;
+  object-fit: cover;
+  margin-left: 3.37px;
+}
+.detail-question-header-author span {
+  width: 20.39px;
+  height: 20.22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 11.89px;
+  font-weight: 500;
+  text-align: justify;
+  border-radius: 50%;
+  background-color: #b1a7eb;
+  color: #ffffff;
+  margin-right: 6.6px;
+}
+.detail-question-date {
+  color: #a4a4a4;
+  font-size: 9px;
+  font-weight: 500;
+  text-align: right;
+}
+.detail-questions-content {
+  color: #1d1d1d;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: justify;
+}
+.detail-questions-answer {
+  display: flex;
+  flex-direction: column;
+  gap: 3.39px;
+  padding-top: 11px;
+}
+.detail-questions-answer p {
+  color: #a4a4a4;
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 9.64px;
+}
+.detail-questions-answer-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.detail-questions-answer-buttons {
+  display: flex;
+  gap: 5.93px;
+}
+.detail-questions-answer-buttons button {
+  background-color: #f2f5f9;
+  font-size: 8.24px;
+  font-weight: 500;
+  line-height: 10.59px;
+  text-align: center;
+  color: #929292;
+  padding: 5px 9px;
+  border-radius: 14.71px;
+  border: 1px solid #f2f5f9;
+  outline: 1px solid #f2f5f9;
+  text-transform: capitalize;
+}
+@media (min-width: 1024px) {
+  .hospital-detail-questions-container {
+    width: var(--desktop);
+    padding: 20px 0;
+  }
+  .hospital-detail-questions-header {
+    padding-bottom: 31px;
+  }
+  .hospital-detail-questions-header h4 {
+    font-size: 38px;
+    line-height: 46.09px;
+    padding-bottom: 7px;
+  }
+  .hospital-detail-questions-header p {
+    font-size: 20px;
+    line-height: 24px;
+    text-align: justify;
+  }
+  .detail-questions-items {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .detail-questions-item {
+    min-height: 398px;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    padding: 31px 33px 35px 33px;
+  }
+  .detail-question {
+    min-height: 130px;
+    gap: 21px;
+  }
+  .detail-question-line {
+    border-bottom: 1px dashed #c2c2c2;
+  }
+  .detail-question-header-author {
+    font-size: 16px;
+    line-height: 18px;
+  }
+  .detail-question-header-author span {
+    margin-right: 11.43px;
+    width: 34.29px;
+    height: 34px;
+    font-size: 20px;
+  }
+  .detail-question-header-author .detail-question-header-profile {
+    margin-right: 11.43px;
+    height: 34px;
+  }
+  .detail-question-header-author .detail-question-header-profile-verify {
+    height: 12.5px;
+    object-fit: cover;
+    margin-left: 7.06px;
+  }
+  .detail-question-date {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .detail-questions-content {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .detail-questions-answer {
+    padding-top: 18px;
+    gap: 7px;
+  }
+  .detail-questions-answer p {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .detail-questions-answer-buttons {
+    gap: 8.68px;
+  }
+  .detail-questions-answer-buttons button {
+    font-size: 12.06px;
+    line-height: 15.5px;
+    padding: 5px 9px;
+    border-radius: 21.53px;
+  }
+}
+@media (min-width: 1440px) {
+  .hospital-detail-questions-container {
+    width: var(--big-desktop);
+  }
+}

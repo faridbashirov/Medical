@@ -100,7 +100,7 @@
     "quiet2":"Guests need be quiet between 11:00 PM and 8:00 AM.",
     "smoking2":"Smoking is not allowed.",
     "party2":"Parties/events are not allowed",
-    "hosbooking":"When booking online",
+    "hosbooking":"When booking online - {{percantage}}%",
     "children":"Children & Beds",
     "children2":"Child policies <br/> Children not allowed. <br/>  Crib and extra bed policies <br/>  There is no capacity for cribs at this property. <br/>  This property does not offer extra beds.",
     "payment":"The Payment Method Accepted by the Clinic",
