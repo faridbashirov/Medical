@@ -85,10 +85,10 @@ const HospitalCard = ({ hospital, t, user }) => {
                 </span>
                 <span className='hospital-card-new-profile-detail-raiting-name'>неплохо</span>
               </span>
-              <div className='hospital-card-new-profile-detail-reviews'>
+              {/* <div className='hospital-card-new-profile-detail-reviews'>
                 <a href="">{hospital?.comment_count} отзыва</a>
                 <p>Соотношение цена/качество</p>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className='hospital-card-new-profile-buttons'>

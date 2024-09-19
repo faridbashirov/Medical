@@ -74,7 +74,7 @@ console.log(hospital);
     <HospitalInfoContent open={onOpenBookingModal} discount={discount} hospital={hospital}/>
     <HospitalDetailHint t={t}/>
     <HospitalDirections services={services} hospital={hospital}/>
-    <Reviews id={id} reviews={reviews}/>
+    {/* <Reviews id={id} reviews={reviews}/> */}
     <Questions questions={questions}/>
     <QualityRating  hospital={hospital}  />
     <GetService hospital={hospital}/>
