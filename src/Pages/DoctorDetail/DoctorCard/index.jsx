@@ -6,17 +6,22 @@ import experience from "../../../assets/Svg/staj.svg";
 import DrFB from "../../../assets/Svg/DrFB.svg";
 import DrVK from "../../../assets/Svg/DrVK.svg";
 import DrLn from "../../../assets/Svg/DrLn.svg";
+import doctorMale from "../../../assets/Images/User/doctor-male.png"
+import doctorFemale from "../../../assets/Images/User/doctor-female.png"
 import { Rate } from 'antd'
 
 const DoctorCard = ({onOpenBookingModal,doctor}) => {
-  console.log(doctor, "salama")
   const {t}=useTranslation()
   return (
     <div className='doctor-card-container'>
       <div className='doctor-card'>
         <div className='doctor-card-profile'>
           <div className='doctor-card-profile-photo'>
-            <img src={doctor.profile_photo} alt="" />
+            {doctor?.profile_photo!=="https://hospitalbackend.efgroup.az/media/default.png" ?
+              <img src={doctor?.profile_photo || doctorMale} alt="" />
+              :
+              <img src={doctorMale} alt="" />
+            }
             <div className='doctor-card-profile-photo-raiting'>{doctor?.raiting>=0 ? doctor?.raiting.toFixed(1) : 0 }</div>
           </div>
           <div className='doctor-card-profile-details'>

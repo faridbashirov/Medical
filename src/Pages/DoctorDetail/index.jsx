@@ -8,7 +8,6 @@ import DoctorDetailFetch from '../../Components/api/doctorDetail.js';
 import { useParams } from 'react-router-dom';
 import DoctorReviews from '../../Components/Reviews';
 import i18next from 'i18next';
-import Breadcrumbs from '../../Components/BreadCrumbs'
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 
@@ -19,15 +18,9 @@ const DoctorDetail = () => {
   const [openBooking, setOpenBooking] = useState(false)
   const {id}=useParams()
   const {data,error,loading,review}=DoctorDetailFetch(id,i18next.language)
-  console.log(data, 'aaaa')
   i18next.on('languageChanged', () => {
     setLang(i18next.language)
   })
-
-
-  console.log(i18next.language, 'actiualllllllllllll');
-
-
 
   const onOpenBookingModal = () => {
     setOpenBooking(true)
@@ -63,7 +56,7 @@ const DoctorDetail = () => {
       </div>
       <DoctorCard doctor={data} onOpenBookingModal={onOpenBookingModal}/>
       <DoctorInfo doctor={data}/>
-      <DoctorReviews doctor={data} reviews={review} id={id}/>
+      {/* <DoctorReviews doctor={data} reviews={review} id={id}/> */}
       <DoctorBookingModal openBooking={openBooking} onCloseBookingModal={onCloseBookingModal}/>
     </div>
     </section>

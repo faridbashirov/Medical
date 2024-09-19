@@ -15,7 +15,7 @@
 }
 @media (min-width: 1024px) {
   .contact-us {
-    padding: 40px 0 32px 0;
+    padding: 0 0 32px 0;
   }
   .contact-us-container {
     width: var(--desktop);

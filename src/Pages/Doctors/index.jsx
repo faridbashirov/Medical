@@ -17,8 +17,8 @@ import { allCountriesFetch } from "../../Components/api/allCountries.js";
 import { Trans } from "react-i18next";
 import i18next from "i18next";
 import { Helmet } from "react-helmet";
-import DoctorsCard from '../../Components/DoctorsCard'
-import BreadCrumbs from "../../Components/BreadCrumbs/index.jsx";
+import DoctorsCard from './DoctorsCard'
+import BreadCrumbs from "../../Components/BreadCrumbs";
 
 const Doctors = () => {
   const navigate=useNavigate()

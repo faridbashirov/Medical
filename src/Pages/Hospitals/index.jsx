@@ -21,6 +21,7 @@ import { allCountriesFetch } from "../../Components/api/allCountries";
 import i18next from "i18next";
 import { Helmet } from "react-helmet";
 import HospitalCard from "./HospitalCard/index.jsx";
+import BreadCrumbs from "../../Components/BreadCrumbs/index.jsx";
 
 const  Hospitals = () => {
   const navigate=useNavigate()
@@ -186,37 +187,15 @@ const DeleteFromFavorite= async(id)=>{
     </Helmet>
       <main className="hospital-main">
         <div className="container">
-          <div className={"breadcrumbs"}>
-            <Breadcrumb
-              separator={
-                <span
-                  style={{
-                    color: "#5282FF",
-                    paddingLeft: "5px",
-                    paddingRight: "10px",
-                  }}
-                >
-                  {">"}
-                </span>
-              }
-              items={[
-
-                {
-                  title: t("home"),
-                  href: "/",
-                },
-                {
-                  title: t("Clinics"),
-                  href: "/hospitals",
-                },
-              
-                 
-                {
-                  title:t("mainsearch"),
-                },
-              ]}
-            />
-          </div>
+          <BreadCrumbs pageItems={[{
+              title: t("home"),
+              href: "/",
+            },
+            {
+              title: t("Clinics"),
+              href: "/hospitals"
+            }
+      ]}/>
           <div>
               <p className={"result-text result-mobile"}>
                 <span

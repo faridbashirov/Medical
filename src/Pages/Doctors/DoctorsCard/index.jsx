@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import './DoctorsCard.css';
-import location from "../../assets/Svg/Location.svg";
-import locationSponsored from '../../assets/Svg/Location-sponsored.svg';
-import experience from "../../assets/Svg/staj.svg";
-import heart from "../../assets/Svg/heart-sm.svg";
-import heartDeactive from '../../assets/Svg/heart-deactive.svg'
-import doctorMale from "../../assets/Images/User/doctor-male.png"
-import doctorFemale from "../../assets/Images/User/doctor-female.png"
+import location from "../../../assets/Svg/Location.svg";
+import locationSponsored from '../../../assets/Svg/Location-sponsored.svg';
+import experience from "../../../assets/Svg/staj.svg";
+import heart from "../../../assets/Svg/heart-sm.svg";
+import heartDeactive from '../../../assets/Svg/heart-deactive.svg'
+import doctorMale from "../../../assets/Images/User/doctor-male.png"
+import doctorFemale from "../../../assets/Images/User/doctor-female.png"
 import { Rate } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import { axiosPrivate } from '../../api/api';
+import { axiosPrivate } from '../../../api/api';
 
 const DoctorsCard = ({ doctor, t, user }) => {
-  console.log(doctor, 'salam12')
   const [liked, setLiked] = React.useState(doctor?.is_favorite);
   const navigate=useNavigate()
   const [add, setAdd] = React.useState(false);

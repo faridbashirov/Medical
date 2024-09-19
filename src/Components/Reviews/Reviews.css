@@ -122,13 +122,12 @@
   display: flex;
   justify-content: center;
 }
-.swiper {
+.reviews__carousel .swiper {
   overflow: visible;
   position: relative;
-}
-.swiper {
   width: 175%;
 }
+
 .reviews {
   position: relative;
 }

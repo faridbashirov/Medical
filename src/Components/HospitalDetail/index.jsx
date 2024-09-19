@@ -23,7 +23,6 @@ const HospitalDetail = () => {
   const [openBooking, setOpenBooking] = useState(false)
  const {id}=useParams()
  const onOpenBookingModal = () => {
-  console.log('1')
   setOpenBooking(true)
 }
 const onCloseBookingModal = () => {
@@ -55,7 +54,7 @@ console.log(hospital);
               title: t("Clinics"),
               href: "/hospitals"
             }
-          ]}/>
+      ]}/>
       <div className={'detail__info-btns'}>
         {infoButtons.map(item => (
           <button key={item.id} className={'detail__info-btn'}>{t(item.label)}</button>

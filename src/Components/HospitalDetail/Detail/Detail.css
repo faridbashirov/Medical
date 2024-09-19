@@ -289,7 +289,29 @@
   .hospital-detail-content-slider {
     width: 32%;
   }
+  .hospital-detail-content-slider .swiper-vertical {
+    height: 100%;
+  }
   .hospital-detail-content-info {
     width: 325px;
+  }
+  .hospital-detail-content-card img {
+    height: 142px;
+  }
+  .hospital-detail-content-slider .swiper-button-next {
+    left: 50%;
+    top: inherit;
+    bottom: 0;
+    transform: rotate(90deg);
+    transform-origin: left center;
+    background-color: #b1b1b1;
+  }
+
+  .hospital-detail-content-slider .swiper-button-prev {
+    left: 50%;
+    top: 0;
+    transform: rotate(90deg);
+    transform-origin: left center;
+    background-color: #b1b1b1;
   }
 }

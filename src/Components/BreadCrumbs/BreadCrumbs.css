@@ -6,7 +6,7 @@
   .bread-crumbs {
     width: 100%;
     display: block;
-    padding-bottom: 23px;
+    padding: 40px 0 23px 0;
     border-bottom: 1px solid #cfcfcf;
   }
   .bread-crumbs .ant-breadcrumb-link {

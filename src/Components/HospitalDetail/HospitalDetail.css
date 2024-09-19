@@ -355,7 +355,7 @@
 
 @media (min-width: 1024px) {
   .hospital-detail-container {
-    padding: 40px 0 51.47px 0;
+    padding: 0 0 51.47px 0;
   }
   .detail__clinic-btns {
     grid-template-columns: 1fr 1fr 1fr 1fr;
