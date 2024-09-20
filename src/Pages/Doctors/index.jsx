@@ -19,6 +19,7 @@ import i18next from "i18next";
 import { Helmet } from "react-helmet";
 import DoctorsCard from './DoctorsCard'
 import BreadCrumbs from "../../Components/BreadCrumbs";
+import Loading from "../Loading";
 
 const Doctors = () => {
   const navigate=useNavigate()

@@ -43,7 +43,7 @@ const FAQ = () => {
               href: "/",
             },
             {
-              title: t("FAQ"),
+              title: t("faq"),
               href: "/faq"
             },
           ]}/>

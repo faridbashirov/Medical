@@ -38,6 +38,23 @@ const DoctorsCard = ({ doctor, t, user }) => {
   useEffect(()=>{
     DeleteFromFavorite()
   })
+  const raitingName = (raiting) => {
+    switch (raiting) {
+      case 0:
+        return t("no-rating");
+      case 1:
+        return t("very-bad");
+      case 2:
+        return t("bad");
+      case 3:
+        return t("not-bad");
+      case 4:
+        return t("good");
+      case 5:
+        return t("excellent");
+    }
+  };
+
   return (
     <div className={`doctors-card-new ${doctor?.is_sponsored ? "doctors-card-new-sponsor" : ""}`}>
       <div className='doctors-card-new-container'>
@@ -84,7 +101,7 @@ const DoctorsCard = ({ doctor, t, user }) => {
               <span className='doctors-card-new-profile-detail-stars'>
                 <Rate style={{ color: '#FFC224' }} disabled={true} value={doctor?.raiting >= 0 ? doctor?.raiting.toFixed(1) : 0} />
               </span>
-              <span className='doctors-card-new-profile-detail-raiting-name'>неплохо</span>
+              <span className='doctors-card-new-profile-detail-raiting-name'>{raitingName(doctor?.raiting)}</span>
             </span>
             <div className='doctors-card-new-profile-detail-reviews'>
               <a href="">{doctor?.comment_count} отзыва</a>

@@ -170,13 +170,13 @@
     "hospital":"Hospital",
     "doctor":"Doctor",
     "ouradvantages": "Our advantages",
-    "aboutus": "About Us"
-
-    
-    
-    
-
-    
-
-
+    "aboutus": "About Us",
+    "faq": "FAQ",
+    "privacy-policy": "Privacy Policy",
+    "very-bad":"Very Bad",
+    "bad":"Bad",
+    "not-bad":"Not Bad",
+    "good":"Good",
+    "excellent":"Excellent",
+    "no-rating": "No Rating"
 }

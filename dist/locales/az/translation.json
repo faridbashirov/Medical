@@ -169,25 +169,14 @@
     "hospital":"Xəstəxana",
     "doctor":"Həkim",
     "ouradvantages": "Bizim üstünlüklərimiz",
-    "aboutus": "Haqqımızda"
-
-
-
-
-
-
-
-
+    "aboutus": "Haqqımızda",
+    "faq": "Tez-tez verilən suallar",
+    "privacy-policy": "Məxfilik siyasəti",
+    "very-bad":"Çox Pis",
+    "bad":"Pis",
+    "not-bad":"Pis Deyil",
+    "good":"Yaxşı",
+    "excellent":"Əla",
+    "no-rating": "Reytinqi Yoxdur"
     
-
-
-
- 
-    
-    
-    
-    
-
-
-
 }

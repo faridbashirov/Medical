@@ -1,0 +1,18 @@
+.loading-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f9;
+}
+.loading-spinner {
+  height: 64px;
+  width: 64px;
+}
+@media (min-width: 1024px) {
+  .loading-spinner {
+    height: 128px;
+    width: 128px;
+  }
+}

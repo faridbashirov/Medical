@@ -58,7 +58,7 @@
     "bron3":"Pulsuz rezervasiya",
     "bron4":"Rezervasiya etmək",
     "variant":"nəticə",
-    "hosbooking":"Rezervasyon zamanı saytda - {{percantage}}%",
+    "hosbooking":"Rezervasyon zamanı <br/> saytda",
     "hoslistbooking2":"Klinikada",
     "hoslistbooking3":"Klinikadan ucuz <br/> Sabit qiymətə indi bron edin, sonra ödəyin İlkin ödənişsiz PULSUZ ləğv. Klinika müqavilə bağlayıb və şərtlərə əməl etməyə borcludur",
     "hoslistbooking4":"Xidmətlərə baxın",
@@ -169,25 +169,13 @@
     "hospital":"Xəstəxana",
     "doctor":"Həkim",
     "ouradvantages": "Bizim üstünlüklərimiz",
-    "aboutus": "Haqqımızda"
-
-
-
-
-
-
-
-
-    
-
-
-
- 
-    
-    
-    
-    
-
-
-
+    "aboutus": "Haqqımızda",
+    "faq": "Tez-tez verilən suallar",
+    "privacy-policy": "Məxfilik siyasəti",
+    "very-bad":"Çox Pis",
+    "bad":"Pis",
+    "not-bad":"Pis Deyil",
+    "good":"Yaxşı",
+    "excellent":"Əla",
+    "no-rating": "Reytinqi Yoxdur"
 }
