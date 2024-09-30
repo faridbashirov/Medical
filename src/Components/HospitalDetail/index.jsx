@@ -18,10 +18,12 @@ import HospitalBookingModal from './HospitalBookingModal';
 import { Helmet } from 'react-helmet';
 import HospitalDetailHint from './HospitalDetailHint/index.jsx';
 import HospitalDirections from './HospitalDirections/index.jsx';
+import { useSelector } from 'react-redux';
 const HospitalDetail = () => {
   const {t}=useTranslation()
   const [openBooking, setOpenBooking] = useState(false)
  const {id}=useParams()
+ const {user,authToken}=useSelector(state=> state.auth)
  const onOpenBookingModal = () => {
   setOpenBooking(true)
 }
@@ -30,7 +32,7 @@ const onCloseBookingModal = () => {
 }
 
 const {hospital,services,advantages,discount,questions,reviews,images,loading,error}=DetailFetch(id,i18next.language)
-console.log(hospital);
+console.log(hospital, "ssssssss");
   if(error){
     return <div>Errorr</div>
   }
@@ -60,7 +62,7 @@ console.log(hospital);
           <button key={item.id} className={'detail__info-btn'}>{t(item.label)}</button>
         ))}
       </div>
-      <Detail open={onOpenBookingModal} images={images} hospital={hospital}/>
+      <Detail user={user} open={onOpenBookingModal} images={images} hospital={hospital}/>
       {advantages.length>0 ? <div className={'detail__clinic-btns'}>
         {advantages.map(item => (
           <button key={item.id} className={'detail__clinic-btn'}>
@@ -78,7 +80,7 @@ console.log(hospital);
     <Questions questions={questions}/>
     <QualityRating  hospital={hospital}  />
     <GetService hospital={hospital}/>
-    <PaySection/>
+    {/* <PaySection/> */}
     <HospitalBookingModal  openBooking={openBooking} onCloseBookingModal={onCloseBookingModal}/>
   </div>}
   </>

@@ -2,10 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import useLanguageFetch from '../../../Hooks/useLanguageFetch';
 import { useTranslation } from 'react-i18next';
-import typeOneImage from '../../../CardBanner/eac6ab1446 2-1.png'
-import typeTwoImage from '../../../CardBanner/a7fbac63bb 1.png'
-import typeThreeImage from '../../../CardBanner/def241ffe1 2.png'
-import typeFourImage from '../../../CardBanner/Rectangle 318.png'
 import { Skeleton } from "antd";
 import './BestOffers.css'
 import Small from '../../CardBanner/Small';

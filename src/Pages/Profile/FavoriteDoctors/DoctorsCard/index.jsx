@@ -12,7 +12,22 @@ import { axiosPrivate } from '../../../../api/api';
 const DoctorsCard = ({ doctor, t, user, add, setAdd }) => {
   const [liked, setLiked] = React.useState(true);
   const navigate = useNavigate();
-
+  const raitingName = (raiting) => {
+    switch (raiting) {
+      case 0:
+        return t("no-rating");
+      case 1:
+        return t("very-bad");
+      case 2:
+        return t("bad");
+      case 3:
+        return t("not-bad");
+      case 4:
+        return t("good");
+      case 5:
+        return t("excellent");
+    }
+  };
   const DeleteFromFavorite = async (id) => {
     try {
       setLiked(false);
@@ -66,7 +81,7 @@ const DoctorsCard = ({ doctor, t, user, add, setAdd }) => {
               <span className='doctors-card-new-profile-detail-stars'>
                 <Rate style={{ color: '#FFC224' }} disabled={true} value={doctor?.raiting >= 0 ? doctor?.raiting.toFixed(1) : 0} />
               </span>
-              <span className='doctors-card-new-profile-detail-raiting-name'>неплохо</span>
+              <span className='doctors-card-new-profile-detail-raiting-name'>{raitingName(doctor?.raiting)}</span>
             </span>
             <div className='doctors-card-new-profile-detail-reviews'>
               <a href="">{doctor?.comment_count} отзыва</a>

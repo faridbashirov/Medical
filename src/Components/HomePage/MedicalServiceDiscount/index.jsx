@@ -47,7 +47,7 @@ const MedicalServiceDiscount = () => {
                     <Button
                         className={"medical-service__button"}
                       >
-                        Посмотреть категории
+                        {t("view-categories")}
                     </Button>
                   </div>
                   

@@ -39,6 +39,7 @@ const Doctors = () => {
   const [count,setCount] = useState(0)
   const {user,authToken}=useSelector(state=> state.auth)
   const [activeElement, setActiveElement] = useState(0);
+  console.log(doctors, "doctoros")
    searchParams.set("type",checkedValue)
    const handleClick = (elementId) => {
     setActiveElement(elementId);

@@ -5,18 +5,31 @@ import location from "../../../assets/Svg/Location.svg";
 import locationSponsored from '../../../assets/Svg/Location-sponsored.svg';
 import heart from "../../../assets/Svg/heart-sm.svg";
 import heartDeactive from '../../../assets/Svg/heart-deactive.svg'
-import doctorMale from "../../../assets/Images/User/doctor-male.png"
 import { Rate } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { axiosPrivate } from '../../../api/api';
 import { Trans } from 'react-i18next';
 
-const HospitalCard = ({ hospital, t, user }) => {
-  console.log(hospital, 'salam')
+const HospitalCard = ({ hospital, t, user }) => {  
   const [liked, setLiked] = React.useState(hospital?.is_favorite || false);
   const navigate=useNavigate()
   const [add, setAdd] = React.useState(false);
-
+  const raitingName = (raiting) => {
+    switch (raiting) {
+      case 0:
+        return t("no-rating");
+      case 1:
+        return t("very-bad");
+      case 2:
+        return t("bad");
+      case 3:
+        return t("not-bad");
+      case 4:
+        return t("good");
+      case 5:
+        return t("excellent");
+    }
+  };
   const AddToFavorite = async (id) => {
     try {
       await axiosPrivate.post(`card/add_favorite/${id}`);
@@ -41,14 +54,15 @@ const HospitalCard = ({ hospital, t, user }) => {
     <div className={`hospital-card-new ${hospital?.is_sponsored ? "hospital-card-new-sponsor" : ""}`}>
       <div className='hospital-card-new-container'>
         <div className='hospital-card-new-profile-photo-area'>
-          {hospital?.main_image!=="https://hospitalbackend.efgroup.az/media/default.png" ?
+          {hospital?.main_image!=="" &&
           <img className='hospital-card-new-profile-photo' src={hospital?.main_image || profile} alt="" />
-           :
-           <img className='hospital-card-new-profile-photo' src={doctorMale} alt="" />
            }
            {user ?
            <div 
-            onClick={() => liked ? DeleteFromFavorite(hospital?.id) : AddToFavorite(hospital?.id)} 
+            onClick={(e) => {
+              e.preventDefault()
+              liked ? DeleteFromFavorite(hospital?.id) : AddToFavorite(hospital?.id)
+            }} 
             className={'hospital-card-new-profile-heart'}
           >
             {liked ? <img src={heart} alt="" /> : <img src={heartDeactive} alt="" />}
@@ -83,7 +97,7 @@ const HospitalCard = ({ hospital, t, user }) => {
                 <span className='hospital-card-new-profile-detail-stars'>
                   <Rate style={{ color: '#FFC224' }} disabled={true} value={hospital?.raiting >= 0 ? hospital?.raiting.toFixed(1) : 0} />
                 </span>
-                <span className='hospital-card-new-profile-detail-raiting-name'>неплохо</span>
+                <span className='hospital-card-new-profile-detail-raiting-name'>{raitingName(hospital?.raiting)}</span>
               </span>
               {/* <div className='hospital-card-new-profile-detail-reviews'>
                 <a href="">{hospital?.comment_count} отзыва</a>

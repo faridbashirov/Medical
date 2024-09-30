@@ -806,7 +806,15 @@ li {
   }
   .ant-input-affix-wrapper > input.ant-input {
     font-size: 13px;
+    background-color: #f4f4f4;
   }
+}
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+.ant-input-affix-wrapper > input.ant-input {
+  background-color: #f4f4f4;
 }
 @media (min-width: 768px) and (max-width: 1024px) {
   .fontMed {

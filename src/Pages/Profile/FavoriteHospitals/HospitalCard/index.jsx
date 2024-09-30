@@ -15,7 +15,22 @@ const HospitalCard = ({ hospital, t, user }) => {
   const [liked, setLiked] = React.useState(hospital?.is_favorite || false);
   const navigate=useNavigate()
   const [add, setAdd] = React.useState(false);
-
+  const raitingName = (raiting) => {
+    switch (raiting) {
+      case 0:
+        return t("no-rating");
+      case 1:
+        return t("very-bad");
+      case 2:
+        return t("bad");
+      case 3:
+        return t("not-bad");
+      case 4:
+        return t("good");
+      case 5:
+        return t("excellent");
+    }
+  };
   const DeleteFromFavorite= async(id)=>{
     setLiked(true)
     axiosPrivate.delete(`card/remove_favorite/${id}`)
@@ -73,7 +88,7 @@ const HospitalCard = ({ hospital, t, user }) => {
                 <span className='hospital-card-new-profile-detail-stars'>
                   <Rate style={{ color: '#FFC224' }} disabled={true} value={hospital?.raiting >= 0 ? hospital?.raiting.toFixed(1) : 0} />
                 </span>
-                <span className='hospital-card-new-profile-detail-raiting-name'>неплохо</span>
+                <span className='hospital-card-new-profile-detail-raiting-name'>{raitingName(hospital?.raiting)}</span>
               </span>
               <div className='hospital-card-new-profile-detail-reviews'>
                 <a href="">{hospital?.comment_count} отзыва</a>

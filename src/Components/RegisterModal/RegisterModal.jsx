@@ -1,7 +1,7 @@
 import {Button, Divider, Form, Input, Modal, Tabs, Typography} from "antd";
 import './RegisterMOdal.css'
-import ClientForm from "./ClientForm.jsx";
-import DoctorForm from "./DoctorForm.jsx";
+import ClientForm from "./ClientForm1.jsx";
+import DoctorForm from "./DoctorForm1.jsx";
 import { useTranslation } from 'react-i18next';
 import { useEffect,createRef } from "react";
 

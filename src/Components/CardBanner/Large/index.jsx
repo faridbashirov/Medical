@@ -1,6 +1,4 @@
 import React from 'react'
-// import plastic from '../../../assets/Images/best-sellers/def241ffe1 1.png'
-import plastic from '../../../assets/Images/best-sellers/eac6ab1446 1.png'
 import './Large.css'
 import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
@@ -26,7 +24,7 @@ const Large = ({image,discount,percantage,title}) => {
         </div> :
         <>
           <div className='large-box'>
-            <p className='large-box-description'>скидка</p>
+            <p className='large-box-description'>{t("discount-name")}</p>
             <p className='large-percantage'>15%</p>
           </div>
           <div className='large-title-button'>

@@ -56,17 +56,18 @@ const DoctorsCard = ({ doctor, t, user }) => {
   };
 
   return (
-    <div className={`doctors-card-new ${doctor?.is_sponsored ? "doctors-card-new-sponsor" : ""}`}>
+    <Link to={`/hospital/${doctor?.hospital?.id}`} className={`doctors-card-new ${doctor?.is_sponsored ? "doctors-card-new-sponsor" : ""}`}>
       <div className='doctors-card-new-container'>
         <div className='doctors-card-new-profile-photo-area'>
-          {doctor?.profile_photo!=="https://hospitalbackend.efgroup.az/media/default.png" ?
+          {doctor?.profile_photo!=="" &&
           <img className='doctors-card-new-profile-photo' src={doctor?.profile_photo || doctorMale} alt="" />
-           :
-           <img className='doctors-card-new-profile-photo' src={doctorMale} alt="" />
            }
            {user ?
            <div 
-            onClick={() => liked ? DeleteFromFavorite(doctor?.id) : AddToFavorite(doctor?.id)} 
+            onClick={(e) => {
+              e.preventDefault();
+              liked ? DeleteFromFavorite(doctor?.id) : AddToFavorite(doctor?.id);
+            }}
             className={'doctors-card-new-profile-heart'}
           >
             {liked ? <img src={heart} alt="" /> : <img src={heartDeactive} alt="" />}
@@ -123,7 +124,7 @@ const DoctorsCard = ({ doctor, t, user }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

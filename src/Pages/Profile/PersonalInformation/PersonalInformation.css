@@ -1,8 +1,18 @@
-@font-face {
-  font-family: "Gilroy";
-  src: url("../../Fonts/gilroy/Gilroy-Medium-AZ_0.ttf");
+.react-international-phone-input,
+.react-international-phone-country-selector-button {
+  background-color: #f9f9f9 !important;
+  height: 34px !important;
+  border-radius: 0 !important;
 }
-
+.react-international-phone-input {
+  overflow: hidden;
+  width: 100%;
+}
+.react-international-phone-input-container {
+  border: none !important;
+  height: 34px !important;
+  border-radius: 0px;
+}
 .menuNav {
   border: 1px solid #ebebeb;
   border-radius: 5px !important;
@@ -33,37 +43,36 @@
   background-color: #f9f9f9 !important;
   border: 1px solid #e0e0e0 !important;
   border-radius: 0 !important;
-  padding: 10px 15px;
+  padding: 5px;
 }
 .lastInputName {
   background-color: #f9f9f9 !important;
   border: 1px solid #e0e0e0 !important;
   border-radius: 0 !important;
-  padding: 10px 15px;
+  padding: 5px;
 }
 
 .emailInput {
   background-color: #f9f9f9 !important;
   border: 1px solid #e0e0e0 !important;
   border-radius: 0 !important;
-  padding: 10px 15px;
+  padding: 5px;
 }
 .passwordInput {
   background-color: #f9f9f9 !important;
   border: 1px solid #e0e0e0 !important;
   border-radius: 0 !important;
-  padding: 10px 15px;
+  padding: 5px;
 }
 .datePicker {
   background-color: #f9f9f9 !important;
   border: 1px solid #e0e0e0 !important;
   border-radius: 0 !important;
-  padding: 10px 15px;
+  padding: 5px;
   width: 100%;
 }
 .phone-select .ant-select-selector {
-  height: 44px !important; /* Set the desired height */
-  line-height: 40px; /* Set the same value as height for vertical alignment */
+  height: 34px !important;
 }
 @media (max-width: 756px) {
 }

@@ -29,6 +29,7 @@
   border-radius: 8.6px;
 }
 .hospital-card-new-profile-heart {
+  cursor: pointer;
   background-color: #ffffff;
   width: 34.51px;
   height: 33.98px;

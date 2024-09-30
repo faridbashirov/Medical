@@ -1,48 +1,78 @@
-.active-tab{
-    background-color: #4096ff;
-    color: #fff;
+.active-tab {
+  background-color: #4096ff;
+  color: #fff;
 }
 
-.custom-tab{
-    background-color: red;
-    color: #fff
+.custom-tab {
+  background-color: red;
+  color: #fff;
 }
 
-
-
-.input{
-    padding: 0.8rem;
-    background: #F4F4F4;
-    border: 1px solid #DEDEDE;
+.input {
+  padding: 0.8rem;
+  background: #f4f4f4;
+  border: 1px solid #dedede;
 }
 
-.select{
-    /*width: 100%;*/
-    padding: 0.8rem;
-    border: 1px solid #DEDEDE;
-    background: #F4F4F4;
-    border-radius: 5px;
+.select {
+  /*width: 100%;*/
+  padding: 0.8rem;
+  border: 1px solid #dedede;
+  background: #f4f4f4;
+  border-radius: 5px;
 }
-.ant-select-selector{
-    border: none !important;
+.ant-select-selector {
+  border: none !important;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.register-modal
+  .react-international-phone-input-container
+  .react-international-phone-input {
+  padding: 10px 15px !important;
+  background: #f4f4f4 !important;
+  border: 1px solid #dedede !important;
+  font-size: 12px !important;
+  border-radius: 0 6px 6px 0 !important;
+  height: 43.22px !important;
+}
+.phone-number-register {
+  height: 43.22px;
+}
+.register-modal
+  .react-international-phone-input-container
+  .react-international-phone-country-selector-button {
+  border-radius: 6px 0 0 6px !important;
+  padding: 10px 5px !important;
+  background: #f4f4f4 !important;
+  height: 43.22px !important;
+}
 
 @media (max-width: 756px) {
-    .modal-content {
-        width: 90%; /* Adjust the width as needed */
-    }
+  .modal-content {
+    width: 90%; /* Adjust the width as needed */
+  }
+}
+
+@media (min-width: 1024px) {
+  .register-modal
+    .react-international-phone-input-container
+    .react-international-phone-input {
+    padding: 10px 15px !important;
+    background: #f4f4f4 !important;
+    border: 1px solid #dedede !important;
+    font-size: 14px !important;
+    border-radius: 0 6px 6px 0 !important;
+    height: 49.22px !important;
+  }
+  .phone-number-register {
+    height: 49.22px;
+  }
+  .register-modal
+    .react-international-phone-input-container
+    .react-international-phone-country-selector-button {
+    border-radius: 6px 0 0 6px !important;
+    padding: 10px 5px !important;
+    background: #f4f4f4 !important;
+    height: 49.22px !important;
+  }
 }

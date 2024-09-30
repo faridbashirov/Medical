@@ -30,7 +30,7 @@ const HomePage = () => {
       <SpecialOffers/>
       <TopClinic/>
       <DoctorSearch/>
-      <HomeReviews/>
+      {/* <HomeReviews/> */}
     </>
   );
 };

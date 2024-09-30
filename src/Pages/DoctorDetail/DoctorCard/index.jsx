@@ -11,6 +11,23 @@ import doctorFemale from "../../../assets/Images/User/doctor-female.png"
 import { Rate } from 'antd'
 
 const DoctorCard = ({onOpenBookingModal,doctor}) => {
+  const raitingName = (raiting) => {
+    switch (raiting) {
+      case 0:
+        return t("no-rating");
+      case 1:
+        return t("very-bad");
+      case 2:
+        return t("bad");
+      case 3:
+        return t("not-bad");
+      case 4:
+        return t("good");
+      case 5:
+        return t("excellent");
+    }
+  };
+  
   const {t}=useTranslation()
   return (
     <div className='doctor-card-container'>
@@ -31,7 +48,7 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
               <Rate disabled={true} value={doctor.raiting}/></div> :
               <div className='doctor-card-profile-title'><Rate disabled={true} value={doctor.raiting}/></div>}
               <div className="doctor-card-raiting-area">
-                <h6>великолепно</h6>
+                <h6>{raitingName(doctor?.raiting)}</h6>
                 <div className='doctor-card-raiting'>{doctor?.raiting>=0 ? doctor?.raiting.toFixed(1) : 0 }</div>
               </div>
             </div>
@@ -51,7 +68,7 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
             <div className='doctor-card-buttons-area'>
               <div className='doctor-card-buttons-desktop'>
                 <button onClick={onOpenBookingModal}>{t("onlinebooking")}</button>
-                <button>контакт</button>
+                <button>{doctor?.phone_number}</button>
               </div>
               <div className="doctor-card-social">
                 <img src={DrFB}/>

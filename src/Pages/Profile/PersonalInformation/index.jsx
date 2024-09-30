@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./PersonalInformation.css";
 import Password from "./Password";
-import Info from "./Info";
+import Info from "./Info2";
 import {
   Form,
   Tabs,

@@ -19,7 +19,7 @@ const ExtraLarge = ({image,discount,percantage}) => {
       <img className='ballSecond' src={ballSecond} alt="" />
       <img className='ballThird' src={ballThird} alt="" />
       <div className='extra-large-box'>
-        <p className='extra-large-box-description'>скидка</p>
+        <p className='extra-large-box-description'>{t("discount-name")}</p>
         <p className='extra-large-percantage'>15%</p>
       </div>
       <div className='extra-large-image-box'>

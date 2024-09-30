@@ -60,12 +60,12 @@ const Footer = () => {
               <li  style={{
                 cursor:"pointer"
               }}  onClick={()=> {navigate("/about-us")}} className={"footer-nav-link"}>
-                О «112 мед».
+                {t("about-112Med")}
               </li>
               <li  style={{
                 cursor:"pointer"
               }}  onClick={()=> {navigate("/faq")}} className={"footer-nav-link"}>
-                FAQ
+                {t("faq")}
               </li>
             </ul>
           </div>
@@ -84,7 +84,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="footerIcons-header">
-          <h4>Свяжись с нами</h4>
+          <h4>{t("contact-us1")}</h4>
           <a href={"mailto:info@112med.com"}>
             <img src={footerArrow} alt=""/>
             info@112med.com
@@ -111,7 +111,7 @@ const Footer = () => {
         </div>
       </div>
       <p className="footer-copy">
-        © All rights reserved 2023. 112 Med
+        {t("copyright")}
       </p>
     </footer>
   );

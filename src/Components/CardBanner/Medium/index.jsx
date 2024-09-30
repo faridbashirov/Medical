@@ -1,7 +1,9 @@
 import React from 'react'
 import './Medium.css'
-import plastic from '../../../assets/Images/best-sellers/5327664118 1.png'
+import { useTranslation } from 'react-i18next'
+
 const Medium = ({discount,percantage,image}) => {
+  const {t}=useTranslation()
   return (
     <div className='medium'>
       {discount || percantage && <div className='medium-box'>
@@ -9,7 +11,7 @@ const Medium = ({discount,percantage,image}) => {
         {percantage && <p className='medium-percantage'>{percantage}</p>}
       </div>}
       <div className='medium-box'>
-        <p className='medium-box-description'>скидка</p>
+        <p className='medium-box-description'>{t("discount-name")}</p>
         <p className='medium-percantage'>30%</p>
       </div>
       {image && <img className='medium-image' src={image} alt="" />}
