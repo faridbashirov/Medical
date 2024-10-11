@@ -8,11 +8,15 @@ import { useTranslation } from 'react-i18next';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { getRatingComment } from '../../api/getRatingComment.js';
 import './Detail.css';
+import axios from "../../api/index.js";
+import { useParams } from 'react-router-dom';
+import i18next from 'i18next';
 
 const Detail = ({ images, hospital, open }) => {
+  const {id}=useParams()
   const [activeIndex, setActiveIndex] = useState(0);
   const { t } = useTranslation();
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(hospital?.raiting_count);
   const [comment, setComment] = useState("");
 
   const handleSlideChange = (swiper) => {
@@ -21,20 +25,16 @@ const Detail = ({ images, hospital, open }) => {
   };
 
   const handleRatingSubmit = async (value) => {
-  setRating(value);
-
   const reviewData = {
     hospital: hospital?.id,
     text: comment,
-    rate: value,  // Use the value from the event handler directly
+    rate: value,
   };
 
   const response = await getRatingComment(reviewData);
-  if (response?.success) {
-    console.log('Rating submitted successfully', response);
-  } else {
-    console.log('Error submitting rating', response);
-  }
+   const responseNew = await axios.get(`${i18next.language === "ru" ? "" : i18next.language + "/"}hospital/hospital/${id}`)
+   let newRating = responseNew?.data?.raiting_count
+   setRating(newRating)
 };
 
 
@@ -48,8 +48,9 @@ const Detail = ({ images, hospital, open }) => {
                 <h6>{hospital.name}</h6>
                 <Rate
                   style={{ color: "#FFC224" }}
-                  value={hospital?.rating}
+                  value={rating}
                   onChange={handleRatingSubmit}
+                  allowHalf
                 />
               </div>
               <p>{t("transport")}</p>

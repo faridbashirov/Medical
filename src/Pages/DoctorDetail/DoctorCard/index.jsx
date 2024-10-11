@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './DoctorCard.css'
 import { useTranslation } from 'react-i18next'
 import location from "../../../assets/Svg/Location.svg";
@@ -9,8 +9,28 @@ import DrLn from "../../../assets/Svg/DrLn.svg";
 import doctorMale from "../../../assets/Images/User/doctor-male.png"
 import doctorFemale from "../../../assets/Images/User/doctor-female.png"
 import { Rate } from 'antd'
+import { postRatingDoctor } from '../../../Components/api/postRaitingDoctor';
 
 const DoctorCard = ({onOpenBookingModal,doctor}) => {
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+  const handleRatingSubmit = async (value) => {
+  setRating(value);
+
+  const reviewData = {
+    doctor: doctor?.id,
+    text: comment,
+    rate: value,
+  };
+
+  const response = await postRatingDoctor(reviewData);
+  if (response?.success) {
+    console.log('Rating submitted successfully', response);
+  } else {
+    console.log('Error submitting rating', response);
+  }
+};
+
   const raitingName = (raiting) => {
     switch (raiting) {
       case 0:
@@ -45,8 +65,13 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
             <div className='doctor-card-profile-title-area'>
               {doctor?.position?.name.length>0 ?
               <div className='doctor-card-profile-title'><h5>{doctor.position?.name}</h5>
-              <Rate disabled={true} value={doctor.raiting}/></div> :
-              <div className='doctor-card-profile-title'><Rate disabled={true} value={doctor.raiting}/></div>}
+              <Rate
+                style={{ color: "#FFC224"}}
+                value={doctor?.raiting_count}
+                onChange={handleRatingSubmit}
+                allowHalf={true}
+              /></div> :
+              <div className='doctor-card-profile-title'><Rate value={doctor.raiting}/></div>}
               <div className="doctor-card-raiting-area">
                 <h6>{raitingName(doctor?.raiting)}</h6>
                 <div className='doctor-card-raiting'>{doctor?.raiting>=0 ? doctor?.raiting.toFixed(1) : 0 }</div>

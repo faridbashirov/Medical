@@ -35,6 +35,14 @@
   padding: 0 11px 11px 11px;
   text-align: center;
 }
+.medium .medium-day {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 21px;
+  text-transform: capitalize;
+  padding: 0 11px 11px 11px;
+  text-align: center;
+}
 
 .medium .medium-image {
   width: auto;
@@ -75,5 +83,10 @@
     padding: 0 16px 18px 16px;
     font-size: 43.73px;
     line-height: 53.57px;
+  }
+  .medium .medium-day {
+    padding: 0 16px 18px 16px;
+    font-size: 38px;
+    line-height: 48px;
   }
 }

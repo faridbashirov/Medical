@@ -6,22 +6,31 @@ import './ExtraLarge.css'
 import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 
-const ExtraLarge = ({image,discount,percantage}) => {
+const ExtraLarge = ({image,discount,percentage}) => {
   const {t}=useTranslation()
   return (
     <div className='extraLarge'>
       <div className='extra-large-background-box'></div>
-      {discount || percantage && <div className='extra-large-box'>
-        {discount && <p className='extra-large-box-description'>{discount}</p>}
-        {percantage && <p className='extra-large-percantage'>{percantage}</p>}
-      </div>}
+      {percentage ? 
+      <div className='extra-large-box'>
+        {discount 
+        ? 
+        <>
+          <p className='extra-large-box-description'>{t("discount-name")}</p>
+          <p className='extra-large-percantage'>{percentage}%</p>
+        </>
+        :
+        <>
+          <p className='extra-large-box-description'>{t("only")}</p>
+          <p className='extra-large-percantage'>{percentage} {t("day")}</p>
+        </>
+        }
+      </div>
+      : <></>}
+
       <img className='ballFirst' src={ballFirst} alt="" />
       <img className='ballSecond' src={ballSecond} alt="" />
       <img className='ballThird' src={ballThird} alt="" />
-      <div className='extra-large-box'>
-        <p className='extra-large-box-description'>{t("discount-name")}</p>
-        <p className='extra-large-percantage'>15%</p>
-      </div>
       <div className='extra-large-image-box'>
         {image && <img className='extra-large-image' src={image} alt="" />}
       </div>

@@ -25,7 +25,9 @@ import useLanguageFetch from "../../Hooks/useLanguageFetch";
 if (!localStorage.getItem("lang")) {
   localStorage.setItem("lang", "ru");
 }
-
+if(!localStorage.getItem("currency")){
+  localStorage.setItem("currency", "USD")
+}
 const itemsFlag = [
   {
     label: (
@@ -69,7 +71,6 @@ const itemsFlag = [
       />
     ),
   },
-  
   {
     label: (
       <span
@@ -97,6 +98,8 @@ const itemsFlag = [
 const Header = () =>{
   const [showMenu, setShowMenu] = useState(false)
   const { data } = useLanguageFetch('main/currencies',localStorage.getItem("lang"));
+  console.log('currrency:', data)
+  const [currency, setCurrency] = useState("USD");
   const [itemsCurrency,setItemsCurrency] = useState([])
   const handleMenu = () =>{
     setShowMenu(!showMenu)
@@ -104,36 +107,36 @@ const Header = () =>{
   if(!localStorage.getItem("lang")){
     localStorage.setItem("lang","ru")
   }
-  if(!localStorage.getItem("currency")){
-    localStorage.setItem("currency","RUB")
-  }
   useEffect(() => {
   if(data){
     const itemsCurrencyNew = Object.keys(data).map((item, index) => ({
         label: (
-          <div className="currency-card">
-            <span>
-              {item}
-            </span>
-            <span>
-              {data[item].rate.toLocaleString('en-US', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-              })}
-            </span>
-          </div>
+            <div className="currency-card">
+                <span>{item}</span>
+                <span>
+                    {data[item].rate.toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                    })}
+                </span>
+            </div>
         ),
         key: index.toString(),
         icon: (
-          <div className="currency">
-            <span>
-            {data[item].symbol}
-          </span>
-          </div>
-        )
-      }));
-    setItemsCurrency(itemsCurrencyNew)
-    const defaultCurrency = itemsCurrencyNew.find(item => item.label.props.children.toString().toUpperCase() === localStorage.getItem("currency").toUpperCase()) || itemsCurrencyNew[0];
+            <div className="currency">
+                <span>{data[item].symbol}</span>
+            </div>
+        ),
+    }));
+    console.log("itemsCurrencyNew:",itemsCurrencyNew)
+    // Find the default currency using the label text
+    const defaultCurrency = itemsCurrencyNew.find(
+        (item) =>
+            item.label.props.children?.props?.children?.toUpperCase() ===
+            localStorage.getItem("currency")?.toUpperCase()
+    ) || itemsCurrencyNew[0];
+
+    setItemsCurrency(itemsCurrencyNew);
     setCurrency(defaultCurrency);
   }
   if (showMenu) {
@@ -144,6 +147,7 @@ const Header = () =>{
 }, [showMenu,data]);
  
   const handleMenuFlagClick = (e) => {
+    console.log('itemsFlag:',itemsFlag[0].label.props)
     localStorage.setItem("lang",itemsFlag.find(item => item.key === e.key).label.props.children.toLowerCase())
     setActive(itemsFlag.find(item => item.key === e.key))
     i18n.changeLanguage(itemsFlag.find(item => item.key === e.key).label.props.children.toLowerCase())
@@ -167,7 +171,6 @@ const Header = () =>{
 
   const [openLogin, setOpenLogin] = useState(false)
   const [openRegister, setOpenRegister] = useState(false)
-   const [currency, setCurrency] = useState({});
   const [active,setActive] = useState(itemsFlag.find( item => item.label.props.children === localStorage.getItem("lang").toUpperCase()))
   const navigate=useNavigate()
   const {user, errors}=useSelector((state)=> state.auth)

@@ -7,11 +7,7 @@ export const fetchHospitals = createAsyncThunk(
     async (obj,thunkAPI) => {
         
       try {
-        
-       
         const data =  await axiosPrivate.get(`https://hospitalbackend.efgroup.az/${obj === "ru" ? "" : obj+"/"}hospital/hospitals`)
-       
-        console.log(data,"salam");
         return data
       } catch (error) {
        return  thunkAPI.rejectWithValue(error.message)

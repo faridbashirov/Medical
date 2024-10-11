@@ -26,6 +26,7 @@
 }
 .sponsored-hospitals-list img {
   object-fit: cover;
+  align-self: center;
   width: 100%;
 }
 @media (min-width: 1024px) {

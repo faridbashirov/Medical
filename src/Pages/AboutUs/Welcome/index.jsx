@@ -8,13 +8,14 @@ const Welcome = () => {
   const doctors = useLanguageFetch('account/doctors',localStorage.getItem("lang"));
   const hospitals = useLanguageFetch('hospital/hospitals',localStorage.getItem("lang"));
   const services = useLanguageFetch('account/all_positions',localStorage.getItem("lang"));
-  console.log(country?.data, country)
+  const about_banner = useLanguageFetch('main/about_banner',localStorage.getItem("lang"));
+  console.log(about_banner?.data, "sslslssslls")
   return (
     <div className='welcome-area'>
       <div className='welcome-container'>
         <div className='welcome-box'>
-          <h3>Добро пожаловать на 112 MED</h3>
-          <p>Мы стремимся, чтобы вы получили качественные, удобные и доступные медицинские услуги по всему миру!</p>
+          <h3>{about_banner?.data?.title}</h3>
+          <p>{about_banner?.data?.description}</p>
         </div>
         <div className="welcome-statistics">
           <div className='welcome-statistic'>

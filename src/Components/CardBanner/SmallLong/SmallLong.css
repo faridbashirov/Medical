@@ -41,6 +41,13 @@
   text-transform: capitalize;
   text-align: center;
 }
+.small-long .small-long-day {
+  font-size: 12.48px;
+  font-weight: 600;
+  line-height: 15.29px;
+  text-transform: capitalize;
+  text-align: center;
+}
 .small-long .small-long-title {
   position: relative;
   z-index: 15;
@@ -91,6 +98,11 @@
   .small-long .small-long-percantage {
     font-size: 37.04px;
     line-height: 45.37px;
+    padding: 0 16px 18px 16px;
+  }
+  .small-long .small-long-day {
+    font-size: 24.15px;
+    line-height: 29.59px;
     padding: 0 16px 18px 16px;
   }
   .small-long .small-long-title {
