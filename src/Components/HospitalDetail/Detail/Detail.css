@@ -142,6 +142,21 @@
 .hospital-detail-thumbnail {
   display: none;
 }
+.hospital-detail-thumbnail .swiper-button-next,
+.hospital-detail-thumbnail .swiper-button-prev {
+  display: none;
+}
+
+.hospital-detail-content-header-title-area div .anticon-star svg {
+  width: 10px;
+  height: 10px;
+}
+.hospital-detail-content-header-title-area div .ant-rate {
+  font-size: 8px !important;
+  display: flex;
+  align-items: center;
+}
+
 @media (min-width: 1024px) {
   .hospital-detail-content-section {
     flex-direction: row-reverse;
@@ -212,6 +227,7 @@
     display: block;
     width: 23px;
     object-fit: cover;
+    cursor: pointer;
   }
   .hospital-detail-content-header-title-area div {
     gap: 9px;
@@ -280,6 +296,18 @@
   .hospital-detail-thumbnail {
     width: 63%;
     display: block;
+    position: relative;
+  }
+  .hospital-detail-thumbnail .swiper-button-next,
+  .hospital-detail-thumbnail .swiper-button-prev {
+    position: absolute;
+    display: block;
+  }
+  .hospital-detail-thumbnail .swiper-button-prev {
+    left: 5px;
+  }
+  .hospital-detail-thumbnail .swiper-button-next {
+    right: 5px;
   }
   .hospital-detail-thumbnail img {
     width: 100%;
@@ -298,20 +326,15 @@
   .hospital-detail-content-card img {
     height: 142px;
   }
-  .hospital-detail-content-slider .swiper-button-next {
-    left: 50%;
-    top: inherit;
-    bottom: 0;
-    transform: rotate(90deg);
-    transform-origin: left center;
-    background-color: #b1b1b1;
-  }
-
+  .hospital-detail-content-slider .swiper-button-next,
   .hospital-detail-content-slider .swiper-button-prev {
-    left: 50%;
-    top: 0;
-    transform: rotate(90deg);
-    transform-origin: left center;
-    background-color: #b1b1b1;
+    display: none;
+  }
+  .hospital-detail-content-header-title-area div .anticon-star svg {
+    width: 17px;
+    height: 17px;
+  }
+  .hospital-detail-content-header-title-area div .ant-rate {
+    font-size: 18px !important;
   }
 }

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Button, Checkbox, Divider, Rate } from "antd";
+import React, { useState, useEffect, useRef } from 'react';
+import { Button, Checkbox, Divider, Rate, message  } from "antd";
 import location from "../../../assets/Svg/Location.svg";
 import heart from "../../../assets/Svg/heart.svg";
 import share from "../../../assets/Svg/share.svg";
@@ -13,30 +13,60 @@ import { useParams } from 'react-router-dom';
 import i18next from 'i18next';
 
 const Detail = ({ images, hospital, open }) => {
-  const {id}=useParams()
+  const textAreaRef = useRef(null)
+  const copyToClip = () =>{
+    const pageUrl = window.location.href;
+    navigator.clipboard.writeText(pageUrl)
+      .then(() => {
+        message.success(t("link-copied"));
+      })
+      .catch(() => {
+        message.error(t("link-copy-failed"));
+      });
+  }
+  const { id } = useParams();
   const [activeIndex, setActiveIndex] = useState(0);
   const { t } = useTranslation();
   const [rating, setRating] = useState(hospital?.raiting_count);
-  const [comment, setComment] = useState("");
+  const [ratingName, setRatingName] = useState('');
+  const [comment, setComment] = useState('');
+
+  const raitingName = (raiting_count) => {
+    if (raiting_count === 0) {
+      return t("no-rating");
+    } else if (raiting_count > 0 && raiting_count <= 1) {
+      return t("very-bad");
+    } else if (raiting_count > 1 && raiting_count <= 2) {
+      return t("bad");
+    } else if (raiting_count > 2 && raiting_count <= 3) {
+      return t("not-bad");
+    } else if (raiting_count > 3 && raiting_count <= 4) {
+      return t("good");
+    } else {
+      return t("excellent");
+    }
+  };
+
+  useEffect(() => {
+    setRatingName(raitingName(rating));
+  }, [rating]);
 
   const handleSlideChange = (swiper) => {
     setActiveIndex(swiper.realIndex);
-    console.log(activeIndex);
   };
 
   const handleRatingSubmit = async (value) => {
-  const reviewData = {
-    hospital: hospital?.id,
-    text: comment,
-    rate: value,
+    const reviewData = {
+      hospital: hospital?.id,
+      text: comment,
+      rate: value,
+    };
+
+    await getRatingComment(reviewData);
+    const responseNew = await axios.get(`${i18next.language === "ru" ? "" : i18next.language + "/"}hospital/hospital/${id}`);
+    let newRating = responseNew?.data?.raiting_count;
+    setRating(newRating);
   };
-
-  const response = await getRatingComment(reviewData);
-   const responseNew = await axios.get(`${i18next.language === "ru" ? "" : i18next.language + "/"}hospital/hospital/${id}`)
-   let newRating = responseNew?.data?.raiting_count
-   setRating(newRating)
-};
-
 
   return (
     <section className='hospital-detail-content-section'>
@@ -48,7 +78,7 @@ const Detail = ({ images, hospital, open }) => {
                 <h6>{hospital.name}</h6>
                 <Rate
                   style={{ color: "#FFC224" }}
-                  value={rating}
+                  defaultValue={0}
                   onChange={handleRatingSubmit}
                   allowHalf
                 />
@@ -63,15 +93,15 @@ const Detail = ({ images, hospital, open }) => {
               </div>
               <p>{t("location")}  -  <span>{t("map2")}</span></p>
               <div className='hospital-detail-content-header-footer-area-raiting'>
-                <span>9.5</span>
-                <span>великолепно</span>
+                <span>{rating}</span>
+                <span>{ratingName}</span>
               </div>
             </div>
           </div>
           <div className='hospital-detail-content-header-right-area'>
             <span>
               <img className='hospital-detail-heart' src={heart} alt="" />
-              <img className='hospital-detail-share' src={share} alt="" />
+              <img className='hospital-detail-share' src={share} alt="" onClick={copyToClip}/>
               <button onClick={() => open()}>{t("bron")}</button>
             </span>
             <button>
@@ -91,6 +121,8 @@ const Detail = ({ images, hospital, open }) => {
               autoplay={{
                 delay: 2500,
               }}
+              allowSlidePrev={true}
+              allowSlideNext={true}
               navigation={{
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -105,7 +137,7 @@ const Detail = ({ images, hospital, open }) => {
               }}
             >
               {images.map((item, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide v-slot="{ isNext }" key={index} onClick={() => setActiveIndex(index)}>
                   <div className='hospital-detail-content-card'>
                     <img key={index} src={item.image} alt="" />
                   </div>
@@ -117,6 +149,8 @@ const Detail = ({ images, hospital, open }) => {
           </div>
           <div className='hospital-detail-thumbnail'>
             <img src={images[activeIndex]?.image} alt="" />
+            <div className="swiper-button-prev"></div>
+            <div className="swiper-button-next"></div>
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@ const DoctorDetail = () => {
   i18next.on('languageChanged', () => {
     setLang(i18next.language)
   })
-
+  console.log('data doctors:', data)
   const onOpenBookingModal = () => {
     setOpenBooking(true)
   }
@@ -32,7 +32,8 @@ const DoctorDetail = () => {
     return <div>Something went wrong !!!</div>
   }
   return (
-    <section className='doctor-detail-section'>
+    data ? 
+      <section className='doctor-detail-section'>
     <Helmet>
       <meta charSet="utf-8" />
       <title>{`${data.first_name} ${data.last_name}`}</title>
@@ -60,6 +61,8 @@ const DoctorDetail = () => {
       <DoctorBookingModal openBooking={openBooking} onCloseBookingModal={onCloseBookingModal}/>
     </div>
     </section>
+    : 
+    <></>
   );
 };
 

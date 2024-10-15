@@ -12,6 +12,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { axiosPrivate } from '../../../api/api';
 
 const DoctorsCard = ({ doctor, t, user }) => {
+  console.log('doctor:',doctor)
   const [liked, setLiked] = React.useState(doctor?.is_favorite);
   const navigate=useNavigate()
   const [add, setAdd] = React.useState(false);
@@ -38,20 +39,20 @@ const DoctorsCard = ({ doctor, t, user }) => {
   useEffect(()=>{
     DeleteFromFavorite()
   })
-  const raitingName = (raiting) => {
-    switch (raiting) {
-      case 0:
-        return t("no-rating");
-      case 1:
-        return t("very-bad");
-      case 2:
-        return t("bad");
-      case 3:
-        return t("not-bad");
-      case 4:
-        return t("good");
-      case 5:
-        return t("excellent");
+  const raitingName = (raiting_count) => {
+    if(raiting_count==0){
+      return t("no-rating");
+    }else if(raiting_count>0 && raiting_count<=1){
+      return t("very-bad");
+    }else if(raiting_count>1 && raiting_count<=2){
+      return t("bad");
+    }
+    else if(raiting_count>2 && raiting_count<=3){
+      return t("not-bad");
+    }else if(raiting_count>3 && raiting_count<=4){
+      return t("good");
+    }else{
+      return t("excellent");
     }
   };
 
@@ -98,11 +99,11 @@ const DoctorsCard = ({ doctor, t, user }) => {
               )}
             </div>
             <span className='doctors-card-new-profile-detail-raitings'>
-              <span className='doctors-card-new-profile-detail-raiting'>{doctor?.raiting >= 0 ? doctor?.raiting.toFixed(1) : 0}</span>
+              <span className='doctors-card-new-profile-detail-raiting'>{doctor?.raiting_count >= 0 ? doctor?.raiting_count.toFixed(1) : 0}</span>
               <span className='doctors-card-new-profile-detail-stars'>
-                <Rate style={{ color: '#FFC224' }} disabled={true} value={doctor?.raiting >= 0 ? doctor?.raiting.toFixed(1) : 0} />
+                <Rate style={{ color: '#FFC224' }} disabled={true} value={doctor?.raiting_count >= 0 ? doctor?.raiting_count.toFixed(1) : 0} />
               </span>
-              <span className='doctors-card-new-profile-detail-raiting-name'>{raitingName(doctor?.raiting)}</span>
+              <span className='doctors-card-new-profile-detail-raiting-name'>{raitingName(doctor?.raiting_count)}</span>
             </span>
             <div className='doctors-card-new-profile-detail-reviews'>
               <a href="">{doctor?.comment_count} отзыва</a>
