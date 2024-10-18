@@ -9,11 +9,34 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { getRatingComment } from '../../api/getRatingComment.js';
 import './Detail.css';
 import axios from "../../api/index.js";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import i18next from 'i18next';
-
+import Filter from "./Filter";
+import FilterButtons from "./FilterButtons";
+import { allCountriesFetch } from '../../api/allCountries.js';
 const Detail = ({ images, hospital, open }) => {
-  const textAreaRef = useRef(null)
+  const [country, setCountry] = useState([])
+  const [searchParams,setSearchParams] = useSearchParams()
+  const [selectedCountryValue, setSelectedCountryValue] = useState(searchParams.get("country")? searchParams.get("country").split(",") : []);
+  const [checkedValue, setCheckedValue] = useState(searchParams.get("type")? searchParams.get("type") : "clinic");
+  const navigate = useNavigate();
+  const CountryChange = (value) => {
+    console.log(value);
+    setSelectedCountryValue(value);
+    searchParams.delete("page");
+    searchParams.delete("location")
+    searchParams.delete("name")
+     
+    if (value.length === 0) {
+      searchParams.delete("country");
+    
+    } else {
+      searchParams.set("country", value);
+    }
+    
+    const newSearch = `?${searchParams.toString()}`;
+    navigate({  pathname:"/hospitals", search: newSearch });
+    };
   const copyToClip = () =>{
     const pageUrl = window.location.href;
     navigator.clipboard.writeText(pageUrl)
@@ -31,6 +54,35 @@ const Detail = ({ images, hospital, open }) => {
   const [ratingName, setRatingName] = useState('');
   const [comment, setComment] = useState('');
 
+  const handleCheckboxChange = (e) => {
+      const { value } = e.target;
+      setCheckedValue(value);
+      searchParams.set("type", value);
+      if(e.target.value ==="doctor"){
+       
+        searchParams.delete("name")
+        searchParams.delete("location")
+        searchParams.delete("page")
+        searchParams.delete("country")
+        searchParams.delete("raiting")
+        const newSearch = `?${searchParams.toString()}`;
+        navigate({ pathname:"/doctors",search: newSearch });
+        
+      }
+      else{
+        const { value } = e.target;
+        setCheckedValue(value);
+        searchParams.set("type",value)
+        searchParams.delete("page");
+        searchParams.delete("name");
+        searchParams.delete("location")
+        searchParams.delete("country")
+        searchParams.delete("raiting")
+        const newSearch = `?${searchParams.toString()}`;
+        navigate({ pathname:"/hospitals",search: newSearch });
+      }
+     
+  };
   const raitingName = (raiting_count) => {
     if (raiting_count === 0) {
       return t("no-rating");
@@ -49,6 +101,11 @@ const Detail = ({ images, hospital, open }) => {
 
   useEffect(() => {
     setRatingName(raitingName(rating));
+    const getCountries=async()=>{
+      const data= await allCountriesFetch(localStorage.getItem("lang"))
+      setCountry(data)
+    }
+    getCountries()
   }, [rating]);
 
   const handleSlideChange = (swiper) => {
@@ -117,9 +174,10 @@ const Detail = ({ images, hospital, open }) => {
               spaceBetween={15}
               slidesPerView={1}
               centeredSlides={true}
-              loop={true}
+              loop={images.length > 2}
               autoplay={{
                 delay: 2500,
+                disableOnInteraction: false,
               }}
               allowSlidePrev={true}
               allowSlideNext={true}
@@ -156,14 +214,8 @@ const Detail = ({ images, hospital, open }) => {
       </div>
 
       <div className="hospital-detail-content-info">
-        <div className={'content__search'}>
-          <p>{t("search")}</p>
-          <p>{t("search2")}</p>
-          <Divider style={{ background: "#fff" }} />
-          <p className={'content__search-checkbox'}><Checkbox>Турция</Checkbox></p>
-          <p className={'content__search-checkbox'}><Checkbox>Услуги</Checkbox></p>
-          <Button block style={{ margin: "1rem", width: "90%" }}>Найти</Button>
-        </div>
+        <FilterButtons country={country}/>
+        <Filter handleCheckboxChange={handleCheckboxChange} country={country} location={true} t={t} selectedCountryValue={selectedCountryValue} CountryChange={CountryChange} checkedValue={checkedValue}/>
         {hospital?.map_url ?
           <div className={'content__location'}>
             <iframe
