@@ -61,8 +61,8 @@
   justify-content: center;
 }
 .quality-raiting-stars .anticon-star {
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
   gap: 2.31px;
 }
 .quality-raiting-stars .anticon-star svg {

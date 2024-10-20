@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button, Checkbox, Divider, Rate, message  } from "antd";
 import location from "../../../assets/Svg/Location.svg";
 import heart from "../../../assets/Svg/heart.svg";
+import heartDeactive from "../../../assets/Svg/heartDeactive.svg";
 import share from "../../../assets/Svg/share.svg";
 import dollar from "../../../assets/Svg/Dollar.svg";
 import { useTranslation } from 'react-i18next';
@@ -14,7 +15,20 @@ import i18next from 'i18next';
 import Filter from "./Filter";
 import FilterButtons from "./FilterButtons";
 import { allCountriesFetch } from '../../api/allCountries.js';
+import { useSelector } from "react-redux";
+import { axiosPrivate } from '../../../api/api';
+
 const Detail = ({ images, hospital, open }) => {
+  console.log("true:", hospital)
+  const { id } = useParams();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const { t } = useTranslation();
+  const [rating, setRating] = useState(hospital?.raiting_count);
+  const [ratingName, setRatingName] = useState('');
+  const [comment, setComment] = useState('');
+  const [liked, setLiked] = React.useState(hospital?.is_favorite || false);
+  const [add, setAdd] = React.useState(false);
+  const {user,authToken}=useSelector(state=> state.auth)
   const [country, setCountry] = useState([])
   const [searchParams,setSearchParams] = useSearchParams()
   const [selectedCountryValue, setSelectedCountryValue] = useState(searchParams.get("country")? searchParams.get("country").split(",") : []);
@@ -47,13 +61,28 @@ const Detail = ({ images, hospital, open }) => {
         message.error(t("link-copy-failed"));
       });
   }
-  const { id } = useParams();
-  const [activeIndex, setActiveIndex] = useState(0);
-  const { t } = useTranslation();
-  const [rating, setRating] = useState(hospital?.raiting_count);
-  const [ratingName, setRatingName] = useState('');
-  const [comment, setComment] = useState('');
 
+  const AddToFavorite = async (hospitalId) => {
+    try {
+      await axiosPrivate.post(`card/add_favorite/${hospitalId}`);
+      setLiked(true);
+      setAdd(!add);
+    } catch (err) {
+      console.error('Failed to add to favorites:', err);
+      console.log('ssskskskks:', hospitalId)
+    }
+  };
+
+  const DeleteFromFavorite = async (hospitalId) => {
+    console.log('sssssss')
+    try {
+      await axiosPrivate.delete(`card/remove_favorite/${hospitalId}`);
+      setLiked(false);
+      setAdd(!add);
+    } catch (err) {
+      console.error('Failed to remove from favorites:', err);
+    }
+  };
   const handleCheckboxChange = (e) => {
       const { value } = e.target;
       setCheckedValue(value);
@@ -157,8 +186,30 @@ const Detail = ({ images, hospital, open }) => {
           </div>
           <div className='hospital-detail-content-header-right-area'>
             <span>
-              <img className='hospital-detail-heart' src={heart} alt="" />
-              <img className='hospital-detail-share' src={share} alt="" onClick={copyToClip}/>
+              {user ? (
+                liked ? (
+                  <img
+                    src={heartDeactive}
+                    alt=""
+                    onClick={(e) => {
+                      e.preventDefault();
+                      DeleteFromFavorite(hospital?.id);
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={heart}
+                    alt=""
+                    onClick={(e) => {
+                      e.preventDefault();
+                      AddToFavorite(hospital?.id);
+                    }}
+                  />
+                )
+              ) : (
+                <img className="hospital-detail-heart" src={heart} alt="" />
+              )}
+              <img className="hospital-detail-share" src={share} alt="" onClick={copyToClip} />
               <button onClick={() => open()}>{t("bron")}</button>
             </span>
             <button>
@@ -207,6 +258,10 @@ const Detail = ({ images, hospital, open }) => {
           </div>
           <div className='hospital-detail-thumbnail'>
             <img src={images[activeIndex]?.image} alt="" />
+            <span>
+              {raitingName(rating)}
+              <div>{rating >= 0 ? rating.toFixed(1) : 0}</div>
+            </span>
             <div className="swiper-button-prev"></div>
             <div className="swiper-button-next"></div>
           </div>

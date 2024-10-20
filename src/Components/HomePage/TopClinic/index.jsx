@@ -14,6 +14,7 @@ import { axiosPrivate } from '../../../api/api';
 import uuid from 'react-uuid';
 const TopClinic = () => {
   const {hospitals,error}=useSelector((state)=>state.hospitals);
+  console.log(hospitals, 'hospitals')
   const {authToken,user}=useSelector((state)=>state.auth)
   const [add,setAdd]=useState(false)
   const {t}=useTranslation()
@@ -69,11 +70,14 @@ const TopClinic = () => {
               return    <swiper-slide><div key={uuid()} className="top-clinic_item">
               <div className="top-clinic__item-top">
                 <img  onClick={()=> navigate(`/hospital/${item.id}`)} src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
-                <div className="top-clinic__item-num">50%</div>
+                { item?.percentage>0 ?
+                  <div className="top-clinic__item-num">{`${item?.percentage}%`}</div>
+                : <></>
+                }
                 <div className="top-clinic__item-heart">
                 { user ? (
                           
-                          item.is_favorite ?  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> DeleteFromFavorite(item.id)}   className='top-clinic__item-heart' src={heart} />  :  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> AddToFavorite(item.id)}    className='top-clinic__item-heart' src={heartOutlined} />) : "" }
+                          item.is_favorite ?  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> DeleteFromFavorite(item.id)}  src={heart} />  :  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> AddToFavorite(item.id)} src={heartOutlined} />) : "" }
                 
                 </div>
               </div>
@@ -84,8 +88,8 @@ const TopClinic = () => {
                 </div>
                 <h3 className="top-clinic__item-footer-title">{item.name}</h3>
                 <div className="top-clinic__item-footer-stars">
-                  <span>{item?.raiting ? item?.raiting.toFixed(1) : 0}</span>
-                  <Rate className='top-clinic-stars' disabled={true} value={item?.raiting}/>
+                  <span>{item?.raiting_count ? item?.raiting_count.toFixed(1) : '0.0'}</span>
+                  <Rate className='top-clinic-stars' disabled={true} value={item?.raiting_count}/>
                 </div>
               </div>
             </div></swiper-slide>
@@ -99,11 +103,14 @@ const TopClinic = () => {
               return    <div key={uuid()} className="top-clinic_item">
               <div className="top-clinic__item-top">
                 <img  onClick={()=> navigate(`/hospital/${item.id}`)} src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
-                <div className="top-clinic__item-num">50%</div>
+                { item?.percentage>0 ?
+                  <div className="top-clinic__item-num">{`${item?.percentage}%`}</div>
+                : <></>
+                }
                 <div className="top-clinic__item-heart">
                 { user ? (
                           
-                          item.is_favorite ?  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> DeleteFromFavorite(item.id)}   className='top-clinic__item-heart' src={heart} />  :  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> AddToFavorite(item.id)}    className='top-clinic__item-heart' src={heartOutlined} />) : "" }
+                          item.is_favorite ?  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> DeleteFromFavorite(item.id)}   src={heart} />  :  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> AddToFavorite(item.id)} src={heartOutlined} />) : "" }
                 
                 </div>
               </div>
@@ -114,8 +121,8 @@ const TopClinic = () => {
                 </div>
                 <h3 className="top-clinic__item-footer-title">{item.name}</h3>
                 <div className="top-clinic__item-footer-stars">
-                  <span>{item?.raiting ? item?.raiting.toFixed(1) : 0}</span>
-                  <Rate className='top-clinic-stars' disabled={true} value={item?.raiting}/>
+                  <span>{item?.raiting_count ? item?.raiting_count.toFixed(1) : '0.0'}</span>
+                  <Rate className='top-clinic-stars' disabled={true} value={item?.raiting_count}/>
                 </div>
               </div>
             </div>

@@ -39,7 +39,6 @@ const  Hospitals = () => {
   const [liked,setLiked] = useState(false)
   const [activeElement, setActiveElement] = useState(0);
   const [loading, setLoading] = useState(false)
-  console.log("hospitals:",hospitals)
   const handleClick = (elementId) => {
     setActiveElement(elementId);
    
@@ -74,7 +73,6 @@ const DeleteFromFavorite= async(id)=>{
     
 }
   const CountryChange = (value) => {
-    console.log(value);
     setSelectedCountryValue(value);
     searchParams.delete("page");
     searchParams.delete("location")
@@ -91,7 +89,6 @@ const DeleteFromFavorite= async(id)=>{
     navigate({ search: newSearch });
     };
   const raitingChange = (value) => {
-    console.log(value);
     setSelectedRaitingValue(value);
     searchParams.delete("page");
     searchParams.delete("location")

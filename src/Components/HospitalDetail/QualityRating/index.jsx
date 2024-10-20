@@ -10,7 +10,7 @@ const QualityRating = ({hospital}) => {
       <div className="quality-rating-container">
         <div className="quality-rating-left">
           <div className="quality-rating-area">
-            <span className="quality-rating-area-big-number">{hospital?.raiting}</span>
+            <span className="quality-rating-area-big-number">{hospital?.raiting_count}</span>
             <div className='quality-rating-area-star'>
               <img src={singleStar} alt=""/>
               <div>
@@ -19,7 +19,7 @@ const QualityRating = ({hospital}) => {
               </div>
             </div>
           </div>
-          <div className='quality-raiting-stars'><Rate disabled={true} value={hospital?.raiting}/></div>
+          <div className='quality-raiting-stars'><Rate disabled={true} allowHalf value={hospital?.raiting_count}/></div>
           <div className="quality-rating-left-desc">112MED оценил качество</div>
         </div>
         <div className="quality-rating-right">

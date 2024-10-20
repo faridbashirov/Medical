@@ -11,6 +11,7 @@ import { axiosPrivate } from '../../../api/api';
 import { Trans } from 'react-i18next';
 
 const HospitalCard = ({ hospital, t, user }) => {  
+  console.log('true:', hospital)
   const [liked, setLiked] = React.useState(hospital?.is_favorite || false);
   const navigate=useNavigate()
   const [add, setAdd] = React.useState(false);
@@ -93,11 +94,11 @@ const HospitalCard = ({ hospital, t, user }) => {
             </div>
             <div className='hospital-card-new-profile-detail-footer-area'>
               <span className='hospital-card-new-profile-detail-raitings'>
-                <span className='hospital-card-new-profile-detail-raiting'>{hospital?.raiting >= 0 ? hospital?.raiting.toFixed(1) : 0}</span>
+                <span className='hospital-card-new-profile-detail-raiting'>{hospital?.raiting_count >= 0 ? hospital?.raiting_count.toFixed(1) : 0}</span>
                 <span className='hospital-card-new-profile-detail-stars'>
-                  <Rate style={{ color: '#FFC224' }} disabled={true} value={hospital?.raiting >= 0 ? hospital?.raiting.toFixed(1) : 0} />
+                  <Rate style={{ color: '#FFC224' }} disabled={true} value={hospital?.raiting_count >= 0 ? hospital?.raiting_count.toFixed(1) : 0} />
                 </span>
-                <span className='hospital-card-new-profile-detail-raiting-name'>{raitingName(hospital?.raiting)}</span>
+                <span className='hospital-card-new-profile-detail-raiting-name'>{raitingName(hospital?.raiting_count)}</span>
               </span>
               {/* <div className='hospital-card-new-profile-detail-reviews'>
                 <a href="">{hospital?.comment_count} отзыва</a>

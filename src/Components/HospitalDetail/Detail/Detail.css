@@ -314,6 +314,35 @@
     object-fit: fill;
     height: 456px;
   }
+  .hospital-detail-thumbnail span {
+    position: absolute;
+    top: 20px;
+    right: 18px;
+    display: flex;
+    gap: 7.72px;
+    align-items: center;
+    height: 29.02px;
+    padding: 4.03px 4.59px 4.03px 13.28px;
+    font-size: 12.9px;
+    font-weight: 400;
+    line-height: 15.48px;
+    text-align: right;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 4.03px;
+  }
+  .hospital-detail-thumbnail span div {
+    padding: 3px 6px 3px 6px;
+    background-color: #5282ff;
+    color: #ffffff;
+    border-radius: 2.42px;
+    font-size: 12.9px;
+    font-weight: 400;
+    line-height: 15.48px;
+    text-align: right;
+    border: none;
+  }
   .hospital-detail-content-slider {
     width: 32%;
   }
