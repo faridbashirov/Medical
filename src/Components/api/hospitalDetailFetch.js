@@ -21,17 +21,17 @@ export default function DetailFetch(id,lang){
                     
                     setLoading(true)
                    
-                        const response = await axios.get(`${lang === "ru" ? "" : lang + "/"}hospital/hospital/${id}`)
+                        const response = await axiosPrivate.get(`${lang === "ru" ? "" : lang + "/"}hospital/hospital/${id}`)
 
                     
                     
-                    setHospital(response.data)
-                    setServices(response.data.services)
-                    setAdvantages(response.data.hospital_advantages)
-                    setDiscount(response.data.hospital_discount)
-                    setQuestions(response.data.hospital_faq)
-                    setReviews(response.data.review)
-                    setImages(response.data.hospital_images)
+                    setHospital(response)
+                    setServices(response.services)
+                    setAdvantages(response.hospital_advantages)
+                    setDiscount(response.hospital_discount)
+                    setQuestions(response.hospital_faq)
+                    setReviews(response.review)
+                    setImages(response.hospital_images)
                 }catch(err){
                     setError(err)
                 }finally{

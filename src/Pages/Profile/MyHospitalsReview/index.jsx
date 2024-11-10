@@ -72,7 +72,7 @@ const ReviewHospitals = () => {
               })}
               <div className={'review-doctors-pagination'}>
               {count ? <Pagination
-        current={parseInt(searchParams.get("page")) || 1}  pageSize={2} onChange={(page)=>{
+        current={parseInt(searchParams.get("page")) || 1}  pageSize={10} onChange={(page)=>{
          searchParams.set("page", page)
         setSearchParams(searchParams)
 

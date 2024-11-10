@@ -18,6 +18,9 @@
 .hospital-detail-content-header-right-area {
   margin-top: 58.33px;
 }
+.hospital-detail-content-header-right-area img {
+  cursor: pointer;
+}
 .hospital-detail-heart {
   width: 20px;
   object-fit: cover;

@@ -1,3 +1,13 @@
+.ant-modal-root .ant-modal-wrap {
+  z-index: 9999999 !important;
+}
+.hospital-detail-loading-area {
+  height: calc(100vh - 94.69px);
+  background-color: #f6f6f6;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
 .hospital-detail-container {
   padding: 22px 0 28.75px 0;
 }

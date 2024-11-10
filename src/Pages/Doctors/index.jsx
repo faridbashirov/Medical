@@ -6,9 +6,8 @@ import {
 } from "antd";
 import { FadeLoader } from "react-spinners";
 import "./Doctors.css"
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import FilterButtons from "../../Components/FilterButtons/index.js";
-import { mainFilterSearch } from "../../Components/api/mainFilterFetch.js";
 import { allFilterSearch } from "../../Components/api/allFilterSearch.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -19,7 +18,6 @@ import i18next from "i18next";
 import { Helmet } from "react-helmet";
 import DoctorsCard from './DoctorsCard'
 import BreadCrumbs from "../../Components/BreadCrumbs";
-import Loading from "../Loading";
 
 const Doctors = () => {
   const navigate=useNavigate()
@@ -34,48 +32,12 @@ const Doctors = () => {
   const [checkedValue, setCheckedValue] = useState(searchParams.get("type")? searchParams.get("type") :"doctor");
   const [loading, setLoading] = useState(false)
   const [country, setCountry] = useState([])
-  const [add,setAdd] = useState(false)
-  const [liked,setLiked]=useState(false)
   const [count,setCount] = useState(0)
   const {user,authToken}=useSelector(state=> state.auth)
-  const [activeElement, setActiveElement] = useState(0);
-  console.log(doctors, "doctoros")
-   searchParams.set("type",checkedValue)
-   const handleClick = (elementId) => {
-    setActiveElement(elementId);
-   
-  };
-   const AddToFavorite= async(id)=>{
-    setLiked(true)
-  axiosPrivate.post(`card/add_favorite_doctor/${id}`)
-  .then((res) => {
-      console.log(res);
-      setAdd(!add)
-  })
-  .catch((err) => {
-      setError(err);
-  })   
-      
-  }
-  
-  const DeleteFromFavorite = async(id)=>{
-   setLiked(true)
-    axiosPrivate.delete(`card/remove_favorite_doctor/${id}`)
-  .then((res) => {
-      console.log(res);
-      setAdd(!add)
-  })
-  .catch((err) => {
-      setError(err);
-  })
-  }
-
+  searchParams.set("type",checkedValue)
   const CountryChange = (value) => {
-    console.log(value);
     setSelectedCountryValue(value);
     searchParams.delete("page");
-    
-   
     searchParams.delete("location")
     searchParams.delete("name")
     searchParams.delete("position")
@@ -90,29 +52,27 @@ const Doctors = () => {
     
     const newSearch = `?${searchParams.toString()}`;
     navigate({ search: newSearch });
-    };
-
-    const raitingChange = (value) => {
-      console.log(value);
-      setSelectedRaitingValue(value);
-      searchParams.delete("page");
-      searchParams.delete("location")
-      searchParams.delete("name")
-      searchParams.delete("position")
-      setName("")
-       
-      if (value.length === 0) {
-        searchParams.delete("raiting");
-      
-      } else {
-        searchParams.set("raiting", value);
-      }
-      
-      const newSearch = `?${searchParams.toString()}`;
-      navigate({ search: newSearch });
-      };
+  };
+  const raitingChange = (value) => {
+    console.log(value);
+    setSelectedRaitingValue(value);
+    searchParams.delete("page");
+    searchParams.delete("location")
+    searchParams.delete("name")
+    searchParams.delete("position")
+    setName("")
+     
+    if (value.length === 0) {
+      searchParams.delete("raiting");
     
-
+    } else {
+      searchParams.set("raiting", value);
+    }
+      
+    const newSearch = `?${searchParams.toString()}`;
+    navigate({ search: newSearch });
+  };
+    
     const handleCheckboxChange = (e) => {
       const { value } = e.target;
       setCheckedValue(value);
@@ -139,49 +99,37 @@ const Doctors = () => {
       }
     };
 
-    const capitalizeWords = (str) => {
-      return str
-        .toLowerCase()
-        .split(' ')
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-    };
-
-
-
   useEffect(() => {
-    setSelectedCountryValue(searchParams.get("country")? searchParams.get("country").split(","):[])
-    setSelectedRaitingValue(searchParams.get("raiting")? searchParams.get("raiting").split(","):[])
-    console.log(name);
-    setLoading(true)
+    setSelectedCountryValue(
+        searchParams.get("country") ? searchParams.get("country").split(",") : []
+    );
+    setSelectedRaitingValue(
+        searchParams.get("raiting") ? searchParams.get("raiting").split(",") : []
+    );
+    setLoading(true);
+
     const getHospitals = async () => {
-      const data = await (searchParams.has("country")|| searchParams.has("raiting") 
-      ? allFilterSearch(
-        checkedValue || "doctor",
-        searchParams.get("country") || "",
-        searchParams.get("raiting") || "",
-        searchParams.get("page") || 0,
-        i18next.language
-      )
-      : mainFilterSearch(
-        checkedValue || "doctor",
-          searchParams.get("location") || "",
-          searchParams.get("name") || "",
-          searchParams.get("position") || "",
-          searchParams.get("page") || 0,
-          i18next.language
-        ));
-        console.log('doctor:', data)
-          setDoctors(data.results);
-          setCount(data.count)
-          setLoading(false)
-      
-          
+        try {
+            const data = await allFilterSearch(
+              checkedValue || "doctor",
+              searchParams.get("country") || "",
+              searchParams.get("raiting") || "",
+              searchParams.get("position") || "",
+              searchParams.get("page") || 0,
+              i18next.language
+            );
+            console.log('doctor:', data);
+            setDoctors(data.results);
+            setCount(data.count);
+        } catch (error) {
+            console.error("Error fetching hospital data:", error);
+        } finally {
+            setLoading(false);
+        }
     };
-    
-  
     getHospitals();
-  }, [searchParams,add,i18next.language]);
+}, [searchParams,i18next.language]);
+
 
   useEffect(()=>{
     const getCountries=async()=>{
@@ -236,7 +184,7 @@ const Doctors = () => {
         </div>
         <div className="displayGridReviewDr">
           <Filter handleCheckboxChange={handleCheckboxChange} country={country} t={t} selectedCountryValue={selectedCountryValue} CountryChange={CountryChange} checkedValue={checkedValue} selectedRaitingValue={selectedRaitingValue} raitingChange={raitingChange}/>
-          <>{loading & !liked ?  <div> <FadeLoader
+          <>{loading ?  <div> <FadeLoader
           color="black"
           className={"loading"}
           loading={true}
@@ -276,7 +224,7 @@ const Doctors = () => {
               >
                   {<>
                   { count?  <Pagination
-        current={parseInt(searchParams.get("page")) || 1}  pageSize={5} onChange={(page)=>{
+        current={parseInt(searchParams.get("page")) || 1}  pageSize={10} onChange={(page)=>{
         searchParams.set("page", page)
         setSearchParams(searchParams)
       }}  total={count}

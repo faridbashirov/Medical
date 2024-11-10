@@ -73,7 +73,6 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
                 style={{ color: "#FFC224"}}
                 defaultValue={0}
                 onChange={handleRatingSubmit}
-                allowHalf
               /></div> :
               <div className='doctor-card-profile-title'><Rate value={doctor.raiting_count}/></div>}
               <div className="doctor-card-raiting-area">
@@ -109,7 +108,7 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
         </div>
         <div className='doctor-card-buttons'>
           <button onClick={onOpenBookingModal}>{t("onlinebooking")}</button>
-          <button>контакт</button>
+          <button><a href={`tel:${doctor?.phone_number}`}>{t('contact-doctor')}</a></button>
         </div>
       </div>
     </div>

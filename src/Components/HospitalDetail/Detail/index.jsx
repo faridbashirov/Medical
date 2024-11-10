@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Button, Checkbox, Divider, Rate, message  } from "antd";
+import React, { useState, useEffect } from 'react';
+import { Button, Rate, message  } from "antd";
 import location from "../../../assets/Svg/Location.svg";
 import heart from "../../../assets/Svg/heart.svg";
 import heartDeactive from "../../../assets/Svg/heartDeactive.svg";
@@ -166,7 +166,6 @@ const Detail = ({ images, hospital, open }) => {
                   style={{ color: "#FFC224" }}
                   defaultValue={0}
                   onChange={handleRatingSubmit}
-                  allowHalf
                 />
               </div>
               <p>{t("transport")}</p>
@@ -187,13 +186,13 @@ const Detail = ({ images, hospital, open }) => {
           <div className='hospital-detail-content-header-right-area'>
             <span>
               {user ? (
-                liked ? (
+                !liked ? (
                   <img
                     src={heartDeactive}
                     alt=""
                     onClick={(e) => {
                       e.preventDefault();
-                      DeleteFromFavorite(hospital?.id);
+                      AddToFavorite(hospital?.id);
                     }}
                   />
                 ) : (
@@ -202,7 +201,7 @@ const Detail = ({ images, hospital, open }) => {
                     alt=""
                     onClick={(e) => {
                       e.preventDefault();
-                      AddToFavorite(hospital?.id);
+                      DeleteFromFavorite(hospital?.id);
                     }}
                   />
                 )

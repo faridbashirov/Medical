@@ -1,55 +1,62 @@
 import React, { useState,useEffect } from 'react';
 import {Button, DatePicker, Divider, Form, Input, Modal, Select, Typography, TimePicker} from "antd";
 const { RangePicker } = DatePicker;
+import { PhoneInput } from "react-international-phone";
+import { PhoneNumberUtil } from "google-libphonenumber";
+import "react-international-phone/style.css";
 import { Controller } from 'react-hook-form';
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from 'react-i18next';
-import { Trans } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { positionFetch } from '../../Components/api/positionFetch';
 import { doctorBook } from '../../Components/api/doctorbook';
 import {toast, ToastContainer } from "react-toastify";
 
+const phoneUtil = PhoneNumberUtil.getInstance();
+const isPhoneValid = (phone) => {
+  try {
+    const number = phoneUtil.parseAndKeepRawInput(phone, 'UA');
+    return phoneUtil.isValidNumber(number);
+  } catch (error) {
+    return false;
+  }
+};
 
 const {Item} = Form
 const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
+  const [number, setNumber] = useState("");
+  const handlePhoneChange = (value) => {
+    setNumber(value);
+  };
    const {id}=useParams()
    const {t}=useTranslation()
  
    const [position,setPosition] = useState([])
 
   const schema = Yup.object().shape({
-   
-   
-    name:Yup.string()
-    
+  name: Yup.string()
     .trim()
-    .required(t("nameerror"))
-    ,
-    phone:Yup.string()
-   
+    .required(t("nameerror")),
+  
+  phone: Yup.string()
     .trim()
     .required(t("phoneerror"))
-    .min(3,t("length"))
-    
-   ,
-    
-    date:Yup.string()
+    .test(
+      'is-valid-phone',
+      t("phoneerror"),
+      (value) => isPhoneValid(value)
+    ),
+
+  date: Yup.string()
+    .required(t("dateerror")),
   
-    .required(t("dateerror"))
-    ,
-    time:Yup.string()
-    
+  time: Yup.string()
     .trim()
-    .required(t("timerrror"))
-    ,
-   
-   
-   
-   
-      })
+    .required(t("timerror")),
+});
+
 
   const {control,reset,handleSubmit,formState: { errors  } } = useForm(
     ({
@@ -107,26 +114,28 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
             )}
           />
             <p style={{color:"red"}}>{errors?.name && errors.name.message}</p>
-        
-           
-          
         </Item>
-        <Item
-          name="phone"
-        >
-           <Controller
-             rules={{
-              required: "This field is required",
-            }}
+        <Item name="phone" className='phone-doctor-info'>
+          <Controller
             name="phone"
             control={control}
+            rules={{
+              required: t("phoneerror"),
+              validate: (value) => isPhoneValid(value) || t("phoneerror"),
+            }}
             render={({ field }) => (
-             
-              
-              <Input {...field} placeholder={'(+994)'} className={'booking-input'} />
+              <PhoneInput
+                {...field}
+                value={number}
+                onChange={(value) => {
+                  handlePhoneChange(value);
+                  field.onChange(value);
+                }}
+                type="tel"
+              />
             )}
           />
-            <p style={{color:"red"}}>{errors?.phone && errors.phone.message}</p>
+        <p className='phone-error' style={{ color: "red" }}>{errors?.phone && errors.phone.message}</p>
         </Item>
         <Item name="category">
         <Controller
@@ -140,8 +149,7 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
              
               
               
-              <Select 
-            // defaultValue="lucy"
+            <Select 
             placeholder={t("category")}
             className={'booking-input'}
             onChange={handleChange}
@@ -169,10 +177,7 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
             name="time"
             control={control}
             render={({ field }) => (
-             
-              
               <TimePicker style={{width:"100%"}} placeholder={t("selecttime")} {...field} className={"booking-modal__time-input"}/>
-             
             )}
           />
           <p style={{color:"red"}}>{errors?.time && errors.time.message}</p>

@@ -10,6 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { axiosPrivate } from '../../../../api/api';
 
 const DoctorsCard = ({ doctor, t, user, add, setAdd }) => {
+  console.log('doctor:', doctor)
   const [liked, setLiked] = React.useState(true);
   const navigate = useNavigate();
   const raitingName = (raiting) => {
@@ -60,7 +61,7 @@ const DoctorsCard = ({ doctor, t, user, add, setAdd }) => {
         </div>
         <div className='doctors-card-new-profile-detail-area'>
           <div className='doctors-card-new-profile-detail-header-area'>
-            <h6>главный врач</h6>
+            <h6>{doctor?.title}</h6>
             <div className='doctor-card-new-profile-name-and-work'>
               {doctor?.first_name && (
                 <h3>Dr. {doctor?.first_name} {doctor?.last_name}</h3>
@@ -84,8 +85,8 @@ const DoctorsCard = ({ doctor, t, user, add, setAdd }) => {
               <span className='doctors-card-new-profile-detail-raiting-name'>{raitingName(doctor?.raiting)}</span>
             </span>
             <div className='doctors-card-new-profile-detail-reviews'>
-              <a href="">{doctor?.comment_count} отзыва</a>
-              <p>Соотношение цена/качество</p>
+              {/* <a href="">{doctor?.comment_count} отзыва</a>
+              <p>Соотношение цена/качество</p> */}
             </div>
           </div>
           <div className='doctors-card-new-profile-buttons'>

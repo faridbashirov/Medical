@@ -19,10 +19,13 @@ import { Helmet } from 'react-helmet';
 import HospitalDetailHint from './HospitalDetailHint/index.jsx';
 import HospitalDirections from './HospitalDirections/index.jsx';
 import { useSelector } from 'react-redux';
+import { FadeLoader } from 'react-spinners';
 const HospitalDetail = () => {
-  const {t}=useTranslation()
-  const [openBooking, setOpenBooking] = useState(false)
  const {id}=useParams()
+ const {hospital,services,advantages,discount,questions,reviews,images,loading,error}=DetailFetch(id,i18next.language)
+ console.log('hospital:',hospital)
+ const {t}=useTranslation()
+ const [openBooking, setOpenBooking] = useState(false)
  const {user,authToken}=useSelector(state=> state.auth)
  const onOpenBookingModal = () => {
   setOpenBooking(true)
@@ -30,19 +33,22 @@ const HospitalDetail = () => {
 const onCloseBookingModal = () => {
   setOpenBooking(false)
 }
-
-const {hospital,services,advantages,discount,questions,reviews,images,loading,error}=DetailFetch(id,i18next.language)
-console.log(hospital, "ssssssss");
+  if(loading){
+    return <div className='hospital-detail-loading-area'> <FadeLoader
+              color="black"
+              className={"loading"}
+              loading={true}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            /> </div>
+  }
   if(error){
     return <div>Errorr</div>
   }
-  if(!hospital){
-    return <div>Loading .... </div>
-  }
-
   return (
     <>
-    {!loading &&  <div style={{background: "#f6f6f6"}} className='hospital-detail-container'>
+    <div style={{background: "#f6f6f6"}} className='hospital-detail-container'>
     <Helmet>
       <meta charSet="utf-8" />
       <title>{hospital.name}</title>
@@ -82,7 +88,7 @@ console.log(hospital, "ssssssss");
     <GetService hospital={hospital}/>
     {/* <PaySection/> */}
     <HospitalBookingModal  openBooking={openBooking} onCloseBookingModal={onCloseBookingModal}/>
-  </div>}
+  </div>
   </>
    
   );

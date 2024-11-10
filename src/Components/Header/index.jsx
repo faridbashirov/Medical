@@ -108,43 +108,32 @@ const Header = () =>{
     localStorage.setItem("lang","ru")
   }
   useEffect(() => {
-  if(data){
-    const itemsCurrencyNew = Object.keys(data).map((item, index) => ({
+    if (data) {
+      const itemsCurrencyNew = Object.keys(data).map((item, index) => ({
         label: (
-            <div className="currency-card">
-                <span>{item}</span>
-                <span>
-                    {data[item].rate.toLocaleString('en-US', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                    })}
-                </span>
-            </div>
+          <div className="currency-card">
+            <span>{item}</span>
+            <span>
+              {data[item].rate.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </span>
+          </div>
         ),
         key: index.toString(),
-        icon: (
-            <div className="currency">
-                <span>{data[item].symbol}</span>
-            </div>
-        ),
-    }));
-    console.log("itemsCurrencyNew:",itemsCurrencyNew)
-    // Find the default currency using the label text
-    const defaultCurrency = itemsCurrencyNew.find(
-        (item) =>
-            item.label.props.children?.props?.children?.toUpperCase() ===
-            localStorage.getItem("currency")?.toUpperCase()
-    ) || itemsCurrencyNew[0];
+        icon: <div className="currency"><span>{data[item].symbol}</span></div>,
+      }));
+      const defaultCurrency = itemsCurrencyNew.find(
+        (item) => item.label.props.children[0].props.children.toUpperCase() ===
+        (localStorage.getItem("currency") || "USD").toUpperCase()
+      ) || itemsCurrencyNew[0];
 
-    setItemsCurrency(itemsCurrencyNew);
-    setCurrency(defaultCurrency);
-  }
-  if (showMenu) {
-    document.body.classList.add('overflowHidden');
-  } else {
-    document.body.classList.remove('overflowHidden');
-  }
-}, [showMenu,data]);
+      setItemsCurrency(itemsCurrencyNew);
+      setCurrency(defaultCurrency);
+    }
+    document.body.classList.toggle('overflowHidden', showMenu);
+  }, [data, showMenu]);
  
   const handleMenuFlagClick = (e) => {
     console.log('itemsFlag:',itemsFlag[0].label.props)
@@ -155,7 +144,8 @@ const Header = () =>{
   
   const handleMenuClick = (e) => {
   const selectedCurrency = itemsCurrency.find(item => item.key === e.key);
-    localStorage.setItem("currency", selectedCurrency.label.props.children[0].toString().toUpperCase());
+  console.log("selected",selectedCurrency.label.props.children[0].props.children.toUpperCase())
+    localStorage.setItem("currency", selectedCurrency.label.props.children[0].props.children.toUpperCase());
     setCurrency(selectedCurrency);
 };
   const menuPropsFlag = {

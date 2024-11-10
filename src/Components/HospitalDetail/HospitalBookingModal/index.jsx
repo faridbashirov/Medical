@@ -1,6 +1,9 @@
 import React, { useState,useEffect } from 'react';
 import {Button, DatePicker, Divider, Form, Input, Modal, Select, Typography, TimePicker} from "antd";
 const { RangePicker } = DatePicker;
+import { PhoneInput } from "react-international-phone";
+import { PhoneNumberUtil } from "google-libphonenumber";
+import "react-international-phone/style.css";
 import { Controller } from 'react-hook-form';
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -9,13 +12,26 @@ import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { positionFetch } from '../../api/positionFetch';
-import { doctorBook } from '../../api/doctorbook';
 import {toast, ToastContainer } from "react-toastify";
 import { hospitalBook } from '../../api/hospitalbook';
+
+const phoneUtil = PhoneNumberUtil.getInstance();
+const isPhoneValid = (phone) => {
+  try {
+    const number = phoneUtil.parseAndKeepRawInput(phone, 'UA');
+    return phoneUtil.isValidNumber(number);
+  } catch (error) {
+    return false;
+  }
+};
 
 const {Item} = Form
 const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
    const {id}=useParams()
+   const [number, setNumber] = useState("");
+  const handlePhoneChange = (value) => {
+    setNumber(value);
+  };
    const {t}=useTranslation()
  
    const [position,setPosition] = useState([])
@@ -28,13 +44,14 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
     .trim()
     .required(t("nameerror"))
     ,
-    phone:Yup.string()
-   
+    phone: Yup.string()
     .trim()
     .required(t("phoneerror"))
-    .min(3)
-    
-   ,
+    .test(
+      'is-valid-phone',
+      t("phoneerror"),
+      (value) => isPhoneValid(value)
+    ),
     
     date:Yup.string()
   
@@ -88,7 +105,7 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
   return (
     <>
   
-    <Modal open={openBooking} onCancel={onCloseBookingModal} footer={[]}>
+    <Modal className='hospital-booking-modal' open={openBooking} onCancel={onCloseBookingModal} footer={[]}>
       <Typography className={'login-title'}>{t("bron4")}</Typography>
       <Divider/>
       <Form onFinish={handleSubmit(onFinish)}>
@@ -112,24 +129,27 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
            
           
         </Item>
-        <Item
-          name="phone"
-        >
-           <Controller
-             rules={{
-              required: "This field is required",
-            }}
+        <Item name="phone" className='phone-doctor-info'>
+          <Controller
             name="phone"
             control={control}
+            rules={{
+              required: t("phoneerror"),
+              validate: (value) => isPhoneValid(value) || t("phoneerror"),
+            }}
             render={({ field }) => (
-             
-              
-              <Input {...field} placeholder={'(+994)'} className={'booking-input'} />
+              <PhoneInput
+                {...field}
+                value={number}
+                onChange={(value) => {
+                  handlePhoneChange(value);
+                  field.onChange(value);
+                }}
+                type="tel"
+              />
             )}
           />
-           <p style={{
-          color:"red"
-         }}> {errors?.phone && errors.phone.message}</p>
+        <p className='phone-error' style={{ color: "red" }}>{errors?.phone && errors.phone.message}</p>
         </Item>
         <Item name="category">
         <Controller

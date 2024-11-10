@@ -37,6 +37,9 @@
   background-color: hsl(223, 100%, 66%);
   color: #ffffff;
 }
+.doctor-card-buttons button:nth-of-type(2) a {
+  color: #5282ff;
+}
 .doctor-card-buttons button a {
   color: black;
   text-decoration: none;

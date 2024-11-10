@@ -57,30 +57,32 @@ const DoctorsCard = ({ doctor, t, user }) => {
   };
 
   return (
-    <Link to={`/hospital/${doctor?.hospital?.id}`} className={`doctors-card-new ${doctor?.is_sponsored ? "doctors-card-new-sponsor" : ""}`}>
+    <div className={`doctors-card-new ${doctor?.is_sponsored ? "doctors-card-new-sponsor" : ""}`}>
       <div className='doctors-card-new-container'>
-        <div className='doctors-card-new-profile-photo-area'>
-          {doctor?.profile_photo!=="" &&
-          <img className='doctors-card-new-profile-photo' src={doctor?.profile_photo || doctorMale} alt="" />
-           }
-           {user ?
-           <div 
-            onClick={(e) => {
-              e.preventDefault();
-              liked ? DeleteFromFavorite(doctor?.id) : AddToFavorite(doctor?.id);
-            }}
-            className={'doctors-card-new-profile-heart'}
-          >
-            {liked ? <img src={heart} alt="" /> : <img src={heartDeactive} alt="" />}
+        <Link to={`/doctor/${doctor?.id}`}>
+          <div className='doctors-card-new-profile-photo-area'>
+            {doctor?.profile_photo!=="" &&
+            <img className='doctors-card-new-profile-photo' src={doctor?.profile_photo || doctorMale} alt="" />
+            }
+            {user ?
+            <div 
+              onClick={(e) => {
+                e.preventDefault();
+                liked ? DeleteFromFavorite(doctor?.id) : AddToFavorite(doctor?.id);
+              }}
+              className={'doctors-card-new-profile-heart'}
+            >
+              {liked ? <img src={heart} alt="" /> : <img src={heartDeactive} alt="" />}
+            </div>
+            :
+            <></>
+            }
+            {doctor?.is_sponsored ?
+            <div className='doctors-card-new-profile-sponsor'>sponsored</div>
+            :
+            <></>}
           </div>
-           :
-           <></>
-           }
-          {doctor?.is_sponsored ?
-          <div className='doctors-card-new-profile-sponsor'>sponsored</div>
-          :
-          <></>}
-        </div>
+        </Link>
         <div className='doctors-card-new-profile-detail-area'>
           <div className='doctors-card-new-profile-detail-header-area'>
             <h6>главный врач</h6>
@@ -106,8 +108,8 @@ const DoctorsCard = ({ doctor, t, user }) => {
               <span className='doctors-card-new-profile-detail-raiting-name'>{raitingName(doctor?.raiting_count)}</span>
             </span>
             <div className='doctors-card-new-profile-detail-reviews'>
-              <a href="">{doctor?.comment_count} отзыва</a>
-              <p>Соотношение цена/качество</p>
+              {/* <a href="">{doctor?.comment_count} отзыва</a>
+              <p>Соотношение цена/качество</p> */}
             </div>
           </div>
           <div className='doctors-card-new-profile-buttons'>
@@ -125,7 +127,7 @@ const DoctorsCard = ({ doctor, t, user }) => {
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

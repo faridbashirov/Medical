@@ -79,7 +79,7 @@ const  Profile = () => {
                 <img src={favHospital} />
                 {t("favoritehospital")}
               </li>
-              <li onClick={() => setSection("doctor-reviews")}  className={section==="doctor-reviews" ? "activeLi" : ""}>
+              {/* <li onClick={() => setSection("doctor-reviews")}  className={section==="doctor-reviews" ? "activeLi" : ""}>
                 <img src={messageDoctor} />
                 {t("commentdoctor")}
               </li>
@@ -90,7 +90,7 @@ const  Profile = () => {
               <li onClick={() => setSection("help")}  className={section==="help" ? "activeLi" : ""}>
                 <img src={help112} />
                 {t("help")}
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="menuRight">

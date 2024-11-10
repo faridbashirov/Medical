@@ -2,13 +2,10 @@ import React, {useEffect, useState} from "react";
 import Filter from '../../Components/Filter'
 import {
   Button,
-  Breadcrumb,
-  Pagination,
-  Rate
+  Pagination
 } from "antd";
 import { FadeLoader } from "react-spinners";
-import { useNavigate, useSearchParams,Link } from "react-router-dom";
-import { axiosPrivate } from "../../api/api.js";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "../Profile/FavoriteHospitals/FavoriteHospitals.css";
 import "./Hospitals.css"
 import FilterButtons from "../../Components/FilterButtons/index.js";
@@ -35,43 +32,11 @@ const  Hospitals = () => {
   const [name,setName]=useState(searchParams.get("name") ? searchParams.get("name") : "")
   const [count,setCount] = useState(0)
   const {user,authToken}=useSelector(state=> state.auth)
-  const [add,setAdd] = useState(false)
   const [liked,setLiked] = useState(false)
-  const [activeElement, setActiveElement] = useState(0);
   const [loading, setLoading] = useState(false)
-  const handleClick = (elementId) => {
-    setActiveElement(elementId);
-   
-  };
   
   
   searchParams.set("type",checkedValue)
-
-const AddToFavorite= async(id)=>{
-  setLiked(true)
-
-  axiosPrivate.post(`card/add_favorite/${id}`)
-  .then((res) => {
-      console.log(res);
-      setAdd(!add)
-  })
-  .catch((err) => {
-      console.log(err);
-  })
-}
-const DeleteFromFavorite= async(id)=>{
-  setLiked(true)
-  axiosPrivate.delete(`card/remove_favorite/${id}`)
-  .then((res) => {
-      console.log(res);
-      setAdd(!add)
-  })
-  .catch((err) => {
-      console.log(err);
-  })
-    
-    
-}
   const CountryChange = (value) => {
     setSelectedCountryValue(value);
     searchParams.delete("page");
@@ -141,8 +106,6 @@ const DeleteFromFavorite= async(id)=>{
       setSelectedRaitingValue(searchParams.get("raiting")? searchParams.get("raiting").split(","):[])
       setLoading(true)
       const getHospitals = async () => {
-        
-        
         const data = await (searchParams.has("country")|| searchParams.has("raiting") 
           ? allFilterSearch(
             checkedValue || "clinic",
@@ -164,7 +127,7 @@ const DeleteFromFavorite= async(id)=>{
             setLoading(false)
       };
       getHospitals();
-    }, [searchParams,add,i18next.language]);
+    }, [searchParams,i18next.language]);
 
     useEffect(()=>{
       const getCountries=async()=>{
@@ -265,7 +228,7 @@ const DeleteFromFavorite= async(id)=>{
                 <div className={'hospitals-pagination'}>
                 {<>
                 {count?  <Pagination
-      current={parseInt(searchParams.get("page")) || 1}  pageSize={5} onChange={(page)=>{
+      current={parseInt(searchParams.get("page")) || 1}  pageSize={10} onChange={(page)=>{
        searchParams.set("page", page)
       setSearchParams(searchParams)
      }}  total={count}

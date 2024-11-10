@@ -161,8 +161,7 @@ const LoginModal = ({openLogin, onCloseLogin,onOpenRegister}) => {
         
         <Button type={'primary'} htmlType={'submit'} block size={'large'}
                 style={{display: 'block', marginBottom: '.5rem'}}>{t("login")}</Button>
-        <Button type={'link'} htmlType={'submit'} block size={'large'} style={{ marginBottom: '.5rem'}}>Забыли
-          пароль?</Button>
+        <Button type={'link'} htmlType={'submit'} block size={'large'} style={{ marginBottom: '.5rem'}}>{t("forgot")}</Button>
         <ConfigProvider
           theme={{
             token: {
