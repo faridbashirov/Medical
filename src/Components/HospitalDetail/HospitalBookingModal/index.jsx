@@ -75,7 +75,6 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
       resolver: yupResolver(schema),
     }))
   const onFinish =  async (values) => {
-    console.log(values)
     values["hospital_id"]=id
     const data=await hospitalBook(values)
     if (data.message){
@@ -90,8 +89,8 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
   }
 
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
   };
+  
   useEffect(()=>{
     async function getLocation(){
      const data = await positionFetch()

@@ -6,16 +6,16 @@ import vk from "../../../assets/Svg/Vkontakte.svg";
 import instagram from "../../../assets/Svg/Instagram.svg";
 
 const Contact = ({data}) => {
-    console.log(data)
+  console.log('data:', data)
   const { t } = useTranslation();
   return (
     <div className='Contact-footer'>
         <h5>{t("help")}</h5>
         <div className='Contact-contact-sosial'>
             <div className='Contact-contact-us'>
-                <h6>+994 000 00 00</h6>
-                <h6>+994 000 00 00</h6>
-                <h6>info@112med.com</h6>
+                <h6>{data?.number}</h6>
+                <h6>{data?.number_second}</h6>
+                <h6>{data?.email}</h6>
             </div>
             <div className='Contact-sosial-icons'>
                 <img src={facebook} alt="" />

@@ -85,7 +85,6 @@ const Info = () => {
       setDate(e.target.value)
      }
     if (e.target.name ==="number"){
-      console.log("here");
       setNumber(e.target.value)
      }
   }
@@ -101,15 +100,12 @@ useEffect(()=>{
      }else{
       setActive(true)
      }
-      
-    console.log(data?.first_name);
 
   },[name,last_name,date,number])
  
 
 
   useEffect(() => {
-    console.log(last_name?.length);
   
     if(name?.trim().length === 0){
      
@@ -120,7 +116,6 @@ useEffect(()=>{
       }));
       
       setActive(true);
-      console.log(error);
     } else {
       setError((prev) => ({
         ...prev,

@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import './Questions.css';
 const Questions = ({questions}) => {
   const {t}=useTranslation()
-  console.log(questions, "salam")
   return (
     <>{questions.length>0 ? <section className="hospital-detail-questions-section">
       <div className="hospital-detail-questions-container">

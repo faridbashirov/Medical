@@ -23,7 +23,6 @@ import { FadeLoader } from 'react-spinners';
 const HospitalDetail = () => {
  const {id}=useParams()
  const {hospital,services,advantages,discount,questions,reviews,images,loading,error}=DetailFetch(id,i18next.language)
- console.log('hospital:',hospital)
  const {t}=useTranslation()
  const [openBooking, setOpenBooking] = useState(false)
  const {user,authToken}=useSelector(state=> state.auth)
@@ -83,7 +82,7 @@ const onCloseBookingModal = () => {
     <HospitalDetailHint t={t}/>
     <HospitalDirections services={services} hospital={hospital}/>
     {/* <Reviews id={id} reviews={reviews}/> */}
-    <Questions questions={questions}/>
+    {/* <Questions questions={questions}/> */}
     <QualityRating  hospital={hospital}  />
     <GetService hospital={hospital}/>
     {/* <PaySection/> */}

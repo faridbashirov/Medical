@@ -11,31 +11,29 @@ import { axiosPrivate } from '../../../../api/api';
 import { Trans } from 'react-i18next';
 
 const HospitalCard = ({ hospital, t, user }) => {
-  console.log(hospital, 'salam')
   const [liked, setLiked] = React.useState(hospital?.is_favorite || false);
   const navigate=useNavigate()
   const [add, setAdd] = React.useState(false);
-  const raitingName = (raiting) => {
-    switch (raiting) {
-      case 0:
-        return t("no-rating");
-      case 1:
-        return t("very-bad");
-      case 2:
-        return t("bad");
-      case 3:
-        return t("not-bad");
-      case 4:
-        return t("good");
-      case 5:
-        return t("excellent");
+  const raitingName = (raiting_count) => {
+    if(raiting_count==0){
+      return t("no-rating");
+    }else if(raiting_count>0 && raiting_count<=1){
+      return t("very-bad");
+    }else if(raiting_count>1 && raiting_count<=2){
+      return t("bad");
+    }
+    else if(raiting_count>2 && raiting_count<=3){
+      return t("not-bad");
+    }else if(raiting_count>3 && raiting_count<=4){
+      return t("good");
+    }else{
+      return t("excellent");
     }
   };
   const DeleteFromFavorite= async(id)=>{
     setLiked(true)
     axiosPrivate.delete(`card/remove_favorite/${id}`)
     .then((res) => {
-        console.log(res);
         setAdd(!add)
     })
     .catch((err) => {
@@ -84,11 +82,11 @@ const HospitalCard = ({ hospital, t, user }) => {
             </div>
             <div className='hospital-card-new-profile-detail-footer-area'>
               <span className='hospital-card-new-profile-detail-raitings'>
-                <span className='hospital-card-new-profile-detail-raiting'>{hospital?.raiting >= 0 ? hospital?.raiting.toFixed(1) : 0}</span>
+                <span className='hospital-card-new-profile-detail-raiting'>{hospital?.raiting_count >= 0 ? hospital?.raiting_count.toFixed(1) : 0}</span>
                 <span className='hospital-card-new-profile-detail-stars'>
-                  <Rate style={{ color: '#FFC224' }} disabled={true} value={hospital?.raiting >= 0 ? hospital?.raiting.toFixed(1) : 0} />
+                  <Rate style={{ color: '#FFC224' }} disabled={true} value={hospital?.raiting_count >= 0 ? hospital?.raiting_count.toFixed(1) : 0} />
                 </span>
-                <span className='hospital-card-new-profile-detail-raiting-name'>{raitingName(hospital?.raiting)}</span>
+                <span className='hospital-card-new-profile-detail-raiting-name'>{raitingName(hospital?.raiting_count)}</span>
               </span>
               <div className='hospital-card-new-profile-detail-reviews'>
                 <a href="">{hospital?.comment_count} отзыва</a>

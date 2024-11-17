@@ -11,7 +11,6 @@ import { axiosPrivate } from '../../../api/api';
 import { Trans } from 'react-i18next';
 
 const HospitalCard = ({ hospital, t, user }) => {  
-  console.log('true:', hospital)
   const [liked, setLiked] = React.useState(hospital?.is_favorite || false);
   const navigate=useNavigate()
   const [add, setAdd] = React.useState(false);

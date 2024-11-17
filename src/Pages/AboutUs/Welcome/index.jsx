@@ -9,7 +9,6 @@ const Welcome = () => {
   const hospitals = useLanguageFetch('hospital/hospitals',localStorage.getItem("lang"));
   const services = useLanguageFetch('account/all_positions',localStorage.getItem("lang"));
   const about_banner = useLanguageFetch('main/about_banner',localStorage.getItem("lang"));
-  console.log(about_banner?.data, "sslslssslls")
   return (
     <div className='welcome-area'>
       <div className='welcome-container'>

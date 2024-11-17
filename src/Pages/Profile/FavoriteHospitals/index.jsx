@@ -21,8 +21,6 @@ const FavoriteHospitals = () => {
   };
 
   const {data,setAdd,add,loading,count}=favoritesFetch(searchParams.get("page") || null)
-  console.log(data,count, "salam-data");
-
   return (
     <div className="menuRight" style={{width:"100%"}}>
           <>

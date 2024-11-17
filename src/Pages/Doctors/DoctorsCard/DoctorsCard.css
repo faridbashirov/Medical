@@ -252,7 +252,7 @@
   }
   .doctor-card-new-profile-name-and-work {
     order: 3;
-    width: 59%;
+    width: 100%;
     justify-content: space-between;
     height: 76%;
   }

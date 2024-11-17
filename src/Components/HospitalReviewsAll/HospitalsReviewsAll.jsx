@@ -1,14 +1,7 @@
 import React from "react";
 import { Button, Breadcrumb, Pagination,Rate } from "antd";
-
 import { EnvironmentOutlined } from "@ant-design/icons";
 import { FadeLoader } from "react-spinners";
-import USD from "../../assets/Svg/usdIcon.svg";
-import EUO from "../../assets/Svg/GroupEuro.svg";
-import POU from "../../assets/Svg/GroupPound.svg";
-import azFlag from "../../assets/Svg/azFlag.svg";
-import trFlag from "../../assets/Svg/trFlag.svg";
-import absFlag from "../../assets/Svg/absFlag.svg";
 import Iconstars from "../../assets/Svg/starIcon.svg";
 import SingleStar from "../../assets/Svg/singleStar.svg";
 import userIcon from "../../assets/Svg/userIcon.svg";
@@ -25,167 +18,9 @@ import ReviewModal from "./ReviewModal";
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { axiosPrivate } from "../../api/api";
 import i18next from "i18next";
 import { Helmet } from "react-helmet";
 
-const items = [
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        USD
-      </span>
-    ),
-    key: "1",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={USD}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        EUR
-      </span>
-    ),
-    key: "2",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={EUO}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        {" "}
-        GBP
-      </span>
-    ),
-    key: "3",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={POU}
-      />
-    ),
-  },
-];
-
-const itemsFlag = [
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        AZ
-      </span>
-    ),
-    key: "1",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={azFlag}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        TR
-      </span>
-    ),
-    key: "2",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={trFlag}
-      />
-    ),
-  },
-  {
-    label: (
-      <span
-        style={{
-          fontFamily: "Gilroy",
-          fontSize: "16px",
-          fontWeight: "600",
-          color: "black",
-          paddingLeft: "10px",
-        }}
-      >
-        {" "}
-        EN
-      </span>
-    ),
-    key: "3",
-    icon: (
-      <img
-        style={{ width: "30px", objectFit: "cover", marginLeft: "20px" }}
-        src={absFlag}
-      />
-    ),
-  },
-];
-
-const handleMenuClick = (e) => {
-  console.log("click", e);
-};
-
-const handleMenuFlagClick = (e) => {
-  console.log("click", e);
-};
-
-const menuProps = {
-  items,
-  onClick: handleMenuClick,
-};
-
-const menuPropsFlag = {
-  items: itemsFlag,
-  onClick: handleMenuFlagClick,
-};
 
 const HospitalsReviewsAll = () => {
   const {t}=useTranslation()
@@ -197,62 +32,9 @@ const HospitalsReviewsAll = () => {
     const [openReview, setOpenReview] = useState(false)
     const [add,setAdd] = useState(false)
     const [count,setCount] = useState(null)
-    console.log(reviews);
-    console.log(id);
 
-    
-    const AddToFavorite= async(id)=>{
-
-      axiosPrivate.post(`card/add_favorite/${id}`)
-      .then((res) => {
-          console.log(res);
-          setAdd(!add)
-      })
-      .catch((err) => {
-          console.log(err);
-      })
-     
-        
-      // fetch(`https://hospitalbackend.efgroup.az/card/add_favorite/${id}`, {
-      //   method: 'POST',
-      //    headers: {
-      //     'Content-type': 'application/json',
-      //     "Authorization":`Bearer ${authToken.access}`
-      //   },
-      // })
-      //    .then((response) => response.json())
-      //    .then((data) => {
-      //       console.log(data);
-      //       setAdd(!add)
-           
-           
-            
-      //    })
-      //    .catch((err) => {
-      //       console.log(err.message);
-      //    });
-         
-        
-    }
-    const DeleteFromFavorite= async(id)=>{
-    
-      axiosPrivate.delete(`card/remove_favorite/${id}`)
-      .then((res) => {
-          console.log(res);
-          setAdd(!add)
-      })
-      .catch((err) => {
-          console.log(err);
-      })
-        
-        
-    }
 
    const {hospital,error}=DetailFetch(id,i18next.language)
-   console.log(hospital);
-
-
-
     const reviewOpen=()=>{
       setOpenReview(true)
 

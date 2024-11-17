@@ -36,7 +36,6 @@ const MyFormItem = ({ name, ...props }) => {
 const Info = () => {
   const { t } = useTranslation();
   const { data, loading } = getUserFetch();
-  console.log(data, 'profiledata')
   const [name, setName] = useState("");
   const [last_name, setLastName] = useState("");
   const [date, setDate] = useState("");

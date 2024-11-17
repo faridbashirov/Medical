@@ -59,24 +59,19 @@ const ClientForm = ({onCancel,keys}) => {
   );
   const [location,setLocation]=useState([])
   const [error,setError] = useState({})
-  console.log(keys);
  if(keys !== "1"){
-  console.log(1);
   clearErrors()
  }
 
   const handleRegistration = async(values) => {
-    console.log("here");
     const data = await registerFetch(values)
 
     if(data.Errors){
-      console.log("error");
             setError(data.Errors)
             
           }
     
     if(data.status===201){
-      console.log("success");
                   setError({})
                   values={}
                   reset(values)
@@ -88,7 +83,6 @@ const ClientForm = ({onCancel,keys}) => {
 }
 
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
     setSelect(value)
 
   };

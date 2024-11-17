@@ -6,12 +6,6 @@ import './DoctorInfo.css'
 const DoctorInfo = ({doctor}) => {
   const  [active,setActive]=useState(true)
   const {t}=useTranslation()
-  if(doctor?.doctor_workexperience?.length === 0){
-    console.log(doctor?.doctor_workexperience);
-  }
-  else{
-    console.log("her2");
-  }
   return (
     <> 
    {(doctor?.doctor_workexperience?.length === 0 && doctor?.doctor_education?.length === 0 ) ? <div className={"container"}></div> :

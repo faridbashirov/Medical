@@ -76,15 +76,6 @@ const DoctorForm = ({onCancel,keys}) => {
   useEffect(()=>{
     clearErrors()
   },[])
-  
-  
-
-  
-
-
- 
-  console.log(errors);
-
 
   const [location,setLocation]=useState([])
   const [hospital,setHospital]=useState([])
@@ -96,13 +87,10 @@ const DoctorForm = ({onCancel,keys}) => {
 
 
   const handleRegistration = async(values) => {
-    console.log(values);
     const data = await doctorRegisterFetch(values)
     if(data.Errors){
-      console.log("error");
             setError(data.Errors)}
     if(data.message){
-      console.log("success");
                   setError({})
                   
                   onCancel()}}

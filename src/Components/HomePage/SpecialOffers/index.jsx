@@ -1,5 +1,4 @@
 import React from "react";
-import CardThird from "../../CardThird/CardThird";
 import './SpecialOffers.css'
 import { Link } from "react-router-dom";
 import Small from '../../CardBanner/Small';
@@ -70,9 +69,9 @@ const SpecialOffers = () => {
                       <div class="swiper-button-prev"></div>
                       <div class="swiper-button-next"></div>
                   </div>
-                  <div className="slider-second-mobile-version slider-third"> 
+                  <div className="slider-second-mobile-version slide-special-offers slider-third"> 
                   {data.map((item,index)=>{
-                        return     <Link to={item.link}> <CardThird  key={index} image={item.image}/></Link>
+                        return     <Link to={item.link}> <Small  key={index} image={item.image} title={item.title}/></Link>
                       })}
                   </div>
                   </div>

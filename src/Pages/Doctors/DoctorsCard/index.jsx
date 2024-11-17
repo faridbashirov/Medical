@@ -12,7 +12,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { axiosPrivate } from '../../../api/api';
 
 const DoctorsCard = ({ doctor, t, user }) => {
-  console.log('doctor:',doctor)
   const [liked, setLiked] = React.useState(doctor?.is_favorite);
   const navigate=useNavigate()
   const [add, setAdd] = React.useState(false);
@@ -85,7 +84,7 @@ const DoctorsCard = ({ doctor, t, user }) => {
         </Link>
         <div className='doctors-card-new-profile-detail-area'>
           <div className='doctors-card-new-profile-detail-header-area'>
-            <h6>главный врач</h6>
+            <h6>{doctor?.title?.title}</h6>
             <div className='doctor-card-new-profile-name-and-work'>
               {doctor?.first_name && (
                 <h3>Dr. {doctor?.first_name} {doctor?.last_name}</h3>
@@ -114,9 +113,9 @@ const DoctorsCard = ({ doctor, t, user }) => {
           </div>
           <div className='doctors-card-new-profile-buttons'>
             <div className='doctors-card-new-profile-left-buttons'>
-              <button className='doctors-card-new-profile-left-button'>Сосудистая хирургия</button>
+              <button className='doctors-card-new-profile-left-button'>{doctor?.position?.name}</button>
               <button className='doctors-card-new-profile-left-button'>
-                <img src={experience} alt="" />{doctor?.experience !== null ? `${doctor?.experience}` : "0"} лет опыта
+                <img src={experience} alt="" />{t('experiment', { years: doctor?.experience !== null ? `${doctor?.experience}` : "0"})}
               </button>
             </div>
             <div className='doctors-card-new-profile-right-buttons'>

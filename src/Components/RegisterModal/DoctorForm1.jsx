@@ -25,7 +25,6 @@ const DoctorForm = ({onCancel,keys}) => {
   const isPhoneValid = (phone) => {
   try {
     const number = phoneUtil.parseAndKeepRawInput(phone);
-    console.log(number, "isValid")
     return phoneUtil.isValidNumber(number);
   } catch (error) {
     return false;
@@ -79,7 +78,6 @@ const DoctorForm = ({onCancel,keys}) => {
   useEffect(()=>{
     clearErrors()
   },[])
-  console.log(errors);
   const [location,setLocation]=useState([])
   const [hospital,setHospital]=useState([])
   const [position,setPosition]=useState([])
@@ -92,10 +90,8 @@ const DoctorForm = ({onCancel,keys}) => {
     if (isPhoneValid(number)) {
       const data = await doctorRegisterFetch(values)
       if(data.Errors){
-      console.log("error");
             setError(data.Errors)}
     if(data.message){
-      console.log("success");
                   setError({})
                   
                   onCancel()}
@@ -107,9 +103,7 @@ const DoctorForm = ({onCancel,keys}) => {
     const newNumber = phoneUtil.parseAndKeepRawInput(value, "US");
     const numberValid = phoneUtil.isValidNumber(newNumber);
     setPhoneValid(numberValid);
-    console.log(numberValid, "is valid");
   } catch (error) {
-    console.error("Phone number error:", error.message);
     setPhoneValid(false); 
   }
 };

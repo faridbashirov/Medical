@@ -110,9 +110,10 @@ const  Hospitals = () => {
           ? allFilterSearch(
             checkedValue || "clinic",
             searchParams.get("country") || "",
-            searchParams.get("raiting") || "",
-            searchParams.get("page") || 0,
-            i18next.language
+              searchParams.get("raiting") || "",
+              searchParams.get("position") || "",
+              searchParams.get("page") || 0,
+              i18next.language
           )
           : mainFilterSearch(
             checkedValue || "clinic",

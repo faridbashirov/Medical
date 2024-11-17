@@ -68,7 +68,7 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
           <div className='doctor-card-profile-details'>
             <div className='doctor-card-profile-title-area'>
               {doctor?.position?.name.length>0 ?
-              <div className='doctor-card-profile-title'><h5>{doctor.position?.name}</h5>
+              <div className='doctor-card-profile-title'><h5>{doctor.title?.title}</h5>
               <Rate
                 style={{ color: "#FFC224"}}
                 defaultValue={0}
@@ -91,7 +91,7 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
             <div className='doctor-card-profile-position'>{doctor.position?.name}</div> : <></>}
             {doctor?.experience ? 
             <div className='doctor-card-profile-experience'>
-              <img src={experience}/>{doctor?.experience} лет опыта
+              <img src={experience}/>{t('experiment', { years: doctor?.experience})}
             </div> : <></>}
             <div className='doctor-card-buttons-area'>
               <div className='doctor-card-buttons-desktop'>

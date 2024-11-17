@@ -98,7 +98,6 @@ const itemsFlag = [
 const Header = () =>{
   const [showMenu, setShowMenu] = useState(false)
   const { data } = useLanguageFetch('main/currencies',localStorage.getItem("lang"));
-  console.log('currrency:', data)
   const [currency, setCurrency] = useState("USD");
   const [itemsCurrency,setItemsCurrency] = useState([])
   const handleMenu = () =>{
@@ -136,7 +135,6 @@ const Header = () =>{
   }, [data, showMenu]);
  
   const handleMenuFlagClick = (e) => {
-    console.log('itemsFlag:',itemsFlag[0].label.props)
     localStorage.setItem("lang",itemsFlag.find(item => item.key === e.key).label.props.children.toLowerCase())
     setActive(itemsFlag.find(item => item.key === e.key))
     i18n.changeLanguage(itemsFlag.find(item => item.key === e.key).label.props.children.toLowerCase())
@@ -144,7 +142,6 @@ const Header = () =>{
   
   const handleMenuClick = (e) => {
   const selectedCurrency = itemsCurrency.find(item => item.key === e.key);
-  console.log("selected",selectedCurrency.label.props.children[0].props.children.toUpperCase())
     localStorage.setItem("currency", selectedCurrency.label.props.children[0].props.children.toUpperCase());
     setCurrency(selectedCurrency);
 };

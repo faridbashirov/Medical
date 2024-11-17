@@ -36,15 +36,7 @@ const ReviewModal = ({openReview,onCloseReview,id,add,setAdd}) => {
     })
   );
 
-  console.log(raiting);
-
   const formhandler =(values)=>{
-    console.log(values);
-    console.log(raiting);
-
-    
-
-
     axiosPrivate.post(`account/doctor_review_create`,{
       
       doctor:id,
@@ -54,7 +46,6 @@ const ReviewModal = ({openReview,onCloseReview,id,add,setAdd}) => {
 
     })
     .then((res) => {
-        console.log(res);
         onCloseReview()
         setAdd(!add)
         toast(t("messagesuc"))
@@ -69,12 +60,7 @@ const ReviewModal = ({openReview,onCloseReview,id,add,setAdd}) => {
   }
 
   const onchange=(value)=>{
-    console.log(value);
     setRaiting(value)
-
-
-
-    
   }
 
 

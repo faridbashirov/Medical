@@ -50,19 +50,14 @@ const Password = () => {
 
     const handlechange =(e)=>{
         setError({})
-       console.log(e.target.name);
         if(e.target.name === "oldpassword"){
             setoldPassword(e.target.value);
         }
         if(e.target.name === "password"){
-            console.log(e.target.value)
             setPassword(e.target.value)
-         
-            console.log("here");
         }
         if(e.target.name === "password2"){
             setPassword2(e.target.value)
-            console.log("here");
         }
         
     }
@@ -70,7 +65,6 @@ const Password = () => {
 
   const navigate=useNavigate()
   const onFinish = async(value) => {
-    console.log(value);
     if(oldpassword.trim().length === 0){
         setError((prev) => ({
             ...prev,
@@ -150,9 +144,6 @@ if(Object.keys(error).length === 0){
 }
 
   useEffect(()=>{
-    console.log( password.trim() === "", oldpassword.trim() === "",  password2.trim() === "");
- 
-  
     if(
         password.trim() === ""&&
         oldpassword.trim() === "" &&

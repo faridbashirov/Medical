@@ -3,7 +3,6 @@ import {Button, Divider, Form, Input, Modal, Typography} from "antd";
 const {Item} = Form
 const AllSortModal = ({openSort, onCloseSort}) => {
   const onFinish = (data) => {
-    console.log(data)
   }
   return (
     <Modal open={openSort} onCancel={onCloseSort} footer={[]}>

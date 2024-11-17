@@ -16,9 +16,6 @@ const FAQ = () => {
   const {data,error,loading}=faqFetch(localStorage.getItem("lang"))
   const {data1,error1,loading1}=ContactInfoFetch(localStorage.getItem("lang"))
   const {data2,error2,loading2}=faqContentFetch(localStorage.getItem("lang"))
-  console.log("data:", data[0])
-  console.log("data-1:", data1)
-  console.log("data-2:", data2)
   const { t } = useTranslation();
   const [selected, setSelected] = useState(null);
   const toggleFAQ = index => {

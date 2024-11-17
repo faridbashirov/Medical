@@ -18,6 +18,7 @@ import i18next from "i18next";
 import { Helmet } from "react-helmet";
 import DoctorsCard from './DoctorsCard'
 import BreadCrumbs from "../../Components/BreadCrumbs";
+import { mainFilterSearch } from "../../Components/api/mainFilterFetch.js";
 
 const Doctors = () => {
   const navigate=useNavigate()
@@ -54,7 +55,6 @@ const Doctors = () => {
     navigate({ search: newSearch });
   };
   const raitingChange = (value) => {
-    console.log(value);
     setSelectedRaitingValue(value);
     searchParams.delete("page");
     searchParams.delete("location")
@@ -109,24 +109,27 @@ const Doctors = () => {
     setLoading(true);
 
     const getHospitals = async () => {
-        try {
-            const data = await allFilterSearch(
-              checkedValue || "doctor",
-              searchParams.get("country") || "",
+        const data = await (searchParams.has("country")|| searchParams.has("raiting") 
+          ? allFilterSearch(
+            checkedValue || "doctor",
+            searchParams.get("country") || "",
               searchParams.get("raiting") || "",
               searchParams.get("position") || "",
               searchParams.get("page") || 0,
               i18next.language
-            );
-            console.log('doctor:', data);
+          )
+          : mainFilterSearch(
+            checkedValue || "doctor",
+              searchParams.get("location") || "",
+              searchParams.get("name") || "",
+              searchParams.get("position") || "",
+              searchParams.get("page") || 0,
+              i18next.language
+            ));
             setDoctors(data.results);
-            setCount(data.count);
-        } catch (error) {
-            console.error("Error fetching hospital data:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
+            setCount(data.count)
+            setLoading(false)
+      };
     getHospitals();
 }, [searchParams,i18next.language]);
 

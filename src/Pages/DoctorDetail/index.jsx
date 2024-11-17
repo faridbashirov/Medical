@@ -22,7 +22,6 @@ const DoctorDetail = () => {
   i18next.on('languageChanged', () => {
     setLang(i18next.language)
   })
-  console.log('data doctors:', data)
   const onOpenBookingModal = () => {
     setOpenBooking(true)
   }

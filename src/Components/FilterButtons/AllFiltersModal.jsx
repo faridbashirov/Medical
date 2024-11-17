@@ -24,7 +24,6 @@ const AllFiltersModal = ({openFilters,onCloseFilter,country}) => {
   const [selectedCountryValue, setSelectedCountryValue] = useState(searchParams.get("country")? searchParams.get("country").split(",") : []);
   
   const onFinish = (data) => {
-    console.log(data)
     searchParams.delete("page");
     searchParams.delete("location")
     searchParams.delete("name")
@@ -52,12 +51,8 @@ const AllFiltersModal = ({openFilters,onCloseFilter,country}) => {
     setSelectedRaitingValue(value);
     
     };
-    console.log(country);
  const CountryChange = (value) => {
-      console.log(value);
       setSelectedCountryValue(value);
-     
-  
       };
 
   // useEffect(()=>{

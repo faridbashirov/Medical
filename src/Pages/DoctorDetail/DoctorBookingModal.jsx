@@ -65,7 +65,6 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
       resolver: yupResolver(schema),
     }))
   const onFinish =  async (values) => {
-    console.log(values)
     values["doctor_id"]=id
     const data=await doctorBook(values)
     if (data.message){

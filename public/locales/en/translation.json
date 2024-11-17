@@ -91,7 +91,7 @@
     "allanswers":"Clinic official responses",
     "allanswers2":"Read all questions/answers",
     "quality":"Quality control",
-    "quality2":"12MED rated the quality of this option 3 out of 5 based on criteria such as services offered, availability, cost.",
+    "quality2":"12MED rated the quality of this option {{value}} out of 5 based on criteria such as services offered, availability, cost.",
     "terms":"Terms of Service",
     "terms2":"accepts special requests - add them in the next step",
     "quiet":"Quiet hours",
@@ -187,5 +187,6 @@
     "only": "Only",
     "day": "days",
     "forgot": "Forgot your password?",
-    "contact-doctor": "Contact"
+    "contact-doctor": "Contact",
+    "experiment": "{{years}} years of experience"
 }

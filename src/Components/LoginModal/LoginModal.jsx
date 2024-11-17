@@ -74,7 +74,6 @@ const LoginModal = ({openLogin, onCloseLogin,onOpenRegister}) => {
 
    }
    const userLogin= async (values)=>{
-    console.log(values);
     values["lang"]=i18next.language
     
     

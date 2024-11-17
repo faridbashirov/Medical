@@ -19,7 +19,6 @@ const ClientForm = ({ onCancel }) => {
   const isPhoneValid = (phone) => {
   try {
     const number = phoneUtil.parseAndKeepRawInput(phone);
-    console.log(number, "isValid")
     return phoneUtil.isValidNumber(number);
   } catch (error) {
     return false;
@@ -72,14 +71,11 @@ const ClientForm = ({ onCancel }) => {
   const handlePhoneChange = (value) => {
   setNumber(value);
   try {
-    // Ensure the number includes a country code
-    const newNumber = phoneUtil.parseAndKeepRawInput(value, "US"); // Default to US if unsure
+    const newNumber = phoneUtil.parseAndKeepRawInput(value, "US");
     const numberValid = phoneUtil.isValidNumber(newNumber);
     setPhoneValid(numberValid);
-    console.log(numberValid, "is valid");
   } catch (error) {
-    console.error("Phone number error:", error.message);
-    setPhoneValid(false); // Set invalid state if parsing fails
+    setPhoneValid(false);
   }
 };
 const handleButton = () => {

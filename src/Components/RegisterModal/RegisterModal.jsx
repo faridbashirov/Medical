@@ -24,12 +24,9 @@ const RegisterModal = ({openRegister, onCloseRegister}) => {
   ];
 
   const onChange = (key) => {
-    console.log(key);
-   
    
   };
   useEffect(()=>{
-    console.log(1);
   },[])
 
 

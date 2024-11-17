@@ -19,7 +19,6 @@ import { useSelector } from "react-redux";
 import { axiosPrivate } from '../../../api/api';
 
 const Detail = ({ images, hospital, open }) => {
-  console.log("true:", hospital)
   const { id } = useParams();
   const [activeIndex, setActiveIndex] = useState(0);
   const { t } = useTranslation();
@@ -35,7 +34,6 @@ const Detail = ({ images, hospital, open }) => {
   const [checkedValue, setCheckedValue] = useState(searchParams.get("type")? searchParams.get("type") : "clinic");
   const navigate = useNavigate();
   const CountryChange = (value) => {
-    console.log(value);
     setSelectedCountryValue(value);
     searchParams.delete("page");
     searchParams.delete("location")
@@ -74,7 +72,6 @@ const Detail = ({ images, hospital, open }) => {
   };
 
   const DeleteFromFavorite = async (hospitalId) => {
-    console.log('sssssss')
     try {
       await axiosPrivate.delete(`card/remove_favorite/${hospitalId}`);
       setLiked(false);
@@ -161,7 +158,7 @@ const Detail = ({ images, hospital, open }) => {
           <div className='hospital-detail-content-header-left-area'>
             <div className='hospital-detail-content-header-title-area'>
               <div>
-                <h6>{hospital.name}</h6>
+                <h6>{hospital?.title?.title}</h6>
                 <Rate
                   style={{ color: "#FFC224" }}
                   defaultValue={0}

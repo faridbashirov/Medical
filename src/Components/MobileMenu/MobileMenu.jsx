@@ -10,10 +10,11 @@ import userIcon from "../../assets/Svg/userlogin.svg"
 
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,currency}) => {
+  const {user}=useSelector((state)=> state.auth)
   const {t,i18n}=useTranslation()
   const navigate=useNavigate()
-  console.log(showMenu)
   return (
     <div className={`menu  ${showMenu && 'show'}`}>
       <div style={{width:"100%"}}>
@@ -23,18 +24,29 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,curre
             <li>
               <Dropdown getPopupContainer={trigger => trigger.parentNode}  menu={menuProps}>
                 <Button type="text">
-                  <Space>
+                  <Space style={{display:"flex"}}>
                     {currency?.icon}
                     <span
-                      style={{
-                        fontFamily: "Gilroy",
-                        fontSize: "14px",
-                        fontWeight: "500",
-                        color: "white",
-                      }}
+                    style={{
+                      fontFamily: "Roboto",
+                      fontSize: "14px",
+                      fontWeight: "500",
+                      color: "white",
+                      marginLeft: "4px",
+                    }}
                     >
-                        {currency?.label?.props?.children}
-                      </span>
+                      {currency?.label?.props?.children[0]}
+                    </span>
+                    {currency?.label && <span
+                    style={{
+                      fontFamily: "Roboto",
+                      fontSize: "14px",
+                      fontWeight: "500",
+                      color: "white",
+                    }}
+                    >
+                      ({currency?.label?.props?.children[1]})
+                    </span>}
                   </Space>
                 </Button>
               </Dropdown>
@@ -69,6 +81,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,curre
               <p className="question-text">{t("contact")} </p>
             </div>
           </li>
+          {user && 
           <li style={{
             cursor:"pointer"
           }} className={"menuListItem"} onClick={()=> {navigate("profile");setShowMenu(!showMenu)}}>
@@ -80,6 +93,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,curre
             />
             <p className="profile-text">{t("profile")}</p>
           </li>
+          }
         </ul>
       </div>
 

@@ -36,11 +36,8 @@ const  DoctorsReviewsAll = () => {
   const [add,Setadd]=useState(false)
   const [openBooking, setOpenBooking] = useState(false)
   const [loading,setLoading]=useState(false)
-  console.log(reviews);
-  console.log(id);
 
   const onOpenBookingModal = () => {
-    console.log('1')
     setOpenBooking(true)
   }
   const onCloseBookingModal = () => {
@@ -59,7 +56,6 @@ const  DoctorsReviewsAll = () => {
 
 
   const {data,error,review}=DoctorDetailFetch(id,localStorage.getItem("lang")) 
-  console.log(data);
   
   const reviewOpen=()=>{
     setOpenReview(true)
@@ -75,11 +71,7 @@ const  DoctorsReviewsAll = () => {
     
       setLoading(true)
       const getReviews= async(id)=>{
-        console.log(searchParams.get("page"),"++++++++");
-        const res=await doctorReviewsFetch(id,searchParams.get("page") || null)
-        console.log(res);
-    
-     
+        const res=await doctorReviewsFetch(id,searchParams.get("page") || null)     
       setReviews(res.results)
       setCount(res.count)
       setLoading(false)

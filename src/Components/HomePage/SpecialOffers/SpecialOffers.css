@@ -1,3 +1,7 @@
+.slide-special-offers {
+  width: var(--mobile);
+  margin: 0 auto;
+}
 .special-offers {
   margin-top: 30px;
 }
@@ -14,11 +18,11 @@
   line-height: 16.8px;
   width: 75%;
 }
-.bestOffer-box a:nth-child(odd) .small-title {
+.slider-second-mobile-version a:nth-child(odd) .small-title {
   background: #56c661;
 }
 
-.bestOffer-box a:nth-child(even) .small-title {
+.slider-second-mobile-version a:nth-child(even) .small-title {
   background: #ffc224;
 }
 .container-foreign {

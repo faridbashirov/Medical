@@ -104,7 +104,11 @@ const DoctorSearch = () => {
                     <div className="doctor-search__mobile-items">
                       <div className='doctor-search__container'>
                         {data.map((item,index)=>{
-                          return <div className="doctor-search_item">
+                          return <div className="doctor-search_item" onClick={()=> navigate({
+                            pathname:"/doctors",
+                            search: `?type=doctor&position=${item?.name}`
+                            
+                          })}>
                           <img src={tooth} alt="tooth"/>
                           <p className={"doctor-search_item-desc"}>{item.name}</p>
                         </div>

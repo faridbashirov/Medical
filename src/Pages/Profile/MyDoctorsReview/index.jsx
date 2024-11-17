@@ -15,7 +15,6 @@ const  MyDoctorsReview = () => {
 
   const {user,authToken}=useSelector(state=> state.auth)
   const {data,error,count,loading}=profileDoctorReviews(searchParams.get("page") || null)
-  console.log(data);
   if(error) {
     return <div>Page Not Found</div>
   }

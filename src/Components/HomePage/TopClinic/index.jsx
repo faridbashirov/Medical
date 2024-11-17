@@ -14,7 +14,6 @@ import { axiosPrivate } from '../../../api/api';
 import uuid from 'react-uuid';
 const TopClinic = () => {
   const {hospitals,error}=useSelector((state)=>state.hospitals);
-  console.log(hospitals, 'hospitals')
   const {authToken,user}=useSelector((state)=>state.auth)
   const [add,setAdd]=useState(false)
   const {t}=useTranslation()
@@ -74,12 +73,16 @@ const TopClinic = () => {
                   <div className="top-clinic__item-num">{`${item?.percentage}%`}</div>
                 : <></>
                 }
+                {user ? 
                 <div className="top-clinic__item-heart">
-                { user ? (
-                          
-                          item.is_favorite ?  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> DeleteFromFavorite(item.id)}  src={heart} />  :  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> AddToFavorite(item.id)} src={heartOutlined} />) : "" }
-                
+                {item.is_favorite ?
+                <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> DeleteFromFavorite(item.id)}  src={heart} />  
+                :  
+                <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> AddToFavorite(item.id)} src={heartOutlined} />
+                }
                 </div>
+                : <></>
+                }
               </div>
               <div className="top-clinic__item-footer">
                 <div className="top-clinic__item-footer-subtitle">
@@ -107,12 +110,18 @@ const TopClinic = () => {
                   <div className="top-clinic__item-num">{`${item?.percentage}%`}</div>
                 : <></>
                 }
+                {
+                user ?
                 <div className="top-clinic__item-heart">
-                { user ? (
-                          
-                          item.is_favorite ?  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> DeleteFromFavorite(item.id)}   src={heart} />  :  <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> AddToFavorite(item.id)} src={heartOutlined} />) : "" }
-                
+                  {
+                    item.is_favorite ? 
+                    <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> DeleteFromFavorite(item.id)}   src={heart} />
+                    : 
+                    <img style={{cursor:"pointer",width:"19px"}}  onClick={()=> AddToFavorite(item.id)} src={heartOutlined} />
+                  }                
                 </div>
+                : <></>
+                }
               </div>
               <div className="top-clinic__item-footer">
                 <div className="top-clinic__item-footer-subtitle">

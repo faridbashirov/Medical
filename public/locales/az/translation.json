@@ -91,7 +91,7 @@
     "allanswers":"Klinikanın rəsmi cavabları",
     "allanswers2":"Bütün sualları/cavabları oxuyun",
     "quality":"Keyfiyyətə nəzarət",
-    "quality2":"112MED təklif olunan xidmətlər, mövcudluq, qiymət kimi meyarlara əsasən bu seçimin keyfiyyətini 5-dən 3-ü ilə qiymətləndirib.",
+    "quality2":"112MED təklif olunan xidmətlər, mövcudluq, qiymət kimi meyarlara əsasən bu seçimin keyfiyyətini 5-dən {{value}} ilə qiymətləndirib.",
     "terms":"Xidmət Şərtləri",
     "terms2":"xüsusi sorğuları qəbul edir - onları növbəti addımda əlavə edin",
     "quiet":"Sakit saatlar",
@@ -186,5 +186,6 @@
     "only": "Sadəcə",
     "day": "gün",
     "forgot": "Parolunuzu unutmusunuz?",
-    "contact-doctor": "Əlaqə"
+    "contact-doctor": "Əlaqə",
+    "experiment": "{{years}} illik təcrübə"
 }

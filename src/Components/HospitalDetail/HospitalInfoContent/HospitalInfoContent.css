@@ -101,6 +101,9 @@
     flex-direction: row;
     gap: 33px;
   }
+  .hospital-info-left-side {
+    width: calc(100% - 33px - 375px);
+  }
   .hospital-info-right-side-card {
     padding: 28px 25px 30px 25px;
     width: 375px;

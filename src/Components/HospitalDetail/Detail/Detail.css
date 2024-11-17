@@ -168,7 +168,7 @@
   }
   .hospital-detail-content {
     padding: 16px 20px 23px 20px;
-    width: 100%;
+    width: calc(100% - 21px - 22.5%);
   }
   .hospital-detail-content-header-right-area {
     margin-top: 0;
@@ -353,7 +353,7 @@
     height: 100%;
   }
   .hospital-detail-content-info {
-    width: 325px;
+    width: 22.5%;
   }
   .hospital-detail-content-card img {
     height: 142px;

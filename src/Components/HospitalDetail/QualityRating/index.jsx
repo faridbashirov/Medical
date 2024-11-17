@@ -6,7 +6,7 @@ import { Rate } from 'antd';
 const QualityRating = ({hospital}) => {
   const {t}=useTranslation()
   return (
-    <div className="quality-rating-section">
+    hospital?.raiting_count!==0 && <div className="quality-rating-section">
       <div className="quality-rating-container">
         <div className="quality-rating-left">
           <div className="quality-rating-area">
@@ -24,7 +24,7 @@ const QualityRating = ({hospital}) => {
         </div>
         <div className="quality-rating-right">
           <h4 className="quality-rating__right-title">{t("quality")}</h4>
-          <p className="quality-rating__right-desc">{t("quality2")}</p>
+          <p className="quality-rating__right-desc">{t("quality2", { value: hospital?.raiting_count})}</p>
         </div>
       </div>
     </div>

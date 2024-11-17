@@ -7,7 +7,6 @@ import uuid from 'react-uuid';
 const { Panel } = Collapse;
 
 const AllFiltersModal = ({ openFilters, onCloseFilter, country }) => {
-  console.log(country)
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,7 +14,6 @@ const AllFiltersModal = ({ openFilters, onCloseFilter, country }) => {
   const [selectedCountryValue, setSelectedCountryValue] = useState(searchParams.get('country') ? searchParams.get('country').split(',') : []);
 
   const onFinish = (data) => {
-  console.log(data);
   searchParams.delete("page");
   searchParams.delete("location");
   searchParams.delete("name");

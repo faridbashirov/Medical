@@ -6,11 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 const Reviews = ({reviews,id}) => {
   const {t}=useTranslation()
-   const navigate=useNavigate()
-   if(reviews.length === 0){
-    console.log("herex");
-   }
-  
+   const navigate=useNavigate()  
   return (
     <>
     {reviews.length>0 ? <section className="hospital-detail__reviews">

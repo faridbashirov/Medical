@@ -10,23 +10,22 @@ import { Link, useNavigate } from 'react-router-dom';
 import { axiosPrivate } from '../../../../api/api';
 
 const DoctorsCard = ({ doctor, t, user, add, setAdd }) => {
-  console.log('doctor:', doctor)
   const [liked, setLiked] = React.useState(true);
   const navigate = useNavigate();
-  const raitingName = (raiting) => {
-    switch (raiting) {
-      case 0:
-        return t("no-rating");
-      case 1:
-        return t("very-bad");
-      case 2:
-        return t("bad");
-      case 3:
-        return t("not-bad");
-      case 4:
-        return t("good");
-      case 5:
-        return t("excellent");
+  const raitingName = (raiting_count) => {
+    if(raiting_count==0){
+      return t("no-rating");
+    }else if(raiting_count>0 && raiting_count<=1){
+      return t("very-bad");
+    }else if(raiting_count>1 && raiting_count<=2){
+      return t("bad");
+    }
+    else if(raiting_count>2 && raiting_count<=3){
+      return t("not-bad");
+    }else if(raiting_count>3 && raiting_count<=4){
+      return t("good");
+    }else{
+      return t("excellent");
     }
   };
   const DeleteFromFavorite = async (id) => {
@@ -42,11 +41,9 @@ const DoctorsCard = ({ doctor, t, user, add, setAdd }) => {
     <div className={`doctors-card-new ${doctor?.is_sponsored ? "doctors-card-new-sponsor" : ""}`}>
       <div className='doctors-card-new-container'>
         <div className='doctors-card-new-profile-photo-area'>
-          {doctor?.profile_photo !== "https://hospitalbackend.efgroup.az/media/default.png" ? (
+          {doctor?.profile_photo!=="" &&
             <img className='doctors-card-new-profile-photo' src={doctor?.profile_photo || doctorMale} alt="" />
-          ) : (
-            <img className='doctors-card-new-profile-photo' src={doctorMale} alt="" />
-          )}
+          }
           {user && (
             <div 
               onClick={() => DeleteFromFavorite(doctor?.id)}
@@ -61,7 +58,7 @@ const DoctorsCard = ({ doctor, t, user, add, setAdd }) => {
         </div>
         <div className='doctors-card-new-profile-detail-area'>
           <div className='doctors-card-new-profile-detail-header-area'>
-            <h6>{doctor?.title}</h6>
+            <h6>{doctor?.title?.title}</h6>
             <div className='doctor-card-new-profile-name-and-work'>
               {doctor?.first_name && (
                 <h3>Dr. {doctor?.first_name} {doctor?.last_name}</h3>
@@ -78,11 +75,11 @@ const DoctorsCard = ({ doctor, t, user, add, setAdd }) => {
               )}
             </div>
             <span className='doctors-card-new-profile-detail-raitings'>
-              <span className='doctors-card-new-profile-detail-raiting'>{doctor?.raiting >= 0 ? doctor?.raiting.toFixed(1) : 0}</span>
+              <span className='doctors-card-new-profile-detail-raiting'>{doctor?.raiting_count >= 0 ? doctor?.raiting_count.toFixed(1) : 0}</span>
               <span className='doctors-card-new-profile-detail-stars'>
-                <Rate style={{ color: '#FFC224' }} disabled={true} value={doctor?.raiting >= 0 ? doctor?.raiting.toFixed(1) : 0} />
+                <Rate style={{ color: '#FFC224' }} disabled={true} value={doctor?.raiting_count >= 0 ? doctor?.raiting_count.toFixed(1) : 0} />
               </span>
-              <span className='doctors-card-new-profile-detail-raiting-name'>{raitingName(doctor?.raiting)}</span>
+              <span className='doctors-card-new-profile-detail-raiting-name'>{raitingName(doctor?.raiting_count)}</span>
             </span>
             <div className='doctors-card-new-profile-detail-reviews'>
               {/* <a href="">{doctor?.comment_count} отзыва</a>
@@ -91,9 +88,9 @@ const DoctorsCard = ({ doctor, t, user, add, setAdd }) => {
           </div>
           <div className='doctors-card-new-profile-buttons'>
             <div className='doctors-card-new-profile-left-buttons'>
-              <button className='doctors-card-new-profile-left-button'>Сосудистая хирургия</button>
+              <button className='doctors-card-new-profile-left-button'>{doctor?.position?.name}</button>
               <button className='doctors-card-new-profile-left-button'>
-                <img src={experience} alt="" />{doctor?.experience !== null ? `${doctor?.experience}` : "0"} лет опыта
+                <img src={experience} alt="" />{t('experiment', { years: doctor?.experience !== null ? `${doctor?.experience}` : "0"})}
               </button>
             </div>
             <div className='doctors-card-new-profile-right-buttons'>

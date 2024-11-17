@@ -8,7 +8,6 @@ import AllSortModal from "./AllSortModal.jsx";
 const FilterButtons = ({country}) => {
   const [openFilters, setOpenFilters] = useState(false)
   const [openSort, setOpenSort] = useState(false)
-  console.log(country);
   const onOpenFilter = () =>{
     setOpenFilters(true)
   }
