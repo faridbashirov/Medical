@@ -5,8 +5,9 @@ import ballThird from '../../../assets/Images/best-sellers/1 13.png'
 import './ExtraLarge.css'
 import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
-const ExtraLarge = ({image,discount,percentage}) => {
+const ExtraLarge = ({image,discount,percentage,linkName}) => {
   const {t}=useTranslation()
   return (
     <div className='extraLarge'>
@@ -34,9 +35,11 @@ const ExtraLarge = ({image,discount,percentage}) => {
       <div className='extra-large-image-box'>
         {image && <img className='extra-large-image' src={image} alt="" />}
       </div>
+      <Link to={linkName}>
       <Button className='extra-large-button'>
       {t("seemore")}
       </Button>
+      </Link>
     </div>
   )
 }

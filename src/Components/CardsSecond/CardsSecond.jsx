@@ -7,8 +7,8 @@ const CardsSecond = ({ position,discount }) => {
   const navigate = useNavigate();
   return (
   <div className="cardSecond trans" onClick={()=> navigate({
-    pathname:"/doctors",
-    search: `?type=doctor&position=${position}`
+    pathname:"/hospitals",
+    search: `?type=service&name=${position}`
   })}>
     <p className="cardsSecond-position">{position}</p>
     <p className="cardsSecond-discount">-{discount}%</p>

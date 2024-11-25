@@ -42,7 +42,7 @@ const MedicalServiceDiscount = () => {
                   </div>
                   <div className="slider-second-mobile-version"> 
                     {data.map((item,index)=>{
-                      if (index <4) return     <CardsSecond key={index} position={item.name} discount="-40%"/>
+                      if (index <4 && item.discount!==null) return     <CardsSecond key={index} position={item.name} discount={item.discount}/>
                     })}
                   </div>
                   <div className="medical-service__button_container">

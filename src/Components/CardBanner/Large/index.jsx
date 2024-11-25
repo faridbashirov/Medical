@@ -2,8 +2,9 @@ import React from 'react'
 import './Large.css'
 import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
+import { Link } from "react-router-dom";
 
-const Large = ({image,discount,percentage,title}) => {
+const Large = ({image,discount,percentage,title,linkName}) => {
   const {t}=useTranslation()
   return (
     <div className={percentage ? 'large largeTypeTwo' : 'large largeTypeOne'}>
@@ -14,9 +15,11 @@ const Large = ({image,discount,percentage,title}) => {
       {percentage===null ? 
         <div className='large-title-button'>
           <h3 className='title'>{title}</h3>
+          <Link to={linkName}>
           <Button className='large-button'>
           {t("seemore")}
           </Button>
+          </Link>
         </div> :
         <>
         {discount 
@@ -32,9 +35,11 @@ const Large = ({image,discount,percentage,title}) => {
           </div>
         }
           <div className='large-title-button'>
+            <Link to={linkName}>
             <Button className='large-button'>
             {t("seemore")}
             </Button>
+            </Link>
           </div>
         </>
       }

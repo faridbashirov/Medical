@@ -109,23 +109,23 @@ const Doctors = () => {
     setLoading(true);
 
     const getHospitals = async () => {
-        const data = await (searchParams.has("country")|| searchParams.has("raiting") 
-          ? allFilterSearch(
-            checkedValue || "doctor",
-            searchParams.get("country") || "",
-              searchParams.get("raiting") || "",
-              searchParams.get("position") || "",
-              searchParams.get("page") || 0,
-              i18next.language
-          )
-          : mainFilterSearch(
+        const data = await (searchParams.has("location") || searchParams.has("name") 
+          ? mainFilterSearch(
             checkedValue || "doctor",
               searchParams.get("location") || "",
               searchParams.get("name") || "",
               searchParams.get("position") || "",
               searchParams.get("page") || 0,
               i18next.language
-            ));
+            )
+          : allFilterSearch(
+            checkedValue || "doctor",
+            searchParams.get("country") || "",
+              searchParams.get("raiting") || "",
+              searchParams.get("position") || "",
+              searchParams.get("page") || 0,
+              i18next.language
+          ));
             setDoctors(data.results);
             setCount(data.count)
             setLoading(false)

@@ -58,7 +58,7 @@ const BestSeller = () => {
                     <div className='small-longes-container'>
                       {data?.map((item, index) => {
                         if (item?.first_section) {
-                          return <SmallLong key={index} title={item?.title} image={item?.image} percentage={item?.percentage} discount={item?.is_discount}/>;
+                          return <Link to={item.link} key={index}><SmallLong title={item?.title} image={item?.image} percentage={item?.percentage} discount={item?.is_discount}/></Link>;
                         }
                         return null;
                       })}
@@ -66,7 +66,7 @@ const BestSeller = () => {
                     <div className='larges-container'>
                       {data?.map((item, index) => {
                         if (item?.second_section) {
-                          return <Large key={index} title={item?.title} image={item?.image} discount={item?.is_discount} percentage={item?.percentage}/>;
+                          return <Large key={index} title={item?.title} image={item?.image} discount={item?.is_discount} percentage={item?.percentage} linkName={item?.link}/>;
                         }
                         return null;
                       })}
@@ -82,7 +82,7 @@ const BestSeller = () => {
                     >
                       {data?.map((item, index) => {
                         if (item?.three_section) {
-                          return <swiper-slide><Medium key={index} image={item?.image} discount={item?.is_discount} percentage={item?.percentage}/></swiper-slide>;
+                          return <swiper-slide key={index}><Link to={item.link}><Medium key={index} image={item?.image} discount={item?.is_discount} percentage={item?.percentage}/></Link></swiper-slide>;
                         }
                         return null;
                       })}
@@ -91,7 +91,7 @@ const BestSeller = () => {
                     <div className='extra-larges-container'>
                       {data?.map((item, index) => {
                         if (item?.four_section) {
-                          return <ExtraLarge key={index} image={item?.image} percentage={item?.percentage} discount={item?.is_discount}/>;
+                          return <ExtraLarge key={index} image={item?.image} percentage={item?.percentage} discount={item?.is_discount} linkName={item?.link}/>;
                         }
                         return null;
                       })}

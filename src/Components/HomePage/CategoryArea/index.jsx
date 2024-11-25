@@ -1,6 +1,5 @@
 import React from 'react'
 import "./CategoryArea.css"
-import hospitaldetail from "../../../assets/Images/hospital-detail/hospital-detail-1.jpg"
 import useLanguageFetch from '../../../Hooks/useLanguageFetch';
 import { Button, Skeleton } from 'antd';
 import { useNavigate } from 'react-router-dom';
