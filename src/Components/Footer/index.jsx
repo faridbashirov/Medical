@@ -111,7 +111,7 @@ const Footer = () => {
         </div>
       </div>
       <p className="footer-copy">
-        {t("copyright")}
+        <Trans i18nKey="copyright"></Trans>
       </p>
     </footer>
   );

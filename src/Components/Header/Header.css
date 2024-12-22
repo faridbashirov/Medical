@@ -54,7 +54,7 @@
   left: -24px !important;
 }
 .currency-dropdown .ant-dropdown {
-  left: -7px !important;
+  left: -42px !important;
 }
 .ant-btn {
   padding: 0;
@@ -62,8 +62,19 @@
 .contact-header {
   display: none;
 }
+.dFlex {
+  position: relative;
+}
 .dFlex:hover .contact-header {
   display: block;
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+.contact-header {
+  text-align: center;
 }
 .site-name {
   display: flex;

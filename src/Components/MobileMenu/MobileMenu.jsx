@@ -8,7 +8,7 @@ import instagram from "../../assets/Images/instagram.png";
 import './MobileMenu.css'
 import userIcon from "../../assets/Svg/userlogin.svg"
 
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,currency}) => {
@@ -37,7 +37,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,curre
                     >
                       {currency?.label?.props?.children[0]}
                     </span>
-                    {currency?.label && <span
+                    {/* {currency?.label && <span
                     style={{
                       fontFamily: "Roboto",
                       fontSize: "14px",
@@ -46,7 +46,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,curre
                     }}
                     >
                       ({currency?.label?.props?.children[1]})
-                    </span>}
+                    </span>} */}
                   </Space>
                 </Button>
               </Dropdown>
@@ -78,7 +78,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,curre
               <img src={question} />
             </div>
             <div>
-              <p className="question-text">{t("contact")} </p>
+              <p className="question-text">{t("contact header")} </p>
             </div>
           </li>
           {user && 
@@ -120,7 +120,8 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,curre
           </div>
         </div>
 
-        <p
+        <div>
+          <p
           className="white profile-text"
           style={{
             textAlign: "center",
@@ -128,8 +129,9 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,curre
             margin: "0px",
           }}
         >
-          © All rights reserved 2023. 112 Med
+          <Trans i18nKey="copyright"></Trans>
         </p>
+        </div>
       </div>
     </div>
   );

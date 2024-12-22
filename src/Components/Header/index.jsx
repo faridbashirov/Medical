@@ -222,7 +222,7 @@ const Header = () =>{
                         >
                           {currency?.label?.props?.children[0]}
                         </span>
-                        {currency?.label && <span
+                        {/* {currency?.label && <span
                           style={{
                             fontFamily: "Gilroy",
                             fontSize: "17.5px",
@@ -231,7 +231,7 @@ const Header = () =>{
                           }}
                         >
                           ({currency?.label?.props?.children[1]})
-                        </span>}
+                        </span>} */}
                       </Space>
                     </Button>
                   </Dropdown>
@@ -260,7 +260,7 @@ const Header = () =>{
                     <img src={question} />
                   </div>
                   <div className="contact-header">
-                    <p style={{color:"white"}}>{t("contact")} </p>
+                    <p style={{color:"white"}}>{t("contact header")} </p>
                   </div>
                 </li>
                 {user ?<li  onClick={()=>navigate("/profile")} style={{ cursor:"pointer" }}>

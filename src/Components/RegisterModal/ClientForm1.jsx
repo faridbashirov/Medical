@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Trans } from 'react-i18next';
 import { Form, Input, Select, Button } from 'antd';
 import './RegisterModal.css';
 import { locationFetch } from '../api/locationFetch';
@@ -9,6 +10,8 @@ import { useTranslation } from 'react-i18next';
 import { PhoneInput } from 'react-international-phone';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import 'react-international-phone/style.css';
+import { Link } from 'react-router-dom';
+import i18next from 'i18next';
 
 const { Item } = Form;
 
@@ -42,11 +45,12 @@ const ClientForm = ({ onCancel }) => {
   
   useEffect(() => {
     async function getLocation() {
-      const data = await locationFetch();
+      const data = await locationFetch(i18next.language);
+
       setLocation(data);
     }
     getLocation();
-  }, []);
+  }, [i18next.language]);
 
   const options = location.map((item) => ({
     value: item.id,
@@ -147,7 +151,7 @@ const handleButton = () => {
             onChange={handlePhoneChange}
             type="tel"
           />
-          <p style={{ color: 'red' }}>{(!phoneValid && counter!==0) ? t('phonenumber') : <></>}</p>
+          <p style={{ color: 'red', paddingTop: "10px", }}>{(!phoneValid && counter!==0) ? t('phonenumber') : <></>}</p>
         </Item>
 
         {/* Username */}
@@ -205,6 +209,35 @@ const handleButton = () => {
             )}
           />
           <p style={{ color: 'red' }}>{errors?.password?.message}</p>
+        </Item>
+        {/* Checkbox for agreement */}
+        <Item>
+          <Controller
+            name="agreement"
+            control={control}
+            rules={{
+              required: t('agreementerror'),
+            }}
+            render={({ field }) => (
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <input type="checkbox" {...field} />
+                <span style={{ marginLeft: '8px' }}>
+                  <Trans
+                    i18nKey="registeragreement"
+                    components={{
+                      useragreement: <Link to="/terms" target="_blank" rel="noopener noreferrer"></Link>,
+                      privacypolicy: <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer"></Link>,
+                    }}
+                    values={{
+                      useragreement: t('useragreement'),
+                      privacypolicy: t('privacypolicy'),
+                    }}
+                  />
+                </span>
+              </div>
+            )}
+          />
+          <p style={{ color: 'red' }}>{errors?.agreement?.message}</p>
         </Item>
 
         <Button type="primary" htmlType="submit" block size="large" onClick={()=>{handleButton()}}>

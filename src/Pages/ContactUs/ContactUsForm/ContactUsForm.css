@@ -37,10 +37,10 @@
 }
 .form-group-name {
   display: grid;
-  gap: 8px;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 49% 49%;
   text-transform: capitalize;
   overflow: hidden;
+  justify-content: space-between;
 }
 .form-group-name .form-group {
   width: 100%;
@@ -113,9 +113,6 @@
   }
   .form-group {
     gap: 5px;
-  }
-  .form-group-name {
-    gap: 16px;
   }
   .form-group label {
     color: #010101;

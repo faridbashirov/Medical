@@ -11,5 +11,4 @@ i18next
     lngs:["az","en","ru"],
     debug:true,
     fallbackLng:"az",
-    
 })

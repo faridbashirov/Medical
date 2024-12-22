@@ -6,15 +6,16 @@ import { positionFetch } from '../api/positionFetch';
 import { locationFetch } from '../api/locationFetch';
 import { doctorRegisterFetch } from '../api/doctorRegisterFetch';
 import {toast, ToastContainer } from "react-toastify";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { Controller } from 'react-hook-form';
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { PhoneInput } from 'react-international-phone';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import 'react-international-phone/style.css';
+import i18next from 'i18next';
 
 const {Item} = Form
 const DoctorForm = ({onCancel,keys}) => {
@@ -113,7 +114,7 @@ const handleButton = () => {
 
    useEffect(()=>{
     async function getLocation(){
-     const data = await locationFetch()
+     const data = await locationFetch(i18next.language);
      setLocation(data)
     }
  
@@ -122,15 +123,16 @@ const handleButton = () => {
 
    useEffect(()=>{
     async function getHospital(){
-     const data = await hospitalFetch()
+     const data = await hospitalFetch(i18next.language)
+     console.log(data)
      setHospital(data)
     }
  
     getHospital()
-   },[])
+   },[i18next.language])
    useEffect(()=>{
     async function getPosition(){
-     const data = await positionFetch()
+     const data = await positionFetch(i18next.language)
      setPosition(data)
     }
  
@@ -308,8 +310,37 @@ const handleButton = () => {
           }
           onFocus={() => refReactSelect.current.focus()}
         />
-    </Item>
     <p style={{color:'red'}}>{errors?.hospital && errors.hospital.message}</p>
+    </Item>
+    {/* Checkbox for agreement */}
+     <Item>
+      <Controller
+        name="agreement"
+        control={control}
+        rules={{
+          required: t('agreementerror'),
+        }}
+        render={({ field }) => (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <input type="checkbox" {...field} />
+        <span style={{ marginLeft: '8px' }}>
+        <Trans
+          i18nKey="registeragreement"
+          components={{
+            useragreement: <Link to="/terms" target="_blank" rel="noopener noreferrer"></Link>,
+            privacypolicy: <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer"></Link>,
+        }}
+        values={{
+          useragreement: t('useragreement'),
+          privacypolicy: t('privacypolicy'),
+        }}
+        />
+        </span>
+        </div>
+        )}
+      />
+      <p style={{ color: 'red' }}>{errors?.agreement?.message}</p>
+    </Item>
     <Button type={'primary'} htmlType={'submit'} block size={'large'}
             style={{display: 'block', marginBottom: '.5rem'}} onClick={()=>{handleButton()}}>{t("register")}</Button>
     </Form>

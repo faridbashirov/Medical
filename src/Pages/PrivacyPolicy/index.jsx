@@ -25,7 +25,7 @@ const PrivacyPolicy = () => {
   const {data,loading,error}=privacyFetch(localStorage.getItem("lang"))
 
   const [active,setActive]=useState(data[0]?.id)
-  
+  console.log(data)
   useEffect(()=>{
     setActive(data[0]?.id)
   },[data,i18next.language])
@@ -52,22 +52,22 @@ const PrivacyPolicy = () => {
         <div className="privacy-policy-container">
           <div className='privacy-policy-left'>
             <div className="privacy-policy-questions">
-              {data?.map((faq, index) => (
+              {data?.map((privacy, index) => (
                 <div key={index} className="privacy-policy-question" onClick={() => toggleFAQ(index)}>
                   <div className="privacy-policy-header">
                     {selected === index ?
                       <>
                         <div className='privacy-policy-arrow'><img src={arrowUp} alt="" /></div>
-                        <div className="privacy-policy-question-title privacy-policy-question-title-active">{faq?.question}</div>
+                        <div className="privacy-policy-question-title privacy-policy-question-title-active">{privacy?.category}</div>
                       </>
                       : <>
                         <div className='privacy-policy-arrow'><img src={arrowDown} alt="" /></div>
-                        <div className="privacy-policy-question-title">{faq?.question}</div>
+                        <div className="privacy-policy-question-title">{privacy?.category}</div>
                       </>
                     }
                   </div>
                   {selected === index && (
-                    <div className="privacy-policy-answer" dangerouslySetInnerHTML={createMarkup(faq?.answer)} />
+                    <div className="privacy-policy-answer" dangerouslySetInnerHTML={createMarkup(privacy?.text)} />
                   )}
                 </div>
               ))}
@@ -91,7 +91,7 @@ const PrivacyPolicy = () => {
           <div className='privacy-policy-right'>
             <div className="privacy-policy-detail">
               {selected !== null && (
-                <div className="privacy-policy-answer-desktop" dangerouslySetInnerHTML={createMarkup(data[selected].answer)} />
+                <div className="privacy-policy-answer-desktop" dangerouslySetInnerHTML={createMarkup(data[selected].text)} />
               )}
             </div>
           </div>
