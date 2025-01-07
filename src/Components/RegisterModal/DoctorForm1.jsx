@@ -67,7 +67,10 @@ const DoctorForm = ({onCancel,keys}) => {
     .label(t("password"))
     .min(3)
     .max(64)
-    .required(t("passworderror"))
+    .required(t("passworderror")),
+    agreement: Yup.bool()
+    .oneOf([true], t("agreementerror")) 
+    .required(t("agreementerror")),
       })
   const {control, handleSubmit,formState: { errors },clearErrors } = useForm(
     ({
@@ -321,9 +324,9 @@ const handleButton = () => {
           required: t('agreementerror'),
         }}
         render={({ field }) => (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div  className='checkbox'>
         <input type="checkbox" {...field} />
-        <span style={{ marginLeft: '8px' }}>
+        <span>
         <Trans
           i18nKey="registeragreement"
           components={{

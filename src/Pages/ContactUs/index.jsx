@@ -33,7 +33,7 @@ const ContactUs = () => {
             <ContactUsForm/>
             <Contact data={data1}/>
           </div>
-          <div style={{ width: "100%", height: "409px", backgroundColor: "#FBFBFB", padding: "40px", marginBottom: "20px" }}>
+          {/* <div style={{ width: "100%", height: "409px", backgroundColor: "#FBFBFB", padding: "40px", marginBottom: "20px" }}>
             <iframe
               style={{ border: "none" }}
               src={newMap}
@@ -44,7 +44,7 @@ const ContactUs = () => {
               referrerPolicy="no-referrer-when-downgrade"
               title="Google Map"
             ></iframe>
-          </div>
+          </div> */}
         </div>
       </section>
     </>

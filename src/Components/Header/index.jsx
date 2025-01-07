@@ -257,7 +257,7 @@ const Header = () =>{
                 </li>
                 <li onClick={()=> navigate("contact-us")}  style={{ cursor:"pointer" }} className="dFlex">
                   <div className="question">
-                    <img src={question} />
+                    <p>?</p>
                   </div>
                   <div className="contact-header">
                     <p style={{color:"white"}}>{t("contact header")} </p>

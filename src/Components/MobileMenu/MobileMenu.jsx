@@ -75,7 +75,7 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,curre
             cursor:"pointer"
           }}  onClick={()=> {navigate("contact-us");setShowMenu(!showMenu)}} className={"menuListItem"}>
             <div className="question">
-              <img src={question} />
+              <p>?</p>
             </div>
             <div>
               <p className="question-text">{t("contact header")} </p>

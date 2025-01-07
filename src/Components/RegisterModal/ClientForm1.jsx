@@ -219,9 +219,9 @@ const handleButton = () => {
               required: t('agreementerror'),
             }}
             render={({ field }) => (
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div className='checkbox'>
                 <input type="checkbox" {...field} />
-                <span style={{ marginLeft: '8px' }}>
+                <span >
                   <Trans
                     i18nKey="registeragreement"
                     components={{

@@ -161,14 +161,7 @@ const LoginModal = ({openLogin, onCloseLogin,onOpenRegister}) => {
         <Button type={'primary'} htmlType={'submit'} block size={'large'}
                 style={{display: 'block', marginBottom: '.5rem'}}>{t("login")}</Button>
         <Button type={'link'} htmlType={'submit'} block size={'large'} style={{ marginBottom: '.5rem'}}>{t("forgot")}</Button>
-        <ConfigProvider
-          theme={{
-            token: {
-              colorPrimary: '#56C661',
-            },
-
-          }}
-        >
+        <ConfigProvider>
           <Button type={'primary'} htmlType={'button'} block size={'large'} style={{margin:'0 !important'}} onClick={onOpenRegister}>{t("newaccaunt")}</Button>
         </ConfigProvider>
       </Form>

@@ -10,6 +10,7 @@ import PrivateRoute from "./Components/utils/PrivateRoute";
 import Doctors from "./Pages/Doctors";
 import DoctorsReviewsAll from "./Pages/DoctorsReviewsAll/DoctorsReviewsAll";
 import PrivacyPolicy from './Pages/PrivacyPolicy';
+import Terms from './Pages/Terms';
 import DoctorDetail from "./Pages/DoctorDetail";
 import FAQ from "./Pages/FAQ";
 import ContactUs from "./Pages/ContactUs";
@@ -46,7 +47,7 @@ const App = () => {
     };
     
     loadData();
-    const validRoutes = ['/', user ? '/profile' : null, '/hospitals', '/hospital-reviews/:id', '/hospital/:id', '/doctors', '/doctor-reviews/:id', '/doctor/:id', '/faq', '/privacy-policy', '/about-us', '/contact-us'].filter(Boolean);
+    const validRoutes = ['/', user ? '/profile' : null, '/hospitals', '/hospital-reviews/:id', '/hospital/:id', '/doctors', '/doctor-reviews/:id', '/doctor/:id', '/faq', '/privacy-policy', '/terms','/about-us', '/contact-us'].filter(Boolean);
     const pathExists = validRoutes.some(route => {
       const pattern = new RegExp(`^${route.replace(/:\w+/g, '\\d+')}$`);
       return pattern.test(location.pathname);
@@ -75,6 +76,7 @@ const App = () => {
           <Route path="/doctor-reviews/:id" element={<DoctorsReviewsAll />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms/>} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="*" element={<HomePage />} /> {/* Catch-all route */}

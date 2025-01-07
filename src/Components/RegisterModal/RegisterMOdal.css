@@ -2,7 +2,15 @@
   background-color: #4096ff;
   color: #fff;
 }
-
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+}
+.checkbox input {
+  margin-top: 4px;
+}
 .custom-tab {
   background-color: red;
   color: #fff;
