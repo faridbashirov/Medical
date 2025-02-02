@@ -11,9 +11,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { positionFetch } from '../../api/positionFetch';
 import {toast, ToastContainer } from "react-toastify";
 import { hospitalBook } from '../../api/hospitalbook';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllPositions } from "../../../store/reducers/positionsReducer";
+import i18next from 'i18next';
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 const isPhoneValid = (phone) => {
@@ -27,20 +29,17 @@ const isPhoneValid = (phone) => {
 
 const {Item} = Form
 const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
+  const dispatch = useDispatch();
+  const { positions } = useSelector((state) => state.positions);
+  
    const {id}=useParams()
    const [number, setNumber] = useState("");
   const handlePhoneChange = (value) => {
     setNumber(value);
   };
    const {t}=useTranslation()
- 
-   const [position,setPosition] = useState([])
-
   const schema = Yup.object().shape({
-   
-   
     name:Yup.string()
-    
     .trim()
     .required(t("nameerror"))
     ,
@@ -60,12 +59,8 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
     time:Yup.string()
     
     .trim()
-    .required(t("timerrror"))
+    .required(t("timeerror"))
     ,
-   
-   
-   
-   
       })
 
   const {control,reset,handleSubmit,formState: { errors  } } = useForm(
@@ -92,9 +87,9 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
   };
   
   useEffect(()=>{
+    dispatch(fetchAllPositions())
     async function getLocation(){
-     const data = await positionFetch()
-     setPosition(data)
+     
     }
  
     getLocation()
@@ -168,7 +163,7 @@ const HospitalBookingModal = ({onCloseBookingModal, openBooking}) => {
             className={'booking-input'}
             onChange={handleChange}
             {...field}
-            options={ position.map((item,index) =>{
+            options={ positions.map((item,index) =>{
               return  {key:index, "value": item.name, "label": item.name }
             })
            

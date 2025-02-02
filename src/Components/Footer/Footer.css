@@ -9,7 +9,12 @@
   padding: 0 10px;
   font-family: "Alfa-Slab-One";
 }
-
+.footer-description a:visited,
+.footer-description a {
+  text-decoration: none;
+  color: white;
+  font-weight: 900;
+}
 .footer-social {
   width: 28px;
   height: 28px;

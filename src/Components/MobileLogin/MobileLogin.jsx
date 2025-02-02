@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "antd";
-import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
-
+import { CloseOutlined, MenuOutlined } from "@ant-design/icons"
 import { useSelector } from "react-redux";
 import { logoutuser } from "../../store/reducers/userReducer";
 import { useDispatch } from "react-redux";

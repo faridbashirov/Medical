@@ -39,6 +39,7 @@ const CategoryArea = () => {
     if (error) {
         return console.log("CategoryArea:",error)
     }
+    console.log(data)
     return (
         <section className='categoryArea'>
             {data ? (
@@ -156,12 +157,13 @@ const CategoryArea = () => {
                     <div className="container search-container">
                         <div className='doctor-position-banner'>
                             <div className='banner-medium-smalls'>
-                                <div className='banner-medium'>
+                                {data.filter((item)=> item.is_large==false && item.is_medium).slice(0, 1).map((item,index)=>{
+                                        return  <div key={index} className='banner-medium'>
                                     <div className='banner-medium-left'>
-                                        <p className='banner-medium-title'>{data[1]?.name}</p>
+                                        <p className='banner-medium-title'>{item?.name}</p>
                                         <Button onClick={()=> navigate({
                                         pathname: "/hospitals",
-                                        search: `?type=service&name=${data[1]?.name}`,
+                                        search: `?type=service&name=${item?.name}`,
                                         })}
                                         className='banner-medium-button'
                                             type="primary"
@@ -170,11 +172,12 @@ const CategoryArea = () => {
                                         </Button>
                                     </div>
                                     <div className='banner-medium-right'>
-                                        <img src={plastic} alt="" />
+                                        <img src={item?.is_medium_image} alt="" />
                                     </div>
                                 </div>
+                                })}
                                 <div className='banner-smalls'>
-                                    {data.filter((item,index)=> index <4).map((item,index)=>{
+                                    {data.filter((item)=> item.is_large==false && item.is_medium==false).slice(0, 4).map((item,index)=>{
                                         return  <div key={index} className='banner-small' onClick={()=> navigate({
                                         pathname: "/hospitals",
                                         search: `?type=service&name=${item?.name}`,
@@ -186,12 +189,13 @@ const CategoryArea = () => {
                                 </div>
                             </div>
                             <div className='banner-mediums'>
-                                <div className='banner-medium'>
+                                {data.filter((item)=> item.is_large==false && item.is_medium).slice(1, 4).map((item,index)=>{
+                                        return  <div key={index} className='banner-medium'>
                                     <div className='banner-medium-left'>
-                                        <p className='banner-medium-title'>{data[1]?.name}</p>
+                                        <p className='banner-medium-title'>{item?.name}</p>
                                         <Button onClick={()=> navigate({
                                         pathname: "/hospitals",
-                                        search: `?type=service&name=${data[1]?.name}`,
+                                        search: `?type=service&name=${item?.name}`,
                                         })}
                                         className='banner-medium-button'
                                             type="primary"
@@ -200,48 +204,22 @@ const CategoryArea = () => {
                                         </Button>
                                     </div>
                                     <div className='banner-medium-right'>
-                                        <img src={plastic} alt="" />
+                                        <img src={item?.is_medium_image} alt="" />
                                     </div>
                                 </div>
-                                <div className='banner-medium'>
-                                    <div className='banner-medium-left'>
-                                        <p className='banner-medium-title'>{data[1]?.name}</p>
-                                        <Button onClick={()=> navigate({
-                                        pathname: "/hospitals",
-                                        search: `?type=service&name=${data[1]?.name}`,
-                                        })}
-                                        className='banner-medium-button'
-                                            type="primary"
-                                        >
-                                            {t("seemore")}
-                                        </Button>
-                                    </div>
-                                    <div className='banner-medium-right'>
-                                        <img src={plastic} alt="" />
-                                    </div>
-                                </div>
-                                <div className='banner-medium'>
-                                    <div className='banner-medium-left'>
-                                        <p className='banner-medium-title'>{data[1]?.name}</p>
-                                        <Button onClick={()=> navigate({
-                                        pathname: "/hospitals",
-                                        search: `?type=service&name=${data[1]?.name}`,
-                                        })}
-                                        className='banner-medium-button'
-                                            type="primary"
-                                        >
-                                            {t("seemore")}
-                                        </Button>
-                                    </div>
-                                    <div className='banner-medium-right'>
-                                        <img src={plastic} alt="" />
-                                    </div>
-                                </div>
+                                })}
                             </div>
-                            <div className='banner-big'>
-                                <p className='banner-big-title'>{data[1]?.name}</p>
-                                <img src={data[1]?.image} alt="" />
-                            </div>
+                            {data.map((position, index)=>{
+                                if(position.is_large){
+                                    return <div key={index} className='banner-big' onClick={()=> navigate({
+                                        pathname: "/hospitals",
+                                        search: `?type=service&name=${position?.name}`,
+                                        })}>
+                                        <p className='banner-big-title'>{position?.name}</p>
+                                        <img src={position?.image} alt="" />
+                                    </div>
+                                }
+                            })}
                         </div>
                     </div>
                 </>

@@ -60,7 +60,11 @@ const onCloseBookingModal = () => {
             {
               title: t("Clinics"),
               href: "/hospitals"
-            }
+            },
+            {
+              title: `${hospital.name}`,
+              href: ""
+            },
       ]}/>
       <div className={'detail__info-btns'}>
         {infoButtons.map(item => (

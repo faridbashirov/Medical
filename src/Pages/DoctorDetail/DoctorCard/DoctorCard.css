@@ -130,6 +130,9 @@
 }
 .doctor-card-profile-position {
   text-transform: capitalize;
+  cursor: pointer;
+  border-style: none;
+  outline-style: none;
 }
 .doctor-card-profile-position,
 .doctor-card-profile-experience {

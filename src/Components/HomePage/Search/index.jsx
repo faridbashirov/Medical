@@ -143,7 +143,7 @@ const Search = () => {
             <div className='search-data-area'>
               {loading && <></>}
               {error && <p>Error: {error.message}</p>}
-              {data && data.map((item) => (
+              {data && data.filter((item, index) => index<6).map((item) => (
                 <div key={item.id} onClick={()=> navigateDoctorServiceClinic(item.id,item.name)}><span>{item.name}</span></div>
               ))}
             </div>

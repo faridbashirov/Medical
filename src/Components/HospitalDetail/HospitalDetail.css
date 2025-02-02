@@ -1,5 +1,5 @@
 .ant-modal-root .ant-modal-wrap {
-  z-index: 9999999 !important;
+  z-index: 1001 !important;
 }
 .hospital-detail-loading-area {
   height: calc(100vh - 94.69px);

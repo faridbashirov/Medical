@@ -94,6 +94,7 @@
     "quality":"Keyfiyyətə nəzarət",
     "quality2":"112MED təklif olunan xidmətlər, mövcudluq, qiymət kimi meyarlara əsasən bu seçimin keyfiyyətini 5-dən {{value}} ilə qiymətləndirib.",
     "terms":"Xidmət Şərtləri",
+    "terms-page": "Xidmət şərtləri",
     "terms2":"xüsusi sorğuları qəbul edir - onları növbəti addımda əlavə edin",
     "quiet":"Sakit saatlar",
     "party":"Şənlik",
@@ -140,7 +141,7 @@
     "emailerror":"Siz e-poçt ünvanınızı daxil etməlisiniz",
     "validemail":"E-poçt etibarlı e-poçt olmalıdır",
     "phoneerror":"Siz telefon nömrənizi daxil etməlisiniz",
-    "timerrror":"Vaxt seçmək lazımdır",
+    "timeerror":"Vaxt seçmək lazımdır",
     "category":"Kateqoriya",
     "dateerror":"Tarix seçməlisiniz",
     "locationerror":"Yerinizi daxil etməlisiniz",
@@ -183,7 +184,8 @@
     "discount-name": "endirim",
     "contact-us1": "Bizimlə əlaqə saxlayın",
     "about-112Med": "«112 med» haqqında.",
-    "copyright": "Copyright © 2022–2025 112MED.com™.<br/>Bütün hüquqlar qorunur.",
+    "footer-title": "112MED.com™ - tibbi xidmətlər sifariş edin",
+    "copyright": "Copyright © 2022–2025 112MED.com™.Bütün hüquqlar qorunur.",
     "view-categories": "Kateqoriyalara baxın",
     "only": "Sadəcə",
     "day": "gün",
@@ -193,5 +195,10 @@
     "registeragreement": "Yeni hesab yaratmaqla <useragreement>{{useragreement}}</useragreement> və <privacypolicy>{{privacypolicy}}</privacypolicy> ilə razılaşırsınız.",
     "useragreement": "İstifadəçi Müqaviləsi",
     "privacypolicy": "Məxfilik Siyasəti",
-    "agreementerror": "İstifadəçi Müqaviləsi və Məxfilik Siyasəti ilə razılaşmamısız."
+    "agreementerror": "İstifadəçi Müqaviləsi və Məxfilik Siyasəti ilə razılaşmamısız.",
+    "footer-description": {
+        "description1": "112MED.COM — dünya üzrə tibbi xidmətlərin axtarışı və rezervasiyası üçün onlayn xidmətdir. Platforma müxtəlif tibb müəssisələrini və həkimləri bir araya gətirərək rahat tariflər və sabit qiymətlər təklif edir. 112MED.COM-un missiyası keyfiyyətli tibbi yardımı hər kəs üçün əlçatan etməkdir. Gələcəkdə xidmət ən böyük №1 tibbi platformaya çevrilməyi və pasiyentlərə təklifləri müqayisə edərək ən yaxşı mütəxəssisləri seçməyi hədəfləyir. 112MED.COM tibbi markalara və həkimlərə yeni müştərilər cəlb etməyə və bizneslərini genişləndirməyə kömək edir.",
+        "description2": "Saytdakı məlumatlar özünüzü diaqnoz etmək və müalicə etmək üçün nəzərdə tutulmayıb və həkimə müraciəti əvəz edə bilməz. 112MED.COM tibbi xidmətlər satmır. 112MED — tibbi xidmətlər, tibb müəssisələri, mərkəzlər, klinikalar, xəstəxanalar və həkimlər üçün elan bazasıdır.",
+        "description3": "Xidmətdən istifadə edərək <1>İstifadəçi Razılaşması</1>, <3>Məxfilik Siyasəti</3> ilə razılaşırsınız. Saytı daha rahat etmək üçün cookie fayllarından istifadə edirik. Saytda qalmaqla <5>cookie siyasətimizi</5> qəbul etmiş olursunuz."
+    }
 }

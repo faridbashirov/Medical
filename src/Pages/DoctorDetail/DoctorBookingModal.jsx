@@ -10,9 +10,10 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { positionFetch } from '../../Components/api/positionFetch';
 import { doctorBook } from '../../Components/api/doctorbook';
 import {toast, ToastContainer } from "react-toastify";
+import { fetchAllPositions } from "../../store/reducers/positionsReducer";
+import { useDispatch, useSelector } from 'react-redux';
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 const isPhoneValid = (phone) => {
@@ -26,6 +27,9 @@ const isPhoneValid = (phone) => {
 
 const {Item} = Form
 const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
+  
+  const dispatch = useDispatch();
+  const { positions } = useSelector((state) => state.positions);
   const [number, setNumber] = useState("");
   const handlePhoneChange = (value) => {
     setNumber(value);
@@ -54,7 +58,7 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
   
   time: Yup.string()
     .trim()
-    .required(t("timerror")),
+    .required(t("timeerror")),
 });
 
 
@@ -82,9 +86,8 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
     console.log(`selected ${value}`);
   };
   useEffect(()=>{
+    dispatch(fetchAllPositions())
     async function getLocation(){
-     const data = await positionFetch()
-     setPosition(data)
     }
  
     getLocation()
@@ -93,8 +96,6 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
 
   return (
     <>
-   
-    
     <Modal open={openBooking} onCancel={onCloseBookingModal} footer={[]}>
       <Typography className={'login-title'}>{t("bron4")}</Typography>
       <Divider/>
@@ -153,7 +154,7 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
             className={'booking-input'}
             onChange={handleChange}
             {...field}
-            options={ position.map((item,index) =>{
+            options={ positions.map((item,index) =>{
               return  {key:index, "value": item.name, "label": item.name }
             })
            

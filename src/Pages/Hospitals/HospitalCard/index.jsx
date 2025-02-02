@@ -55,7 +55,7 @@ const HospitalCard = ({ hospital, t, user }) => {
       <div className='hospital-card-new-container'>
         <div className='hospital-card-new-profile-photo-area'>
           {hospital?.main_image!=="" &&
-          <img className='hospital-card-new-profile-photo' src={hospital?.main_image || profile} alt="" />
+          <Link to={`/hospital/${hospital?.id}`}><img className='hospital-card-new-profile-photo' src={hospital?.main_image || profile} alt="" /></Link>
            }
            {user ?
            <div 

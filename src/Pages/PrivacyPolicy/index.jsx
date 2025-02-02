@@ -72,7 +72,7 @@ const PrivacyPolicy = () => {
                 </div>
               ))}
             </div>
-            <div className='privacy-policy-footer'>
+            {/* <div className='privacy-policy-footer'>
               <h5>{t("help")}</h5>
               <div className='privacy-policy-contact-sosial'>
                 <div className='privacy-policy-contact-us'>
@@ -86,7 +86,7 @@ const PrivacyPolicy = () => {
                   <img src={instagram} alt="" />
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className='privacy-policy-right'>
             <div className="privacy-policy-detail">

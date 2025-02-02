@@ -6,37 +6,38 @@ import facebook from "../../assets/Svg/facebook.svg";
 import vk from "../../assets/Svg/Vkontakte.svg";
 import instagram from "../../assets/Svg/Instagram.svg";
 import "./Terms.css"
-import privacyFetch from "../../Components/api/privacyFetch";
+import termsFetch from "../../Components/api/termsFetch";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet";
 
 const Terms = () => {
   const [selected, setSelected] = useState(null);
-  const toggleFAQ = index => {
-    setSelected(selected === index ? null : index);
+  const toggleFAQ = () => {
+    setSelected(selected === null ? true : null);
   };
 
   const createMarkup = (htmlContent) => {
-  const formattedContent = htmlContent.replace(/\n/g, '<br />');
-  return { __html: formattedContent };
+    const formattedContent = htmlContent.replace(/\n/g, '<br />');
+    return { __html: formattedContent };
   };
-  const {t,i18n}=useTranslation()
-  const {data,loading,error}=privacyFetch(localStorage.getItem("lang"))
 
-  const [active,setActive]=useState(data[0]?.id)
-  console.log(data)
-  useEffect(()=>{
-    setActive(data[0]?.id)
-  },[data,i18next.language])
+  const { t, i18n } = useTranslation();
+  const { data, loading, error } = termsFetch(localStorage.getItem("lang"));
+
+  useEffect(() => {
+    if (data) {
+      setSelected(null); // Varsayılan olarak kapalı başlat
+    }
+  }, [data, i18next.language]);
 
   return (
     <>
-    <Helmet>
-      <meta charSet="utf-8" />
-      <title>112MED.ru | Официальный сайт | Клиники, врачи, онлайн-сервис по поиску и бронированию медицинских услуг, выгодные цены </title>
-    </Helmet>
-     <section className='faq-section'>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>112MED.ru | Официальный сайт | Клиники, врачи, онлайн-сервис по поиску и бронированию медицинских услуг, выгодные цены </title>
+      </Helmet>
+      <section className='faq-section'>
         <div className='container'>
           <BreadCrumbs pageItems={[
             {
@@ -44,35 +45,34 @@ const Terms = () => {
               href: "/",
             },
             {
-              title: t("privacy-policy"),
+              title: t("terms"),
               href: "/terms"
             },
-          ]}/>
+          ]} />
         </div>
         <div className="privacy-policy-container">
           <div className='privacy-policy-left'>
             <div className="privacy-policy-questions">
-              {data?.map((privacy, index) => (
-                <div key={index} className="privacy-policy-question" onClick={() => toggleFAQ(index)}>
-                  <div className="privacy-policy-header">
-                    {selected === index ?
-                      <>
-                        <div className='privacy-policy-arrow'><img src={arrowUp} alt="" /></div>
-                        <div className="privacy-policy-question-title privacy-policy-question-title-active">{privacy?.category}</div>
-                      </>
-                      : <>
-                        <div className='privacy-policy-arrow'><img src={arrowDown} alt="" /></div>
-                        <div className="privacy-policy-question-title">{privacy?.category}</div>
-                      </>
-                    }
-                  </div>
-                  {selected === index && (
-                    <div className="privacy-policy-answer" dangerouslySetInnerHTML={createMarkup(privacy?.text)} />
+              <div className="privacy-policy-question" onClick={toggleFAQ}>
+                <div className="privacy-policy-header">
+                  {selected !== null ? (
+                    <>
+                      <div className='privacy-policy-arrow'><img src={arrowUp} alt="" /></div>
+                      <div className="privacy-policy-question-title privacy-policy-question-title-active">{data?.category}</div>
+                    </>
+                  ) : (
+                    <>
+                      <div className='privacy-policy-arrow'><img src={arrowDown} alt="" /></div>
+                      <div className="privacy-policy-question-title">{data?.category}</div>
+                    </>
                   )}
                 </div>
-              ))}
+                {selected !== null && (
+                  <div className="privacy-policy-answer" dangerouslySetInnerHTML={createMarkup(data?.text)} />
+                )}
+              </div>
             </div>
-            <div className='privacy-policy-footer'>
+                        {/* <div className='privacy-policy-footer'>
               <h5>{t("help")}</h5>
               <div className='privacy-policy-contact-sosial'>
                 <div className='privacy-policy-contact-us'>
@@ -86,12 +86,12 @@ const Terms = () => {
                   <img src={instagram} alt="" />
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className='privacy-policy-right'>
             <div className="privacy-policy-detail">
               {selected !== null && (
-                <div className="privacy-policy-answer-desktop" dangerouslySetInnerHTML={createMarkup(data[selected].text)} />
+                <div className="privacy-policy-answer-desktop" dangerouslySetInnerHTML={createMarkup(data?.text)} />
               )}
             </div>
           </div>

@@ -3,6 +3,9 @@
   flex-direction: column;
   gap: 35px;
 }
+.hospital-detail-content-section .filters {
+  order: 0;
+}
 .hospital-detail-content {
   background-color: #fbfbfb;
   padding: 16px 20px 23px 20px;

@@ -13,6 +13,7 @@ import { postRatingDoctor } from '../../../Components/api/postRaitingDoctor';
 import i18next from 'i18next';
 import { useParams } from 'react-router-dom';
 import axios from "../../../Components/api";
+import PositionsModal from "../../../Components/PositionModal";
 
 const DoctorCard = ({onOpenBookingModal,doctor}) => {
   const {id}=useParams()
@@ -51,7 +52,7 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
       return t("excellent");
     }
   };
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const {t}=useTranslation()
   return (
     <div className='doctor-card-container'>
@@ -88,27 +89,34 @@ const DoctorCard = ({onOpenBookingModal,doctor}) => {
             </div>
             : <></>}
             {doctor?.position?.name ? 
-            <div className='doctor-card-profile-position'>{doctor.position?.name}</div> : <></>}
+            <>
+              <button onClick={() => setIsModalOpen(true)} className='doctor-card-profile-position'>{doctor.position?.name}</button>
+              <PositionsModal position={doctor?.position?.name} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            </> : <></>}
             {doctor?.experience ? 
             <div className='doctor-card-profile-experience'>
               <img src={experience}/>{t('experiment', { years: doctor?.experience})}
-            </div> : <></>}
+            </div> : 
+            <div className='doctor-card-profile-experience'>
+              <img src={experience}/>{t('experiment', {years: 0})}
+            </div>
+            }
             <div className='doctor-card-buttons-area'>
               <div className='doctor-card-buttons-desktop'>
                 <button onClick={onOpenBookingModal}>{t("onlinebooking")}</button>
-                <button><a href={`tel:${doctor?.phone_number}`}>{doctor?.phone_number}</a></button>
+                {/* <button><a href={`tel:${doctor?.phone_number}`}>{doctor?.phone_number}</a></button> */}
               </div>
-              <div className="doctor-card-social">
+              {/* <div className="doctor-card-social">
                 <img src={DrFB}/>
                 <img src={DrVK}/>
                 <img src={DrLn}/>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
         <div className='doctor-card-buttons'>
           <button onClick={onOpenBookingModal}>{t("onlinebooking")}</button>
-          <button><a href={`tel:${doctor?.phone_number}`}>{t('contact-doctor')}</a></button>
+          {/* <button><a href={`tel:${doctor?.phone_number}`}>{t('contact-doctor')}</a></button> */}
         </div>
       </div>
     </div>
