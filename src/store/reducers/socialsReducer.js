@@ -3,42 +3,42 @@ import axios from "../../Components/api/index";
 import i18next from 'i18next';
 
 
-export const fetchAllPositions = createAsyncThunk(
-  "positions/fetchAll",
+export const fetchAllSocials = createAsyncThunk(
+  "socials/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${i18next.language === "ru" ? "" : i18next.language + "/"}account/all_positions`
+        `main/socials`
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Failed to fetch positions");
+      return rejectWithValue(error.response?.data || "Failed to fetch socials");
     }
   }
 );
 
-const positionsSlice = createSlice({
-  name: "positions",
+const socialsSlice = createSlice({
+  name: "socials",
   initialState: {
-    positions: [],
+    socials: [],
     status: "idle", 
     error: null,
   },
   reducers: {}, 
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllPositions.pending, (state) => {
+      .addCase(fetchAllSocials.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchAllPositions.fulfilled, (state, action) => {
+      .addCase(fetchAllSocials.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.positions = action.payload;
+        state.socials = action.payload;
       })
-      .addCase(fetchAllPositions.rejected, (state, action) => {
+      .addCase(fetchAllSocials.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });
   },
 });
 
-export default positionsSlice.reducer;
+export default socialsSlice.reducer;

@@ -36,8 +36,6 @@ const DoctorBookingModal = ({onCloseBookingModal, openBooking}) => {
   };
    const {id}=useParams()
    const {t}=useTranslation()
- 
-   const [position,setPosition] = useState([])
 
   const schema = Yup.object().shape({
   name: Yup.string()

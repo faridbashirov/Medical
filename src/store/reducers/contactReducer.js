@@ -3,42 +3,42 @@ import axios from "../../Components/api/index";
 import i18next from 'i18next';
 
 
-export const fetchAllPositions = createAsyncThunk(
-  "positions/fetchAll",
+export const fetchAllContact = createAsyncThunk(
+  "contact/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${i18next.language === "ru" ? "" : i18next.language + "/"}account/all_positions`
+        `${i18next.language === "ru" ? "" : i18next.language + "/"}main/contact_info`
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Failed to fetch positions");
+      return rejectWithValue(error.response?.data || "Failed to fetch contact");
     }
   }
 );
 
-const positionsSlice = createSlice({
-  name: "positions",
+const contactSlice = createSlice({
+  name: "contact",
   initialState: {
-    positions: [],
+    contact: [],
     status: "idle", 
     error: null,
   },
   reducers: {}, 
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllPositions.pending, (state) => {
+      .addCase(fetchAllContact.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchAllPositions.fulfilled, (state, action) => {
+      .addCase(fetchAllContact.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.positions = action.payload;
+        state.contact = action.payload;
       })
-      .addCase(fetchAllPositions.rejected, (state, action) => {
+      .addCase(fetchAllContact.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });
   },
 });
 
-export default positionsSlice.reducer;
+export default contactSlice.reducer;

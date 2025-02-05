@@ -106,7 +106,7 @@ const  Hospitals = () => {
       setSelectedRaitingValue(searchParams.get("raiting")? searchParams.get("raiting").split(","):[])
       setLoading(true)
       const getHospitals = async () => {
-        const data = await (searchParams.has("country")|| searchParams.has("raiting") 
+        const data = await (searchParams.has("country") || searchParams.has("raiting") 
           ? allFilterSearch(
             checkedValue || "clinic",
             searchParams.get("country") || "",

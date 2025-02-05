@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
-import useLanguageFetch from '../../Hooks/useLanguageFetch';
 import "./positionModal.css";
+import { fetchAllPositions } from "../../store/reducers/positionsReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 const PositionsModal = ({ isOpen, onClose, position }) => {
-  const { data, loading, error } = useLanguageFetch('account/all_positions',localStorage.getItem("lang"));
+  const dispatch = useDispatch();
+  const { positions } = useSelector((state) => state.positions);
+  useEffect(()=>{
+    dispatch(fetchAllPositions())
+  },[])
   const handleOverlayClick = (e) => {
     if (e.target.classList.contains("modal-overlay")) {
       onClose();
@@ -19,7 +24,7 @@ const PositionsModal = ({ isOpen, onClose, position }) => {
           &times;
         </button>
         <ul>
-          {data.filter((pos)=> pos.name.toLowerCase()==position.toLowerCase()).map((pos) => (
+          {positions.filter((pos)=> pos.name.toLowerCase()==position.toLowerCase()).map((pos) => (
             <li key={pos.id} className="position-item">
               <strong>{pos.name}</strong>
               {pos.description && <p>{pos.description}</p>}

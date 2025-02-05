@@ -47,7 +47,7 @@ const ContactUsForm = () => {
                     name="first_name"
                     control={control}
                     render={({ field }) => (
-                    <input {...field} className="input" placeholder="First Name *" />
+                    <input {...field} className="input" placeholder={t("name")} />
                     )}
                 />
                 <p style={{ color: 'red' }}>{errors?.first_name?.message || error.first_name}</p>
@@ -58,7 +58,7 @@ const ContactUsForm = () => {
                     name="last_name"
                     control={control}
                     render={({ field }) => (
-                    <input {...field} className="input" placeholder="Last Name *" />
+                    <input {...field} className="input" placeholder={t("surname")} />
                     )}
                 />
                 <p style={{ color: 'red' }}>{errors?.last_name?.message || error.last_name}</p>
@@ -70,7 +70,7 @@ const ContactUsForm = () => {
             name="email"
             control={control}
             render={({ field }) => (
-              <input {...field} type="email" className="input" placeholder="Email" />
+              <input {...field} type="email" className="input" placeholder={t("mailadress")} />
             )}
           />
           <p style={{ color: 'red' }}>{errors?.email?.message || error.email}</p>
@@ -81,7 +81,7 @@ const ContactUsForm = () => {
             name="text"
             control={control}
             render={({ field }) => (
-              <textarea {...field} className="input" placeholder="Message" />
+              <textarea {...field} className="input" placeholder={t("note")} />
             )}
           />
           <p style={{ color: 'red' }}>{errors?.text?.message}</p>

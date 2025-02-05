@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import facebook from "../../assets/Svg/facebook.svg";
 import vk from "../../assets/Svg/Vkontakte.svg";
 import instagram from "../../assets/Svg/Instagram.svg";
@@ -7,13 +7,18 @@ import footerArrow from "../../assets/Svg/footer-arrow.svg"
 import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import SocialsFetch from '../api/socialsFetch';
 import './Footer.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllSocials } from '../../store/reducers/socialsReducer';
 const Footer = () => {
 
   const navigate=useNavigate();
   const {t}=useTranslation()
-  const {data,error,loading}=SocialsFetch()
+  const dispatch = useDispatch();
+  const { socials } = useSelector((state) => state.socials);
+  useEffect(()=>{
+    dispatch(fetchAllSocials())
+  },[])
   return (
     <footer className="bgFooter">
       <div className="container footer-wrapper">
@@ -91,18 +96,17 @@ const Footer = () => {
           </a>
         </div>
         <div  className="footerIcons">
-          <div style={{display:"flex", gap:"16px",marginTop:"10px"}}>
-            <div >
-              <img onClick={()=>window.open(data.facebook)} className={"footer-social"} src={facebook} />
-            </div>
-            <div>
-              <img onClick={()=>window.open(data.linkedin)} className={"footer-social"} src={vk} />
-            </div>
-            <div>
-              <img onClick={()=>window.open(data.instagram)} className={"footer-social"} src={instagram} />
-            </div>
-          </div>
-
+          {(socials?.instagram || socials?.linkedin || socials.facebook) && <div style={{display:"flex", gap:"16px",marginTop:"10px"}}>
+            {socials.facebook && <div>
+              <img onClick={()=>window.open(socials.facebook)} className={"footer-social"} src={facebook} />
+            </div>}
+            {socials.linkedin && <div>
+              <img onClick={()=>window.open(socials.linkedin)} className={"footer-social"} src={vk} />
+            </div>}
+            {socials.instagram && <div>
+              <img onClick={()=>window.open(socials.instagram)} className={"footer-social"} src={instagram} />
+            </div>}
+          </div>}
           <div className="pad-wrapper" >
             <Button onClick={()=> navigate("/contact-us")}  className="pad">
              {t("contact1").toUpperCase()}

@@ -346,7 +346,7 @@
   .ant-btn.ant-btn-lg {
     font-size: 12px;
     border-radius: 3px;
-    border: 1px solid #56c661;
+    border: none;
     box-shadow: none;
   }
   .ant-form-item {
