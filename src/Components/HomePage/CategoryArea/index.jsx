@@ -20,13 +20,13 @@ const CategoryArea = () => {
                                 </div>
                                 <div className='banner-smalls'>
                                     {[...Array(4)].map((_, index) => (
-                                    <div className='banner-small'></div>
+                                    <div  key={index} className='banner-small'></div>
                                     ))}
                                 </div>
                             </div>
                             <div className='banner-mediums'>
                                 {[...Array(3)].map((_, index) => (
-                            <div className='banner-medium'>
+                            <div  key={index} className='banner-medium'>
                                 <Skeleton.Image active style={{height: '100%', width: '100%'}}/>
                             </div>
                       ))}
@@ -39,7 +39,6 @@ const CategoryArea = () => {
     if (error) {
         return console.log("CategoryArea:",error)
     }
-    console.log(data)
     return (
         <section className='categoryArea'>
             {data ? (

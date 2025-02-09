@@ -33,7 +33,7 @@ const DoctorInfo = ({doctor}) => {
         </div> */}
         <div className="doctor-info-content">
         { active ? doctor?.doctor_education?.map((item,index)=>{
-          return <div className="doctor-info-content-item">
+          return <div key={index} className="doctor-info-content-item">
             <p className={"study-info line-large"}>
               <span className={"study-type"}>{item.types}</span>
               <span className={"study-address"}>{item.place_of_study}</span>
@@ -42,7 +42,7 @@ const DoctorInfo = ({doctor}) => {
             <div className={"study-date"}><p>{item.year_range} </p></div>
           </div>
         }) : doctor?.doctor_workexperience?.map((item,index)=>{
-          return <div className="doctor-info-content-item">
+          return <div key={index} className="doctor-info-content-item">
             <p className={"study-info line-large"}>
               <span className={"study-type"}>{item.types}</span>
               <span className={"study-address"}>{item.place_of_work}</span>

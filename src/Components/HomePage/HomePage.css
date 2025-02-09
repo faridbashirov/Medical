@@ -298,6 +298,9 @@ li {
   align-items: flex-end;
 }
 @media (max-width: 1024px) {
+  #textFooterid {
+    grid-column: span 2;
+  }
   .group-18-btn {
     padding-left: 20px;
     padding-right: 20px;
@@ -994,6 +997,7 @@ input::-ms-clear {
     height: 240px !important;
   }
 }
+
 @media (min-width: 1024px) {
   .btn_,
   .activeBtn {

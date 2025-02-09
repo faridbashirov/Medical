@@ -42,16 +42,16 @@ const DoctorSearch = () => {
                   slides-per-view={4} rewind={true} space-between={20} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
                           >
                           {[1, 2,3,4].map((_, index) => (
-                            <swiper-slide><div className="doctor-search_itemSkeleton trans"><Skeleton.Image active style={{height: '100%', width: '100%'}}/></div></swiper-slide>
+                            <swiper-slide key={index}><div className="doctor-search_itemSkeleton trans"><Skeleton.Image active style={{height: '100%', width: '100%'}}/></div></swiper-slide>
                           ))
                           }
                       </swiper-container>
-                      <div class="swiper-button-prev"></div>
-                      <div class="swiper-button-next"></div>
+                      <div className="swiper-button-prev"></div>
+                      <div className="swiper-button-next"></div>
                       </div>
                       <div className="top-clinic__mobile-items">
                         {[1, 2].map((_, index) => (
-                          <div className="doctor-search_itemSkeleton"><Skeleton.Image active style={{height: '100%', width: '100%'}}/></div>
+                          <div key={index} className="doctor-search_itemSkeleton"><Skeleton.Image active style={{height: '100%', width: '100%'}}/></div>
                         ))}
                       </div>
                       <div className={"doctor-search-footer"}>
@@ -87,7 +87,7 @@ const DoctorSearch = () => {
                 slides-per-view={4} loop={true} space-between={20} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
                         >
                         {data.map((item,index)=>{
-                          return <swiper-slide><div style={{cursor:"pointer"}}  key={index} onClick={()=> navigate({
+                          return <swiper-slide key={index}><div style={{cursor:"pointer"}}  key={index} onClick={()=> navigate({
                             pathname:"/doctors",
                             search: `?type=doctor&position=${item?.name}`
                             
@@ -98,13 +98,13 @@ const DoctorSearch = () => {
                         </swiper-slide>
                         })}
                     </swiper-container>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    <div className="swiper-button-prev"></div>
+                    <div className="swiper-button-next"></div>
                     </div>
                     <div className="doctor-search__mobile-items">
                       <div className='doctor-search__container'>
                         {data.map((item,index)=>{
-                          return <div className="doctor-search_item" onClick={()=> navigate({
+                          return <div className="doctor-search_item" key={index} onClick={()=> navigate({
                             pathname:"/doctors",
                             search: `?type=doctor&position=${item?.name}`
                             

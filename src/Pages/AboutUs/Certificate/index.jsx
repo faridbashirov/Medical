@@ -26,13 +26,13 @@ const Certificate = () => {
           slides-per-view={4} space-between={18} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
           breakpoints="{&quot;1024&quot;:{&quot;slidesPerView&quot;:5,&quot;centeredSlides&quot;:false}}"
           >
-            {data?.map((certificate)=> (
-              <swiper-slide><div className='certificate-logo'><img src={certificate?.logo} alt={certificate?.title} /></div></swiper-slide>
+            {data?.map((certificate, index)=> (
+              <swiper-slide key={index}><div className='certificate-logo'><img src={certificate?.logo} alt={certificate?.title} /></div></swiper-slide>
             )
             )}
           </swiper-container>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+          <div className="swiper-button-prev"></div>
+          <div className="swiper-button-next"></div>
         </div>
       </div>
     </section>

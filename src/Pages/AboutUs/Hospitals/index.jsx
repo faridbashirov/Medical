@@ -21,8 +21,8 @@ const Hospitals = () => {
         </div>
         <div className='sponsored-hospitals-list-box'>
           <div className='sponsored-hospitals-list'>
-            {data?.map((item)=>(
-              <img src={item?.logo} alt="" />
+            {data?.map((item,index)=>(
+              <img key={index} src={item?.logo} alt="" />
             ))}
           </div>
         </div>

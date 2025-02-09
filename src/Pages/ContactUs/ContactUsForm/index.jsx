@@ -37,8 +37,8 @@ const ContactUsForm = () => {
 
   return (
     <div className="contact-us-form">
-      <p className="write-us">{t("contact-us")}</p>
-      <p className="contact-us-form-description">{t("profileinfo2")}</p>
+      <p className="write-us">{t("contact-us-title")}</p>
+      <p className="contact-us-form-description">{t("contact-us-description")}</p>
       <form onSubmit={handleSubmit(handleRegistration)}>
         <div className="form-group-name">
             <div className="form-group">

@@ -16,7 +16,7 @@ const BestOffers = () => {
                     </p>
                     <div className="bestOffer-box">
                       {[...Array(4)].map((_, index) => (
-                            <Skeleton.Image active style={{height: '100%', width: '100%'}}/>
+                            <Skeleton.Image  key={index} active style={{height: '100%', width: '100%'}}/>
                       ))}
                     </div>
                   </div>

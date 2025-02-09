@@ -66,7 +66,7 @@ const TopClinic = () => {
         slides-per-view={4} space-between={23} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
                 >
                 {hospitals.map((item,index)=>{
-              return    <swiper-slide><div key={uuid()} className="top-clinic_item">
+              return    <swiper-slide key={index}><div key={uuid()} className="top-clinic_item">
               <div className="top-clinic__item-top">
                 <img  onClick={()=> navigate(`/hospital/${item.id}`)} src={item.main_image} alt="clinic" className="top-clinic__item-img"/>
                 { item?.percentage>0 ?
@@ -98,8 +98,8 @@ const TopClinic = () => {
             </div></swiper-slide>
             })}
             </swiper-container>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div className="swiper-button-prev"></div>
+            <div className="swiper-button-next"></div>
             </div>
           <div className="top-clinic__mobile-items">
             {hospitals.map((item,index)=>{

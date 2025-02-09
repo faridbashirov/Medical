@@ -36,7 +36,7 @@ const BestSeller = () => {
                       centered-slides={false}
                     >
                       {[...Array(4)].map((_, index) => (
-                            <swiper-slide><Skeleton.Image active style={{height: '100%', width: '100%'}}/></swiper-slide>
+                            <swiper-slide  key={index}><Skeleton.Image active style={{height: '100%', width: '100%'}}/></swiper-slide>
                       ))}
                     </swiper-container>
                     </div>

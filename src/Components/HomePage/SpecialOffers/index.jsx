@@ -26,15 +26,15 @@ const SpecialOffers = () => {
                         slides-per-view={4} rewind={true} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
                       >
                         {[...Array(4)].map((_, index) => (
-                            <swiper-slide><Skeleton.Image active style={{height: '100%', width: '100%'}}/></swiper-slide>
+                            <swiper-slide  key={index}><Skeleton.Image active style={{height: '100%', width: '100%'}}/></swiper-slide>
                       ))}
                       </swiper-container>
-                      <div class="swiper-button-prev"></div>
-                      <div class="swiper-button-next"></div>
+                      <div className="swiper-button-prev"></div>
+                      <div className="swiper-button-next"></div>
                   </div>
                   <div className="slider-second-mobile-version slider-third"> 
                   {[...Array(2)].map((_, index) => (
-                            <Skeleton.Image active style={{height: '100%', width: '100%'}}/>
+                            <Skeleton.Image key={index} active style={{height: '100%', width: '100%'}}/>
                       ))}
                   </div>
                   </div>
@@ -63,15 +63,15 @@ const SpecialOffers = () => {
                         slides-per-view={4} rewind={true} space-between={15} autoplay-delay={2500} autoplay-disable-on-interaction={false} stopOnLastSlide={false}
                       >
                         {data.map((item,index)=>{
-                        return   <swiper-slide><Link to={item.link} key={index}><Small image={item.image} title={item.title}/></Link></swiper-slide>
+                        return   <swiper-slide  key={index}><Link to={item.link} key={index}><Small image={item.image} title={item.title}/></Link></swiper-slide>
                       })}
                       </swiper-container>
-                      <div class="swiper-button-prev"></div>
-                      <div class="swiper-button-next"></div>
+                      <div className="swiper-button-prev"></div>
+                      <div className="swiper-button-next"></div>
                   </div>
                   <div className="slider-second-mobile-version slide-special-offers slider-third"> 
                   {data.map((item,index)=>{
-                        return     <Link to={item.link}> <Small  key={index} image={item.image} title={item.title}/></Link>
+                        return     <Link to={item.link}  key={index}> <Small  key={index} image={item.image} title={item.title}/></Link>
                       })}
                   </div>
                   </div>

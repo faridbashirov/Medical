@@ -46,7 +46,7 @@ const Geography = () => {
       </div>
       <div className="country-partnerships">
         {data?.map((item,index)=>{
-            return  <div className="country-partnership">
+            return  <div key={index} className="country-partnership">
               <img src={item.flag} alt=""/>
               <h6>{item.name}</h6>
           </div>

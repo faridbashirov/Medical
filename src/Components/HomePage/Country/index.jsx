@@ -32,11 +32,11 @@ const Country = () => {
                       centered-slides={true}
                     >
                       {[...Array(5)].map((_, index) => (
-                            <swiper-slide><Skeleton.Image active style={{height: '100%', width: '100%'}}/></swiper-slide>
+                            <swiper-slide  key={index}><Skeleton.Image active style={{height: '100%', width: '100%'}}/></swiper-slide>
                       ))}
                       </swiper-container>
-                      <div class="swiper-button-prev"></div>
-                      <div class="swiper-button-next"></div>
+                      <div className="swiper-button-prev"></div>
+                      <div className="swiper-button-next"></div>
                     </div>
                   </div>
                 </section>
@@ -66,13 +66,13 @@ const Country = () => {
                       centered-slides={true}
                     >
                         {data?.map((item, index) => (
-                                <swiper-slide>
+                                <swiper-slide  key={index}>
                                   <Cards flag={item.flag} title={item.name} img={item.image} key={index}/>
                                 </swiper-slide>
                               ))}
                       </swiper-container>
-                      <div class="swiper-button-prev"></div>
-                      <div class="swiper-button-next"></div>
+                      <div className="swiper-button-prev"></div>
+                      <div className="swiper-button-next"></div>
                     </div>
                   </div>
                 </section>

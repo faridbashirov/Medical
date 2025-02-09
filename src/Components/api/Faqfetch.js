@@ -15,10 +15,7 @@ export default function faqFetch(lang){
             async function(){
                 try{
                     setLoading(true)
-                    const response = await axios.get(`https://hospitalbackend.efgroup.az/${lang === "ru" ? "" :lang + "/"}main/faq`)
-                      
-                    console.log(response.data)
-                   
+                    const response = await axios.get(`https://hospitalbackend.efgroup.az/${lang === "ru" ? "" :lang + "/"}main/faq`)                   
                     setData(response.data)
                     
                 }catch(err){

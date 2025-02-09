@@ -11,7 +11,7 @@ import { Rate } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { axiosPrivate } from '../../../api/api';
 
-const DoctorsCard = ({ doctor, t, user }) => {
+const DoctorsCard = ({ doctor, t, user, keyID }) => {
   const [liked, setLiked] = React.useState(doctor?.is_favorite);
   const navigate=useNavigate()
   const [add, setAdd] = React.useState(false);
@@ -56,7 +56,7 @@ const DoctorsCard = ({ doctor, t, user }) => {
   };
 
   return (
-    <div className={`doctors-card-new ${doctor?.is_sponsored ? "doctors-card-new-sponsor" : ""}`}>
+    <div key={keyID} className={`doctors-card-new ${doctor?.is_sponsored ? "doctors-card-new-sponsor" : ""}`}>
       <div className='doctors-card-new-container'>
         <Link to={`/doctor/${doctor?.id}`}>
           <div className='doctors-card-new-profile-photo-area'>

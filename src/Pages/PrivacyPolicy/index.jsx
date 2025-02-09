@@ -25,7 +25,6 @@ const PrivacyPolicy = () => {
   const {data,loading,error}=privacyFetch(localStorage.getItem("lang"))
 
   const [active,setActive]=useState(data[0]?.id)
-  console.log(data)
   useEffect(()=>{
     setActive(data[0]?.id)
   },[data,i18next.language])

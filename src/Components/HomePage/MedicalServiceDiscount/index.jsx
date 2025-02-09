@@ -34,11 +34,11 @@ const MedicalServiceDiscount = () => {
                         >
                         {data.map((item,index)=>{
                           if (item.discount!==null){
-                      return     <swiper-slide><CardsSecond key={index} position={item.name} discount={item.discount}/></swiper-slide>
+                      return     <swiper-slide  key={index}><CardsSecond key={index} position={item.name} discount={item.discount}/></swiper-slide>
                     }})}
                     </swiper-container>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    <div className="swiper-button-prev"></div>
+                    <div className="swiper-button-next"></div>
                   </div>
                   <div className="slider-second-mobile-version"> 
                     {data.map((item,index)=>{

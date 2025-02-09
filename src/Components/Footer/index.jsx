@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import facebook from "../../assets/Svg/facebook.svg";
 import vk from "../../assets/Svg/Vkontakte.svg";
 import instagram from "../../assets/Svg/Instagram.svg";
@@ -10,12 +10,49 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Footer.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllSocials } from '../../store/reducers/socialsReducer';
-const Footer = () => {
+import {toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import LoginModal from "../LoginModal/LoginModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
 
+const Footer = () => {
+  const [openLogin, setOpenLogin] = useState(false)
+  const [openRegister, setOpenRegister] = useState(false)
   const navigate=useNavigate();
   const {t}=useTranslation()
   const dispatch = useDispatch();
   const { socials } = useSelector((state) => state.socials);
+  const {user, errors}=useSelector((state)=> state.auth)
+  const {authToken}=useSelector((state)=> state.auth)
+  const state=useSelector((state)=>state.auth)
+  const displayLogoutNotification = () => {
+    toast(t("suclogout"));
+  };
+
+
+  
+ const logout =()=>{
+    dispatch(logoutuser())
+    displayLogoutNotification()
+ }
+ 
+  const onOpenLogin = () => {
+    setOpenLogin(true)
+  }
+
+  const onCloseLogin = () =>{
+    
+    setOpenLogin(false)
+  }
+
+  const onCloseRegister= () =>{
+    setOpenRegister(false)
+  }
+
+  const onOpenRegister = () => {
+    setOpenRegister(true)
+    setOpenLogin(false)
+  }
   useEffect(()=>{
     dispatch(fetchAllSocials())
   },[])
@@ -27,63 +64,70 @@ const Footer = () => {
             <Link><h1 className="footer-textMed">112MED.COM</h1></Link>
           </div>
           <div>
+            <LoginModal openLogin={openLogin} onCloseLogin={onCloseLogin} onOpenRegister={onOpenRegister}/>
+            <RegisterModal openRegister={openRegister} onCloseRegister={onCloseRegister}/>
+            <ul style={{ listStyle: "none" }}>
+              <li  className={"footer-nav-title"}>
+              {t("footerHeader1")}
+              </li>
+              {!user && <li  style={{
+                cursor:"pointer"
+              }}  onClick={() => { onOpenRegister(); window.scrollTo(0, 0); }}  className={"footer-nav-link"}>
+              {t("footerTitle1-1")}
+              </li>}
+              <li style={{
+                cursor:"pointer"
+              }}  onClick={()=> {navigate("/contact-us")}} className={"footer-nav-link"}>
+              {t("footerTitle1-2")}
+              </li>
+              <li  style={{
+                cursor:"pointer"
+              }}  onClick={()=> {navigate("/about-us")}} className={"footer-nav-link"}>
+              {t("footerTitle1-3")}
+              </li>
+              <li  style={{
+                cursor:"pointer"
+              }}  onClick={()=> {navigate("/faq")}} className={"footer-nav-link"}>
+              {t("footerTitle1-4")}
+              </li>
+            </ul>
+          </div>
+          <div className='footer-center-area'>
             <ul style={{ listStyle: "none" }} >
               <li   className={"footer-nav-title"}>
-                {t("footerh1")}
+                {t("footerHeader2")}
+              </li>
+              <li  style={{
+                cursor:"pointer"
+              }}  onClick={()=> {navigate("/hospitals")}} className={"footer-nav-link"}>
+              {t("footerTitle2-1")}
               </li>
               <li style={{
                 cursor:"pointer"
               }}  onClick={()=> {navigate("/doctors")}} className={"footer-nav-link"}>
-              {t("Doctors")}
+              {t("footerTitle2-2")}
               </li>
               <li  style={{
                 cursor:"pointer"
               }}  onClick={()=> {navigate("/hospitals")}} className={"footer-nav-link"}>
-              {t("Clinics")}
-              </li>
-              <li  style={{
-                cursor:"pointer"
-              }}  onClick={()=> {navigate("/hospitals")}} className={"footer-nav-link"}>
-              {t("Services")}
+              {t("footerTitle2-3")}
               </li>
             </ul>
           </div>
           <div>
             <ul style={{ listStyle: "none" }}>
               <li className={"footer-nav-title"}>
-              {t("footerh2")}
+              {t("footerHeader3")}
               </li>
               <li   style={{
                 cursor:"pointer"
               }} onClick={()=> {navigate("/privacy-policy")}} className={"footer-nav-link"}>
-              {t("footerh2.1")}
-              </li>
-              <li  className={"footer-nav-link"}>
-                {" "}
-                {t("footer2.2")}
+              {t("footerTitle3-1")}
               </li>
               <li  style={{
                 cursor:"pointer"
-              }}  onClick={()=> {navigate("/about-us")}} className={"footer-nav-link"}>
-                {t("about-112Med")}
-              </li>
-              <li  style={{
-                cursor:"pointer"
-              }}  onClick={()=> {navigate("/faq")}} className={"footer-nav-link"}>
-                {t("faq")}
-              </li>
-            </ul>
-          </div>
-          <div>
-            <ul style={{ listStyle: "none" }}>
-              <li  className={"footer-nav-title"}>
-              {t("footerh3")}
-              </li>
-              
-              <li style={{
-                "cursor":"pointer"
-              }}  onClick={()=>window.open('tel:900300400')} className={"footer-nav-link"}>
-              {t("footer3.3")}
+              }}  onClick={()=> {navigate("/terms")}} className={"footer-nav-link"}>
+                {t("footerTitle3-2")}
               </li>
             </ul>
           </div>

@@ -10,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { axiosPrivate } from '../../../api/api';
 import { Trans } from 'react-i18next';
 
-const HospitalCard = ({ hospital, t, user }) => {  
+const HospitalCard = ({ hospital, t, user, keyID }) => {  
   const [liked, setLiked] = React.useState(hospital?.is_favorite || false);
   const navigate=useNavigate()
   const [add, setAdd] = React.useState(false);
@@ -51,7 +51,7 @@ const HospitalCard = ({ hospital, t, user }) => {
   };
 
   return (
-    <div className={`hospital-card-new ${hospital?.is_sponsored ? "hospital-card-new-sponsor" : ""}`}>
+    <div key={keyID} className={`hospital-card-new ${hospital?.is_sponsored ? "hospital-card-new-sponsor" : ""}`}>
       <div className='hospital-card-new-container'>
         <div className='hospital-card-new-profile-photo-area'>
           {hospital?.main_image!=="" &&

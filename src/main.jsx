@@ -7,7 +7,14 @@ import { store } from "./store/store";
 import { Provider } from "react-redux";
 import { ConfigProvider } from "antd";
 import ScrollToTop from "./Components/scrollToTop";
+import { initReactI18next } from "react-i18next";
+import i18next from "i18next";
 
+i18next
+  .use(initReactI18next)
+  .init({
+    debug: false
+  });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>

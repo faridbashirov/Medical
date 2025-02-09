@@ -16,9 +16,6 @@ export default function ContactInfoFetch(){
                 try{
                     setLoading(true)
                     const response = await axios.get(`https://hospitalbackend.efgroup.az/main/contact_info`)
-                      
-                    console.log(response.data)
-                   
                     setData(response.data)
                     
                 }catch(err){

@@ -214,7 +214,7 @@ const Doctors = () => {
             <div>
             <div className="doctors-cards">
               {doctors.map((doctor)=>{
-                return <DoctorsCard key={doctor.id} doctor={doctor} t={t} user={user}/>
+                return <DoctorsCard keyID={doctor.id} doctor={doctor} t={t} user={user}/>
               })}
             </div>
               <div

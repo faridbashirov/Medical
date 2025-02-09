@@ -9,7 +9,6 @@ export const instance = axios.create({
     },
 })
 
-console.log("sala", instance)
 
 
 

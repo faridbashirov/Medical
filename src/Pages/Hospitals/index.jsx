@@ -223,7 +223,7 @@ const  Hospitals = () => {
               <div>
                 <div className="all-hospitals">
                   {hospitals?.map((hospital)=>{
-                    return <HospitalCard key={hospital.id} hospital={hospital} t={t} user={user}/>
+                    return <HospitalCard keyID={hospital.id} hospital={hospital} t={t} user={user}/>
                   })}
                 </div>
                 <div className={'hospitals-pagination'}>

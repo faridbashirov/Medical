@@ -16,7 +16,6 @@ export default function privacyFetch(lang){
                 try{
                     setLoading(true)
                     const response = await axios.get(`https://hospitalbackend.efgroup.az/${lang === "ru" ? "" : lang +"/"}main/privacy`)
-                    console.log(response.data)
                    
                     setData(response.data)
                     
