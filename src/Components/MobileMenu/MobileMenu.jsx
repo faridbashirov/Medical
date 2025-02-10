@@ -10,8 +10,10 @@ import userIcon from "../../assets/Svg/userlogin.svg"
 
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,currency}) => {
+  const dispatch = useDispatch();
+  const { socials } = useSelector((state) => state.socials);
   const {user}=useSelector((state)=> state.auth)
   const {t,i18n}=useTranslation()
   const navigate=useNavigate()
@@ -98,40 +100,32 @@ const MobileMenu = ({menuProps, showMenu, menuPropsFlag,active,setShowMenu,curre
       </div>
 
       <div className={"menuFooter"}>
-        <div  className="footerIcons reverse">
-          <div style={{display:"flex", gap: "10px"}}>
-            <li><img  src={facebook} /></li>
-            <li><img  src={vk} /></li>
-            <li><img  src={instagram} /></li>
-          </div>
-
-          <div>
-            <Button
-            onClick={()=> {navigate("contact-us");setShowMenu(!showMenu)}}
-              style={{
-                fontFamily: "Gilroy",
-                fontSize: "20px",
-                fontWeight: "600",
-              }}
-              className="pad contact-btn"
-            >
-              {t("contact1")}
-            </Button>
-          </div>
-        </div>
-
         <div>
           <p
           className="white profile-text"
           style={{
             textAlign: "center",
-            paddingBottom: "30px",
+            paddingBottom: "10px",
             margin: "0px",
           }}
         >
           <Trans i18nKey="copyright"></Trans>
         </p>
         </div>
+        {(socials?.instagram || socials?.linkedin || socials.facebook) &&
+        <div  className="footerIcons footerIconsMobile">
+          <div style={{display:"flex", gap: "10px"}}>
+            {socials.facebook && <li>
+              <img onClick={()=>window.open(socials.facebook)} className={"footer-social"} src={facebook} />
+            </li>}
+            {socials.linkedin && <li>
+              <img onClick={()=>window.open(socials.linkedin)} className={"footer-social"} src={vk} />
+            </li>}
+            {socials.instagram && <li>
+              <img onClick={()=>window.open(socials.instagram)} className={"footer-social"} src={instagram} />
+            </li>}
+          </div>
+        </div>}
       </div>
     </div>
   );

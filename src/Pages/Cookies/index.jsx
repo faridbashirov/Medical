@@ -2,16 +2,13 @@ import React, { useEffect, useState } from "react";
 import BreadCrumbs from '../../Components/BreadCrumbs';
 import arrowDown from "../../assets/Svg/arrow-down.svg";
 import arrowUp from "../../assets/Svg/arrow-up-active.svg";
-import facebook from "../../assets/Svg/facebook.svg";
-import vk from "../../assets/Svg/Vkontakte.svg";
-import instagram from "../../assets/Svg/Instagram.svg";
-import "./Terms.css"
-import termsFetch from "../../Components/api/termsFetch";
+import "./Cookies.css"
+import cookiesFetch from "../../Components/api/cookiesFetch";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet";
 
-const Terms = () => {
+const Cookies = () => {
   const [selected, setSelected] = useState(null);
   const toggleFAQ = () => {
     setSelected(selected === null ? true : null);
@@ -22,7 +19,7 @@ const Terms = () => {
   };
 
   const { t, i18n } = useTranslation();
-  const { data, loading, error } = termsFetch(localStorage.getItem("lang"));
+  const { data, loading, error } = cookiesFetch(localStorage.getItem("lang"));
   useEffect(() => {
     if (data) {
       setSelected(null);
@@ -43,8 +40,8 @@ const Terms = () => {
               href: "/",
             },
             {
-              title: t("terms"),
-              href: "/terms"
+              title: t("footerTitle3-3"),
+              href: "/cookies"
             },
           ]} />
         </div>
@@ -84,4 +81,4 @@ const Terms = () => {
   );
 };
 
-export default Terms;
+export default Cookies;

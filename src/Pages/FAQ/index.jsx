@@ -70,7 +70,7 @@ const FAQ = () => {
             </div>
             <div className='FAQ-footer'>
               <h5>{t("help")}</h5>
-              <div className='FAQ-contact-sosial'>
+              {/* <div className='FAQ-contact-sosial'>
                 <div className='FAQ-contact-us'>
                   <h6>+994 000 00 00</h6>
                   <h6>+994 000 00 00</h6>
@@ -81,7 +81,7 @@ const FAQ = () => {
                   <img src={vk} alt="" />
                   <img src={instagram} alt="" />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className='faq-right'>

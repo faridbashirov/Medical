@@ -376,7 +376,6 @@ li {
   justify-content: flex-end;
   gap: 30px;
   align-items: center;
-  padding: 40px 0;
 }
 .pad-wrapper {
   padding-left: 30px;
@@ -576,9 +575,7 @@ li {
   .textFooterid {
     padding-left: 0;
   }
-  .footerIcons {
-    padding: 20px 0;
-  }
+
   .pad-wrapper {
     padding-left: 0;
   }
@@ -775,7 +772,6 @@ li {
     font-size: 20px;
     line-height: 25px;
     text-transform: capitalize;
-    margin: 20px 0 5px;
   }
   .footerIcons-header a {
     font-family: "Gilroy";

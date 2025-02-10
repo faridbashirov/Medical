@@ -47,24 +47,10 @@
   line-height: 32px;
 }
 
-.privacy-policy-answer {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  text-align: justify;
-  padding: 2px 0 8px 0;
-}
 .privacy-policy-arrow {
   height: 100%;
 }
-.privacy-policy-answer,
-.privacy-policy-answer-desktop {
-  color: #313131;
-}
-.privacy-policy-answer-desktop span,
-.privacy-policy-answer span {
-  color: #5282ff;
-}
+
 .privacy-policy-footer {
   background-color: #5282ff;
   padding: 17px 28px;
@@ -142,13 +128,7 @@
   .privacy-policy-question .privacy-policy-answer {
     display: none;
   }
-  .privacy-policy-answer-desktop {
-    background-color: transparent;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 32px;
-    text-align: justify;
-  }
+
   .privacy-policy-footer {
     padding: 33px 38px;
     border-radius: 10px;

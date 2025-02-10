@@ -18,8 +18,7 @@ const PrivacyPolicy = () => {
   };
 
   const createMarkup = (htmlContent) => {
-  const formattedContent = htmlContent.replace(/\n/g, '<br />');
-  return { __html: formattedContent };
+  return { __html: htmlContent };
   };
   const {t,i18n}=useTranslation()
   const {data,loading,error}=privacyFetch(localStorage.getItem("lang"))
@@ -71,21 +70,6 @@ const PrivacyPolicy = () => {
                 </div>
               ))}
             </div>
-            {/* <div className='privacy-policy-footer'>
-              <h5>{t("help")}</h5>
-              <div className='privacy-policy-contact-sosial'>
-                <div className='privacy-policy-contact-us'>
-                  <h6>+994 000 00 00</h6>
-                  <h6>+994 000 00 00</h6>
-                  <h6>info@112med.com</h6>
-                </div>
-                <div className='privacy-policy-sosial-icons'>
-                  <img src={facebook} alt="" />
-                  <img src={vk} alt="" />
-                  <img src={instagram} alt="" />
-                </div>
-              </div>
-            </div> */}
           </div>
           <div className='privacy-policy-right'>
             <div className="privacy-policy-detail">

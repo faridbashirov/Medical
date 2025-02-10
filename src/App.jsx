@@ -20,6 +20,7 @@ import Loading from './Pages/Loading';
 import './main.css';
 import { register } from 'swiper/element/bundle';
 import { useSelector } from "react-redux";
+import Cookies from './Pages/Cookies';
 register();
 
 const App = () => {
@@ -47,7 +48,7 @@ const App = () => {
     };
     
     loadData();
-    const validRoutes = ['/', user ? '/profile' : null, '/hospitals', '/hospital-reviews/:id', '/hospital/:id', '/doctors', '/doctor-reviews/:id', '/doctor/:id', '/faq', '/privacy-policy', '/terms','/about-us', '/contact-us'].filter(Boolean);
+    const validRoutes = ['/', user ? '/profile' : null, '/hospitals', '/hospital-reviews/:id', '/hospital/:id', '/doctors', '/doctor-reviews/:id', '/doctor/:id', '/faq', '/privacy-policy', '/terms','/cookies','/about-us', '/contact-us'].filter(Boolean);
     const pathExists = validRoutes.some(route => {
       const pattern = new RegExp(`^${route.replace(/:\w+/g, '\\d+')}$`);
       return pattern.test(location.pathname);
@@ -76,10 +77,11 @@ const App = () => {
           <Route path="/doctor-reviews/:id" element={<DoctorsReviewsAll />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/cookies" element={<Cookies/>} />
           <Route path="/terms" element={<Terms/>} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="*" element={<HomePage />} /> {/* Catch-all route */}
+          <Route path="*" element={<HomePage />} />
         </Routes>
       <Footer />
     </>

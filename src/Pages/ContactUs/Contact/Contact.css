@@ -56,7 +56,7 @@
 @media (min-width: 1024px) {
   .Contact-contact-sosial div h5 {
     padding: 20px 0;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 25px;
     text-align: justify;
   }
@@ -67,9 +67,9 @@
     height: max-content;
   }
   .Contact-footer h5 {
-    font-size: 24px;
+    font-size: 20px;
     line-height: 29.11px;
-    padding-bottom: 16px;
+    padding-bottom: 12px;
   }
   .Contact-contact-sosial {
     flex-direction: column;

@@ -159,3 +159,8 @@
     line-height: 25px;
   }
 }
+@media (min-width: 1440px) {
+  .hospital-info-container {
+    width: var(--big-desktop);
+  }
+}

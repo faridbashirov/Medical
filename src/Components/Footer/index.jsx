@@ -129,18 +129,17 @@ const Footer = () => {
               }}  onClick={()=> {navigate("/terms")}} className={"footer-nav-link"}>
                 {t("footerTitle3-2")}
               </li>
+              <li  style={{
+                cursor:"pointer"
+              }}  onClick={()=> {navigate("/cookies")}} className={"footer-nav-link"}>
+                {t("footerTitle3-3")}
+              </li>
             </ul>
           </div>
         </div>
-        <div className="footerIcons-header">
-          <h4>{t("contact-us1")}</h4>
-          <a href={"mailto:info@112med.com"}>
-            <img src={footerArrow} alt=""/>
-            info@112med.com
-          </a>
-        </div>
+        {(socials?.instagram || socials?.linkedin || socials.facebook) &&
         <div  className="footerIcons">
-          {(socials?.instagram || socials?.linkedin || socials.facebook) && <div style={{display:"flex", gap:"16px",marginTop:"10px"}}>
+          <div style={{display:"flex", gap:"8px"}}>
             {socials.facebook && <div>
               <img onClick={()=>window.open(socials.facebook)} className={"footer-social"} src={facebook} />
             </div>}
@@ -150,13 +149,20 @@ const Footer = () => {
             {socials.instagram && <div>
               <img onClick={()=>window.open(socials.instagram)} className={"footer-social"} src={instagram} />
             </div>}
-          </div>}
-          <div className="pad-wrapper" >
+          </div>
+          <div className="footerIcons-header">
+          <h4>{t("contact-us1")}</h4>
+          <a href={"mailto:info@112med.com"}>
+            <img src={footerArrow} alt=""/>
+            info@112med.com
+          </a>
+        </div>
+          {/* <div className="pad-wrapper" >
             <Button onClick={()=> navigate("/contact-us")}  className="pad">
              {t("contact1").toUpperCase()}
             </Button>
-          </div>
-        </div>
+          </div> */}
+        </div>}
       </div>
       <div className="footer-copy">
         <div className='footerArea'>
@@ -170,7 +176,7 @@ const Footer = () => {
             <Trans i18nKey="footer-description.description3">
               {" "}<Link to="/terms">Пользовательским соглашением</Link>
               {" "}<Link to="/privacy-policy">Политикой конфиденциальности</Link>
-              {" "}<Link to="/terms">политикой</Link>
+              {" "}<Link to="/cookies">политикой</Link>
             </Trans>
           </p>
         </div>

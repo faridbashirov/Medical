@@ -1,34 +1,38 @@
 .divider {
-    width: calc(100% - 46px);
-    margin: 26px 23px;
-    height: 1px;
-    border: 1px solid rgba(255, 255, 255, 0.29);
+  width: calc(100% - 46px);
+  margin: 26px 23px;
+  height: 1px;
+  border: 1px solid rgba(255, 255, 255, 0.29);
 }
-
+.footerIconsMobile img {
+  height: 18px;
+  width: auto;
+  object-fit: cover;
+}
 .menuFooter {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 15px;
 }
 
 .reverse {
-    margin: 20px 0;
-    flex-direction: row-reverse;
+  margin: 20px 0;
+  flex-direction: row-reverse;
 }
 
 .menuList {
-    padding: 0;
-    margin: 26px 23px;
+  padding: 0;
+  margin: 26px 23px;
 }
-.menuListItem{
-    display: flex;
-    margin-bottom: 30px;
-    align-items: center;
-    gap: 12px;
-    color: white;
+.menuListItem {
+  display: flex;
+  margin-bottom: 30px;
+  align-items: center;
+  gap: 12px;
+  color: white;
 }
-.show{
-    z-index: 1000000000000  !important;
+.show {
+  z-index: 1000000000000 !important;
 }
-
